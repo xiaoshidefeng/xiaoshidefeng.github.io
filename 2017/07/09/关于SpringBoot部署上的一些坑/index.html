@@ -6,17 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://xiaoshidefeng.github.io">
-  <title>Tag: code | Xiaoshidefeng的博客</title>
+  <title>关于SpringBoot部署上的一些坑 | Xiaoshidefeng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="CW的个人Blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Xiaoshidefeng的博客">
-<meta property="og:url" content="https://xiaoshidefeng.github.io/tags/code/index.html">
+  <meta name="description" content="最近打算把之前写的一个SpringBoot的小demo部署到自己的腾讯云上但是中间断断续续踩了很多坑，所以来写个博客，来记录下 第一个坑 war包的部署  在IDEA里打包成war包后，我高高兴兴的把它扔到了服务器的Tomcat上">
+<meta name="keywords" content="study,code">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于SpringBoot部署上的一些坑">
+<meta property="og:url" content="https://xiaoshidefeng.github.io/2017/07/09/关于SpringBoot部署上的一些坑/index.html">
 <meta property="og:site_name" content="Xiaoshidefeng的博客">
-<meta property="og:description" content="CW的个人Blog">
+<meta property="og:description" content="最近打算把之前写的一个SpringBoot的小demo部署到自己的腾讯云上但是中间断断续续踩了很多坑，所以来写个博客，来记录下 第一个坑 war包的部署  在IDEA里打包成war包后，我高高兴兴的把它扔到了服务器的Tomcat上">
+<meta property="og:image" content="https://xiaoshidefeng.github.io/images/20170709/2017070901.png">
+<meta property="og:updated_time" content="2017-07-09T07:32:06.294Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Xiaoshidefeng的博客">
-<meta name="twitter:description" content="CW的个人Blog">
+<meta name="twitter:title" content="关于SpringBoot部署上的一些坑">
+<meta name="twitter:description" content="最近打算把之前写的一个SpringBoot的小demo部署到自己的腾讯云上但是中间断断续续踩了很多坑，所以来写个博客，来记录下 第一个坑 war包的部署  在IDEA里打包成war包后，我高高兴兴的把它扔到了服务器的Tomcat上">
+<meta name="twitter:image" content="https://xiaoshidefeng.github.io/images/20170709/2017070901.png">
   
     <link rel="alternative" href="/atom.xml" title="Xiaoshidefeng的博客" type="application/atom+xml">
   
@@ -174,36 +178,92 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-关于SpringBoot部署上的一些坑" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      关于SpringBoot部署上的一些坑
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/09/关于SpringBoot部署上的一些坑/" class="archive-article-date">
+
+        
+        <a href="/2017/07/09/关于SpringBoot部署上的一些坑/" class="archive-article-date">
   	<time datetime="2017-07-09T06:53:00.354Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-09</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/09/关于SpringBoot部署上的一些坑/">关于SpringBoot部署上的一些坑</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近打算把之前写的一个SpringBoot的小demo部署到自己的腾讯云上<br>但是中间断断续续踩了很多坑，所以来写个博客，来记录下</p>
+<h2 id="第一个坑"><a href="#第一个坑" class="headerlink" title="第一个坑"></a>第一个坑</h2><ul>
+<li>war包的部署</li>
+</ul>
+<p>在IDEA里打包成war包后，我高高兴兴的把它扔到了服务器的Tomcat上<br><a id="more"></a><br>但是却没有用，我以为是环境问题<br>于是我把打包的war包扔到了本地的Tomcat上<br>还是没有用<br>我查看了本地Tomcat的日志<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">严重: The web application [/ssm] registered the JDBC driver [com.alibaba.druid.proxy.DruidDriver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.</div></pre></td></tr></table></figure></p>
+<p>查了资料，说是Tomcat7里面的防止内存泄漏的机制<br>用了很多方法试着解决，但是现在还是没有解决<br>于是用了jar打包的方式，放弃用war打包</p>
+<h2 id="第二个坑"><a href="#第二个坑" class="headerlink" title="第二个坑"></a>第二个坑</h2><ul>
+<li>jar的打包<br>SpringBoot里用jar打包只需把pom.xml里packaging改成jar<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;packaging&gt;jar&lt;/packaging&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>然后点击右侧Maven projects里的package即可在target目录下生成对应的jar文件<br><img src="/images/20170709/2017070901.png" alt=""></p>
+<p>但是有一个问题，我本地数据的密码与服务器上不一样<br>所以还要在resources文件夹下的application.properties 里把数据库密码改下<br>但是因为我这里有单元测试，所以改完后要关掉单元测试才行</p>
+<p>改完后在本地测试成功<br>高高兴兴的扔到服务器上<br>执行命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -jar demo.jar</div></pre></td></tr></table></figure></p>
+<p>报错<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Exception in thread “main” java.lang.UnsupportedClassVersionError: a (Unsupported major.minor version 52.0)</div></pre></td></tr></table></figure></p>
+<p>这里就要注意了<br>因为我本地编译用的JAVA SDK是1.8版本的<br>而服务器上是1.7版本的，所以就出了问题</p>
+<p>一开始我打算把IDEA里项目编译的SDK改为1.7<br>但是改完1.7后打包各种报错<br>估计是Maven那边又有些地方版本对不上吧（JAVA的版本真的是坑，前后不兼容）</p>
+<p>于是只能在服务器上修改JAVA的版本<br>参考了这篇博客 <a href="http://www.cnblogs.com/a2211009/p/4265225.html" target="_blank" rel="external">ubuntu 安装jdk 的两种方式</a><br>总算是完成了版本的升级</p>
+<h2 id="第三个坑"><a href="#第三个坑" class="headerlink" title="第三个坑"></a>第三个坑</h2><ul>
+<li>服务器上的端口问题<br>一开始我在resources文件夹下的application.properties 里把项目端口设置为81端口<br>但是在服务器上运行的时候报错了<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ERROR 10148 --- [           main] o.a.coyote.http11.Http11NioProtocol      : Failed to start end point associated with ProtocolHandler [&quot;http-nio-81&quot;]</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>查了资料后<br>According to w3.org doc ports below 1024 are priviledged on Linux. Only root can bind to such ports. You should either use ports &gt;1024 or run under root account (not recommended).<br>发现好像不能把端口定为小于1024的端口，于是我改成了8889端口</p>
+<p>打包–本地测试–上传服务器–运行–成功</p>
+<p>总算是成功了！！！</p>
+<h2 id="一些注意事项"><a href="#一些注意事项" class="headerlink" title="一些注意事项"></a>一些注意事项</h2><ul>
+<li><p>数据库的远程管理用Mysql官方的MySql Workbench工具<br>远程连接的时候记得先在数据库中新建一个用户</p>
+</li>
+<li><p>Tomcat里的管理员要在tomcat-user.xml 中设置<br>设置完就可以查看进程了</p>
+</li>
+</ul>
+<h2 id="用到的工具"><a href="#用到的工具" class="headerlink" title="用到的工具"></a>用到的工具</h2><ul>
+<li>IDEA</li>
+<li>Tomcat</li>
+<li>Mysql</li>
+<li>WinSCP</li>
+<li>MySql Workbench</li>
+</ul>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -219,7 +279,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -232,131 +292,87 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://xiaoshidefeng.github.io/2017/07/09/关于SpringBoot部署上的一些坑/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/11/IDEA SpringBoot 环境搭建/" class="archive-article-date">
-  	<time datetime="2017-05-11T10:33:16.472Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/11/IDEA SpringBoot 环境搭建/">IDEA里构建SpringBoot项目</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/SpringBoot/" class="article-tag-list-link color1">SpringBoot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/09/关于这个博客/" class="archive-article-date">
-  	<time datetime="2017-05-09T06:46:15.246Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/09/关于这个博客/">关于博客</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">read</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">life</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/测试/" class="article-tag-list-link color3">测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2017/05/11/IDEA SpringBoot 环境搭建/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">IDEA里构建SpringBoot项目</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+  
+  
   
 
-    
+  
+
+  
 
 
           </div>
@@ -380,9 +396,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",
