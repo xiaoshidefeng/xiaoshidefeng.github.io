@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://xiaoshidefeng.github.io">
-  <title>关于Spring数据库连接 | Xiaoshidefeng的博客</title>
+  <title>MySql的保留字段的问题 | Xiaoshidefeng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="之前短学期数据库实践，和同学用SpringMVC + mybatis 做了个图书管理系统的后台用vue.js与ElementUI做前端 在合作的时候，我们采用的是GitHub 来进行代码同步协作但是在中间遇到了一个小插曲">
+  <meta name="description" content="今天打算把短学期实践的时候写的图书管理系统的后台用SpringBoot实现一下一开始很顺利但是在写插入一本书的数据的时候出现了问题">
 <meta name="keywords" content="study,code">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于Spring数据库连接">
-<meta property="og:url" content="https://xiaoshidefeng.github.io/2017/07/11/关于SpringBoot数据库连接/index.html">
+<meta property="og:title" content="MySql的保留字段的问题">
+<meta property="og:url" content="https://xiaoshidefeng.github.io/2017/07/12/MySql的保留字段的问题/index.html">
 <meta property="og:site_name" content="Xiaoshidefeng的博客">
-<meta property="og:description" content="之前短学期数据库实践，和同学用SpringMVC + mybatis 做了个图书管理系统的后台用vue.js与ElementUI做前端 在合作的时候，我们采用的是GitHub 来进行代码同步协作但是在中间遇到了一个小插曲">
-<meta property="og:updated_time" content="2017-07-11T06:03:24.069Z">
+<meta property="og:description" content="今天打算把短学期实践的时候写的图书管理系统的后台用SpringBoot实现一下一开始很顺利但是在写插入一本书的数据的时候出现了问题">
+<meta property="og:updated_time" content="2017-07-12T12:40:27.455Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于Spring数据库连接">
-<meta name="twitter:description" content="之前短学期数据库实践，和同学用SpringMVC + mybatis 做了个图书管理系统的后台用vue.js与ElementUI做前端 在合作的时候，我们采用的是GitHub 来进行代码同步协作但是在中间遇到了一个小插曲">
+<meta name="twitter:title" content="MySql的保留字段的问题">
+<meta name="twitter:description" content="今天打算把短学期实践的时候写的图书管理系统的后台用SpringBoot实现一下一开始很顺利但是在写插入一本书的数据的时候出现了问题">
   
     <link rel="alternative" href="/atom.xml" title="Xiaoshidefeng的博客" type="application/atom+xml">
   
@@ -176,14 +176,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-关于SpringBoot数据库连接" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-MySql的保留字段的问题" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      关于Spring数据库连接
+      MySql的保留字段的问题
     </h1>
     <span>&nbsp;&nbsp;&nbsp; | &nbsp;
     <span id="busuanzi_value_page_pv" ></span>次阅读
@@ -192,23 +192,22 @@
 
 
         
-        <a href="/2017/07/11/关于SpringBoot数据库连接/" class="archive-article-date">
-  	<time datetime="2017-07-11T05:49:53.542Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-11</time>
+        <a href="/2017/07/12/MySql的保留字段的问题/" class="archive-article-date">
+  	<time datetime="2017-07-12T12:20:58.091Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-12</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>之前短学期数据库实践，和同学用SpringMVC + mybatis 做了个图书管理系统的后台<br>用vue.js与ElementUI做前端</p>
-<p>在合作的时候，我们采用的是GitHub 来进行代码同步协作<br>但是在中间遇到了一个小插曲<br><a id="more"></a></p>
-<p>我在调试的时候，发现我通过前端向后台数据库插入和更新数据的时候，中文字符都会变成???</p>
-<p>一开始我认为是前端传输的时候Header里的格式问题<br>但是用postman来调试还是没用</p>
-<p>后来我打开IDEA的log窗口，查看程序运行时的log<br>发现log里中文还是正常显示的</p>
-<p>那么问题应该出在后台与数据库的连接那里</p>
-<p>我们数据库是utf-8格式<br>我们连接的时候是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">data_source_url=jdbc:mysql://localhost:3306/bookmanage</div></pre></td></tr></table></figure></p>
-<p>没有指定编码格式<br>于是我改成<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">data_source_url=jdbc:mysql://localhost:3306/bookmanage?useUnicode=true&amp;characterEncoding=utf8</div></pre></td></tr></table></figure></p>
-<p>重启服务后再次进行调试，发现成功了<br>中文成功更新到数据里了</p>
+        <p>今天打算把短学期实践的时候写的图书管理系统的后台用SpringBoot实现一下<br>一开始很顺利<br>但是在写插入一本书的数据的时候出现了问题<br><a id="more"></a><br>以下是报错信息的部分截取</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">SQL Error: 1064, SQLState: 42000</div><div class="line">You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &apos;write) values (321, &apos;11111111&apos;, &apos;sdasd&apos;, &apos;ssss&apos;, &apos;aaa&apos;)&apos; at line 1</div></pre></td></tr></table></figure>
+<p>我试着解决整个问题<br>我打开控制台<br>因为我在properties里设置了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">spring.jpa.show-sql=true</div></pre></td></tr></table></figure></p>
+<p>所以是能看到sql语句的<br>我发现控制台里打印出来的是这个信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Hibernate: insert into book (author, inventory, isbn, name, publisher) values (?, ?, ?, ?, ?)</div></pre></td></tr></table></figure></p>
+<p>为什么value都是问号<br>难道是传回来的数据没有收到吗？<br>问题出在传输的时候？</p>
+<p>我改了一种形式来接受，并且打印出来<br>发现收到的数据是正常的<br>说明传输没有问题</p>
+<p>然后我去Google了 SQL Error: 1064, SQLState: 42000<br>在stackoverflow 的<a href="https://stackoverflow.com/questions/28946567/sql-error-1064-sqlstate-42000-while-creating-new-entity" target="_blank" rel="external">这个</a>答案里找到了解决方案<br>大意就是我占用了MySql的一个保留字段<br>在我这里因为用了write 这个字段，所以报错了</p>
+<p>在MySQL中，部分字显式被保留。其中大多数字进制被标准SQL用作列名和/或表名(例如，GROUP)。少数被保留了，因为MySQL需要它们，在MySQL中，当表名或字段名乃至数据库名和保留字冲突时，在sql语句里可以用撇号（）括起来,当让我们一般都尽量少使用这些保留的字段。<br>点击<a href="http://www.metsky.com/archives/3.html" target="_blank" rel="external">MySql保留字段</a> 来查看具体的字段</p>
 
       
 
@@ -259,7 +258,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/SpringMVC/" class="article-tag-list-link color5">SpringMVC</a>
+        			<a href="/categories/MySql/" class="article-tag-list-link color1">MySql</a>
         		</li>
       		
 		</ul>
@@ -314,7 +313,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://xiaoshidefeng.github.io/2017/07/11/关于SpringBoot数据库连接/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://xiaoshidefeng.github.io/2017/07/12/MySql的保留字段的问题/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -328,18 +327,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/07/12/MySql的保留字段的问题/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          MySql的保留字段的问题
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/07/10/服务器运行打包的jar/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">服务器运行打包的jar</div>
+    <a href="/2017/07/11/关于SpringBoot数据库连接/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">关于Spring数据库连接</div>
       <i class="icon-circle-right"></i>
     </a>
   

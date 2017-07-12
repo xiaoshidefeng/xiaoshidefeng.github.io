@@ -6,19 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://xiaoshidefeng.github.io">
-  <title>关于Spring数据库连接 | Xiaoshidefeng的博客</title>
+  <title>Category: MySql | Xiaoshidefeng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="之前短学期数据库实践，和同学用SpringMVC + mybatis 做了个图书管理系统的后台用vue.js与ElementUI做前端 在合作的时候，我们采用的是GitHub 来进行代码同步协作但是在中间遇到了一个小插曲">
-<meta name="keywords" content="study,code">
-<meta property="og:type" content="article">
-<meta property="og:title" content="关于Spring数据库连接">
-<meta property="og:url" content="https://xiaoshidefeng.github.io/2017/07/11/关于SpringBoot数据库连接/index.html">
+  <meta name="description" content="CW的个人Blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Xiaoshidefeng的博客">
+<meta property="og:url" content="https://xiaoshidefeng.github.io/categories/MySql/index.html">
 <meta property="og:site_name" content="Xiaoshidefeng的博客">
-<meta property="og:description" content="之前短学期数据库实践，和同学用SpringMVC + mybatis 做了个图书管理系统的后台用vue.js与ElementUI做前端 在合作的时候，我们采用的是GitHub 来进行代码同步协作但是在中间遇到了一个小插曲">
-<meta property="og:updated_time" content="2017-07-11T06:03:24.069Z">
+<meta property="og:description" content="CW的个人Blog">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于Spring数据库连接">
-<meta name="twitter:description" content="之前短学期数据库实践，和同学用SpringMVC + mybatis 做了个图书管理系统的后台用vue.js与ElementUI做前端 在合作的时候，我们采用的是GitHub 来进行代码同步协作但是在中间遇到了一个小插曲">
+<meta name="twitter:title" content="Xiaoshidefeng的博客">
+<meta name="twitter:description" content="CW的个人Blog">
   
     <link rel="alternative" href="/atom.xml" title="Xiaoshidefeng的博客" type="application/atom+xml">
   
@@ -176,68 +174,37 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-关于SpringBoot数据库连接" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      关于Spring数据库连接
-    </h1>
-    <span>&nbsp;&nbsp;&nbsp; | &nbsp;
-    <span id="busuanzi_value_page_pv" ></span>次阅读
-    </span>
   
-
-
-        
-        <a href="/2017/07/11/关于SpringBoot数据库连接/" class="archive-article-date">
-  	<time datetime="2017-07-11T05:49:53.542Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-11</time>
-</a>
-        
-      </header>
     
-    <div class="article-entry" itemprop="articleBody">
+    
       
-        <p>之前短学期数据库实践，和同学用SpringMVC + mybatis 做了个图书管理系统的后台<br>用vue.js与ElementUI做前端</p>
-<p>在合作的时候，我们采用的是GitHub 来进行代码同步协作<br>但是在中间遇到了一个小插曲<br><a id="more"></a></p>
-<p>我在调试的时候，发现我通过前端向后台数据库插入和更新数据的时候，中文字符都会变成???</p>
-<p>一开始我认为是前端传输的时候Header里的格式问题<br>但是用postman来调试还是没用</p>
-<p>后来我打开IDEA的log窗口，查看程序运行时的log<br>发现log里中文还是正常显示的</p>
-<p>那么问题应该出在后台与数据库的连接那里</p>
-<p>我们数据库是utf-8格式<br>我们连接的时候是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">data_source_url=jdbc:mysql://localhost:3306/bookmanage</div></pre></td></tr></table></figure></p>
-<p>没有指定编码格式<br>于是我改成<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">data_source_url=jdbc:mysql://localhost:3306/bookmanage?useUnicode=true&amp;characterEncoding=utf8</div></pre></td></tr></table></figure></p>
-<p>重启服务后再次进行调试，发现成功了<br>中文成功更新到数据里了</p>
-
       
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
         </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2017/07/12/MySql的保留字段的问题/" class="archive-article-date">
+  	<time datetime="2017-07-12T12:20:58.091Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-12</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/07/12/MySql的保留字段的问题/">MySql的保留字段的问题</a>
+    </h1>
+  
+
+
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -253,109 +220,31 @@
 		</ul>
 	</div>
 
-      
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/SpringMVC/" class="article-tag-list-link color5">SpringMVC</a>
+        			<a href="/categories/MySql/" class="article-tag-list-link color1">MySql</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://xiaoshidefeng.github.io/2017/07/11/关于SpringBoot数据库连接/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
 
   
-<nav id="article-nav">
   
-    <a href="/2017/07/12/MySql的保留字段的问题/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          MySql的保留字段的问题
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2017/07/10/服务器运行打包的jar/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">服务器运行打包的jar</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
+    
 
 
           </div>
@@ -386,10 +275,10 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
-		isCategory: false,
+		isCategory: true,
 		open_in_new: false,
 		root: "/",
 		innerArchive: true,
