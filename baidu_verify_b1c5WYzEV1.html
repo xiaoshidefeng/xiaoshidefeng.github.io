@@ -6,19 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://blog.chenwe.top">
-  <title>SpringBoot邮箱注册验证 | Xiaoshidefeng的博客</title>
+  <title>Xiaoshidefeng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="注册功能是一个网站的基本功能刚刚实现了用邮箱来注册并验证的程序这里记录下">
-<meta name="keywords" content="study,code">
-<meta property="og:type" content="article">
-<meta property="og:title" content="SpringBoot邮箱注册验证">
-<meta property="og:url" content="https://blog.chenwe.top/2017/07/19/SpringBoot邮箱注册验证/index.html">
+  <meta name="description" content="b1c5WYzEV1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Xiaoshidefeng的博客">
+<meta property="og:url" content="https://blog.chenwe.top/baidu_verify_b1c5WYzEV1.html">
 <meta property="og:site_name" content="Xiaoshidefeng的博客">
-<meta property="og:description" content="注册功能是一个网站的基本功能刚刚实现了用邮箱来注册并验证的程序这里记录下">
-<meta property="og:updated_time" content="2017-07-19T11:36:58.898Z">
+<meta property="og:description" content="b1c5WYzEV1">
+<meta property="og:updated_time" content="2017-07-26T02:33:19.059Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SpringBoot邮箱注册验证">
-<meta name="twitter:description" content="注册功能是一个网站的基本功能刚刚实现了用邮箱来注册并验证的程序这里记录下">
+<meta name="twitter:title" content="Xiaoshidefeng的博客">
+<meta name="twitter:description" content="b1c5WYzEV1">
   
     <link rel="alternative" href="/atom.xml" title="Xiaoshidefeng的博客" type="application/atom+xml">
   
@@ -176,54 +175,12 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-SpringBoot邮箱注册验证" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="page-undefined" class="article article-type-page " itemscope itemprop="blogPost">
   <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      SpringBoot邮箱注册验证
-    </h1>
-    <span>&nbsp;&nbsp;&nbsp; | &nbsp;
-    <span id="busuanzi_value_page_pv" ></span>次阅读
-    </span>
-  
-
-
-        
-        <a href="/2017/07/19/SpringBoot邮箱注册验证/" class="archive-article-date">
-  	<time datetime="2017-07-19T11:03:05.574Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-19</time>
-</a>
-        
-      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>注册功能是一个网站的基本功能<br>刚刚实现了用邮箱来注册并验证的程序<br>这里记录下<br><a id="more"></a></p>
-<p>有了上篇<a href="https://xiaoshidefeng.github.io/2017/07/18/SpringBoot%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/" target="_blank" rel="external">SpringBoot发送邮件</a>的基础，我们就可以完成一个简单的邮箱注册功能了</p>
-<h2 id="首先我们要在SpringBoot里配置pom-xml文件"><a href="#首先我们要在SpringBoot里配置pom-xml文件" class="headerlink" title="首先我们要在SpringBoot里配置pom.xml文件"></a>首先我们要在SpringBoot里配置pom.xml文件</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-jpa<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-mail<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-thymeleaf<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>这个比起之前的邮件服务还多了两个配置<br>分别是</p>
-<ul>
-<li>mysql驱动</li>
-<li>jpa</li>
-</ul>
-<h2 id="在application-properties中添加邮件和mysql配置"><a href="#在application-properties中添加邮件和mysql配置" class="headerlink" title="在application.properties中添加邮件和mysql配置"></a>在application.properties中添加邮件和mysql配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">spring.mail.host=smtp.mxhichina.com</div><div class="line">spring.mail.username=邮箱账号</div><div class="line">spring.mail.password=密码</div><div class="line">spring.mail.default-encoding=UTF-8</div><div class="line"></div><div class="line">mail.fromMail.addr=你想要用来发送的邮箱</div><div class="line"></div><div class="line">server.port=8899</div><div class="line"></div><div class="line">spring.datasource.driver-class-name=com.mysql.jdbc.Driver</div><div class="line">spring.datasource.url=jdbc:mysql://localhost:3306/dbname?useUnicode=true&amp;characterEncoding=utf8</div><div class="line">spring.datasource.username=root</div><div class="line">spring.datasource.password=</div><div class="line"></div><div class="line">spring.jpa.hibernate.ddl-auto=update</div><div class="line">spring.jpa.show-sql=true</div></pre></td></tr></table></figure>
-<h2 id="数据库的用户字段"><a href="#数据库的用户字段" class="headerlink" title="数据库的用户字段"></a>数据库的用户字段</h2><p>用户字段至少要有这几个方面组成</p>
-<ul>
-<li>用户邮箱</li>
-<li>用户密码</li>
-<li>用户激活状态</li>
-<li>用户激活码</li>
-</ul>
-<p>激活状态用来显示用户是否已经通过邮箱完成激活，未完成为 0 完成为 1</p>
-<p>激活码是一串随机字符串，用来在邮件中添加用户标识</p>
-<h2 id="邮箱验证的流程"><a href="#邮箱验证的流程" class="headerlink" title="邮箱验证的流程"></a>邮箱验证的流程</h2><p>用户填写完账号密码点击注册后<br>后台获取用户信息<br>验证是否合法<br>如果合法就将用户激活状态置0<br>开启邮件发送服务<br>用户收到邮件，邮件里有一个连接，由用户id 和 激活码组成<br>用户点击激活链接<br>账号完成激活，用户激活状态置1</p>
-<p><strong>至此，一个简单的注册流程就完成了</strong></p>
-<h2 id="一些相关代码"><a href="#一些相关代码" class="headerlink" title="一些相关代码"></a>一些相关代码</h2><p><strong>发送验证邮件服务</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(!user.getUserEmail().matches(<span class="string">"^\\w+@(\\w+\\.)+\\w+$"</span>)) &#123;</div><div class="line">    <span class="keyword">return</span> ResultUtil.error(<span class="number">10</span>, <span class="string">"邮箱不合法"</span>);</div><div class="line">&#125;</div><div class="line"><span class="keyword">if</span>(userRepository.findByUserEmail(user.getUserEmail()) != <span class="keyword">null</span>) &#123;</div><div class="line">    <span class="keyword">return</span> ResultUtil.error(<span class="number">2</span>, <span class="string">"邮箱已被注册"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//加盐</span></div><div class="line">String code = CodeUtil.generateCode(user.getUserEmail());</div><div class="line">String codepw = CodeUtil.generateCode(user.getPassword());</div><div class="line">user.setPassword(codepw);</div><div class="line">user.setUserState(<span class="number">0</span>);</div><div class="line">user.setUserCode(code);</div><div class="line"></div><div class="line">SimpleDateFormat df = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>);<span class="comment">//设置日期格式</span></div><div class="line">user.setRegisterTime(df.format(<span class="keyword">new</span> Date()));</div><div class="line"></div><div class="line"><span class="keyword">if</span>(mailUtil.sendRegisterMail(user.getUserEmail(), code)) &#123;</div><div class="line">    <span class="keyword">return</span> ResultUtil.success(userRepository.save(user));</div><div class="line">&#125;</div><div class="line"><span class="keyword">return</span> ResultUtil.error(<span class="number">4</span>, <span class="string">"邮件发送失败"</span>);</div></pre></td></tr></table></figure></p>
-<p><strong>发送html邮件</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">import</span> org.slf4j.Logger;</div><div class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</div><div class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</div><div class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Value;</div><div class="line"><span class="keyword">import</span> org.springframework.mail.javamail.JavaMailSender;</div><div class="line"><span class="keyword">import</span> org.springframework.mail.javamail.MimeMessageHelper;</div><div class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</div><div class="line"><span class="keyword">import</span> org.thymeleaf.TemplateEngine;</div><div class="line"><span class="keyword">import</span> org.thymeleaf.context.Context;</div><div class="line"></div><div class="line"><span class="keyword">import</span> javax.mail.MessagingException;</div><div class="line"><span class="keyword">import</span> javax.mail.internet.MimeMessage;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by cw on 2017/7/19.</div><div class="line"> */</div><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MailUtil</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(<span class="keyword">this</span>.getClass());</div><div class="line"></div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> JavaMailSender mailSender;</div><div class="line"></div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> TemplateEngine templateEngine;</div><div class="line"></div><div class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;mail.fromMail.addr&#125;"</span>)</div><div class="line">    <span class="keyword">private</span> String from;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">sendRegisterMail</span><span class="params">(String email, String code)</span> </span>&#123;</div><div class="line">        MimeMessage message = mailSender.createMimeMessage();</div><div class="line"></div><div class="line">        String register_link = <span class="string">"http://localhost:8899/api/email="</span> + email + <span class="string">"/code="</span> +code;</div><div class="line"></div><div class="line">        <span class="comment">//创建邮件正文</span></div><div class="line">        Context context = <span class="keyword">new</span> Context();</div><div class="line">        context.setVariable(<span class="string">"register_link"</span>, register_link);</div><div class="line">        String emailContent = templateEngine.process(<span class="string">"UserRegisterTemplate"</span>, context);</div><div class="line"></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="comment">//true表示需要创建一个multipart message</span></div><div class="line">            MimeMessageHelper helper = <span class="keyword">new</span> MimeMessageHelper(message, <span class="keyword">true</span>);</div><div class="line">            helper.setFrom(from);</div><div class="line">            helper.setTo(email);</div><div class="line">            helper.setSubject(<span class="string">"低电查询验证邮件"</span>);</div><div class="line">            helper.setText(emailContent, <span class="keyword">true</span>);</div><div class="line"></div><div class="line">            mailSender.send(message);</div><div class="line">            logger.info(<span class="string">"html邮件发送成功"</span>);</div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125; <span class="keyword">catch</span> (MessagingException e) &#123;</div><div class="line">            logger.error(<span class="string">"发送html邮件时发生异常！"</span>, e);</div><div class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><strong>邮箱验证</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> Result <span class="title">userCheckMail</span><span class="params">(String email, String code)</span> </span>&#123;</div><div class="line">    User user = userRepository.findByUserCode(code);</div><div class="line">    <span class="keyword">if</span>(user.getUserEmail() != <span class="keyword">null</span> &amp;&amp; user.getUserEmail().equals(email)) &#123;</div><div class="line">        user.setUserState(<span class="number">1</span>);</div><div class="line">        userRepository.save(user);</div><div class="line">        <span class="keyword">return</span> ResultUtil.success();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> ResultUtil.error(<span class="number">6</span>, <span class="string">"邮件验证失败"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-
+        b1c5WYzEV1
       
 
       
@@ -252,33 +209,7 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/SpringBoot/" class="article-tag-list-link color1">SpringBoot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
 
       
 
@@ -328,7 +259,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://blog.chenwe.top/2017/07/19/SpringBoot邮箱注册验证/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://blog.chenwe.top/baidu_verify_b1c5WYzEV1.html" alt="微信分享二维码">
     </div>
 </div>
 
@@ -340,25 +271,6 @@
 </article>
 
   
-<nav id="article-nav">
-  
-    <a href="/2017/07/20/SpringBoot定时任务/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          SpringBoot定时任务
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2017/07/18/SpringBoot发送邮件/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">SpringBoot发送邮件</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
 
 
 
@@ -400,7 +312,7 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
