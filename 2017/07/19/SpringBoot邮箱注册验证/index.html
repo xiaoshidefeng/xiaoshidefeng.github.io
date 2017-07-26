@@ -5,14 +5,14 @@
   
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <link rel="dns-prefetch" href="https://xiaoshidefeng.github.io">
+  <link rel="dns-prefetch" href="http://blog.chenwe.top">
   <title>SpringBoot邮箱注册验证 | Xiaoshidefeng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="注册功能是一个网站的基本功能刚刚实现了用邮箱来注册并验证的程序这里记录下">
 <meta name="keywords" content="study,code">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringBoot邮箱注册验证">
-<meta property="og:url" content="https://xiaoshidefeng.github.io/2017/07/19/SpringBoot邮箱注册验证/index.html">
+<meta property="og:url" content="http://blog.chenwe.top/2017/07/19/SpringBoot邮箱注册验证/index.html">
 <meta property="og:site_name" content="Xiaoshidefeng的博客">
 <meta property="og:description" content="注册功能是一个网站的基本功能刚刚实现了用邮箱来注册并验证的程序这里记录下">
 <meta property="og:updated_time" content="2017-07-19T11:36:58.898Z">
@@ -201,7 +201,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>注册功能是一个网站的基本功能<br>刚刚实现了用邮箱来注册并验证的程序<br>这里记录下<br><a id="more"></a></p>
-<p>有了上篇<a href="https://xiaoshidefeng.github.io/2017/07/18/SpringBoot%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/">SpringBoot发送邮件</a>的基础，我们就可以完成一个简单的邮箱注册功能了</p>
+<p>有了上篇<a href="https://xiaoshidefeng.github.io/2017/07/18/SpringBoot%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/" target="_blank" rel="external">SpringBoot发送邮件</a>的基础，我们就可以完成一个简单的邮箱注册功能了</p>
 <h2 id="首先我们要在SpringBoot里配置pom-xml文件"><a href="#首先我们要在SpringBoot里配置pom-xml文件" class="headerlink" title="首先我们要在SpringBoot里配置pom.xml文件"></a>首先我们要在SpringBoot里配置pom.xml文件</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-jpa<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-mail<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-thymeleaf<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>这个比起之前的邮件服务还多了两个配置<br>分别是</p>
 <ul>
@@ -328,7 +328,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://xiaoshidefeng.github.io/2017/07/19/SpringBoot邮箱注册验证/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://blog.chenwe.top/2017/07/19/SpringBoot邮箱注册验证/" alt="微信分享二维码">
     </div>
 </div>
 
