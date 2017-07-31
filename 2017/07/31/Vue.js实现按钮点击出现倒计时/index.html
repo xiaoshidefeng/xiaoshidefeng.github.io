@@ -6,17 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.chenwe.top">
-  <title>Category: vue.js | Xiaoshidefeng的博客</title>
+  <title>Vue.js实现按钮点击出现倒计时 | Xiaoshidefeng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="CW的个人Blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Xiaoshidefeng的博客">
-<meta property="og:url" content="http://blog.chenwe.top/categories/vue-js/index.html">
+  <meta name="description" content="有时候我们会遇到这种需求比如我们在向客户发送一个验证码的时候为了防止资源被浪费，所以要让客户每隔60秒才能再发送下一次验证码 那么如何实现这个功能呢">
+<meta name="keywords" content="study,code">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue.js实现按钮点击出现倒计时">
+<meta property="og:url" content="http://blog.chenwe.top/2017/07/31/Vue.js实现按钮点击出现倒计时/index.html">
 <meta property="og:site_name" content="Xiaoshidefeng的博客">
-<meta property="og:description" content="CW的个人Blog">
+<meta property="og:description" content="有时候我们会遇到这种需求比如我们在向客户发送一个验证码的时候为了防止资源被浪费，所以要让客户每隔60秒才能再发送下一次验证码 那么如何实现这个功能呢">
+<meta property="og:image" content="http://otj6w86xd.bkt.clouddn.com/2017073101.png">
+<meta property="og:image" content="http://otj6w86xd.bkt.clouddn.com/2017073101.png">
+<meta property="og:image" content="http://otj6w86xd.bkt.clouddn.com/2017073102.png">
+<meta property="og:image" content="http://otj6w86xd.bkt.clouddn.com/lianhong.jpg">
+<meta property="og:updated_time" content="2017-07-31T12:34:05.983Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Xiaoshidefeng的博客">
-<meta name="twitter:description" content="CW的个人Blog">
+<meta name="twitter:title" content="Vue.js实现按钮点击出现倒计时">
+<meta name="twitter:description" content="有时候我们会遇到这种需求比如我们在向客户发送一个验证码的时候为了防止资源被浪费，所以要让客户每隔60秒才能再发送下一次验证码 那么如何实现这个功能呢">
+<meta name="twitter:image" content="http://otj6w86xd.bkt.clouddn.com/2017073101.png">
   
     <link rel="alternative" href="/atom.xml" title="Xiaoshidefeng的博客" type="application/atom+xml">
   
@@ -176,37 +183,79 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-Vue.js实现按钮点击出现倒计时" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      Vue.js实现按钮点击出现倒计时
+    </h1>
+    <span>&nbsp;&nbsp;&nbsp; | &nbsp;
+    <span id="busuanzi_value_page_pv" ></span>次阅读
+    </span>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/31/Vue.js实现按钮点击出现倒计时/" class="archive-article-date">
+
+
+        
+        <a href="/2017/07/31/Vue.js实现按钮点击出现倒计时/" class="archive-article-date">
   	<time datetime="2017-07-31T12:09:02.116Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-31</time>
 </a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>有时候我们会遇到这种需求<br>比如我们在向客户发送一个验证码的时候<br>为了防止资源被浪费，所以要让客户每隔60秒才能再发送下一次验证码</p>
+<p>那么如何实现这个功能呢</p>
+<a id="more"></a>
+<h2 id="需要用到的东西"><a href="#需要用到的东西" class="headerlink" title="需要用到的东西"></a>需要用到的东西</h2><p>这里我用Vue.js的脚手架工具和Element UI 构建了一个简单的按钮示例<br><img src="http://otj6w86xd.bkt.clouddn.com/2017073101.png" alt=""></p>
+<p>我们点击右侧的获取验证码就能够出发按钮的事件<br>同时按钮开始变成不可点击<br>并显示倒计时</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>首先看下我们按钮和表单的实现<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">el-form-item</span> <span class="attr">label</span>=<span class="string">"验 证 码"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">el-input</span> <span class="attr">v-model</span>=<span class="string">"form.code"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">el-button</span> <span class="attr">slot</span>=<span class="string">"append"</span> <span class="attr">icon</span>=<span class="string">"message"</span> <span class="attr">:loading</span>=<span class="string">"sendLoad"</span> <span class="attr">placeholder</span>=<span class="string">"请输入验证码"</span></span></div><div class="line">              @<span class="attr">click</span>=<span class="string">"sendMail()"</span>&gt;&#123;&#123;text&#125;&#125;<span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">el-input</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">el-form-item</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>我们将按钮的文本定义为 text，通过sendMail() 方法来执行相关操作<br>我们定一个了一个sendLoad 作为加载的开关</p>
+<p>在 methods里，我是这样实现的<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">sendMail() &#123;</div><div class="line">  <span class="keyword">this</span>.sendLoad = <span class="literal">true</span>;</div><div class="line">  <span class="keyword">this</span>.time = <span class="number">60</span>;</div><div class="line">  <span class="keyword">this</span>.timer();</div><div class="line">&#125;,</div><div class="line">timer () &#123;</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.time &gt; <span class="number">0</span>) &#123;</div><div class="line">        <span class="keyword">this</span>.time--;</div><div class="line">        setTimeout(<span class="keyword">this</span>.timer, <span class="number">1000</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>紧接着，我在computed里来实现倒计时<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">text: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>.time == <span class="number">0</span>) &#123;</div><div class="line">      <span class="keyword">this</span>.sendLoad = <span class="literal">false</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.time &gt; <span class="number">0</span> ? <span class="keyword">this</span>.time + <span class="string">'s 后重新获取'</span> : <span class="string">'获取验证码'</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们来看下<br>点击按钮时，设置按钮为加载的不可点击状态<br>我们初始化time为60<br>然后执行timer()方法<br>里面有一个setTimeout方法<br>setTimeout() 方法用于在指定的毫秒数后调用函数或计算表达式。</p>
+<p>所以我们每个一秒就会减少一次数值<br>在computed里，我们设置当time的值等于0时，重置按钮状态<br>如果不等于0，我们显示按钮上的text为 剩余时间 + s 后重新获取</p>
+<p>因此，我们可以得到如下的功能</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>点击前<br><img src="http://otj6w86xd.bkt.clouddn.com/2017073101.png" alt=""></p>
+<p>点击后<br><img src="http://otj6w86xd.bkt.clouddn.com/2017073102.png" alt=""></p>
+<p>我们的按钮开始转动且不可点击，当倒计时结束，又变成原来的样子<br><img src="http://otj6w86xd.bkt.clouddn.com/lianhong.jpg" alt=""><br>这样，我们就实现了一个简单的按钮倒计时控件</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://otj6w86xd.bkt.clouddn.com/wxzf.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/31/Vue.js实现按钮点击出现倒计时/">Vue.js实现按钮点击出现倒计时</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -222,7 +271,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -235,183 +284,109 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://blog.chenwe.top/2017/07/31/Vue.js实现按钮点击出现倒计时/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
 
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/30/在Nginx上部署Vue.js项目/" class="archive-article-date">
-  	<time datetime="2017-07-30T11:26:28.043Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/30/在Nginx上部署Vue.js项目/">在Nginx上部署Vue.js项目</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/vue.js/" class="article-tag-list-link color2">vue.js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/23/Vue.js中Cookie的操作/" class="archive-article-date">
-  	<time datetime="2017-07-23T06:25:01.399Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/23/Vue.js中Cookie的操作/">Vue.js中Cookie的操作</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/vue.js/" class="article-tag-list-link color2">vue.js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/17/在Tomcat上部署Vue.js项目/" class="archive-article-date">
-  	<time datetime="2017-07-17T06:54:17.406Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/17/在Tomcat上部署Vue.js项目/">在Tomcat上部署Vue.js项目</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/vue.js/" class="article-tag-list-link color2">vue.js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2017/07/30/在Nginx上部署Vue.js项目/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">在Nginx上部署Vue.js项目</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
   
 
-    
+  
+
+  
+
+  
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTc5Mi82MzU4">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+  
+
+  
 
 
           </div>
@@ -447,10 +422,10 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
-		isCategory: true,
+		isCategory: false,
 		open_in_new: false,
 		root: "/",
 		innerArchive: true,
