@@ -1,1 +1,1 @@
-http://blog.chenwe.top/2017/08/01/关于百度搜索不到Github Pages的解决方法/
+http://blog.chenwe.top/2017/08/02/IDEA Maven项目依赖失效/
