@@ -1,1 +1,1 @@
-http://blog.chenwe.top/2017/08/02/IDEA Maven项目依赖失效/
+http://blog.chenwe.top/2017/08/03/SpringBoot远程shell监控和管理/
