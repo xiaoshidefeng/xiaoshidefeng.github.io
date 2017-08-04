@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.chenwe.top/"/>
-  <updated>2017-08-03T12:57:05.140Z</updated>
+  <updated>2017-08-04T08:46:16.704Z</updated>
   <id>http://blog.chenwe.top/</id>
   
   <author>
@@ -14,6 +14,48 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>练字记录（一）</title>
+    <link href="http://blog.chenwe.top/2017/08/04/%E7%BB%83%E5%AD%97%E8%AE%B0%E5%BD%95%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+    <id>http://blog.chenwe.top/2017/08/04/练字记录（一）/</id>
+    <published>2017-08-04T08:27:24.136Z</published>
+    <updated>2017-08-04T08:46:16.704Z</updated>
+    
+    <content type="html"><![CDATA[<p>练字记录<br>每五天左右发一篇博客来记录<br>目前是楷书<br><img src="http://otj6w86xd.bkt.clouddn.com/huajizuo.jpg" alt=""></p>
+<a id="more"></a>
+<h2 id="为什么要练字？"><a href="#为什么要练字？" class="headerlink" title="为什么要练字？"></a>为什么要练字？</h2><p>打算把自己极丑的字改善下<br>陶冶情操</p>
+<h2 id="之前有练过吗？"><a href="#之前有练过吗？" class="headerlink" title="之前有练过吗？"></a>之前有练过吗？</h2><p>以前练字，都是练得英文字<br>而且有一定效果<br>因为英文练字成效快，收益大<br>好的英文字能在作文中取得一定优势</p>
+<h2 id="先从哪里练？"><a href="#先从哪里练？" class="headerlink" title="先从哪里练？"></a>先从哪里练？</h2><p>先练楷书吧<br>目前正在临摹 赵孟頫 的 《道德经》</p>
+<h2 id="五天的记录"><a href="#五天的记录" class="headerlink" title="五天的记录"></a>五天的记录</h2><ul>
+<li><p>2017年07月31日<br><img src="http://otj6w86xd.bkt.clouddn.com/zi01.jpg" alt=""></p>
+</li>
+<li><p>2017年08月01日<br><img src="http://otj6w86xd.bkt.clouddn.com/zi02.jpg" alt=""></p>
+</li>
+<li><p>2017年08月02日<br><img src="http://otj6w86xd.bkt.clouddn.com/zi03.jpg" alt=""></p>
+</li>
+<li><p>2017年08月03日<br><img src="http://otj6w86xd.bkt.clouddn.com/zi04.jpg" alt=""></p>
+</li>
+<li><p>2017年08月04日<br><img src="http://otj6w86xd.bkt.clouddn.com/zi05.jpg" alt=""></p>
+</li>
+</ul>
+<p><img src="http://otj6w86xd.bkt.clouddn.com/ha.jpg" alt=""><br><strong>虽然自己的字还是很难看</strong><br><strong>但还是要坚持下去</strong></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;练字记录&lt;br&gt;每五天左右发一篇博客来记录&lt;br&gt;目前是楷书&lt;br&gt;&lt;img src=&quot;http://otj6w86xd.bkt.clouddn.com/huajizuo.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="练字" scheme="http://blog.chenwe.top/categories/%E7%BB%83%E5%AD%97/"/>
+    
+    
+      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
+    
+      <category term="life" scheme="http://blog.chenwe.top/tags/life/"/>
+    
+  </entry>
   
   <entry>
     <title>SpringBoot远程shell监控和管理</title>
@@ -810,37 +852,9 @@
     
       <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
     
-      <category term="life" scheme="http://blog.chenwe.top/tags/life/"/>
-    
       <category term="read" scheme="http://blog.chenwe.top/tags/read/"/>
     
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://blog.chenwe.top/2017/05/08/hello-world/"/>
-    <id>http://blog.chenwe.top/2017/05/08/hello-world/</id>
-    <published>2017-05-08T11:55:07.524Z</published>
-    <updated>2017-05-09T06:52:03.056Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<a id="more"></a>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-    
-    </summary>
-    
+      <category term="life" scheme="http://blog.chenwe.top/tags/life/"/>
     
   </entry>
   
