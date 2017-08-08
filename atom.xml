@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.chenwe.top/"/>
-  <updated>2017-08-04T08:46:16.704Z</updated>
+  <updated>2017-08-08T14:01:51.999Z</updated>
   <id>http://blog.chenwe.top/</id>
   
   <author>
@@ -14,6 +14,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android BottomNavigationView无法添加依赖</title>
+    <link href="http://blog.chenwe.top/2017/08/08/Android%20BottomNavigationView%E6%97%A0%E6%B3%95%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96/"/>
+    <id>http://blog.chenwe.top/2017/08/08/Android BottomNavigationView无法添加依赖/</id>
+    <published>2017-08-08T13:49:31.414Z</published>
+    <updated>2017-08-08T14:01:51.999Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天在Android Studio上创建了一个Bottom Navigation Activity<br>但是创建完成后发现BottomNavigationView无法添加依赖<br><img src="http://otj6w86xd.bkt.clouddn.com/wenhao.jpg" alt=""><br><a id="more"></a></p>
+<p>网上查找资料<br>发现他的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">com.android.support:design</div></pre></td></tr></table></figure></p>
+<p>要25以上</p>
+<p>而我的是24，所以就不能使用了</p>
+<p>我们需要在 <code>dependencies</code> 里添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compile &apos;com.android.support:design:25.1.0&apos;</div></pre></td></tr></table></figure></p>
+<p>clean Project 就可以完成依赖了</p>
+<p><img src="http://otj6w86xd.bkt.clouddn.com/lianhong.jpg" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天在Android Studio上创建了一个Bottom Navigation Activity&lt;br&gt;但是创建完成后发现BottomNavigationView无法添加依赖&lt;br&gt;&lt;img src=&quot;http://otj6w86xd.bkt.clouddn.com/wenhao.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://blog.chenwe.top/categories/Android/"/>
+    
+    
+      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
+    
+      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
+    
+  </entry>
   
   <entry>
     <title>练字记录（一）</title>
@@ -807,54 +838,6 @@
       <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
     
       <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>关于博客</title>
-    <link href="http://blog.chenwe.top/2017/05/09/%E5%85%B3%E4%BA%8E%E8%BF%99%E4%B8%AA%E5%8D%9A%E5%AE%A2/"/>
-    <id>http://blog.chenwe.top/2017/05/09/关于这个博客/</id>
-    <published>2017-05-09T06:46:15.246Z</published>
-    <updated>2017-05-09T07:27:24.963Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="为什么要做这个博客？"><a href="#为什么要做这个博客？" class="headerlink" title="为什么要做这个博客？"></a>为什么要做这个博客？</h2><p>为了督促自己去学习，记录自己学习的脚步，也为了向大家分享一些在学习中的心得体会。</p>
-<h2 id="这个博客里有什么？"><a href="#这个博客里有什么？" class="headerlink" title="这个博客里有什么？"></a>这个博客里有什么？</h2><ul>
-<li>一些技术相关的原创文章</li>
-<li>一些读书相关的读书笔记</li>
-<li>一些电影相关的观影感悟</li>
-<li>一些生活相关的心得体会</li>
-</ul>
-<h2 id="有问题反馈"><a href="#有问题反馈" class="headerlink" title="有问题反馈"></a>有问题反馈</h2><p>在浏览中有任何问题，欢迎反馈给我，可以用以下联系方式跟我交流</p>
-<ul>
-<li>邮件：a1330661071@gmail.com</li>
-<li>QQ: 1330661071</li>
-<li>github: <a href="https://github.com/xiaoshidefeng" target="_blank" rel="external">@xiaoshidefeng</a></li>
-<li>zhihu: <a href="https://www.zhihu.com/people/chen-wei-60-87-31" target="_blank" rel="external">@我的知乎</a></li>
-</ul>
-<h2 id="感激"><a href="#感激" class="headerlink" title="感激"></a>感激</h2><p>感谢以下的项目,排名不分先后</p>
-<ul>
-<li><a href="https://hexo.io" target="_blank" rel="external">hexo</a> </li>
-<li><a href="https://nodejs.org/en/" target="_blank" rel="external">Node.js</a></li>
-<li><a href="https://github.com/" target="_blank" rel="external">github</a></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;为什么要做这个博客？&quot;&gt;&lt;a href=&quot;#为什么要做这个博客？&quot; class=&quot;headerlink&quot; title=&quot;为什么要做这个博客？&quot;&gt;&lt;/a&gt;为什么要做这个博客？&lt;/h2&gt;&lt;p&gt;为了督促自己去学习，记录自己学习的脚步，也为了向大家分享一些在学习中的心得体
-    
-    </summary>
-    
-      <category term="测试" scheme="http://blog.chenwe.top/categories/%E6%B5%8B%E8%AF%95/"/>
-    
-    
-      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
-    
-      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
-    
-      <category term="read" scheme="http://blog.chenwe.top/tags/read/"/>
-    
-      <category term="life" scheme="http://blog.chenwe.top/tags/life/"/>
     
   </entry>
   

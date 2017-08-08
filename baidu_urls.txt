@@ -1,1 +1,1 @@
-http://blog.chenwe.top/2017/08/04/练字记录（一）/
+http://blog.chenwe.top/2017/08/08/Android BottomNavigationView无法添加依赖/
