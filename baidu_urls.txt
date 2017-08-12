@@ -1,1 +1,1 @@
-http://blog.chenwe.top/2017/08/08/Android BottomNavigationView无法添加依赖/
+http://blog.chenwe.top/2017/08/12/git detached HEAD状态的解决方法/

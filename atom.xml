@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.chenwe.top/"/>
-  <updated>2017-08-08T14:01:51.999Z</updated>
+  <updated>2017-08-12T15:24:01.536Z</updated>
   <id>http://blog.chenwe.top/</id>
   
   <author>
@@ -14,6 +14,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>git detached HEAD状态的解决方法</title>
+    <link href="http://blog.chenwe.top/2017/08/12/git%20detached%20HEAD%E7%8A%B6%E6%80%81%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
+    <id>http://blog.chenwe.top/2017/08/12/git detached HEAD状态的解决方法/</id>
+    <published>2017-08-12T15:17:02.886Z</published>
+    <updated>2017-08-12T15:24:01.536Z</updated>
+    
+    <content type="html"><![CDATA[<p>在用IDEA的时候<br>一不小心就进入detached HEAD状态了<br><img src="http://otj6w86xd.bkt.clouddn.com/bqb-cm.jpg" alt=""><br><a id="more"></a></p>
+<h2 id="如何解决"><a href="#如何解决" class="headerlink" title="如何解决"></a>如何解决</h2><p>首先<br>把最新写好的代码保存下<br>commit上去</p>
+<p>然后<br>切换到你最后一次正确的指针代码那里（这里以master为例）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout master</div></pre></td></tr></table></figure></p>
+<p>创建一条新的分支来保存代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git branch tempp aa63314</div></pre></td></tr></table></figure></p>
+<p>这里的aa63314是我最后一次commit的</p>
+<p>然后<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git merge tempp</div></pre></td></tr></table></figure></p>
+<p>合并过去<br>这样我们就又恢复正常了<br><img src="http://otj6w86xd.bkt.clouddn.com/lianhong.jpg" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在用IDEA的时候&lt;br&gt;一不小心就进入detached HEAD状态了&lt;br&gt;&lt;img src=&quot;http://otj6w86xd.bkt.clouddn.com/bqb-cm.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="git" scheme="http://blog.chenwe.top/categories/git/"/>
+    
+    
+      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
+    
+      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
+    
+  </entry>
   
   <entry>
     <title>Android BottomNavigationView无法添加依赖</title>
@@ -783,52 +814,6 @@
 &lt;li&gt;war包的部署&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;在IDEA里打包成war包后，我高高兴兴的把它扔到了服务器的Tomcat上&lt;br&gt;
-    
-    </summary>
-    
-      <category term="SpringBoot" scheme="http://blog.chenwe.top/categories/SpringBoot/"/>
-    
-    
-      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
-    
-      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>IDEA里构建SpringBoot项目</title>
-    <link href="http://blog.chenwe.top/2017/05/11/IDEA%20SpringBoot%20%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
-    <id>http://blog.chenwe.top/2017/05/11/IDEA SpringBoot 环境搭建/</id>
-    <published>2017-05-11T10:33:16.472Z</published>
-    <updated>2017-05-11T10:46:04.996Z</updated>
-    
-    <content type="html"><![CDATA[<p>最近在学SpringBoot，所以来写一些教程，帮助自己更好的学习，也给刚入门的人一点帮助。</p>
-<p>好，下面进入正题。</p>
-<a id="more"></a>
-<p>首先打开IDEA，我们，点击new project</p>
-<p>会出现如下界面</p>
-<p><img src="/images/20170511/1.png" alt=""></p>
-<p>我们选择我在图里标记的 Spring Initializr  ，然后点击Next</p>
-<p>会出现下图所示</p>
-<p><img src="/images/20170511/2.png" alt=""></p>
-<p>我们可以修改项目名，这里我的项目名是demo</p>
-<p>点击Next后 出现下图<br><img src="/images/20170511/3.png" alt=""></p>
-<p>接着选择我框起来的 Web →Web</p>
-<p>点击Next</p>
-<p>出现下图</p>
-<p><img src="/images/20170511/4.png" alt=""></p>
-<p>再点击Finsh</p>
-<p>我们就构建好了<br><img src="/images/20170511/5.png" alt=""><br>我们可以看到我们的项目里出现了demo文件夹</p>
-<p>点开 我们看下pom.xml文件<br><img src="/images/20170511/6.png" alt=""></p>
-<p>我们发现，IDEA已经很自动的帮我们配好了SpringBoot框架了</p>
-<p>好，至此，IDEA配置SpringBoot 框架教程已经好了</p>
-<p><strong>后续的教程会慢慢出的 请大家耐心等待</strong></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;最近在学SpringBoot，所以来写一些教程，帮助自己更好的学习，也给刚入门的人一点帮助。&lt;/p&gt;
-&lt;p&gt;好，下面进入正题。&lt;/p&gt;
     
     </summary>
     
