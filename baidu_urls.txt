@@ -1,1 +1,1 @@
-http://blog.chenwe.top/2017/08/12/git detached HEAD状态的解决方法/
+http://blog.chenwe.top/2017/08/18/Mysql登录'Access denied for user 'root'@'localhost'的问题/

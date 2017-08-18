@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.chenwe.top/"/>
-  <updated>2017-08-12T15:24:01.536Z</updated>
+  <updated>2017-08-18T14:24:50.888Z</updated>
   <id>http://blog.chenwe.top/</id>
   
   <author>
@@ -14,6 +14,58 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Mysql登录&#39;Access denied for user &#39;root&#39;@&#39;localhost&#39;的问题</title>
+    <link href="http://blog.chenwe.top/2017/08/18/Mysql%E7%99%BB%E5%BD%95&#39;Access%20denied%20for%20user%20&#39;root&#39;@&#39;localhost&#39;%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    <id>http://blog.chenwe.top/2017/08/18/Mysql登录&#39;Access denied for user &#39;root&#39;@&#39;localhost&#39;的问题/</id>
+    <published>2017-08-18T14:09:27.908Z</published>
+    <updated>2017-08-18T14:24:50.888Z</updated>
+    
+    <content type="html"><![CDATA[<p>之前有一天我服务器里的mysql突然远程连接不上了<br>MySQL WorkBench 连上显示无法读取数据，丢失部分文件<br><img src="http://otj6w86xd.bkt.clouddn.com/wenhao.jpg" alt=""><br><a id="more"></a><br>我用ssh登录出现以下报错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&apos;Access denied for user &apos;root&apos;@&apos;localhost&apos; (using password: YES)&apos;</div></pre></td></tr></table></figure>
+<p>经过资料查找<br>找到了解决方法</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>输入以下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"># /etc/init.d/mysql stop</div><div class="line"></div><div class="line"># mysqld_safe --user=mysql --skip-grant-tables --skip-networking &amp;</div><div class="line"></div><div class="line"># mysql -u root mysql</div><div class="line"></div><div class="line">mysql&gt; UPDATE user SET Password=PASSWORD(&apos;新密码&apos;) where USER=&apos;root&apos;;</div><div class="line"></div><div class="line">mysql&gt; FLUSH PRIVILEGES;</div><div class="line"></div><div class="line">mysql&gt; quit</div><div class="line"></div><div class="line"># /etc/init.d/mysql restart</div><div class="line"></div><div class="line"># mysql -uroot -p</div><div class="line"></div><div class="line">Enter password: &lt;新密码&gt;</div><div class="line"></div><div class="line">mysql&gt;</div></pre></td></tr></table></figure></p>
+<p>这样我就解决了不能登录的问题</p>
+<p>下面我们来配置下远程 MySQL WorkBench连接的配置吧</p>
+<h2 id="MySQL-WorkBench远程连接"><a href="#MySQL-WorkBench远程连接" class="headerlink" title="MySQL WorkBench远程连接"></a>MySQL WorkBench远程连接</h2><ul>
+<li><p>开放mysql<br>mysql的配置文件在/etc/mysql/my.cnf文件内，里面有一行bind-address = 127.0.0.1表示只允许本地访问，将这行注释即可</p>
+</li>
+<li><p>创建新的mysql用户<br>在登录mysql后<br>输入以下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GRANT ALL ON *.* to user@&apos;IP&apos; IDENTIFIED BY &apos;password&apos;;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>其中user表示需要创建用户的名字；IP表示哪台客户端想要访问mysql数据库<br>password表示密码 并赋予所有的权限。<br>如果想要所有IP都能登录<br>那么 将 <code>IP</code> 改成 <code>%</code> 即可</p>
+<ul>
+<li><p>刷新权限表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">FLUSH PRIVILEGES;</div></pre></td></tr></table></figure>
+</li>
+<li><p>重启数据库</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo service mysql restart</div></pre></td></tr></table></figure>
+<ul>
+<li>用MySQL WorkBench连接<br>新建一个连接<br>输入ip地址 和 用户名<br>就可以测试连接了<br>连接的方法是 TCP/IP</li>
+</ul>
+<p>这样，我们就做好了mysql的远程连接</p>
+<p><img src="http://otj6w86xd.bkt.clouddn.com/lianhong.jpg" alt=""></p>
+<p>本篇部分内容参考自<br>简书 的<a href="http://www.jianshu.com/p/ae78ce8d8e14" target="_blank" rel="external">这个</a>解决方案<br>CSDN 的<a href="http://blog.csdn.net/gent__chen/article/details/51065723" target="_blank" rel="external">这个</a>解决方案</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;之前有一天我服务器里的mysql突然远程连接不上了&lt;br&gt;MySQL WorkBench 连上显示无法读取数据，丢失部分文件&lt;br&gt;&lt;img src=&quot;http://otj6w86xd.bkt.clouddn.com/wenhao.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="MySql" scheme="http://blog.chenwe.top/categories/MySql/"/>
+    
+    
+      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
+    
+      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
+    
+  </entry>
   
   <entry>
     <title>git detached HEAD状态的解决方法</title>
@@ -749,71 +801,6 @@
     
       &lt;p&gt;写了个简单的SpringBoot的demo&lt;br&gt;打包成jar文件部署到服务器&lt;/p&gt;
 &lt;p&gt;通常的做法是&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="SpringBoot" scheme="http://blog.chenwe.top/categories/SpringBoot/"/>
-    
-    
-      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
-    
-      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>关于SpringBoot部署上的一些坑</title>
-    <link href="http://blog.chenwe.top/2017/07/09/%E5%85%B3%E4%BA%8ESpringBoot%E9%83%A8%E7%BD%B2%E4%B8%8A%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91/"/>
-    <id>http://blog.chenwe.top/2017/07/09/关于SpringBoot部署上的一些坑/</id>
-    <published>2017-07-09T06:53:00.354Z</published>
-    <updated>2017-07-09T07:32:06.294Z</updated>
-    
-    <content type="html"><![CDATA[<p>最近打算把之前写的一个SpringBoot的小demo部署到自己的腾讯云上<br>但是中间断断续续踩了很多坑，所以来写个博客，来记录下</p>
-<h2 id="第一个坑"><a href="#第一个坑" class="headerlink" title="第一个坑"></a>第一个坑</h2><ul>
-<li>war包的部署</li>
-</ul>
-<p>在IDEA里打包成war包后，我高高兴兴的把它扔到了服务器的Tomcat上<br><a id="more"></a><br>但是却没有用，我以为是环境问题<br>于是我把打包的war包扔到了本地的Tomcat上<br>还是没有用<br>我查看了本地Tomcat的日志<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">严重: The web application [/ssm] registered the JDBC driver [com.alibaba.druid.proxy.DruidDriver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.</div></pre></td></tr></table></figure></p>
-<p>查了资料，说是Tomcat7里面的防止内存泄漏的机制<br>用了很多方法试着解决，但是现在还是没有解决<br>于是用了jar打包的方式，放弃用war打包</p>
-<h2 id="第二个坑"><a href="#第二个坑" class="headerlink" title="第二个坑"></a>第二个坑</h2><ul>
-<li>jar的打包<br>SpringBoot里用jar打包只需把pom.xml里packaging改成jar<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;packaging&gt;jar&lt;/packaging&gt;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>然后点击右侧Maven projects里的package即可在target目录下生成对应的jar文件<br><img src="/images/20170709/2017070901.png" alt=""></p>
-<p>但是有一个问题，我本地数据的密码与服务器上不一样<br>所以还要在resources文件夹下的application.properties 里把数据库密码改下<br>但是因为我这里有单元测试，所以改完后要关掉单元测试才行</p>
-<p>改完后在本地测试成功<br>高高兴兴的扔到服务器上<br>执行命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -jar demo.jar</div></pre></td></tr></table></figure></p>
-<p>报错<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Exception in thread “main” java.lang.UnsupportedClassVersionError: a (Unsupported major.minor version 52.0)</div></pre></td></tr></table></figure></p>
-<p>这里就要注意了<br>因为我本地编译用的JAVA SDK是1.8版本的<br>而服务器上是1.7版本的，所以就出了问题</p>
-<p>一开始我打算把IDEA里项目编译的SDK改为1.7<br>但是改完1.7后打包各种报错<br>估计是Maven那边又有些地方版本对不上吧（JAVA的版本真的是坑，前后不兼容）</p>
-<p>于是只能在服务器上修改JAVA的版本<br>参考了这篇博客 <a href="http://www.cnblogs.com/a2211009/p/4265225.html" target="_blank" rel="external">ubuntu 安装jdk 的两种方式</a><br>总算是完成了版本的升级</p>
-<h2 id="第三个坑"><a href="#第三个坑" class="headerlink" title="第三个坑"></a>第三个坑</h2><ul>
-<li>服务器上的端口问题<br>一开始我在resources文件夹下的application.properties 里把项目端口设置为81端口<br>但是在服务器上运行的时候报错了<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ERROR 10148 --- [           main] o.a.coyote.http11.Http11NioProtocol      : Failed to start end point associated with ProtocolHandler [&quot;http-nio-81&quot;]</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>查了资料后<br>According to w3.org doc ports below 1024 are priviledged on Linux. Only root can bind to such ports. You should either use ports &gt;1024 or run under root account (not recommended).<br>发现好像不能把端口定为小于1024的端口，于是我改成了8889端口</p>
-<p>打包–本地测试–上传服务器–运行–成功</p>
-<p>总算是成功了！！！</p>
-<h2 id="一些注意事项"><a href="#一些注意事项" class="headerlink" title="一些注意事项"></a>一些注意事项</h2><ul>
-<li><p>数据库的远程管理用Mysql官方的MySql Workbench工具<br>远程连接的时候记得先在数据库中新建一个用户</p>
-</li>
-<li><p>Tomcat里的管理员要在tomcat-user.xml 中设置<br>设置完就可以查看进程了</p>
-</li>
-</ul>
-<h2 id="用到的工具"><a href="#用到的工具" class="headerlink" title="用到的工具"></a>用到的工具</h2><ul>
-<li>IDEA</li>
-<li>Tomcat</li>
-<li>Mysql</li>
-<li>WinSCP</li>
-<li>MySql Workbench</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;最近打算把之前写的一个SpringBoot的小demo部署到自己的腾讯云上&lt;br&gt;但是中间断断续续踩了很多坑，所以来写个博客，来记录下&lt;/p&gt;
-&lt;h2 id=&quot;第一个坑&quot;&gt;&lt;a href=&quot;#第一个坑&quot; class=&quot;headerlink&quot; title=&quot;第一个坑&quot;&gt;&lt;/a&gt;第一个坑&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;war包的部署&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;在IDEA里打包成war包后，我高高兴兴的把它扔到了服务器的Tomcat上&lt;br&gt;
     
     </summary>
     
