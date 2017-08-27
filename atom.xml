@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.chenwe.top/"/>
-  <updated>2017-08-18T14:24:50.888Z</updated>
+  <updated>2017-08-27T08:58:59.219Z</updated>
   <id>http://blog.chenwe.top/</id>
   
   <author>
@@ -14,6 +14,43 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>手机连接本地服务器调试</title>
+    <link href="http://blog.chenwe.top/2017/08/27/%E6%89%8B%E6%9C%BA%E8%BF%9E%E6%8E%A5%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B0%83%E8%AF%95/"/>
+    <id>http://blog.chenwe.top/2017/08/27/手机连接本地服务器调试/</id>
+    <published>2017-08-27T08:49:21.822Z</published>
+    <updated>2017-08-27T08:58:59.219Z</updated>
+    
+    <content type="html"><![CDATA[<p>有时候我们要做一个面向手机端的项目<br>比如一个面向手机端的网页<br>我们在预览的时候，虽然可以用chrome浏览器的手机模式来预览<br>但是因为像素的关系<br>所以和实际手机端的表现还是有些差异的<br>最好的办法就是在手机端直接预览</p>
+<p>那么该怎么办呢</p>
+<p><img src="http://otj6w86xd.bkt.clouddn.com/lianhong.jpg" alt=""></p>
+<a id="more"></a>
+<h2 id="找到本机的ip地址"><a href="#找到本机的ip地址" class="headerlink" title="找到本机的ip地址"></a>找到本机的ip地址</h2><p>打开cmd(或者cmder)<br>输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ipconfig</div></pre></td></tr></table></figure></p>
+<p>然后就会获取到本机的ip信息<br>我们要的是这里<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">无线局域网适配器 WLAN:</div><div class="line"></div><div class="line">   连接特定的 DNS 后缀 . . . . . . . :</div><div class="line">   本地链接 IPv6 地址. . . . . . . . : fe80::30cd:b5f:ec67:3054%16</div><div class="line">   IPv4 地址 . . . . . . . . . . . . : 192.168.1.105</div><div class="line">   子网掩码  . . . . . . . . . . . . : 255.255.255.0</div><div class="line">   默认网关. . . . . . . . . . . . . : 192.168.1.1</div></pre></td></tr></table></figure></p>
+<p>里面的 IPv4 地址<br>也就是<code>192.168.1.105</code></p>
+<p>如果我们要访问本机的<br><a href="http://localhost:8080/goods" target="_blank" rel="external">http://localhost:8080/goods</a><br>地址<br>我们在手机上打开是没用的，因为localhost 只是本机的地址</p>
+<p>所以我们要把localhost 替换为 刚刚得到的ip地址<br>最终网址成了 <a href="http://192.168.1.105:8080/goods" target="_blank" rel="external">http://192.168.1.105:8080/goods</a></p>
+<p>为了方便使用<br>我们可以去 <a href="https://cli.im" target="_blank" rel="external">草料</a>把我们的连接生成一个二维码<br>然后用手机来扫一扫就可以访问了（要确保手机和电脑处在同一局域网中）</p>
+<p><img src="http://otj6w86xd.bkt.clouddn.com/lianhong.jpg" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;有时候我们要做一个面向手机端的项目&lt;br&gt;比如一个面向手机端的网页&lt;br&gt;我们在预览的时候，虽然可以用chrome浏览器的手机模式来预览&lt;br&gt;但是因为像素的关系&lt;br&gt;所以和实际手机端的表现还是有些差异的&lt;br&gt;最好的办法就是在手机端直接预览&lt;/p&gt;
+&lt;p&gt;那么该怎么办呢&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://otj6w86xd.bkt.clouddn.com/lianhong.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="测试" scheme="http://blog.chenwe.top/categories/%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
+    
+      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
+    
+  </entry>
   
   <entry>
     <title>Mysql登录&#39;Access denied for user &#39;root&#39;@&#39;localhost&#39;的问题</title>
@@ -766,45 +803,6 @@
     </summary>
     
       <category term="SpringMVC" scheme="http://blog.chenwe.top/categories/SpringMVC/"/>
-    
-    
-      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
-    
-      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>服务器运行打包的jar</title>
-    <link href="http://blog.chenwe.top/2017/07/10/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%90%E8%A1%8C%E6%89%93%E5%8C%85%E7%9A%84jar/"/>
-    <id>http://blog.chenwe.top/2017/07/10/服务器运行打包的jar/</id>
-    <published>2017-07-10T09:18:32.352Z</published>
-    <updated>2017-07-10T09:31:58.147Z</updated>
-    
-    <content type="html"><![CDATA[<p>写了个简单的SpringBoot的demo<br>打包成jar文件部署到服务器</p>
-<p>通常的做法是</p>
-<a id="more"></a>
-<p>进入jar文件目录<br>输入命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -jar demo2.jar</div></pre></td></tr></table></figure></p>
-<p>虽然这样确实能跑起来，但是这不是常驻后台的<br>一旦你关闭ssh窗口，服务也就停止了</p>
-<p>下面介绍常驻后台的方法</p>
-<p>用Linux里的nohup 命令<br>例如这里我们可以这样做<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nohup java -jar demo2.jar &gt;test.out &amp;</div></pre></td></tr></table></figure></p>
-<p>解释下<br>nohup 意思是不挂断运行命令,当账户退出或终端关闭时,程序仍然运行<br>. &gt;test.out  是指把log打印到test.out文件中<br>&amp;是指在后台运行</p>
-<p>执行完后会返回<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nohup: ignoring input and redirecting stderr to stdout</div></pre></td></tr></table></figure></p>
-<p>下面我们到浏览器里访问目标地址就可以获取到信息了，证明我们的服务跑起来了</p>
-<p>我们输入 ls</p>
-<p>可以看到当前文件夹下多出了一个test.out文件</p>
-<p>输入 ps -a<br>可以看到运行的进程<br>如果看不到的话 输入 top</p>
-<p>想要停止进程的话 用kill命令就好了</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;写了个简单的SpringBoot的demo&lt;br&gt;打包成jar文件部署到服务器&lt;/p&gt;
-&lt;p&gt;通常的做法是&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="SpringBoot" scheme="http://blog.chenwe.top/categories/SpringBoot/"/>
     
     
       <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
