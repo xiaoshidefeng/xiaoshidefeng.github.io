@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.chenwe.top/"/>
-  <updated>2017-08-27T08:58:59.219Z</updated>
+  <updated>2017-08-28T09:14:28.061Z</updated>
   <id>http://blog.chenwe.top/</id>
   
   <author>
@@ -14,6 +14,47 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Vue.js中使用axios数据赋值报错</title>
+    <link href="http://blog.chenwe.top/2017/08/28/Vue.js%E4%B8%AD%E4%BD%BF%E7%94%A8axios%E6%95%B0%E6%8D%AE%E8%B5%8B%E5%80%BC%E6%8A%A5%E9%94%99/"/>
+    <id>http://blog.chenwe.top/2017/08/28/Vue.js中使用axios数据赋值报错/</id>
+    <published>2017-08-28T09:04:57.623Z</published>
+    <updated>2017-08-28T09:14:28.061Z</updated>
+    
+    <content type="html"><![CDATA[<p>在用vue.js的axios插件来获取数据的时候<br>踩了一个坑</p>
+<p>获取到的数据对象不能赋值给变量</p>
+<p><img src="http://otj6w86xd.bkt.clouddn.com/bqb-cm.jpg" alt=""></p>
+<a id="more"></a>
+<h2 id="问题的代码"><a href="#问题的代码" class="headerlink" title="问题的代码"></a>问题的代码</h2><p>问题代码<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">data() &#123;</div><div class="line">  <span class="keyword">return</span> &#123;</div><div class="line">    <span class="attr">seller</span>: &#123;&#125;,</div><div class="line">  &#125;</div><div class="line">&#125;,</div><div class="line"><span class="attr">methods</span>: &#123;</div><div class="line">  getData() &#123;</div><div class="line">    axios.get(<span class="string">'./static/data.json'</span>)</div><div class="line">    .then(<span class="function"><span class="keyword">function</span> (<span class="params">response</span>) </span>&#123;</div><div class="line">      <span class="keyword">this</span>.seller = response.data.seller;</div><div class="line">    &#125;)</div><div class="line">    .catch(<span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(error);</div><div class="line">    &#125;);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我想通过axios来获取data.json里面的seller对象<br>然后赋值给我们的seller<br>但是会报错<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">TypeError: Cannot set property &apos;seller&apos; of undefined</div><div class="line">    at eval (App.vue?87b3:54)</div><div class="line">    at &lt;anonymous&gt;</div></pre></td></tr></table></figure></p>
+<p>它说我们不能赋值给seller</p>
+<p>一开始我怀疑是不是数据没拿到<br>于是打印数据<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(response.data.seller);</div></pre></td></tr></table></figure></p>
+<p>发现是可以的<br>也就是说是赋值的时候出现了问题</p>
+<h2 id="问题的原因"><a href="#问题的原因" class="headerlink" title="问题的原因"></a>问题的原因</h2><p>经过自己的网上资料查找<br>找到了问题的原因</p>
+<p>因为 this 指向更改了<br>所以 this.seller 是拿不到对象的<br>（上面的代码可是官方推荐的代码。。居然容易踩坑）</p>
+<h2 id="问题的解决"><a href="#问题的解决" class="headerlink" title="问题的解决"></a>问题的解决</h2><p>使用箭头函数来获取数据</p>
+<p>示例代码:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">axios.get(<span class="string">'./static/data.json'</span>).then(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</div><div class="line">  <span class="keyword">this</span>.seller = response.data.seller;</div><div class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.seller);</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>用箭头函数来实现后<br>就不会报错了<br>问题也解决了</p>
+<p><img src="http://otj6w86xd.bkt.clouddn.com/bqb-bcm.jpg" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在用vue.js的axios插件来获取数据的时候&lt;br&gt;踩了一个坑&lt;/p&gt;
+&lt;p&gt;获取到的数据对象不能赋值给变量&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://otj6w86xd.bkt.clouddn.com/bqb-cm.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="vue.js" scheme="http://blog.chenwe.top/categories/vue-js/"/>
+    
+    
+      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
+    
+      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
+    
+  </entry>
   
   <entry>
     <title>手机连接本地服务器调试</title>
@@ -769,40 +810,6 @@
     </summary>
     
       <category term="MySql" scheme="http://blog.chenwe.top/categories/MySql/"/>
-    
-    
-      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
-    
-      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>关于Spring数据库连接</title>
-    <link href="http://blog.chenwe.top/2017/07/11/%E5%85%B3%E4%BA%8ESpringBoot%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5/"/>
-    <id>http://blog.chenwe.top/2017/07/11/关于SpringBoot数据库连接/</id>
-    <published>2017-07-11T05:49:53.542Z</published>
-    <updated>2017-07-11T06:03:24.069Z</updated>
-    
-    <content type="html"><![CDATA[<p>之前短学期数据库实践，和同学用SpringMVC + mybatis 做了个图书管理系统的后台<br>用vue.js与ElementUI做前端</p>
-<p>在合作的时候，我们采用的是GitHub 来进行代码同步协作<br>但是在中间遇到了一个小插曲<br><a id="more"></a></p>
-<p>我在调试的时候，发现我通过前端向后台数据库插入和更新数据的时候，中文字符都会变成???</p>
-<p>一开始我认为是前端传输的时候Header里的格式问题<br>但是用postman来调试还是没用</p>
-<p>后来我打开IDEA的log窗口，查看程序运行时的log<br>发现log里中文还是正常显示的</p>
-<p>那么问题应该出在后台与数据库的连接那里</p>
-<p>我们数据库是utf-8格式<br>我们连接的时候是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">data_source_url=jdbc:mysql://localhost:3306/bookmanage</div></pre></td></tr></table></figure></p>
-<p>没有指定编码格式<br>于是我改成<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">data_source_url=jdbc:mysql://localhost:3306/bookmanage?useUnicode=true&amp;characterEncoding=utf8</div></pre></td></tr></table></figure></p>
-<p>重启服务后再次进行调试，发现成功了<br>中文成功更新到数据里了</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;之前短学期数据库实践，和同学用SpringMVC + mybatis 做了个图书管理系统的后台&lt;br&gt;用vue.js与ElementUI做前端&lt;/p&gt;
-&lt;p&gt;在合作的时候，我们采用的是GitHub 来进行代码同步协作&lt;br&gt;但是在中间遇到了一个小插曲&lt;br&gt;
-    
-    </summary>
-    
-      <category term="SpringMVC" scheme="http://blog.chenwe.top/categories/SpringMVC/"/>
     
     
       <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
