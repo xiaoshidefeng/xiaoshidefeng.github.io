@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.chenwe.top/"/>
-  <updated>2017-08-28T09:14:28.061Z</updated>
+  <updated>2017-08-30T14:51:26.729Z</updated>
   <id>http://blog.chenwe.top/</id>
   
   <author>
@@ -14,6 +14,42 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Vue.js中修改router-link的样式</title>
+    <link href="http://blog.chenwe.top/2017/08/29/Vue.js%E4%B8%AD%E4%BF%AE%E6%94%B9router-link%E7%9A%84%E6%A0%B7%E5%BC%8F/"/>
+    <id>http://blog.chenwe.top/2017/08/29/Vue.js中修改router-link的样式/</id>
+    <published>2017-08-29T11:20:34.758Z</published>
+    <updated>2017-08-30T14:51:26.729Z</updated>
+    
+    <content type="html"><![CDATA[<p>在用vue.js 的时候<br>有个地方用到了router-link<br>并且要修改router-link的样式</p>
+<p>但是我发现直接修改router-link是不行的</p>
+<p><img src="http://otj6w86xd.bkt.clouddn.com/wulian.jpg" alt=""></p>
+<a id="more"></a>
+<h2 id="该怎么办？"><a href="#该怎么办？" class="headerlink" title="该怎么办？"></a>该怎么办？</h2><p>其实router-link标签和a 标签是一样的<br>我们可以通过对a标签修改<br>达到修改router-link的目的</p>
+<p>例如想实现类似手机APP顶部的tab标签<br>可以这样(styl语法)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">&lt;template&gt;</div><div class="line">  &lt;div id="app"&gt;</div><div class="line">    &lt;div class="tab border-1px"&gt;</div><div class="line">      &lt;div class="tab-item"&gt;</div><div class="line">        &lt;router-link to="/goods"&gt;商品&lt;/router-link&gt;</div><div class="line">      &lt;/div&gt;</div><div class="line">      &lt;div class="tab-item"&gt;</div><div class="line">        &lt;router-link to="/ratings"&gt;评论&lt;/router-link&gt;</div><div class="line">      &lt;/div&gt;</div><div class="line">      &lt;div class="tab-item"&gt;</div><div class="line">        &lt;router-link to="/seller"&gt;商家&lt;/router-link&gt;</div><div class="line">      &lt;/div&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">&lt;/template&gt;</div><div class="line"></div><div class="line">&lt;script&gt;</div><div class="line">export default &#123;</div><div class="line">  name: 'app'</div><div class="line">&#125;</div><div class="line">&lt;/script&gt;</div><div class="line"></div><div class="line">&lt;style lang="stylus" rel="stylesheet/stylus"&gt;</div><div class="line">    .tab</div><div class="line">      display:flex</div><div class="line">      width: 100%</div><div class="line">      height: 40px</div><div class="line">      line-height: 40px</div><div class="line">      border-1px(rgba(7, 17, 27, 0.1))</div><div class="line">      .tab-item</div><div class="line">        flex: 1</div><div class="line">        text-align: center</div><div class="line">        &amp; &gt; a</div><div class="line">          display: block</div><div class="line">          font-size: 14px</div><div class="line">          color: rgb(77, 85, 93)</div><div class="line">          &amp;.active</div><div class="line">            color: rgb(240, 20, 20)</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+<p>效果图：</p>
+<p><img src="http://otj6w86xd.bkt.clouddn.com/ele-tab.png" alt=""></p>
+<p><img src="http://otj6w86xd.bkt.clouddn.com/bqb-bcm.jpg" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在用vue.js 的时候&lt;br&gt;有个地方用到了router-link&lt;br&gt;并且要修改router-link的样式&lt;/p&gt;
+&lt;p&gt;但是我发现直接修改router-link是不行的&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://otj6w86xd.bkt.clouddn.com/wulian.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="vue.js" scheme="http://blog.chenwe.top/categories/vue-js/"/>
+    
+    
+      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
+    
+      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
+    
+  </entry>
   
   <entry>
     <title>Vue.js中使用axios数据赋值报错</title>
@@ -778,38 +814,6 @@
     </summary>
     
       <category term="SpringBoot" scheme="http://blog.chenwe.top/categories/SpringBoot/"/>
-    
-    
-      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
-    
-      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MySql的保留字段的问题</title>
-    <link href="http://blog.chenwe.top/2017/07/12/MySql%E7%9A%84%E4%BF%9D%E7%95%99%E5%AD%97%E6%AE%B5%E7%9A%84%E9%97%AE%E9%A2%98/"/>
-    <id>http://blog.chenwe.top/2017/07/12/MySql的保留字段的问题/</id>
-    <published>2017-07-12T12:20:58.091Z</published>
-    <updated>2017-07-12T12:40:27.455Z</updated>
-    
-    <content type="html"><![CDATA[<p>今天打算把短学期实践的时候写的图书管理系统的后台用SpringBoot实现一下<br>一开始很顺利<br>但是在写插入一本书的数据的时候出现了问题<br><a id="more"></a><br>以下是报错信息的部分截取</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">SQL Error: 1064, SQLState: 42000</div><div class="line">You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &apos;write) values (321, &apos;11111111&apos;, &apos;sdasd&apos;, &apos;ssss&apos;, &apos;aaa&apos;)&apos; at line 1</div></pre></td></tr></table></figure>
-<p>我试着解决整个问题<br>我打开控制台<br>因为我在properties里设置了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">spring.jpa.show-sql=true</div></pre></td></tr></table></figure></p>
-<p>所以是能看到sql语句的<br>我发现控制台里打印出来的是这个信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Hibernate: insert into book (author, inventory, isbn, name, publisher) values (?, ?, ?, ?, ?)</div></pre></td></tr></table></figure></p>
-<p>为什么value都是问号<br>难道是传回来的数据没有收到吗？<br>问题出在传输的时候？</p>
-<p>我改了一种形式来接受，并且打印出来<br>发现收到的数据是正常的<br>说明传输没有问题</p>
-<p>然后我去Google了 SQL Error: 1064, SQLState: 42000<br>在stackoverflow 的<a href="https://stackoverflow.com/questions/28946567/sql-error-1064-sqlstate-42000-while-creating-new-entity" target="_blank" rel="external">这个</a>答案里找到了解决方案<br>大意就是我占用了MySql的一个保留字段<br>在我这里因为用了write 这个字段，所以报错了</p>
-<p>在MySQL中，部分字显式被保留。其中大多数字进制被标准SQL用作列名和/或表名(例如，GROUP)。少数被保留了，因为MySQL需要它们，在MySQL中，当表名或字段名乃至数据库名和保留字冲突时，在sql语句里可以用撇号（）括起来,当让我们一般都尽量少使用这些保留的字段。<br>点击<a href="http://www.metsky.com/archives/3.html" target="_blank" rel="external">MySql保留字段</a> 来查看具体的字段</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;今天打算把短学期实践的时候写的图书管理系统的后台用SpringBoot实现一下&lt;br&gt;一开始很顺利&lt;br&gt;但是在写插入一本书的数据的时候出现了问题&lt;br&gt;
-    
-    </summary>
-    
-      <category term="MySql" scheme="http://blog.chenwe.top/categories/MySql/"/>
     
     
       <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
