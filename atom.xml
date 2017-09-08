@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.chenwe.top/"/>
-  <updated>2017-08-30T14:51:26.729Z</updated>
+  <updated>2017-09-08T08:04:17.877Z</updated>
   <id>http://blog.chenwe.top/</id>
   
   <author>
@@ -14,6 +14,48 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用Xpath来制作python3爬虫</title>
+    <link href="http://blog.chenwe.top/2017/09/08/%E4%BD%BF%E7%94%A8Xpath%E6%9D%A5%E5%88%B6%E4%BD%9Cpython3%E7%88%AC%E8%99%AB/"/>
+    <id>http://blog.chenwe.top/2017/09/08/使用Xpath来制作python3爬虫/</id>
+    <published>2017-09-08T06:52:51.867Z</published>
+    <updated>2017-09-08T08:04:17.877Z</updated>
+    
+    <content type="html"><![CDATA[<p>之前用Python3制作了一个爬虫<br>但是在服务器运行后<br>发现每隔一段时间<br>爬虫就会崩溃</p>
+<p><img src="http://otj6w86xd.bkt.clouddn.com/wulian.jpg" alt=""></p>
+<a id="more"></a>
+<h2 id="问题的产生"><a href="#问题的产生" class="headerlink" title="问题的产生"></a>问题的产生</h2><p>发现每隔一段时间<br>爬虫就会崩溃<br>调查日志后发现是爬取的网页的一些样式变了<br>因为我用的是正则表达式来获取数据<br>所以一些样式变了会导致无法正常的获取数据</p>
+<p>在知道问题后，我觉定用 Xpath来优化爬虫</p>
+<h2 id="什么是Xpath"><a href="#什么是Xpath" class="headerlink" title="什么是Xpath"></a>什么是Xpath</h2><p>以下是Wiki的解释：</p>
+<blockquote>
+<p>XPath即为XML路径语言（XML Path Language），它是一种用来确定XML文档中某部分位置的语言。 XPath基于XML的树状结构，提供在数据结构树中找寻节点的能力。 起初XPath的提出的初衷是将其作为一个通用的、介于XPointer与XSL间的语法模型。</p>
+</blockquote>
+<p>如果用Xpath的话<br>就不会出现部分样式更改，而导致爬虫无法正常工作的情况出现了</p>
+<h2 id="Xpath入门"><a href="#Xpath入门" class="headerlink" title="Xpath入门"></a>Xpath入门</h2><p>可以看下w3school里关于<a href="http://www.w3school.com.cn/xpath/index.asp" target="_blank" rel="external">Xpath的教程</a></p>
+<h2 id="Xpath获取的小技巧"><a href="#Xpath获取的小技巧" class="headerlink" title="Xpath获取的小技巧"></a>Xpath获取的小技巧</h2><p>用chrome浏览器<br>按f12选中我们要的元素后<br>在HTML中 右键 -&gt; Copy -&gt; Copy Xpath<br>这样我们就复制了一段Xpath</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>我们在获取完HTML后<br>我们可以定义一个函数来格式化数据,返回xml结构<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">def getxpath(html):</div><div class="line">    return etree.HTML(html)</div></pre></td></tr></table></figure></p>
+<p>然后我们调用这个方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">contentTree = getxpath(contentBytes)</div><div class="line">content = contentTree.xpath(&apos;//*[@id=&quot;weisite&quot;]/div[1]/div/section/table/tbody/tr/td/text()&apos;)</div></pre></td></tr></table></figure></p>
+<p>这里的content是一个数组<br>表<code>tr</code>下的所有td元素里的text值</p>
+<p>这样我们就用Xpath完成了一个简单的爬虫</p>
+<p><img src="http://otj6w86xd.bkt.clouddn.com/lianhong.jpg" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;之前用Python3制作了一个爬虫&lt;br&gt;但是在服务器运行后&lt;br&gt;发现每隔一段时间&lt;br&gt;爬虫就会崩溃&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://otj6w86xd.bkt.clouddn.com/wulian.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="SpringMVC" scheme="http://blog.chenwe.top/categories/SpringMVC/"/>
+    
+    
+      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
+    
+      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
+    
+  </entry>
   
   <entry>
     <title>Vue.js中修改router-link的样式</title>
@@ -778,42 +820,6 @@
     </summary>
     
       <category term="vue.js" scheme="http://blog.chenwe.top/categories/vue-js/"/>
-    
-    
-      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
-    
-      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JPA里自定义SQL查询的一些问题</title>
-    <link href="http://blog.chenwe.top/2017/07/13/JPA%E9%87%8C%E8%87%AA%E5%AE%9A%E4%B9%89SQL%E6%9F%A5%E8%AF%A2%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/"/>
-    <id>http://blog.chenwe.top/2017/07/13/JPA里自定义SQL查询的一些问题/</id>
-    <published>2017-07-13T13:35:07.592Z</published>
-    <updated>2017-07-13T13:58:50.236Z</updated>
-    
-    <content type="html"><![CDATA[<p>接着上次的图书管理系统</p>
-<p>还书的时候不仅要在还书的数据表添加新纪录<br>还要去把借书表中对应的内容删除</p>
-<a id="more"></a>
-<p>但是因为前端我写的时候只返回了book_id和client_id<br>所以在还书的Service里还要根据这两个id去查出对应的借书记录，并删掉</p>
-<p>这里可以用Spring data 里的自定义查询来实现<br>自定义查询以及Spring data JPA的使用方法可以在<a href="http://www.ityouknow.com/springboot/2016/08/20/springboot%28五%29-spring-data-jpa的使用" target="_blank" rel="external">这里</a> 有相关的介绍</p>
-<p>因为我在设定Rent这个实体类了里设定的是book_id和client_id<br><strong>所以在机智的IDEA的帮助下，我写了这么一句在repository里写了这么一句</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Rent findByClient_idAndBook_id(Integer client_id, Integer book_id);</div></pre></td></tr></table></figure></p>
-<p>哈哈，这不是简单吗<br>然后运行<br><strong>报错</strong><br>哦，我天呐，来看看控制台的信息吧<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">No property client found for type Rent!</div></pre></td></tr></table></figure></p>
-<p>我来简单翻译下<br><em>在Rent里找不到client属性</em></p>
-<p>client? 不是client_id 吗</p>
-<p>经过查找，终于在文档里发现 一个下划线 _ 会被认为是And的意思<br>所以findByClient_idAndBook_id 就被理解为 根据client 和 id 和 book 和 id 来查找<br>然后系统在Rent里找不到client 所以就报错了</p>
-<h2 id="该怎么办呢？"><a href="#该怎么办呢？" class="headerlink" title="该怎么办呢？"></a>该怎么办呢？</h2><p>嗯，所以命名时候就不要用_ 下划线就好了(IDEA 还挺 ‘机智’的)<br>现在去改应该还来的及<br>不说了，现在去改了..</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;接着上次的图书管理系统&lt;/p&gt;
-&lt;p&gt;还书的时候不仅要在还书的数据表添加新纪录&lt;br&gt;还要去把借书表中对应的内容删除&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="SpringBoot" scheme="http://blog.chenwe.top/categories/SpringBoot/"/>
     
     
       <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
