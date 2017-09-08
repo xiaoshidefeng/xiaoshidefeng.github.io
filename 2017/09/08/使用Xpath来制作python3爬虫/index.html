@@ -17,7 +17,7 @@
 <meta property="og:description" content="之前用Python3制作了一个爬虫但是在服务器运行后发现每隔一段时间爬虫就会崩溃">
 <meta property="og:image" content="http://otj6w86xd.bkt.clouddn.com/wulian.jpg">
 <meta property="og:image" content="http://otj6w86xd.bkt.clouddn.com/lianhong.jpg">
-<meta property="og:updated_time" content="2017-09-08T08:04:17.877Z">
+<meta property="og:updated_time" content="2017-09-08T10:59:59.223Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Xpath来制作python3爬虫">
 <meta name="twitter:description" content="之前用Python3制作了一个爬虫但是在服务器运行后发现每隔一段时间爬虫就会崩溃">
@@ -219,6 +219,9 @@
 <p>XPath即为XML路径语言（XML Path Language），它是一种用来确定XML文档中某部分位置的语言。 XPath基于XML的树状结构，提供在数据结构树中找寻节点的能力。 起初XPath的提出的初衷是将其作为一个通用的、介于XPointer与XSL间的语法模型。</p>
 </blockquote>
 <p>如果用Xpath的话<br>就不会出现部分样式更改，而导致爬虫无法正常工作的情况出现了</p>
+<h2 id="Xpath库的安装"><a href="#Xpath库的安装" class="headerlink" title="Xpath库的安装"></a>Xpath库的安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install lxml</div></pre></td></tr></table></figure>
+<p> 如果是Python3<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install python3-lxml</div></pre></td></tr></table></figure></p>
+<h2 id="Xpath的引用"><a href="#Xpath的引用" class="headerlink" title="Xpath的引用"></a>Xpath的引用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">from lxml import etree</div></pre></td></tr></table></figure>
 <h2 id="Xpath入门"><a href="#Xpath入门" class="headerlink" title="Xpath入门"></a>Xpath入门</h2><p>可以看下w3school里关于<a href="http://www.w3school.com.cn/xpath/index.asp" target="_blank" rel="external">Xpath的教程</a></p>
 <h2 id="Xpath获取的小技巧"><a href="#Xpath获取的小技巧" class="headerlink" title="Xpath获取的小技巧"></a>Xpath获取的小技巧</h2><p>用chrome浏览器<br>按f12选中我们要的元素后<br>在HTML中 右键 -&gt; Copy -&gt; Copy Xpath<br>这样我们就复制了一段Xpath</p>
 <h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>我们在获取完HTML后<br>我们可以定义一个函数来格式化数据,返回xml结构<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">def getxpath(html):</div><div class="line">    return etree.HTML(html)</div></pre></td></tr></table></figure></p>
@@ -504,11 +507,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">read</a>
+                <a href="javascript:void(0)" class="js-tag color5">life</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">life</a>
+                <a href="javascript:void(0)" class="js-tag color5">read</a>
               </li>
             
             <div class="clearfix"></div>
