@@ -6,17 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.chenwe.top">
-  <title>Xiaoshidefeng的博客</title>
+  <title>Vue.js平行组件之间通信 | Xiaoshidefeng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="CW的个人Blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Xiaoshidefeng的博客">
-<meta property="og:url" content="http://blog.chenwe.top/page/3/index.html">
+  <meta name="description" content="在用Vue.js做项目的时候有时候会需要平行组件（非父子组件）之间传递数据的情况 该怎么做呢？">
+<meta name="keywords" content="study,code">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue.js平行组件之间通信">
+<meta property="og:url" content="http://blog.chenwe.top/2017/09/09/Vue.js平行组件之间通信/index.html">
 <meta property="og:site_name" content="Xiaoshidefeng的博客">
-<meta property="og:description" content="CW的个人Blog">
+<meta property="og:description" content="在用Vue.js做项目的时候有时候会需要平行组件（非父子组件）之间传递数据的情况 该怎么做呢？">
+<meta property="og:image" content="http://otj6w86xd.bkt.clouddn.com/bqb-cm.jpg">
+<meta property="og:image" content="http://otj6w86xd.bkt.clouddn.com/lianhong.jpg">
+<meta property="og:updated_time" content="2017-09-09T03:44:03.427Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Xiaoshidefeng的博客">
-<meta name="twitter:description" content="CW的个人Blog">
+<meta name="twitter:title" content="Vue.js平行组件之间通信">
+<meta name="twitter:description" content="在用Vue.js做项目的时候有时候会需要平行组件（非父子组件）之间传递数据的情况 该怎么做呢？">
+<meta name="twitter:image" content="http://otj6w86xd.bkt.clouddn.com/bqb-cm.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Xiaoshidefeng的博客" type="application/atom+xml">
   
@@ -180,36 +185,79 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-在Tomcat上部署Vue.js项目" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-Vue.js平行组件之间通信" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/17/在Tomcat上部署Vue.js项目/">在Tomcat上部署Vue.js项目</a>
+    <h1 class="article-title" itemprop="name">
+      Vue.js平行组件之间通信
     </h1>
+    <span>&nbsp;&nbsp;&nbsp; | &nbsp;
+    <span id="busuanzi_value_page_pv" ></span>次阅读
+    </span>
   
 
 
         
-        <a href="/2017/07/17/在Tomcat上部署Vue.js项目/" class="archive-article-date">
-  	<time datetime="2017-07-17T06:54:17.406Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-17</time>
+        <a href="/2017/09/09/Vue.js平行组件之间通信/" class="archive-article-date">
+  	<time datetime="2017-09-09T03:14:03.850Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-09</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>接着上次的图书管理系统</p>
-<p>修改完问题后把SpringBoot成功部署到了服务器上<br>测试了下api接口，能正常访问<br>那么下面就是在服务器上部署前端的vue.js了<br>
-        
-          <a class="article-more-a" href="/2017/07/17/在Tomcat上部署Vue.js项目/#more">more >></a>
-        
+        <p>在用Vue.js做项目的时候<br>有时候会需要平行组件（非父子组件）之间传递数据的情况</p>
+<p>该怎么做呢？<br><img src="http://otj6w86xd.bkt.clouddn.com/bqb-cm.jpg" alt=""></p>
+<a id="more"></a>
+<h2 id="该怎么办？"><a href="#该怎么办？" class="headerlink" title="该怎么办？"></a>该怎么办？</h2><p>用eventBus来实现</p>
+<p>在原来的Vue1.0中组件之间的通信主要通过vm.$dispatch沿着父链向上传播和用vm.$broadcast向下广播来实现。<br>在vue2.0中，已经废除了这种用法。<br>在Vue2.0中可以使用Vuex</p>
+<blockquote>
+<p>Vuex基于SPA的应用，使用全局state共享数据，达到组件与组件间的通讯。如果你没有开发过大型的单页应用(SPA)就立刻上 Vuex，可能会觉得繁琐然后排斥，这是很正常的 —— 如果是个简单的应用，大多数情况下，不用 Vuex 还好，你要的可能就是个简单的 全局事件总线(global event bus)。不过，如果你构建的是一个中到大型单页应用，当你在考虑如何更好的在 Vue 组件外处理状态时，Vuex 自然就是你的下一步选择。</p>
+</blockquote>
+<p>如果我们的项目只是一个简单的应用也可以不用Vuex<br>用eventBus来实现</p>
+<h2 id="如何实现"><a href="#如何实现" class="headerlink" title="如何实现"></a>如何实现</h2><p>先在common/js下创建一个js文件<br>命名为 bus.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span>;</div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Vue();</div></pre></td></tr></table></figure></p>
+<p>在要两个兄弟组件中引入bus<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Bus <span class="keyword">from</span> <span class="string">'./js/bus.js'</span>;</div></pre></td></tr></table></figure></p>
+<p>在事件发起组件中<br>我们假设有一个点击事件 <code>showLoginDia</code><br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"el-dropdown-link"</span> @<span class="attr">click</span>=<span class="string">"showLoginDia($event)"</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>我们在showLoginDia中传入一个 event<br>在方法中利用bus来传递数据实现对另一个组件的通信<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Bus.$emit(<span class="string">'login'</span>, event.target);</div></pre></td></tr></table></figure></p>
+<p>这样我们点击就通过Bus传递了一个点击事件的event.target名为<code>‘login’</code></p>
+<p>然后我们在要接收的组件的 <code>created()</code>中调用bus监听事件<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Bus.$on(<span class="string">'login'</span>, target =&gt; &#123;</div><div class="line">  <span class="keyword">this</span>.$set(<span class="keyword">this</span>.items, <span class="number">2</span>, <span class="keyword">this</span>.bindDormItem);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<ul>
+<li>这里我们用$set来更新数组，才能实时更新DOM</li>
+</ul>
+<p>这样在每次点击的时候，就能通过bus来传递事件到平行组件了</p>
+<p><img src="http://otj6w86xd.bkt.clouddn.com/lianhong.jpg" alt=""></p>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://otj6w86xd.bkt.clouddn.com/wxzf.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -244,649 +292,108 @@
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/17/在Tomcat上部署Vue.js项目/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://blog.chenwe.top/2017/09/09/Vue.js平行组件之间通信/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
 
-
-
-
-
   
-    <article id="post-JPA里自定义SQL查询的一些问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/13/JPA里自定义SQL查询的一些问题/">JPA里自定义SQL查询的一些问题</a>
-    </h1>
   
-
-
-        
-        <a href="/2017/07/13/JPA里自定义SQL查询的一些问题/" class="archive-article-date">
-  	<time datetime="2017-07-13T13:35:07.592Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>接着上次的图书管理系统</p>
-<p>还书的时候不仅要在还书的数据表添加新纪录<br>还要去把借书表中对应的内容删除</p>
-        
-          <a class="article-more-a" href="/2017/07/13/JPA里自定义SQL查询的一些问题/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/SpringBoot/" class="article-tag-list-link color1">SpringBoot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/13/JPA里自定义SQL查询的一些问题/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
+    <a href="/2017/09/08/使用Xpath来制作python3爬虫/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">使用Xpath来制作python3爬虫</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
 
 
 
 
   
-    <article id="post-MySql的保留字段的问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/12/MySql的保留字段的问题/">MySql的保留字段的问题</a>
-    </h1>
-  
-
-
-        
-        <a href="/2017/07/12/MySql的保留字段的问题/" class="archive-article-date">
-  	<time datetime="2017-07-12T12:20:58.091Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天打算把短学期实践的时候写的图书管理系统的后台用SpringBoot实现一下<br>一开始很顺利<br>但是在写插入一本书的数据的时候出现了问题<br>
-        
-          <a class="article-more-a" href="/2017/07/12/MySql的保留字段的问题/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/MySql/" class="article-tag-list-link color1">MySql</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/12/MySql的保留字段的问题/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
 
   
-    <article id="post-关于SpringBoot数据库连接" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/11/关于SpringBoot数据库连接/">关于Spring数据库连接</a>
-    </h1>
-  
-
-
-        
-        <a href="/2017/07/11/关于SpringBoot数据库连接/" class="archive-article-date">
-  	<time datetime="2017-07-11T05:49:53.542Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>之前短学期数据库实践，和同学用SpringMVC + mybatis 做了个图书管理系统的后台<br>用vue.js与ElementUI做前端</p>
-<p>在合作的时候，我们采用的是GitHub 来进行代码同步协作<br>但是在中间遇到了一个小插曲<br>
-        
-          <a class="article-more-a" href="/2017/07/11/关于SpringBoot数据库连接/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/SpringMVC/" class="article-tag-list-link color5">SpringMVC</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/11/关于SpringBoot数据库连接/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
 
   
-    <article id="post-服务器运行打包的jar" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/10/服务器运行打包的jar/">服务器运行打包的jar</a>
-    </h1>
-  
-
-
-        
-        <a href="/2017/07/10/服务器运行打包的jar/" class="archive-article-date">
-  	<time datetime="2017-07-10T09:18:32.352Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>写了个简单的SpringBoot的demo<br>打包成jar文件部署到服务器</p>
-<p>通常的做法是</p>
-        
-          <a class="article-more-a" href="/2017/07/10/服务器运行打包的jar/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/SpringBoot/" class="article-tag-list-link color1">SpringBoot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/10/服务器运行打包的jar/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
 
   
-    <article id="post-关于SpringBoot部署上的一些坑" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/09/关于SpringBoot部署上的一些坑/">关于SpringBoot部署上的一些坑</a>
-    </h1>
-  
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTc5Mi82MzU4" style="padding: 25px">
 
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
 
-        
-        <a href="/2017/07/09/关于SpringBoot部署上的一些坑/" class="archive-article-date">
-  	<time datetime="2017-07-09T06:53:00.354Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近打算把之前写的一个SpringBoot的小demo部署到自己的腾讯云上<br>但是中间断断续续踩了很多坑，所以来写个博客，来记录下</p>
-<h2 id="第一个坑"><a href="#第一个坑" class="headerlink" title="第一个坑"></a>第一个坑</h2><ul>
-<li>war包的部署</li>
-</ul>
-<p>在IDEA里打包成war包后，我高高兴兴的把它扔到了服务器的Tomcat上<br>
-        
-          <a class="article-more-a" href="/2017/07/09/关于SpringBoot部署上的一些坑/#more">more >></a>
-        
-      
+       if (typeof LivereTower === 'function') { return; }
 
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
 
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/SpringBoot/" class="article-tag-list-link color1">SpringBoot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/09/关于SpringBoot部署上的一些坑/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
 
   
-    <article id="post-IDEA SpringBoot 环境搭建" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/11/IDEA SpringBoot 环境搭建/">IDEA里构建SpringBoot项目</a>
-    </h1>
-  
 
-
-        
-        <a href="/2017/05/11/IDEA SpringBoot 环境搭建/" class="archive-article-date">
-  	<time datetime="2017-05-11T10:33:16.472Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近在学SpringBoot，所以来写一些教程，帮助自己更好的学习，也给刚入门的人一点帮助。</p>
-<p>好，下面进入正题。</p>
-        
-          <a class="article-more-a" href="/2017/05/11/IDEA SpringBoot 环境搭建/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/SpringBoot/" class="article-tag-list-link color1">SpringBoot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/11/IDEA SpringBoot 环境搭建/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-关于这个博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/09/关于这个博客/">关于博客</a>
-    </h1>
-  
-
-
-        
-        <a href="/2017/05/09/关于这个博客/" class="archive-article-date">
-  	<time datetime="2017-05-09T06:46:15.246Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="为什么要做这个博客？"><a href="#为什么要做这个博客？" class="headerlink" title="为什么要做这个博客？"></a>为什么要做这个博客？</h2><p>为了督促自己去学习，记录自己学习的脚步，也为了向大家分享一些在学习中的心得体会。</p>
-<h2 id="这个博客里有什么？"><a href="#这个博客里有什么？" class="headerlink" title="这个博客里有什么？"></a>这个博客里有什么？</h2><ul>
-<li>一些技术相关的原创文章</li>
-<li>一些读书相关的读书笔记</li>
-<li>一些电影相关的观影感悟</li>
-<li>一些生活相关的心得体会</li>
-</ul>
-<h2 id="有问题反馈"><a href="#有问题反馈" class="headerlink" title="有问题反馈"></a>有问题反馈</h2><p>在浏览中有任何问题，欢迎反馈给我，可以用以下联系方式跟我交流</p>
-<ul>
-<li>邮件：a1330661071@gmail.com</li>
-<li>QQ: 1330661071</li>
-<li>github: <a href="https://github.com/xiaoshidefeng" target="_blank" rel="external">@xiaoshidefeng</a></li>
-<li>zhihu: <a href="https://www.zhihu.com/people/chen-wei-60-87-31" target="_blank" rel="external">@我的知乎</a></li>
-</ul>
-<h2 id="感激"><a href="#感激" class="headerlink" title="感激"></a>感激</h2><p>感谢以下的项目,排名不分先后</p>
-<ul>
-<li><a href="https://hexo.io" target="_blank" rel="external">hexo</a> </li>
-<li><a href="https://nodejs.org/en/" target="_blank" rel="external">Node.js</a></li>
-<li><a href="https://github.com/" target="_blank" rel="external">github</a></li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">life</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">read</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/测试/" class="article-tag-list-link color3">测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/09/关于这个博客/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/08/hello-world/">Hello World</a>
-    </h1>
-  
-
-
-        
-        <a href="/2017/05/08/hello-world/" class="archive-article-date">
-  	<time datetime="2017-05-08T11:55:07.524Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-        
-          <a class="article-more-a" href="/2017/05/08/hello-world/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/08/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
-    </nav>
   
 
 
@@ -922,8 +429,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

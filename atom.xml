@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.chenwe.top/"/>
-  <updated>2017-09-08T10:59:59.223Z</updated>
+  <updated>2017-09-09T03:44:03.427Z</updated>
   <id>http://blog.chenwe.top/</id>
   
   <author>
@@ -14,6 +14,51 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Vue.js平行组件之间通信</title>
+    <link href="http://blog.chenwe.top/2017/09/09/Vue.js%E5%B9%B3%E8%A1%8C%E7%BB%84%E4%BB%B6%E4%B9%8B%E9%97%B4%E9%80%9A%E4%BF%A1/"/>
+    <id>http://blog.chenwe.top/2017/09/09/Vue.js平行组件之间通信/</id>
+    <published>2017-09-09T03:14:03.850Z</published>
+    <updated>2017-09-09T03:44:03.427Z</updated>
+    
+    <content type="html"><![CDATA[<p>在用Vue.js做项目的时候<br>有时候会需要平行组件（非父子组件）之间传递数据的情况</p>
+<p>该怎么做呢？<br><img src="http://otj6w86xd.bkt.clouddn.com/bqb-cm.jpg" alt=""></p>
+<a id="more"></a>
+<h2 id="该怎么办？"><a href="#该怎么办？" class="headerlink" title="该怎么办？"></a>该怎么办？</h2><p>用eventBus来实现</p>
+<p>在原来的Vue1.0中组件之间的通信主要通过vm.$dispatch沿着父链向上传播和用vm.$broadcast向下广播来实现。<br>在vue2.0中，已经废除了这种用法。<br>在Vue2.0中可以使用Vuex</p>
+<blockquote>
+<p>Vuex基于SPA的应用，使用全局state共享数据，达到组件与组件间的通讯。如果你没有开发过大型的单页应用(SPA)就立刻上 Vuex，可能会觉得繁琐然后排斥，这是很正常的 —— 如果是个简单的应用，大多数情况下，不用 Vuex 还好，你要的可能就是个简单的 全局事件总线(global event bus)。不过，如果你构建的是一个中到大型单页应用，当你在考虑如何更好的在 Vue 组件外处理状态时，Vuex 自然就是你的下一步选择。</p>
+</blockquote>
+<p>如果我们的项目只是一个简单的应用也可以不用Vuex<br>用eventBus来实现</p>
+<h2 id="如何实现"><a href="#如何实现" class="headerlink" title="如何实现"></a>如何实现</h2><p>先在common/js下创建一个js文件<br>命名为 bus.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span>;</div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Vue();</div></pre></td></tr></table></figure></p>
+<p>在要两个兄弟组件中引入bus<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Bus <span class="keyword">from</span> <span class="string">'./js/bus.js'</span>;</div></pre></td></tr></table></figure></p>
+<p>在事件发起组件中<br>我们假设有一个点击事件 <code>showLoginDia</code><br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"el-dropdown-link"</span> @<span class="attr">click</span>=<span class="string">"showLoginDia($event)"</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>我们在showLoginDia中传入一个 event<br>在方法中利用bus来传递数据实现对另一个组件的通信<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Bus.$emit(<span class="string">'login'</span>, event.target);</div></pre></td></tr></table></figure></p>
+<p>这样我们点击就通过Bus传递了一个点击事件的event.target名为<code>‘login’</code></p>
+<p>然后我们在要接收的组件的 <code>created()</code>中调用bus监听事件<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Bus.$on(<span class="string">'login'</span>, target =&gt; &#123;</div><div class="line">  <span class="keyword">this</span>.$set(<span class="keyword">this</span>.items, <span class="number">2</span>, <span class="keyword">this</span>.bindDormItem);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<ul>
+<li>这里我们用$set来更新数组，才能实时更新DOM</li>
+</ul>
+<p>这样在每次点击的时候，就能通过bus来传递事件到平行组件了</p>
+<p><img src="http://otj6w86xd.bkt.clouddn.com/lianhong.jpg" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在用Vue.js做项目的时候&lt;br&gt;有时候会需要平行组件（非父子组件）之间传递数据的情况&lt;/p&gt;
+&lt;p&gt;该怎么做呢？&lt;br&gt;&lt;img src=&quot;http://otj6w86xd.bkt.clouddn.com/bqb-cm.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="vue.js" scheme="http://blog.chenwe.top/categories/vue-js/"/>
+    
+    
+      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
+    
+      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
+    
+  </entry>
   
   <entry>
     <title>使用Xpath来制作python3爬虫</title>
@@ -789,40 +834,6 @@
     </summary>
     
       <category term="SpringBoot" scheme="http://blog.chenwe.top/categories/SpringBoot/"/>
-    
-    
-      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
-    
-      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>在Tomcat上部署Vue.js项目</title>
-    <link href="http://blog.chenwe.top/2017/07/17/%E5%9C%A8Tomcat%E4%B8%8A%E9%83%A8%E7%BD%B2Vue.js%E9%A1%B9%E7%9B%AE/"/>
-    <id>http://blog.chenwe.top/2017/07/17/在Tomcat上部署Vue.js项目/</id>
-    <published>2017-07-17T06:54:17.406Z</published>
-    <updated>2017-07-18T12:41:27.552Z</updated>
-    
-    <content type="html"><![CDATA[<p>接着上次的图书管理系统</p>
-<p>修改完问题后把SpringBoot成功部署到了服务器上<br>测试了下api接口，能正常访问<br>那么下面就是在服务器上部署前端的vue.js了<br><a id="more"></a></p>
-<p>这里的话我们要明确一点<br>vue.js是一个前端的框架，所以部署的时候并不需要node.js之类的服务器 像本地的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm run Dev</div></pre></td></tr></table></figure></p>
-<p><strong>只是用来调试用的，不要再线上用它部署</strong></p>
-<p>这里我先用比较熟悉的Tomcat来部署<br>我们先在本地运行命令来打包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm run bulid</div></pre></td></tr></table></figure></p>
-<p>通过这个命令，我们会打包我们的项目到一个 dist文件夹中</p>
-<p>我们把它部署到Tomcat服务器上</p>
-<p>用WinSCP软件登陆我们的服务器<br>找到Tomcat的wabapps目录<br>把新建一个文件夹，我这里把它命名为 bookmanage<br>我们把本地dist文件夹里的文件复制到 bookmanage中</p>
-<p>完成之后，我们访问默认的8080端口 加上 bookmanage 就可以访问到我们的项目了<br>例如我的项目地址 <a href="http://118.89.159.95:8080/bookmanage" target="_blank" rel="external">http://118.89.159.95:8080/bookmanage</a> （账号：admin 密码：admin）<br>这样我们的前端的项目部署就成功了</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;接着上次的图书管理系统&lt;/p&gt;
-&lt;p&gt;修改完问题后把SpringBoot成功部署到了服务器上&lt;br&gt;测试了下api接口，能正常访问&lt;br&gt;那么下面就是在服务器上部署前端的vue.js了&lt;br&gt;
-    
-    </summary>
-    
-      <category term="vue.js" scheme="http://blog.chenwe.top/categories/vue-js/"/>
     
     
       <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
