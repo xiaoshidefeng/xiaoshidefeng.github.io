@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.chenwe.top/"/>
-  <updated>2017-09-09T03:44:03.427Z</updated>
+  <updated>2017-09-10T06:55:18.600Z</updated>
   <id>http://blog.chenwe.top/</id>
   
   <author>
@@ -14,6 +14,39 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Vue.js去掉链接里的#井号</title>
+    <link href="http://blog.chenwe.top/2017/09/10/Vue.js%E5%8E%BB%E6%8E%89%E9%93%BE%E6%8E%A5%E9%87%8C%E7%9A%84#%E4%BA%95%E5%8F%B7/"/>
+    <id>http://blog.chenwe.top/2017/09/10/Vue.js去掉链接里的#井号/</id>
+    <published>2017-09-10T06:37:51.431Z</published>
+    <updated>2017-09-10T06:55:18.600Z</updated>
+    
+    <content type="html"><![CDATA[<p>在用vue-router的时候<br>有时候会在连接里会出现一个 #<br>不太美观</p>
+<p>要怎么去掉呢？<br><img src="http://otj6w86xd.bkt.clouddn.com/huajizuo.jpg" alt=""></p>
+<a id="more"></a>
+<h2 id="为什么会有井号-？"><a href="#为什么会有井号-？" class="headerlink" title="为什么会有井号 #？"></a>为什么会有井号 #？</h2><p>因为vue-router 默认 hash 模式 —— 使用 URL 的 hash 来模拟一个完整的 URL，于是当 URL 改变时，页面不会重新加载。</p>
+<h2 id="怎么去掉？"><a href="#怎么去掉？" class="headerlink" title="怎么去掉？"></a>怎么去掉？</h2><p>如果不想要很丑的 hash，我们可以用路由的 history 模式，这种模式充分利用 history.pushState API 来完成 URL 跳转而无须重新加载页面。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">const router = new VueRouter(&#123;</div><div class="line">  mode: &apos;history&apos;,</div><div class="line">  routes: [...]</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>这样连接中的 # 就没了</p>
+<p>更加详细的说明可以参考 <a href="https://router.vuejs.org/zh-cn/essentials/history-mode.html" target="_blank" rel="external">文档</a></p>
+<p><img src="http://otj6w86xd.bkt.clouddn.com/lianhong.jpg" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在用vue-router的时候&lt;br&gt;有时候会在连接里会出现一个 #&lt;br&gt;不太美观&lt;/p&gt;
+&lt;p&gt;要怎么去掉呢？&lt;br&gt;&lt;img src=&quot;http://otj6w86xd.bkt.clouddn.com/huajizuo.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="vue.js" scheme="http://blog.chenwe.top/categories/vue-js/"/>
+    
+    
+      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
+    
+      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
+    
+  </entry>
   
   <entry>
     <title>Vue.js平行组件之间通信</title>
@@ -785,51 +818,6 @@
     <summary type="html">
     
       &lt;p&gt;注册功能是一个网站的基本功能&lt;br&gt;刚刚实现了用邮箱来注册并验证的程序&lt;br&gt;这里记录下&lt;br&gt;
-    
-    </summary>
-    
-      <category term="SpringBoot" scheme="http://blog.chenwe.top/categories/SpringBoot/"/>
-    
-    
-      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
-    
-      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SpringBoot发送邮件</title>
-    <link href="http://blog.chenwe.top/2017/07/18/SpringBoot%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/"/>
-    <id>http://blog.chenwe.top/2017/07/18/SpringBoot发送邮件/</id>
-    <published>2017-07-18T12:03:31.612Z</published>
-    <updated>2017-07-18T12:32:14.039Z</updated>
-    
-    <content type="html"><![CDATA[<p>最近把算打注册邮箱验证弄一下</p>
-<p>学习了下如何用SpringBoot发送邮件<br><a id="more"></a></p>
-<h2 id="首先我们要在SpringBoot里配置pom-xml文件"><a href="#首先我们要在SpringBoot里配置pom-xml文件" class="headerlink" title="首先我们要在SpringBoot里配置pom.xml文件"></a>首先我们要在SpringBoot里配置pom.xml文件</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-mail<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>这个就是spring推出的JavaMailSender<br>比起之前的JavaMail 更加简化了邮件发送的过程</p>
-<h2 id="在application-properties中添加邮箱配置"><a href="#在application-properties中添加邮箱配置" class="headerlink" title="在application.properties中添加邮箱配置"></a>在application.properties中添加邮箱配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">spring.mail.host=smtp.mxhichina.com</div><div class="line">spring.mail.username=邮箱账号</div><div class="line">spring.mail.password=密码</div><div class="line">spring.mail.default-encoding=UTF-8</div><div class="line"></div><div class="line">mail.fromMail.addr=你想要用来发送的邮箱</div></pre></td></tr></table></figure>
-<p>第一个是smtp服务（详细Google下，确保你的邮箱开启了smtp）</p>
-<h2 id="编写一个简单的类来测试"><a href="#编写一个简单的类来测试" class="headerlink" title="编写一个简单的类来测试"></a>编写一个简单的类来测试</h2><p>为了防止初学者导错包，我把import也写进来<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.slf4j.Logger;</div><div class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</div><div class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</div><div class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Value;</div><div class="line"><span class="keyword">import</span> org.springframework.mail.SimpleMailMessage;</div><div class="line"><span class="keyword">import</span> org.springframework.mail.javamail.JavaMailSender;</div><div class="line"><span class="keyword">import</span> org.springframework.mail.javamail.MimeMessageHelper;</div><div class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</div><div class="line"></div><div class="line"><span class="keyword">import</span> javax.mail.MessagingException;</div><div class="line"><span class="keyword">import</span> javax.mail.internet.MimeMessage;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by cw on 2017/7/18.</div><div class="line"> */</div><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MailService</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(<span class="keyword">this</span>.getClass());</div><div class="line"></div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> JavaMailSender mailSender;</div><div class="line"></div><div class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;mail.fromMail.addr&#125;"</span>)</div><div class="line">    <span class="keyword">private</span> String from;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendSimpleMail</span><span class="params">(String to, String subject, String content)</span> </span>&#123;</div><div class="line">        SimpleMailMessage message = <span class="keyword">new</span> SimpleMailMessage();</div><div class="line">        message.setFrom(from);</div><div class="line">        message.setTo(to);</div><div class="line">        message.setSubject(subject);</div><div class="line">        message.setText(content);</div><div class="line"></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            mailSender.send(message);</div><div class="line">            logger.info(<span class="string">"简单邮件已经发送。"</span>);</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            logger.error(<span class="string">"发送简单邮件时发生异常！"</span>, e);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>这个就是来负责发送邮件的类了</p>
-<p>我们编写测试类来测试下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.junit.Test;</div><div class="line"><span class="keyword">import</span> org.junit.runner.RunWith;</div><div class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</div><div class="line"><span class="keyword">import</span> org.springframework.boot.test.context.SpringBootTest;</div><div class="line"><span class="keyword">import</span> org.springframework.test.context.junit4.SpringRunner;</div><div class="line"><span class="keyword">import</span> org.thymeleaf.TemplateEngine;</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@RunWith</span>(SpringRunner.class)</div><div class="line"><span class="meta">@SpringBootTest</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ApplicationTests</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Autowired</span></div><div class="line">	<span class="keyword">private</span> MailService mailService;</div><div class="line"></div><div class="line">	<span class="meta">@Autowired</span></div><div class="line">	<span class="keyword">private</span> TemplateEngine templateEngine;</div><div class="line"></div><div class="line"></div><div class="line">	<span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSimpleMail</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		mailService.sendSimpleMail(<span class="string">"123456789@qq.com"</span>,<span class="string">"测试邮件"</span>,<span class="string">" 你好"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>邮件运行测试类<br>如果按照上面的步骤来的话，123456789@qq.com里应该会收到一份邮件（请用自己的邮箱来测试）</p>
-<p>但是这样的邮件是不是太单调了？<br>那么我们可以html来美化邮件</p>
-<h2 id="用thymeleaf来美化邮件"><a href="#用thymeleaf来美化邮件" class="headerlink" title="用thymeleaf来美化邮件"></a>用thymeleaf来美化邮件</h2><p>在pom.xml文件里引入<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-thymeleaf<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>在MailService里添加新的方法来发送html邮件<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendHtmlMail</span><span class="params">(String to, String subject, String content)</span> </span>&#123;</div><div class="line">    MimeMessage message = mailSender.createMimeMessage();</div><div class="line"></div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        <span class="comment">//true表示需要创建一个multipart message</span></div><div class="line">        MimeMessageHelper helper = <span class="keyword">new</span> MimeMessageHelper(message, <span class="keyword">true</span>);</div><div class="line">        helper.setFrom(from);</div><div class="line">        helper.setTo(to);</div><div class="line">        helper.setSubject(subject);</div><div class="line">        helper.setText(content, <span class="keyword">true</span>);</div><div class="line"></div><div class="line">        mailSender.send(message);</div><div class="line">        logger.info(<span class="string">"html邮件发送成功"</span>);</div><div class="line">    &#125; <span class="keyword">catch</span> (MessagingException e) &#123;</div><div class="line">        logger.error(<span class="string">"发送html邮件时发生异常！"</span>, e);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>在resources文件夹中的templates里新建HTML文件</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"zh"</span> <span class="attr">xmlns:th</span>=<span class="string">"http://www.thymeleaf.org"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">您好,这是验证邮件,请点击下面的链接完成验证,<span class="tag">&lt;<span class="name">br</span>/&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">th:href</span>=<span class="string">"@&#123; http://www.google.com/&#123;id&#125;(id=$&#123;id&#125;) &#125;"</span>&gt;</span>激活账号<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>测试一下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.thymeleaf.context.Context;</div><div class="line"></div><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendTemplateMail</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="comment">//创建邮件正文</span></div><div class="line">  Context context = <span class="keyword">new</span> Context();</div><div class="line">  context.setVariable(<span class="string">"id"</span>, <span class="string">"1"</span>);</div><div class="line">  String emailContent = templateEngine.process(<span class="string">"emailTemplate"</span>, context);</div><div class="line"></div><div class="line">  mailService.sendHtmlMail(<span class="string">"123456789@qq.com"</span>,<span class="string">"主题：这是模板邮件"</span>,emailContent);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>这里我们传入了一个id 到html里</p>
-<p>运行测试类，你的邮箱应该又收到了一封邮件<br>不过这封会更加美观？</p>
-<p><strong>这个就是SpringBoot发送邮件的简单教程了</strong></p>
-<p>本篇参考了<a href="http://www.ityouknow.com/springboot/2017/05/06/springboot-mail.html" target="_blank" rel="external">这篇博客</a><br>也可以去这里学习下</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;最近把算打注册邮箱验证弄一下&lt;/p&gt;
-&lt;p&gt;学习了下如何用SpringBoot发送邮件&lt;br&gt;
     
     </summary>
     
