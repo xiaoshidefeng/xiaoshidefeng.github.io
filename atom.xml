@@ -50,11 +50,11 @@
   </entry>
   
   <entry>
-    <title>Vue.js去掉链接里的#井号</title>
-    <link href="http://blog.chenwe.top/2017/09/10/Vue.js%E5%8E%BB%E6%8E%89%E9%93%BE%E6%8E%A5%E9%87%8C%E7%9A%84#%E4%BA%95%E5%8F%B7/"/>
-    <id>http://blog.chenwe.top/2017/09/10/Vue.js去掉链接里的#井号/</id>
+    <title>Vue.js去掉链接里的井号</title>
+    <link href="http://blog.chenwe.top/2017/09/10/Vue.js%E5%8E%BB%E6%8E%89%E9%93%BE%E6%8E%A5%E9%87%8C%E7%9A%84%E4%BA%95%E5%8F%B7/"/>
+    <id>http://blog.chenwe.top/2017/09/10/Vue.js去掉链接里的井号/</id>
     <published>2017-09-10T06:37:51.431Z</published>
-    <updated>2017-09-10T06:55:18.600Z</updated>
+    <updated>2017-09-11T14:10:54.250Z</updated>
     
     <content type="html"><![CDATA[<p>在用vue-router的时候<br>有时候会在连接里会出现一个 #<br>不太美观</p>
 <p>要怎么去掉呢？<br><img src="http://otj6w86xd.bkt.clouddn.com/huajizuo.jpg" alt=""></p>
@@ -73,7 +73,7 @@
     
     </summary>
     
-      <category term="vue.js" scheme="http://blog.chenwe.top/categories/vue-js/"/>
+      <category term="Vue" scheme="http://blog.chenwe.top/categories/Vue/"/>
     
     
       <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
@@ -87,7 +87,7 @@
     <link href="http://blog.chenwe.top/2017/09/09/Vue.js%E5%B9%B3%E8%A1%8C%E7%BB%84%E4%BB%B6%E4%B9%8B%E9%97%B4%E9%80%9A%E4%BF%A1/"/>
     <id>http://blog.chenwe.top/2017/09/09/Vue.js平行组件之间通信/</id>
     <published>2017-09-09T03:14:03.850Z</published>
-    <updated>2017-09-09T03:44:03.427Z</updated>
+    <updated>2017-09-11T14:10:50.257Z</updated>
     
     <content type="html"><![CDATA[<p>在用Vue.js做项目的时候<br>有时候会需要平行组件（非父子组件）之间传递数据的情况</p>
 <p>该怎么做呢？<br><img src="http://otj6w86xd.bkt.clouddn.com/bqb-cm.jpg" alt=""></p>
@@ -118,7 +118,7 @@
     
     </summary>
     
-      <category term="vue.js" scheme="http://blog.chenwe.top/categories/vue-js/"/>
+      <category term="Vue" scheme="http://blog.chenwe.top/categories/Vue/"/>
     
     
       <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
@@ -177,7 +177,7 @@
     <link href="http://blog.chenwe.top/2017/08/29/Vue.js%E4%B8%AD%E4%BF%AE%E6%94%B9router-link%E7%9A%84%E6%A0%B7%E5%BC%8F/"/>
     <id>http://blog.chenwe.top/2017/08/29/Vue.js中修改router-link的样式/</id>
     <published>2017-08-29T11:20:34.758Z</published>
-    <updated>2017-08-30T14:51:26.729Z</updated>
+    <updated>2017-09-11T14:11:03.262Z</updated>
     
     <content type="html"><![CDATA[<p>在用vue.js 的时候<br>有个地方用到了router-link<br>并且要修改router-link的样式</p>
 <p>但是我发现直接修改router-link是不行的</p>
@@ -199,7 +199,7 @@
     
     </summary>
     
-      <category term="vue.js" scheme="http://blog.chenwe.top/categories/vue-js/"/>
+      <category term="Vue" scheme="http://blog.chenwe.top/categories/Vue/"/>
     
     
       <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
@@ -213,7 +213,7 @@
     <link href="http://blog.chenwe.top/2017/08/28/Vue.js%E4%B8%AD%E4%BD%BF%E7%94%A8axios%E6%95%B0%E6%8D%AE%E8%B5%8B%E5%80%BC%E6%8A%A5%E9%94%99/"/>
     <id>http://blog.chenwe.top/2017/08/28/Vue.js中使用axios数据赋值报错/</id>
     <published>2017-08-28T09:04:57.623Z</published>
-    <updated>2017-08-28T09:14:28.061Z</updated>
+    <updated>2017-09-11T14:10:59.690Z</updated>
     
     <content type="html"><![CDATA[<p>在用vue.js的axios插件来获取数据的时候<br>踩了一个坑</p>
 <p>获取到的数据对象不能赋值给变量</p>
@@ -240,7 +240,7 @@
     
     </summary>
     
-      <category term="vue.js" scheme="http://blog.chenwe.top/categories/vue-js/"/>
+      <category term="Vue" scheme="http://blog.chenwe.top/categories/Vue/"/>
     
     
       <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
@@ -287,11 +287,11 @@
   </entry>
   
   <entry>
-    <title>Mysql登录&#39;Access denied for user &#39;root&#39;@&#39;localhost&#39;的问题</title>
-    <link href="http://blog.chenwe.top/2017/08/18/Mysql%E7%99%BB%E5%BD%95&#39;Access%20denied%20for%20user%20&#39;root&#39;@&#39;localhost&#39;%E7%9A%84%E9%97%AE%E9%A2%98/"/>
-    <id>http://blog.chenwe.top/2017/08/18/Mysql登录&#39;Access denied for user &#39;root&#39;@&#39;localhost&#39;的问题/</id>
+    <title>Mysql登录Access denied for user &#39;root&#39;@&#39;localhost的问题</title>
+    <link href="http://blog.chenwe.top/2017/08/18/Mysql%E7%99%BB%E5%BD%95Access%20denied%20for%20user%20&#39;root&#39;@&#39;localhost%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    <id>http://blog.chenwe.top/2017/08/18/Mysql登录Access denied for user &#39;root&#39;@&#39;localhost的问题/</id>
     <published>2017-08-18T14:09:27.908Z</published>
-    <updated>2017-08-18T14:24:50.888Z</updated>
+    <updated>2017-09-11T14:12:46.472Z</updated>
     
     <content type="html"><![CDATA[<p>之前有一天我服务器里的mysql突然远程连接不上了<br>MySQL WorkBench 连上显示无法读取数据，丢失部分文件<br><img src="http://otj6w86xd.bkt.clouddn.com/wenhao.jpg" alt=""><br><a id="more"></a><br>我用ssh登录出现以下报错</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&apos;Access denied for user &apos;root&apos;@&apos;localhost&apos; (using password: YES)&apos;</div></pre></td></tr></table></figure>
@@ -560,7 +560,7 @@
     <link href="http://blog.chenwe.top/2017/07/31/Vue.js%E5%AE%9E%E7%8E%B0%E6%8C%89%E9%92%AE%E7%82%B9%E5%87%BB%E5%87%BA%E7%8E%B0%E5%80%92%E8%AE%A1%E6%97%B6/"/>
     <id>http://blog.chenwe.top/2017/07/31/Vue.js实现按钮点击出现倒计时/</id>
     <published>2017-07-31T12:09:02.116Z</published>
-    <updated>2017-07-31T12:34:05.983Z</updated>
+    <updated>2017-09-11T14:10:57.092Z</updated>
     
     <content type="html"><![CDATA[<p>有时候我们会遇到这种需求<br>比如我们在向客户发送一个验证码的时候<br>为了防止资源被浪费，所以要让客户每隔60秒才能再发送下一次验证码</p>
 <p>那么如何实现这个功能呢</p>
@@ -586,7 +586,7 @@
     
     </summary>
     
-      <category term="vue.js" scheme="http://blog.chenwe.top/categories/vue-js/"/>
+      <category term="Vue" scheme="http://blog.chenwe.top/categories/Vue/"/>
     
     
       <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
@@ -747,7 +747,7 @@
     <link href="http://blog.chenwe.top/2017/07/23/Vue.js%E4%B8%ADCookie%E7%9A%84%E6%93%8D%E4%BD%9C/"/>
     <id>http://blog.chenwe.top/2017/07/23/Vue.js中Cookie的操作/</id>
     <published>2017-07-23T06:25:01.399Z</published>
-    <updated>2017-07-23T07:02:24.073Z</updated>
+    <updated>2017-09-11T14:11:06.842Z</updated>
     
     <content type="html"><![CDATA[<p>在用vue.js搭建前端的时候<br>做到登录的功能</p>
 <p>登录成功后，虽然能在界面上显示用户名<br>但是一刷新就全没了<br><img src="http://otj6w86xd.bkt.clouddn.com/bqb-cm.jpg" alt=""></p>
@@ -770,7 +770,7 @@
     
     </summary>
     
-      <category term="vue.js" scheme="http://blog.chenwe.top/categories/vue-js/"/>
+      <category term="Vue" scheme="http://blog.chenwe.top/categories/Vue/"/>
     
     
       <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
