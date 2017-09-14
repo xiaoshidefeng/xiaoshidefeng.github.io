@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.chenwe.top/"/>
-  <updated>2017-09-11T08:53:06.240Z</updated>
+  <updated>2017-09-14T08:25:20.286Z</updated>
   <id>http://blog.chenwe.top/</id>
   
   <author>
@@ -16,9 +16,63 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>数据库RAID简介</title>
+    <link href="http://blog.chenwe.top/2017/09/14/2017/2017-09-14%20%E6%95%B0%E6%8D%AE%E5%BA%93RAID%E7%AE%80%E4%BB%8B/"/>
+    <id>http://blog.chenwe.top/2017/09/14/2017/2017-09-14 数据库RAID简介/</id>
+    <published>2017-09-14T08:04:23.254Z</published>
+    <updated>2017-09-14T08:25:20.286Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>RAID （ Redundant Array of Independent Disks ）即独立磁盘冗余阵列，通常简称为磁盘阵列。 简单地说， RAID 是由多个独立的高性能磁盘驱动器组成的磁盘子系统，从而提供比单个磁盘更高的存储性能和数据冗余的技术。</p>
+</blockquote>
+<p><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20170914160646934.png" alt=""></p>
+<a id="more"></a>
+<h2 id="有哪些RAID"><a href="#有哪些RAID" class="headerlink" title="有哪些RAID"></a>有哪些RAID</h2><p>常见的有6种RAID类型<br>RAID 等级 | RAID0 | RAID1 | RAID5 | RAID6 | RAID10 |</p>
+<p>这里我们简单的介绍一下 RAID0 RAID1 RAID5 RAID10</p>
+<h2 id="RAID0"><a href="#RAID0" class="headerlink" title="RAID0"></a>RAID0</h2><p><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-2017091416153039.png" alt=""></p>
+<blockquote>
+<p>RAID 0又称为Stripe或Striping，它代表了所有RAID级别中最高的存储性能。RAID 0提高存储性能的原理是把连续的数据分散到多个磁盘上存取，这样，系统有数据请求就可以被多个磁盘并行的执行，每个磁盘执行属于它自己的那部分数据请求。这种数据上的并行操作可以充分利用总线的带宽，显著提高磁盘整体存取性能。</p>
+</blockquote>
+<p>RAID0 没有数据冗余，没有数据校验的磁盘阵列。<br>实现它需要至少两块以上的硬盘，将两个硬盘并成一块，数据连续分割在各个盘上。<br>因为带宽加倍，所以读写速度加倍，但是在提高速度的同时，却带来了安全上的问题。<br>只要任何一块硬盘损坏就会丢失所有数据。因此RAID 0 不可应用于需要数据高可用性的关键领域。</p>
+<h2 id="RAID1"><a href="#RAID1" class="headerlink" title="RAID1"></a>RAID1</h2><p><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-2017091416172531.png" alt=""></p>
+<blockquote>
+<p>RAID 1通过磁盘数据镜像实现数据冗余，在成对的独立磁盘上产生互 为备份的数据。当原始数据繁忙时，可直接从镜像拷贝中读取数据，因此RAID 1可以提高读取性能。RAID 1是磁盘阵列中单位成本最高的，但提供了很高的数据安全性和可用性。当一个磁盘失效时，系统可以自动切换到镜像磁盘上读写，而不需要重组失效的数据。</p>
+</blockquote>
+<p>RAID1是将一个两块硬盘所构成RAID磁盘阵列。<br>其容量仅等于一块硬盘的容量，因为另一块只是当作数据“镜像”。<br>在提升速度的时候，也保护了数据的安全，但是成本较高。</p>
+<h2 id="RAID5"><a href="#RAID5" class="headerlink" title="RAID5"></a>RAID5</h2><p><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20170914161833407.png" alt=""></p>
+<blockquote>
+<p>RAID 5 是一种存储性能、数据安全和存储成本兼顾的存储解决方案。 RAID 5可以理解为是RAID 0和RAID 1的折中方案。RAID 5可以为系统提供数据安全保障，但保障程度要比Mirror低而磁盘空间利用率要比Mirror高。RAID 5具有和RAID 0相近似的数据读取速度，只是多了一个奇偶校验信息，写入数据的速度比对单个磁盘进行写入操作稍慢。同时由于多个数据对应一个奇偶校验信息，RAID 5的磁盘空间利用率要比RAID 1高，存储成本相对较低，是目前运用较多的一种解决方案。</p>
+</blockquote>
+<p>RAID5 可以通过<a href="https://baike.baidu.com/item/%E5%A5%87%E5%81%B6%E6%A0%A1%E9%AA%8C" target="_blank" rel="external">奇偶校验</a>来恢复损坏的盘的数据<br>但是只能损坏一块硬盘，如果同时损坏两块硬盘，那么数据也是无法恢复</p>
+<h2 id="RAID10"><a href="#RAID10" class="headerlink" title="RAID10"></a>RAID10</h2><p><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20170914162321744.png" alt=""></p>
+<blockquote>
+<p>Raid 10是一个Raid 1与Raid0的组合体，它是利用奇偶校验实现条带集镜像，所以它继承了Raid0的快速和Raid1的安全。我们知道，RAID 1在这里就是一个冗余的备份阵列，而RAID 0则负责数据的读写阵列。其实，右图只是一种RAID 10方式，更多的情况是从主通路分出两路，做Striping操作，即把数据分割，而这分出来的每一路则再分两路，做Mirroring操作，即互做镜像。</p>
+</blockquote>
+<p>RAID10 将 RAID0 RAID1 的标准相结合<br>在连续地以位或字节为单位分割数据并且并行读/写多个磁盘的同时，为每一块磁盘作磁盘镜像进行冗余。<br>它有效的吸收了两者的优点<br>这种结构的可扩充性不好，这种解决方案被广泛应用，使用此方案比较昂贵。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;RAID （ Redundant Array of Independent Disks ）即独立磁盘冗余阵列，通常简称为磁盘阵列。 简单地说， RAID 是由多个独立的高性能磁盘驱动器组成的磁盘子系统，从而提供比单个磁盘更高的存储性能和数据冗余的技术。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20170914160646934.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="数据库" scheme="http://blog.chenwe.top/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
+    
+      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
+    
+  </entry>
+  
+  <entry>
     <title>获取Cookie时中文乱码</title>
-    <link href="http://blog.chenwe.top/2017/09/11/%E8%8E%B7%E5%8F%96Cookie%E6%97%B6%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/"/>
-    <id>http://blog.chenwe.top/2017/09/11/获取Cookie时中文乱码/</id>
+    <link href="http://blog.chenwe.top/2017/09/11/2017/%E8%8E%B7%E5%8F%96Cookie%E6%97%B6%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/"/>
+    <id>http://blog.chenwe.top/2017/09/11/2017/获取Cookie时中文乱码/</id>
     <published>2017-09-11T08:45:12.450Z</published>
     <updated>2017-09-11T08:53:06.240Z</updated>
     
@@ -51,8 +105,8 @@
   
   <entry>
     <title>Vue.js去掉链接里的井号</title>
-    <link href="http://blog.chenwe.top/2017/09/10/Vue.js%E5%8E%BB%E6%8E%89%E9%93%BE%E6%8E%A5%E9%87%8C%E7%9A%84%E4%BA%95%E5%8F%B7/"/>
-    <id>http://blog.chenwe.top/2017/09/10/Vue.js去掉链接里的井号/</id>
+    <link href="http://blog.chenwe.top/2017/09/10/2017/Vue.js%E5%8E%BB%E6%8E%89%E9%93%BE%E6%8E%A5%E9%87%8C%E7%9A%84%E4%BA%95%E5%8F%B7/"/>
+    <id>http://blog.chenwe.top/2017/09/10/2017/Vue.js去掉链接里的井号/</id>
     <published>2017-09-10T06:37:51.431Z</published>
     <updated>2017-09-11T14:10:54.250Z</updated>
     
@@ -84,8 +138,8 @@
   
   <entry>
     <title>Vue.js平行组件之间通信</title>
-    <link href="http://blog.chenwe.top/2017/09/09/Vue.js%E5%B9%B3%E8%A1%8C%E7%BB%84%E4%BB%B6%E4%B9%8B%E9%97%B4%E9%80%9A%E4%BF%A1/"/>
-    <id>http://blog.chenwe.top/2017/09/09/Vue.js平行组件之间通信/</id>
+    <link href="http://blog.chenwe.top/2017/09/09/2017/Vue.js%E5%B9%B3%E8%A1%8C%E7%BB%84%E4%BB%B6%E4%B9%8B%E9%97%B4%E9%80%9A%E4%BF%A1/"/>
+    <id>http://blog.chenwe.top/2017/09/09/2017/Vue.js平行组件之间通信/</id>
     <published>2017-09-09T03:14:03.850Z</published>
     <updated>2017-09-11T14:10:50.257Z</updated>
     
@@ -129,8 +183,8 @@
   
   <entry>
     <title>使用Xpath来制作python3爬虫</title>
-    <link href="http://blog.chenwe.top/2017/09/08/%E4%BD%BF%E7%94%A8Xpath%E6%9D%A5%E5%88%B6%E4%BD%9Cpython3%E7%88%AC%E8%99%AB/"/>
-    <id>http://blog.chenwe.top/2017/09/08/使用Xpath来制作python3爬虫/</id>
+    <link href="http://blog.chenwe.top/2017/09/08/2017/%E4%BD%BF%E7%94%A8Xpath%E6%9D%A5%E5%88%B6%E4%BD%9Cpython3%E7%88%AC%E8%99%AB/"/>
+    <id>http://blog.chenwe.top/2017/09/08/2017/使用Xpath来制作python3爬虫/</id>
     <published>2017-09-08T06:52:51.867Z</published>
     <updated>2017-09-08T10:59:59.223Z</updated>
     
@@ -174,8 +228,8 @@
   
   <entry>
     <title>Vue.js中修改router-link的样式</title>
-    <link href="http://blog.chenwe.top/2017/08/29/Vue.js%E4%B8%AD%E4%BF%AE%E6%94%B9router-link%E7%9A%84%E6%A0%B7%E5%BC%8F/"/>
-    <id>http://blog.chenwe.top/2017/08/29/Vue.js中修改router-link的样式/</id>
+    <link href="http://blog.chenwe.top/2017/08/29/2017/Vue.js%E4%B8%AD%E4%BF%AE%E6%94%B9router-link%E7%9A%84%E6%A0%B7%E5%BC%8F/"/>
+    <id>http://blog.chenwe.top/2017/08/29/2017/Vue.js中修改router-link的样式/</id>
     <published>2017-08-29T11:20:34.758Z</published>
     <updated>2017-09-11T14:11:03.262Z</updated>
     
@@ -210,8 +264,8 @@
   
   <entry>
     <title>Vue.js中使用axios数据赋值报错</title>
-    <link href="http://blog.chenwe.top/2017/08/28/Vue.js%E4%B8%AD%E4%BD%BF%E7%94%A8axios%E6%95%B0%E6%8D%AE%E8%B5%8B%E5%80%BC%E6%8A%A5%E9%94%99/"/>
-    <id>http://blog.chenwe.top/2017/08/28/Vue.js中使用axios数据赋值报错/</id>
+    <link href="http://blog.chenwe.top/2017/08/28/2017/Vue.js%E4%B8%AD%E4%BD%BF%E7%94%A8axios%E6%95%B0%E6%8D%AE%E8%B5%8B%E5%80%BC%E6%8A%A5%E9%94%99/"/>
+    <id>http://blog.chenwe.top/2017/08/28/2017/Vue.js中使用axios数据赋值报错/</id>
     <published>2017-08-28T09:04:57.623Z</published>
     <updated>2017-09-11T14:10:59.690Z</updated>
     
@@ -251,8 +305,8 @@
   
   <entry>
     <title>手机连接本地服务器调试</title>
-    <link href="http://blog.chenwe.top/2017/08/27/%E6%89%8B%E6%9C%BA%E8%BF%9E%E6%8E%A5%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B0%83%E8%AF%95/"/>
-    <id>http://blog.chenwe.top/2017/08/27/手机连接本地服务器调试/</id>
+    <link href="http://blog.chenwe.top/2017/08/27/2017/%E6%89%8B%E6%9C%BA%E8%BF%9E%E6%8E%A5%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B0%83%E8%AF%95/"/>
+    <id>http://blog.chenwe.top/2017/08/27/2017/手机连接本地服务器调试/</id>
     <published>2017-08-27T08:49:21.822Z</published>
     <updated>2017-08-27T08:58:59.219Z</updated>
     
@@ -288,8 +342,8 @@
   
   <entry>
     <title>Mysql登录报错的问题</title>
-    <link href="http://blog.chenwe.top/2017/08/18/Mysql%E7%99%BB%E5%BD%95%E7%9A%84%E9%97%AE%E9%A2%98/"/>
-    <id>http://blog.chenwe.top/2017/08/18/Mysql登录的问题/</id>
+    <link href="http://blog.chenwe.top/2017/08/18/2017/Mysql%E7%99%BB%E5%BD%95%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    <id>http://blog.chenwe.top/2017/08/18/2017/Mysql登录的问题/</id>
     <published>2017-08-18T14:09:27.908Z</published>
     <updated>2017-09-11T14:53:42.298Z</updated>
     
@@ -340,8 +394,8 @@
   
   <entry>
     <title>git detached HEAD状态的解决方法</title>
-    <link href="http://blog.chenwe.top/2017/08/12/git%20detached%20HEAD%E7%8A%B6%E6%80%81%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
-    <id>http://blog.chenwe.top/2017/08/12/git detached HEAD状态的解决方法/</id>
+    <link href="http://blog.chenwe.top/2017/08/12/2017/git%20detached%20HEAD%E7%8A%B6%E6%80%81%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
+    <id>http://blog.chenwe.top/2017/08/12/2017/git detached HEAD状态的解决方法/</id>
     <published>2017-08-12T15:17:02.886Z</published>
     <updated>2017-08-12T15:24:01.536Z</updated>
     
@@ -371,8 +425,8 @@
   
   <entry>
     <title>Android BottomNavigationView无法添加依赖</title>
-    <link href="http://blog.chenwe.top/2017/08/08/Android%20BottomNavigationView%E6%97%A0%E6%B3%95%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96/"/>
-    <id>http://blog.chenwe.top/2017/08/08/Android BottomNavigationView无法添加依赖/</id>
+    <link href="http://blog.chenwe.top/2017/08/08/2017/Android%20BottomNavigationView%E6%97%A0%E6%B3%95%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96/"/>
+    <id>http://blog.chenwe.top/2017/08/08/2017/Android BottomNavigationView无法添加依赖/</id>
     <published>2017-08-08T13:49:31.414Z</published>
     <updated>2017-08-08T14:01:51.999Z</updated>
     
@@ -402,8 +456,8 @@
   
   <entry>
     <title>练字记录（一）</title>
-    <link href="http://blog.chenwe.top/2017/08/04/%E7%BB%83%E5%AD%97%E8%AE%B0%E5%BD%95%EF%BC%88%E4%B8%80%EF%BC%89/"/>
-    <id>http://blog.chenwe.top/2017/08/04/练字记录（一）/</id>
+    <link href="http://blog.chenwe.top/2017/08/04/2017/%E7%BB%83%E5%AD%97%E8%AE%B0%E5%BD%95%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+    <id>http://blog.chenwe.top/2017/08/04/2017/练字记录（一）/</id>
     <published>2017-08-04T08:27:24.136Z</published>
     <updated>2017-08-04T08:46:16.704Z</updated>
     
@@ -444,8 +498,8 @@
   
   <entry>
     <title>SpringBoot远程shell监控和管理</title>
-    <link href="http://blog.chenwe.top/2017/08/03/SpringBoot%E8%BF%9C%E7%A8%8Bshell%E7%9B%91%E6%8E%A7%E5%92%8C%E7%AE%A1%E7%90%86/"/>
-    <id>http://blog.chenwe.top/2017/08/03/SpringBoot远程shell监控和管理/</id>
+    <link href="http://blog.chenwe.top/2017/08/03/2017/SpringBoot%E8%BF%9C%E7%A8%8Bshell%E7%9B%91%E6%8E%A7%E5%92%8C%E7%AE%A1%E7%90%86/"/>
+    <id>http://blog.chenwe.top/2017/08/03/2017/SpringBoot远程shell监控和管理/</id>
     <published>2017-08-03T12:39:38.610Z</published>
     <updated>2017-08-03T12:57:05.140Z</updated>
     
@@ -479,8 +533,8 @@
   
   <entry>
     <title>IDEA Maven项目依赖失效</title>
-    <link href="http://blog.chenwe.top/2017/08/02/IDEA%20Maven%E9%A1%B9%E7%9B%AE%E4%BE%9D%E8%B5%96%E5%A4%B1%E6%95%88/"/>
-    <id>http://blog.chenwe.top/2017/08/02/IDEA Maven项目依赖失效/</id>
+    <link href="http://blog.chenwe.top/2017/08/02/2017/IDEA%20Maven%E9%A1%B9%E7%9B%AE%E4%BE%9D%E8%B5%96%E5%A4%B1%E6%95%88/"/>
+    <id>http://blog.chenwe.top/2017/08/02/2017/IDEA Maven项目依赖失效/</id>
     <published>2017-08-02T02:35:45.599Z</published>
     <updated>2017-08-02T03:05:18.097Z</updated>
     
@@ -512,8 +566,8 @@
   
   <entry>
     <title>关于百度搜索不到Github Pages的解决方法.</title>
-    <link href="http://blog.chenwe.top/2017/08/01/%E5%85%B3%E4%BA%8E%E7%99%BE%E5%BA%A6%E6%90%9C%E7%B4%A2%E4%B8%8D%E5%88%B0Github%20Pages%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
-    <id>http://blog.chenwe.top/2017/08/01/关于百度搜索不到Github Pages的解决方法/</id>
+    <link href="http://blog.chenwe.top/2017/08/01/2017/%E5%85%B3%E4%BA%8E%E7%99%BE%E5%BA%A6%E6%90%9C%E7%B4%A2%E4%B8%8D%E5%88%B0Github%20Pages%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
+    <id>http://blog.chenwe.top/2017/08/01/2017/关于百度搜索不到Github Pages的解决方法/</id>
     <published>2017-08-01T08:09:24.308Z</published>
     <updated>2017-08-01T09:10:22.909Z</updated>
     
@@ -557,8 +611,8 @@
   
   <entry>
     <title>Vue.js实现按钮点击出现倒计时</title>
-    <link href="http://blog.chenwe.top/2017/07/31/Vue.js%E5%AE%9E%E7%8E%B0%E6%8C%89%E9%92%AE%E7%82%B9%E5%87%BB%E5%87%BA%E7%8E%B0%E5%80%92%E8%AE%A1%E6%97%B6/"/>
-    <id>http://blog.chenwe.top/2017/07/31/Vue.js实现按钮点击出现倒计时/</id>
+    <link href="http://blog.chenwe.top/2017/07/31/2017/Vue.js%E5%AE%9E%E7%8E%B0%E6%8C%89%E9%92%AE%E7%82%B9%E5%87%BB%E5%87%BA%E7%8E%B0%E5%80%92%E8%AE%A1%E6%97%B6/"/>
+    <id>http://blog.chenwe.top/2017/07/31/2017/Vue.js实现按钮点击出现倒计时/</id>
     <published>2017-07-31T12:09:02.116Z</published>
     <updated>2017-09-11T14:10:57.092Z</updated>
     
@@ -597,8 +651,8 @@
   
   <entry>
     <title>在Nginx上部署Vue.js项目</title>
-    <link href="http://blog.chenwe.top/2017/07/30/%E5%9C%A8Nginx%E4%B8%8A%E9%83%A8%E7%BD%B2Vue.js%E9%A1%B9%E7%9B%AE/"/>
-    <id>http://blog.chenwe.top/2017/07/30/在Nginx上部署Vue.js项目/</id>
+    <link href="http://blog.chenwe.top/2017/07/30/2017/%E5%9C%A8Nginx%E4%B8%8A%E9%83%A8%E7%BD%B2Vue.js%E9%A1%B9%E7%9B%AE/"/>
+    <id>http://blog.chenwe.top/2017/07/30/2017/在Nginx上部署Vue.js项目/</id>
     <published>2017-07-30T11:26:28.043Z</published>
     <updated>2017-07-30T11:46:14.639Z</updated>
     
@@ -646,8 +700,8 @@
   
   <entry>
     <title>关于博客的部分优化</title>
-    <link href="http://blog.chenwe.top/2017/07/28/%E5%85%B3%E4%BA%8E%E5%8D%9A%E5%AE%A2%E7%9A%84%E9%83%A8%E5%88%86%E4%BC%98%E5%8C%96/"/>
-    <id>http://blog.chenwe.top/2017/07/28/关于博客的部分优化/</id>
+    <link href="http://blog.chenwe.top/2017/07/28/2017/%E5%85%B3%E4%BA%8E%E5%8D%9A%E5%AE%A2%E7%9A%84%E9%83%A8%E5%88%86%E4%BC%98%E5%8C%96/"/>
+    <id>http://blog.chenwe.top/2017/07/28/2017/关于博客的部分优化/</id>
     <published>2017-07-28T07:01:55.035Z</published>
     <updated>2017-07-28T08:24:27.966Z</updated>
     
@@ -699,8 +753,8 @@
   
   <entry>
     <title>关于API传递参数的一些小问题</title>
-    <link href="http://blog.chenwe.top/2017/07/27/%E5%85%B3%E4%BA%8EAPI%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E9%97%AE%E9%A2%98/"/>
-    <id>http://blog.chenwe.top/2017/07/27/关于API传递参数的一些小问题/</id>
+    <link href="http://blog.chenwe.top/2017/07/27/2017/%E5%85%B3%E4%BA%8EAPI%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E9%97%AE%E9%A2%98/"/>
+    <id>http://blog.chenwe.top/2017/07/27/2017/关于API传递参数的一些小问题/</id>
     <published>2017-07-27T10:24:52.472Z</published>
     <updated>2017-07-28T06:42:56.464Z</updated>
     
@@ -744,8 +798,8 @@
   
   <entry>
     <title>Vue.js中Cookie的操作</title>
-    <link href="http://blog.chenwe.top/2017/07/23/Vue.js%E4%B8%ADCookie%E7%9A%84%E6%93%8D%E4%BD%9C/"/>
-    <id>http://blog.chenwe.top/2017/07/23/Vue.js中Cookie的操作/</id>
+    <link href="http://blog.chenwe.top/2017/07/23/2017/Vue.js%E4%B8%ADCookie%E7%9A%84%E6%93%8D%E4%BD%9C/"/>
+    <id>http://blog.chenwe.top/2017/07/23/2017/Vue.js中Cookie的操作/</id>
     <published>2017-07-23T06:25:01.399Z</published>
     <updated>2017-09-11T14:11:06.842Z</updated>
     
@@ -771,44 +825,6 @@
     </summary>
     
       <category term="Vue" scheme="http://blog.chenwe.top/categories/Vue/"/>
-    
-    
-      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
-    
-      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SpringBoot定时任务</title>
-    <link href="http://blog.chenwe.top/2017/07/20/SpringBoot%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/"/>
-    <id>http://blog.chenwe.top/2017/07/20/SpringBoot定时任务/</id>
-    <published>2017-07-20T10:28:30.770Z</published>
-    <updated>2017-07-20T10:44:04.516Z</updated>
-    
-    <content type="html"><![CDATA[<p>定时任务是一个后台经常要用到的功能</p>
-<a id="more"></a>
-<h2 id="首先我们要在SpringBoot里配置pom-xml文件"><a href="#首先我们要在SpringBoot里配置pom-xml文件" class="headerlink" title="首先我们要在SpringBoot里配置pom.xml文件"></a>首先我们要在SpringBoot里配置pom.xml文件</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>只要有starter就好了（spring-boot-starter-xxx也行）</p>
-<h2 id="创建一个定时任务"><a href="#创建一个定时任务" class="headerlink" title="创建一个定时任务"></a>创建一个定时任务</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by cw on 2017/7/20.</div><div class="line"> */</div><div class="line"> <span class="meta">@Component</span></div><div class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SchedulerTaskFindAndSend</span> </span>&#123;</div><div class="line">     <span class="keyword">private</span> <span class="keyword">int</span> count=<span class="number">0</span>;</div><div class="line"></div><div class="line">     <span class="meta">@Scheduled</span>(cron=<span class="string">"*/30 * * * * ?"</span>)</div><div class="line">     <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">()</span></span>&#123;</div><div class="line">         System.out.println(<span class="string">"count = "</span>+(count++));</div><div class="line">     &#125;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
-<p>在@SpringBootApplication下添加@EnableScheduling<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">@SpringBootApplication</div><div class="line">@EnableScheduling</div></pre></td></tr></table></figure></p>
-<p>启动运行程序<br>控制台会每隔30秒打印出 count = 计数</p>
-<h2 id="关于-Scheduled"><a href="#关于-Scheduled" class="headerlink" title="关于@Scheduled"></a>关于@Scheduled</h2><p>除了cron=” “ 这种方式外<br>还有以下几种</p>
-<ul>
-<li>@Scheduled(fixedRate = 3000) ————————上一次开始执行时间点之后3秒再执行</li>
-<li>@Scheduled(fixedDelay = 3000) ————————上一次执行完毕时间点之后3秒再执行</li>
-<li>@Scheduled(initialDelay=1000, initialDelay = 3000) ————————第一次延迟1秒后执行，之后按fixedRate的规则每3秒执行一次</li>
-</ul>
-<p><strong>关于cron表达式</strong><br>可以看下<a href="http://rainbowdesert.iteye.com/blog/2107220" target="_blank" rel="external">这篇博客</a>对于cron表达式讲解比较详细</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;定时任务是一个后台经常要用到的功能&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="SpringBoot" scheme="http://blog.chenwe.top/categories/SpringBoot/"/>
     
     
       <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
