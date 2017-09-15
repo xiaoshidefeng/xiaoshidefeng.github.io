@@ -6,17 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.chenwe.top">
-  <title>Xiaoshidefeng的博客</title>
+  <title>Spring Boot中的缓存支持 | Xiaoshidefeng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="CW的个人Blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Xiaoshidefeng的博客">
-<meta property="og:url" content="http://blog.chenwe.top/page/3/index.html">
+  <meta name="description" content="当数据库的数据规模越来越大的时候数据库的查询容易变成影响用户体验的瓶颈是时候加入缓存来提高性能了">
+<meta name="keywords" content="study,code">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Boot中的缓存支持">
+<meta property="og:url" content="http://blog.chenwe.top/2017/09/15/2017/2017-09-15 Spring Boot中的缓存支持/index.html">
 <meta property="og:site_name" content="Xiaoshidefeng的博客">
-<meta property="og:description" content="CW的个人Blog">
+<meta property="og:description" content="当数据库的数据规模越来越大的时候数据库的查询容易变成影响用户体验的瓶颈是时候加入缓存来提高性能了">
+<meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20170915162439368.png">
+<meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20170915163858970.png">
+<meta property="og:updated_time" content="2017-09-15T08:44:11.894Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Xiaoshidefeng的博客">
-<meta name="twitter:description" content="CW的个人Blog">
+<meta name="twitter:title" content="Spring Boot中的缓存支持">
+<meta name="twitter:description" content="当数据库的数据规模越来越大的时候数据库的查询容易变成影响用户体验的瓶颈是时候加入缓存来提高性能了">
+<meta name="twitter:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20170915162439368.png">
   
     <link rel="alternative" href="/atom.xml" title="Xiaoshidefeng的博客" type="application/atom+xml">
   
@@ -180,113 +185,78 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-2017/Vue.js中Cookie的操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-2017/2017-09-15 Spring Boot中的缓存支持" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/23/2017/Vue.js中Cookie的操作/">Vue.js中Cookie的操作</a>
+    <h1 class="article-title" itemprop="name">
+      Spring Boot中的缓存支持
     </h1>
+    <span>&nbsp;&nbsp;&nbsp; | &nbsp;
+    <span id="busuanzi_value_page_pv" ></span>次阅读
+    </span>
   
 
 
         
-        <a href="/2017/07/23/2017/Vue.js中Cookie的操作/" class="archive-article-date">
-  	<time datetime="2017-07-23T06:25:01.399Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-23</time>
+        <a href="/2017/09/15/2017/2017-09-15 Spring Boot中的缓存支持/" class="archive-article-date">
+  	<time datetime="2017-09-15T08:22:03.250Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-15</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在用vue.js搭建前端的时候<br>做到登录的功能</p>
-<p>登录成功后，虽然能在界面上显示用户名<br>但是一刷新就全没了<br><img src="http://otj6w86xd.bkt.clouddn.com/bqb-cm.jpg" alt=""></p>
-        
-          <a class="article-more-a" href="/2017/07/23/2017/Vue.js中Cookie的操作/#more">more >></a>
-        
-      
+        <p>当数据库的数据规模越来越大的时候<br>数据库的查询容易变成影响用户体验的瓶颈<br>是时候加入缓存来提高性能了<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20170915162439368.png" alt=""></p>
+<a id="more"></a>
+<h2 id="有哪些缓存工具"><a href="#有哪些缓存工具" class="headerlink" title="有哪些缓存工具"></a>有哪些缓存工具</h2><p>常见的有Redis 和 EhCache<br>今天讲下EhCache</p>
+<h2 id="EhCache"><a href="#EhCache" class="headerlink" title="EhCache"></a>EhCache</h2><blockquote>
+<p>EhCache 是一个纯Java的进程内缓存框架，具有快速、精干等特点，是Hibernate中默认的CacheProvider。</p>
+</blockquote>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>pom.xml<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-cache<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>net.sf.ehcache<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>ehcache<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>添加完依赖后<br>在resources目录下新建 <code>ehcache.xml</code>文件<br>ehcache.xml<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">ehcache</span> <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></div><div class="line">         <span class="attr">xsi:noNamespaceSchemaLocation</span>=<span class="string">"ehcache.xsd"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">cache</span> <span class="attr">name</span>=<span class="string">"powers"</span></span></div><div class="line">           <span class="attr">maxEntriesLocalHeap</span>=<span class="string">"200"</span></div><div class="line">           <span class="attr">timeToLiveSeconds</span>=<span class="string">"10"</span>&gt;</div><div class="line">    <span class="tag">&lt;/<span class="name">cache</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ehcache</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>这里的<code>timeToLiveSeconds</code>是更新时间<br>这里我们设置10秒钟后自动更新数据</p>
+<p>在启动类中添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">@SpringBootApplication</div><div class="line">@EnableCaching</div></pre></td></tr></table></figure></p>
+<p>在Repository中添加<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@CacheConfig</span>(cacheNames = <span class="string">"powers"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">PowerRepository</span> <span class="keyword">extends</span> <span class="title">JpaRepository</span>&lt;<span class="title">Power</span>, <span class="title">Integer</span>&gt; </span>&#123;</div><div class="line">    <span class="meta">@Cacheable</span></div><div class="line">    <span class="function">List&lt;Power&gt; <span class="title">findAll</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这里我们把<code>cacheNames</code>和前面的配置里对应<br>在要缓存的地方写上<code>@Cacheable</code></p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>先在 <code>application.properties</code>中添加显示sql<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">spring.jpa.show-sql=true</div></pre></td></tr></table></figure></p>
+<p>在测试类中<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Autowired</span></div><div class="line"><span class="keyword">private</span> PowerService powerService;</div><div class="line"></div><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">totest</span><span class="params">()</span> </span>&#123;</div><div class="line">  List&lt;Power&gt; list1 = powerService.findAll();</div><div class="line">  System.out.println(<span class="string">"第一次查询："</span> + list1.get(<span class="number">0</span>));</div><div class="line"></div><div class="line">  List&lt;Power&gt; list2 = powerService.findAll();</div><div class="line">  System.out.println(<span class="string">"第二次查询："</span> + list2.get(<span class="number">0</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>写好测试类开始测试<br>打印出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Hibernate: select power0_.power_id as power_id1_1_, power0_.building_name as building2_1_, power0_.date_num as date_num3_1_, power0_.dorm_num as dorm_num4_1_, power0_.residual_electricity as residual5_1_ from lowpower power0_</div><div class="line">第一次查询：com.example.demo.domain.Power@1ae90cb9</div><div class="line">第二次查询：com.example.demo.domain.Power@1ae90cb9</div></pre></td></tr></table></figure></p>
+<p>我们发现第二次查询是没有打印出sql语句的<br>因为我们在第一次查询后，就把数据缓存了</p>
+<p>因为我们设置了10秒钟更新缓存数据<br>所以如果在外部改变数据库的一些字段<br>查询在10秒后也能得到更新<br>这里就不演示了</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>利用缓存来优化数据库<br>可以减缓数据库的压力<br>改善用户体验</p>
+<p><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20170915163858970.png" alt=""></p>
 
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Vue/" class="article-tag-list-link color4">Vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/23/2017/Vue.js中Cookie的操作/">展开全文 >></a>
-        </p>
       
 
       
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-2017/SpringBoot定时任务" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/20/2017/SpringBoot定时任务/">SpringBoot定时任务</a>
-    </h1>
-  
-
-
-        
-        <a href="/2017/07/20/2017/SpringBoot定时任务/" class="archive-article-date">
-  	<time datetime="2017-07-20T10:28:30.770Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>定时任务是一个后台经常要用到的功能</p>
-        
-          <a class="article-more-a" href="/2017/07/20/2017/SpringBoot定时任务/#more">more >></a>
-        
-      
-
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://otj6w86xd.bkt.clouddn.com/wxzf.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -321,651 +291,108 @@
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/20/2017/SpringBoot定时任务/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://blog.chenwe.top/2017/09/15/2017/2017-09-15 Spring Boot中的缓存支持/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
 
-
-
-
-
   
-    <article id="post-2017/SpringBoot邮箱注册验证" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/19/2017/SpringBoot邮箱注册验证/">SpringBoot邮箱注册验证</a>
-    </h1>
   
-
-
-        
-        <a href="/2017/07/19/2017/SpringBoot邮箱注册验证/" class="archive-article-date">
-  	<time datetime="2017-07-19T11:03:05.574Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>注册功能是一个网站的基本功能<br>刚刚实现了用邮箱来注册并验证的程序<br>这里记录下<br>
-        
-          <a class="article-more-a" href="/2017/07/19/2017/SpringBoot邮箱注册验证/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/SpringBoot/" class="article-tag-list-link color1">SpringBoot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/19/2017/SpringBoot邮箱注册验证/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
+    <a href="/2017/09/14/2017/2017-09-14 数据库RAID简介/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数据库RAID简介</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
 
 
 
 
   
-    <article id="post-2017/SpringBoot发送邮件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/18/2017/SpringBoot发送邮件/">SpringBoot发送邮件</a>
-    </h1>
-  
-
-
-        
-        <a href="/2017/07/18/2017/SpringBoot发送邮件/" class="archive-article-date">
-  	<time datetime="2017-07-18T12:03:31.612Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近把算打注册邮箱验证弄一下</p>
-<p>学习了下如何用SpringBoot发送邮件<br>
-        
-          <a class="article-more-a" href="/2017/07/18/2017/SpringBoot发送邮件/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/SpringBoot/" class="article-tag-list-link color1">SpringBoot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/18/2017/SpringBoot发送邮件/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
 
   
-    <article id="post-2017/在Tomcat上部署Vue.js项目" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/17/2017/在Tomcat上部署Vue.js项目/">在Tomcat上部署Vue.js项目</a>
-    </h1>
-  
-
-
-        
-        <a href="/2017/07/17/2017/在Tomcat上部署Vue.js项目/" class="archive-article-date">
-  	<time datetime="2017-07-17T06:54:17.406Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>接着上次的图书管理系统</p>
-<p>修改完问题后把SpringBoot成功部署到了服务器上<br>测试了下api接口，能正常访问<br>那么下面就是在服务器上部署前端的vue.js了<br>
-        
-          <a class="article-more-a" href="/2017/07/17/2017/在Tomcat上部署Vue.js项目/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/vue.js/" class="article-tag-list-link color2">vue.js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/17/2017/在Tomcat上部署Vue.js项目/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
 
   
-    <article id="post-2017/JPA里自定义SQL查询的一些问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/13/2017/JPA里自定义SQL查询的一些问题/">JPA里自定义SQL查询的一些问题</a>
-    </h1>
-  
-
-
-        
-        <a href="/2017/07/13/2017/JPA里自定义SQL查询的一些问题/" class="archive-article-date">
-  	<time datetime="2017-07-13T13:35:07.592Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>接着上次的图书管理系统</p>
-<p>还书的时候不仅要在还书的数据表添加新纪录<br>还要去把借书表中对应的内容删除</p>
-        
-          <a class="article-more-a" href="/2017/07/13/2017/JPA里自定义SQL查询的一些问题/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/SpringBoot/" class="article-tag-list-link color1">SpringBoot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/13/2017/JPA里自定义SQL查询的一些问题/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
 
   
-    <article id="post-2017/MySql的保留字段的问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/12/2017/MySql的保留字段的问题/">MySql的保留字段的问题</a>
-    </h1>
-  
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTc5Mi82MzU4" style="padding: 25px">
 
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
 
-        
-        <a href="/2017/07/12/2017/MySql的保留字段的问题/" class="archive-article-date">
-  	<time datetime="2017-07-12T12:20:58.091Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天打算把短学期实践的时候写的图书管理系统的后台用SpringBoot实现一下<br>一开始很顺利<br>但是在写插入一本书的数据的时候出现了问题<br>
-        
-          <a class="article-more-a" href="/2017/07/12/2017/MySql的保留字段的问题/#more">more >></a>
-        
-      
+       if (typeof LivereTower === 'function') { return; }
 
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
 
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/MySql/" class="article-tag-list-link color1">MySql</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/12/2017/MySql的保留字段的问题/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
 
   
-    <article id="post-2017/关于SpringBoot数据库连接" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/11/2017/关于SpringBoot数据库连接/">关于Spring数据库连接</a>
-    </h1>
-  
 
-
-        
-        <a href="/2017/07/11/2017/关于SpringBoot数据库连接/" class="archive-article-date">
-  	<time datetime="2017-07-11T05:49:53.542Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>之前短学期数据库实践，和同学用SpringMVC + mybatis 做了个图书管理系统的后台<br>用vue.js与ElementUI做前端</p>
-<p>在合作的时候，我们采用的是GitHub 来进行代码同步协作<br>但是在中间遇到了一个小插曲<br>
-        
-          <a class="article-more-a" href="/2017/07/11/2017/关于SpringBoot数据库连接/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/SpringMVC/" class="article-tag-list-link color5">SpringMVC</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/11/2017/关于SpringBoot数据库连接/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-2017/服务器运行打包的jar" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/10/2017/服务器运行打包的jar/">服务器运行打包的jar</a>
-    </h1>
-  
-
-
-        
-        <a href="/2017/07/10/2017/服务器运行打包的jar/" class="archive-article-date">
-  	<time datetime="2017-07-10T09:18:32.352Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>写了个简单的SpringBoot的demo<br>打包成jar文件部署到服务器</p>
-<p>通常的做法是</p>
-        
-          <a class="article-more-a" href="/2017/07/10/2017/服务器运行打包的jar/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/SpringBoot/" class="article-tag-list-link color1">SpringBoot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/10/2017/服务器运行打包的jar/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-2017/关于SpringBoot部署上的一些坑" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/09/2017/关于SpringBoot部署上的一些坑/">关于SpringBoot部署上的一些坑</a>
-    </h1>
-  
-
-
-        
-        <a href="/2017/07/09/2017/关于SpringBoot部署上的一些坑/" class="archive-article-date">
-  	<time datetime="2017-07-09T06:53:00.354Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近打算把之前写的一个SpringBoot的小demo部署到自己的腾讯云上<br>但是中间断断续续踩了很多坑，所以来写个博客，来记录下</p>
-<h2 id="第一个坑"><a href="#第一个坑" class="headerlink" title="第一个坑"></a>第一个坑</h2><ul>
-<li>war包的部署</li>
-</ul>
-<p>在IDEA里打包成war包后，我高高兴兴的把它扔到了服务器的Tomcat上<br>
-        
-          <a class="article-more-a" href="/2017/07/09/2017/关于SpringBoot部署上的一些坑/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/SpringBoot/" class="article-tag-list-link color1">SpringBoot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/09/2017/关于SpringBoot部署上的一些坑/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
-    </nav>
   
 
 
@@ -1001,8 +428,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

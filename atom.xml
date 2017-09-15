@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.chenwe.top/"/>
-  <updated>2017-09-14T08:25:20.286Z</updated>
+  <updated>2017-09-15T08:44:11.894Z</updated>
   <id>http://blog.chenwe.top/</id>
   
   <author>
@@ -16,11 +16,54 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Spring Boot中的缓存支持</title>
+    <link href="http://blog.chenwe.top/2017/09/15/2017/2017-09-15%20Spring%20Boot%E4%B8%AD%E7%9A%84%E7%BC%93%E5%AD%98%E6%94%AF%E6%8C%81/"/>
+    <id>http://blog.chenwe.top/2017/09/15/2017/2017-09-15 Spring Boot中的缓存支持/</id>
+    <published>2017-09-15T08:22:03.250Z</published>
+    <updated>2017-09-15T08:44:11.894Z</updated>
+    
+    <content type="html"><![CDATA[<p>当数据库的数据规模越来越大的时候<br>数据库的查询容易变成影响用户体验的瓶颈<br>是时候加入缓存来提高性能了<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20170915162439368.png" alt=""></p>
+<a id="more"></a>
+<h2 id="有哪些缓存工具"><a href="#有哪些缓存工具" class="headerlink" title="有哪些缓存工具"></a>有哪些缓存工具</h2><p>常见的有Redis 和 EhCache<br>今天讲下EhCache</p>
+<h2 id="EhCache"><a href="#EhCache" class="headerlink" title="EhCache"></a>EhCache</h2><blockquote>
+<p>EhCache 是一个纯Java的进程内缓存框架，具有快速、精干等特点，是Hibernate中默认的CacheProvider。</p>
+</blockquote>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>pom.xml<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-cache<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>net.sf.ehcache<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>ehcache<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>添加完依赖后<br>在resources目录下新建 <code>ehcache.xml</code>文件<br>ehcache.xml<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">ehcache</span> <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></div><div class="line">         <span class="attr">xsi:noNamespaceSchemaLocation</span>=<span class="string">"ehcache.xsd"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">cache</span> <span class="attr">name</span>=<span class="string">"powers"</span></span></div><div class="line">           <span class="attr">maxEntriesLocalHeap</span>=<span class="string">"200"</span></div><div class="line">           <span class="attr">timeToLiveSeconds</span>=<span class="string">"10"</span>&gt;</div><div class="line">    <span class="tag">&lt;/<span class="name">cache</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ehcache</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>这里的<code>timeToLiveSeconds</code>是更新时间<br>这里我们设置10秒钟后自动更新数据</p>
+<p>在启动类中添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">@SpringBootApplication</div><div class="line">@EnableCaching</div></pre></td></tr></table></figure></p>
+<p>在Repository中添加<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@CacheConfig</span>(cacheNames = <span class="string">"powers"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">PowerRepository</span> <span class="keyword">extends</span> <span class="title">JpaRepository</span>&lt;<span class="title">Power</span>, <span class="title">Integer</span>&gt; </span>&#123;</div><div class="line">    <span class="meta">@Cacheable</span></div><div class="line">    <span class="function">List&lt;Power&gt; <span class="title">findAll</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这里我们把<code>cacheNames</code>和前面的配置里对应<br>在要缓存的地方写上<code>@Cacheable</code></p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>先在 <code>application.properties</code>中添加显示sql<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">spring.jpa.show-sql=true</div></pre></td></tr></table></figure></p>
+<p>在测试类中<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Autowired</span></div><div class="line"><span class="keyword">private</span> PowerService powerService;</div><div class="line"></div><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">totest</span><span class="params">()</span> </span>&#123;</div><div class="line">  List&lt;Power&gt; list1 = powerService.findAll();</div><div class="line">  System.out.println(<span class="string">"第一次查询："</span> + list1.get(<span class="number">0</span>));</div><div class="line"></div><div class="line">  List&lt;Power&gt; list2 = powerService.findAll();</div><div class="line">  System.out.println(<span class="string">"第二次查询："</span> + list2.get(<span class="number">0</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>写好测试类开始测试<br>打印出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Hibernate: select power0_.power_id as power_id1_1_, power0_.building_name as building2_1_, power0_.date_num as date_num3_1_, power0_.dorm_num as dorm_num4_1_, power0_.residual_electricity as residual5_1_ from lowpower power0_</div><div class="line">第一次查询：com.example.demo.domain.Power@1ae90cb9</div><div class="line">第二次查询：com.example.demo.domain.Power@1ae90cb9</div></pre></td></tr></table></figure></p>
+<p>我们发现第二次查询是没有打印出sql语句的<br>因为我们在第一次查询后，就把数据缓存了</p>
+<p>因为我们设置了10秒钟更新缓存数据<br>所以如果在外部改变数据库的一些字段<br>查询在10秒后也能得到更新<br>这里就不演示了</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>利用缓存来优化数据库<br>可以减缓数据库的压力<br>改善用户体验</p>
+<p><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20170915163858970.png" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;当数据库的数据规模越来越大的时候&lt;br&gt;数据库的查询容易变成影响用户体验的瓶颈&lt;br&gt;是时候加入缓存来提高性能了&lt;br&gt;&lt;img src=&quot;http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20170915162439368.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="SpringBoot" scheme="http://blog.chenwe.top/categories/SpringBoot/"/>
+    
+    
+      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
+    
+      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
+    
+  </entry>
+  
+  <entry>
     <title>数据库RAID简介</title>
     <link href="http://blog.chenwe.top/2017/09/14/2017/2017-09-14%20%E6%95%B0%E6%8D%AE%E5%BA%93RAID%E7%AE%80%E4%BB%8B/"/>
     <id>http://blog.chenwe.top/2017/09/14/2017/2017-09-14 数据库RAID简介/</id>
     <published>2017-09-14T08:04:23.254Z</published>
-    <updated>2017-09-14T08:25:20.286Z</updated>
+    <updated>2017-09-15T08:44:10.696Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>RAID （ Redundant Array of Independent Disks ）即独立磁盘冗余阵列，通常简称为磁盘阵列。 简单地说， RAID 是由多个独立的高性能磁盘驱动器组成的磁盘子系统，从而提供比单个磁盘更高的存储性能和数据冗余的技术。</p>
@@ -788,43 +831,6 @@
     </summary>
     
       <category term="SpringBoot" scheme="http://blog.chenwe.top/categories/SpringBoot/"/>
-    
-    
-      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
-    
-      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Vue.js中Cookie的操作</title>
-    <link href="http://blog.chenwe.top/2017/07/23/2017/Vue.js%E4%B8%ADCookie%E7%9A%84%E6%93%8D%E4%BD%9C/"/>
-    <id>http://blog.chenwe.top/2017/07/23/2017/Vue.js中Cookie的操作/</id>
-    <published>2017-07-23T06:25:01.399Z</published>
-    <updated>2017-09-11T14:11:06.842Z</updated>
-    
-    <content type="html"><![CDATA[<p>在用vue.js搭建前端的时候<br>做到登录的功能</p>
-<p>登录成功后，虽然能在界面上显示用户名<br>但是一刷新就全没了<br><img src="http://otj6w86xd.bkt.clouddn.com/bqb-cm.jpg" alt=""></p>
-<a id="more"></a>
-<h2 id="该怎么办？"><a href="#该怎么办？" class="headerlink" title="该怎么办？"></a>该怎么办？</h2><p>我的做法是保存到Cookie里</p>
-<ul>
-<li>那么该怎么保存呢？</li>
-</ul>
-<p>我们自己来手动保存吧<br>来到main.js文件里<br>把有关Cookie的操作都写好<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//设置cookie</span></div><div class="line">Vue.prototype.setCookie = <span class="function">(<span class="params">c_name, value, expiredays</span>) =&gt;</span> &#123;</div><div class="line">  <span class="keyword">var</span> exdate = <span class="keyword">new</span> <span class="built_in">Date</span>();　　　　</div><div class="line">  exdate.setDate(exdate.getDate() + expiredays);　　　　</div><div class="line">  <span class="built_in">document</span>.cookie = c_name + <span class="string">"="</span> + <span class="built_in">escape</span>(value) + ((expiredays == <span class="literal">null</span>) ? <span class="string">""</span> : <span class="string">";expires="</span> + exdate.toGMTString());</div><div class="line">&#125;</div><div class="line"><span class="comment">//获取cookie、</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getCookie</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> arr, reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"(^| )"</span> + name + <span class="string">"=([^;]*)(;|$)"</span>);</div><div class="line">  <span class="keyword">if</span> (arr = <span class="built_in">document</span>.cookie.match(reg))</div><div class="line">    <span class="keyword">return</span> (arr[<span class="number">2</span>]);</div><div class="line">  <span class="keyword">else</span></div><div class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</div><div class="line">&#125;</div><div class="line">Vue.prototype.getCookie = getCookie;</div><div class="line"></div><div class="line"><span class="comment">//删除cookie</span></div><div class="line">Vue.prototype.delCookie =<span class="function">(<span class="params">name</span>) =&gt;</span> &#123;</div><div class="line">    <span class="keyword">var</span> exp = <span class="keyword">new</span> <span class="built_in">Date</span>();</div><div class="line">    exp.setTime(exp.getTime() - <span class="number">1</span>);</div><div class="line">    <span class="keyword">var</span> cval = getCookie(name);</div><div class="line">    <span class="keyword">if</span> (cval != <span class="literal">null</span>)</div><div class="line">      <span class="built_in">document</span>.cookie = name + <span class="string">"="</span> + cval + <span class="string">";expires="</span> + exp.toGMTString();</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
-<p>这样我们就有关于Cookie的操作了</p>
-<h2 id="该怎么用？"><a href="#该怎么用？" class="headerlink" title="该怎么用？"></a>该怎么用？</h2><p>到我们想要存储Cookie的地方<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> expireDays = <span class="number">1000</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span> * <span class="number">15</span>;</div><div class="line"><span class="keyword">this</span>.setCookie(<span class="string">'username'</span>, response.data, expireDays);</div></pre></td></tr></table></figure></p>
-<p>用this.xxxCookie调用就好了<br>expireDays是Cookie失效时间</p>
-<p>这样，我们就能够完成对于Cookie的操作了<br>在用户刷新时，在created方法里获取Cookie就知道用户有没有登录了<br><img src="http://otj6w86xd.bkt.clouddn.com/bqb-bcm.jpg" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在用vue.js搭建前端的时候&lt;br&gt;做到登录的功能&lt;/p&gt;
-&lt;p&gt;登录成功后，虽然能在界面上显示用户名&lt;br&gt;但是一刷新就全没了&lt;br&gt;&lt;img src=&quot;http://otj6w86xd.bkt.clouddn.com/bqb-cm.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Vue" scheme="http://blog.chenwe.top/categories/Vue/"/>
     
     
       <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
