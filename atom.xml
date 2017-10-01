@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.chenwe.top/"/>
-  <updated>2017-09-15T08:44:11.894Z</updated>
+  <updated>2017-10-01T08:49:58.552Z</updated>
   <id>http://blog.chenwe.top/</id>
   
   <author>
@@ -14,6 +14,54 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>图书信息推送系统</title>
+    <link href="http://blog.chenwe.top/2017/10/01/2017/2017-10-01%20%E5%9B%BE%E4%B9%A6%E4%BF%A1%E6%81%AF%E6%8E%A8%E9%80%81%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+    <id>http://blog.chenwe.top/2017/10/01/2017/2017-10-01 图书信息推送系统（一）/</id>
+    <published>2017-10-01T07:46:23.184Z</published>
+    <updated>2017-10-01T08:49:58.552Z</updated>
+    
+    <content type="html"><![CDATA[<p>之前把实验室的一台废弃的主机改装成了Ubuntu系统<br>于是我准备把它拿来搞事请</p>
+<p>我们学校的图书馆虽然可以网上查询图书信息<br>但是却没有提供图书到馆通知的功能<br>有时候想借一本书，但是却被别人借走了<br>自己就要时不时关注图书的信息，十分麻烦<br>所以，开始搞事<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171001155255849.png" alt=""></p>
+<a id="more"></a>
+<h2 id="搞什么事"><a href="#搞什么事" class="headerlink" title="搞什么事"></a>搞什么事</h2><p>做一个用邮件推送的图书到馆信息推送系统</p>
+<h2 id="用到哪些东西"><a href="#用到哪些东西" class="headerlink" title="用到哪些东西"></a>用到哪些东西</h2><ul>
+<li><p>java爬虫<br>用来获取图书信息</p>
+</li>
+<li><p>SpringBoot<br>用来搭建网站以及整合与管理后台服务</p>
+</li>
+<li><p>MySql关系数据库<br>用来存储订阅信息</p>
+</li>
+</ul>
+<h2 id="配置数据库"><a href="#配置数据库" class="headerlink" title="配置数据库"></a>配置数据库</h2><p>开发环境的数据库配置这里就不多说了<br>网上相关教程有很多</p>
+<p>这里讲下在Linux下配置数据库 并远程连接管理</p>
+<h3 id="安装mysql"><a href="#安装mysql" class="headerlink" title="安装mysql"></a>安装mysql</h3><p>安装的方法有很多<br>这里讲下 apt-get的方式<br>在终端输入命令<br><code>sudo apt-get install mysql-server mysql-client</code><br>安装过程中会让你设置一个数据库密码</p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>安装完成后<br>我们先进入mysql<br><code>mysql -u root -p</code><br>输入密码 进入后<br>输入 <code>GRANT ALL PRIVILEGES ON *.* TO &lt;用户名&gt;@&quot;%&quot; IDENTIFIED BY &#39;&lt;密码&gt;&#39; WITH GRANT OPTION;</code><br>创建一个远程连接的用户<br>再输入 <code>FLUSH RIVILEGES;</code>刷新权限表</p>
+<p>退出mysql</p>
+<p>修改mysql的配置文件<br><code>vi /etc/mysql/my.cnf</code><br>把里面的 <code>127.0.0.1</code>那行 用 <code>#</code>注释掉</p>
+<p>启动mysql服务<code>sudo service mysql start</code></p>
+<h3 id="远程连接"><a href="#远程连接" class="headerlink" title="远程连接"></a>远程连接</h3><p>现在我们就可以远程连接了<br>这里我用的是MySQL Workbench<br>新建一个连接<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171001164625658.png" alt=""><br>填好相应的内容</p>
+<p>如果前面都是正确的话 应该就成功连上了</p>
+<p><strong>这样我们就配好了数据库<br>接下来就是写代码来实现功能了<br>下次再讲吧</strong></p>
+<p><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171001164957520.png" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;之前把实验室的一台废弃的主机改装成了Ubuntu系统&lt;br&gt;于是我准备把它拿来搞事请&lt;/p&gt;
+&lt;p&gt;我们学校的图书馆虽然可以网上查询图书信息&lt;br&gt;但是却没有提供图书到馆通知的功能&lt;br&gt;有时候想借一本书，但是却被别人借走了&lt;br&gt;自己就要时不时关注图书的信息，十分麻烦&lt;br&gt;所以，开始搞事&lt;br&gt;&lt;img src=&quot;http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171001155255849.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="SpringBoot" scheme="http://blog.chenwe.top/categories/SpringBoot/"/>
+    
+    
+      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
+    
+      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
+    
+  </entry>
   
   <entry>
     <title>Spring Boot中的缓存支持</title>
@@ -791,51 +839,6 @@
       <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
     
       <category term="life" scheme="http://blog.chenwe.top/tags/life/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>关于API传递参数的一些小问题</title>
-    <link href="http://blog.chenwe.top/2017/07/27/2017/%E5%85%B3%E4%BA%8EAPI%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E9%97%AE%E9%A2%98/"/>
-    <id>http://blog.chenwe.top/2017/07/27/2017/关于API传递参数的一些小问题/</id>
-    <published>2017-07-27T10:24:52.472Z</published>
-    <updated>2017-07-28T06:42:56.464Z</updated>
-    
-    <content type="html"><![CDATA[<p>有些API接口要求传回参数</p>
-<p>有时候我们会在链接里直接带上参数<br>在后台用@PathVariable来获取参数<br>但是有些数据是不能直接放入链接里的</p>
-<a id="more"></a>
-<h2 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@GetMapping</span>(<span class="string">"/forget_password/email=&#123;email&#125;"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> Result <span class="title">forgetPassword</span><span class="params">(@PathVariable(<span class="string">"email"</span>)</span> String email)</span></div></pre></td></tr></table></figure>
-<p>这个是我们常用的方法，通过@PathVariable获取email的信息<br><strong>但是</strong><br>这个是有问题的<br>因为email是带有.com的<br>所以如果123456@mail.com 放入链接会变成 /forget_password/email=123456@mail.com<br>那么系统就会把 .com不当成邮箱的部分而舍去<br>后台用@PathVariable方法只会获取到123456@mail这个值</p>
-<p>所以我们这里要用post放到body里传邮箱的值</p>
-<p>除此之外，还有一些例如 换行之类的也是不能直接传的，要放到POST的body体里传过来（以前就犯过这个错误。。）</p>
-<p><strong>除了这些带有特殊字符的值以外</strong></p>
-<p><strong>我们还要注意一些敏感的数据不能直接放到连接里。</strong></p>
-<h2 id="顺便一提"><a href="#顺便一提" class="headerlink" title="顺便一提"></a>顺便一提</h2><p>SpringBoot里，获取数据有两种<br>一种是从连接里获取，还有一种是从body里获取</p>
-<ul>
-<li>连接里获取<br>利用 @PathVariable 注解<br>例如:<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@GetMapping</span>(<span class="string">"/findByDorm/dorm=&#123;dorm&#125;"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> Result <span class="title">findByDor</span><span class="params">(@PathVariable(<span class="string">"dorm"</span>)</span> String dorm) </span>&#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>这样我们就获取了连接的dorm的值了</p>
-<ul>
-<li>body里取值<br>利用 @RequestParam 注解<br>例如:<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@PostMapping</span>(<span class="string">"/bindingDorm"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> Result <span class="title">bindingDorm</span><span class="params">(@RequestParam(<span class="string">"dorm"</span>)</span> String dorm) </span>&#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>这样我们就获取了连接的dorm的值了</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;有些API接口要求传回参数&lt;/p&gt;
-&lt;p&gt;有时候我们会在链接里直接带上参数&lt;br&gt;在后台用@PathVariable来获取参数&lt;br&gt;但是有些数据是不能直接放入链接里的&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="SpringBoot" scheme="http://blog.chenwe.top/categories/SpringBoot/"/>
-    
-    
-      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
-    
-      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
     
   </entry>
   
