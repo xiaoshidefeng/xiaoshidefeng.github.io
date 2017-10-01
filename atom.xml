@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.chenwe.top/"/>
-  <updated>2017-10-01T08:49:58.552Z</updated>
+  <updated>2017-10-01T08:54:58.321Z</updated>
   <id>http://blog.chenwe.top/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>图书信息推送系统</title>
+    <title>图书信息推送系统（一）</title>
     <link href="http://blog.chenwe.top/2017/10/01/2017/2017-10-01%20%E5%9B%BE%E4%B9%A6%E4%BF%A1%E6%81%AF%E6%8E%A8%E9%80%81%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%B8%80%EF%BC%89/"/>
     <id>http://blog.chenwe.top/2017/10/01/2017/2017-10-01 图书信息推送系统（一）/</id>
     <published>2017-10-01T07:46:23.184Z</published>
-    <updated>2017-10-01T08:49:58.552Z</updated>
+    <updated>2017-10-01T08:54:58.321Z</updated>
     
     <content type="html"><![CDATA[<p>之前把实验室的一台废弃的主机改装成了Ubuntu系统<br>于是我准备把它拿来搞事请</p>
 <p>我们学校的图书馆虽然可以网上查询图书信息<br>但是却没有提供图书到馆通知的功能<br>有时候想借一本书，但是却被别人借走了<br>自己就要时不时关注图书的信息，十分麻烦<br>所以，开始搞事<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171001155255849.png" alt=""></p>
