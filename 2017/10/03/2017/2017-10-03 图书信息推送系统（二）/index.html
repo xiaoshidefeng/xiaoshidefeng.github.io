@@ -6,17 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.chenwe.top">
-  <title>Tag: code | Xiaoshidefeng的博客</title>
+  <title>图书信息推送系统（二） | Xiaoshidefeng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="CW的个人Blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Xiaoshidefeng的博客">
-<meta property="og:url" content="http://blog.chenwe.top/tags/code/page/2/index.html">
+  <meta name="description" content="上回书说到Linux数据库的配置以及远程连接 这次我们来讲下具体功能的实现">
+<meta name="keywords" content="study,code">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图书信息推送系统（二）">
+<meta property="og:url" content="http://blog.chenwe.top/2017/10/03/2017/2017-10-03 图书信息推送系统（二）/index.html">
 <meta property="og:site_name" content="Xiaoshidefeng的博客">
-<meta property="og:description" content="CW的个人Blog">
+<meta property="og:description" content="上回书说到Linux数据库的配置以及远程连接 这次我们来讲下具体功能的实现">
+<meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171003202042469.png">
+<meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171001164957520.png">
+<meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171003204110811.png">
+<meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171003205045713.png">
+<meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171003205141163.png">
+<meta property="og:updated_time" content="2017-10-03T12:51:42.236Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Xiaoshidefeng的博客">
-<meta name="twitter:description" content="CW的个人Blog">
+<meta name="twitter:title" content="图书信息推送系统（二）">
+<meta name="twitter:description" content="上回书说到Linux数据库的配置以及远程连接 这次我们来讲下具体功能的实现">
+<meta name="twitter:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171003202042469.png">
   
     <link rel="alternative" href="/atom.xml" title="Xiaoshidefeng的博客" type="application/atom+xml">
   
@@ -180,37 +188,94 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-2017/2017-10-03 图书信息推送系统（二）" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      图书信息推送系统（二）
+    </h1>
+    <span>&nbsp;&nbsp;&nbsp; | &nbsp;
+    <span id="busuanzi_value_page_pv" ></span>次阅读
+    </span>
+  
+
+
+        
+        <a href="/2017/10/03/2017/2017-10-03 图书信息推送系统（二）/" class="archive-article-date">
+  	<time datetime="2017-10-03T12:16:23.865Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-03</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上回书说到<br>Linux数据库的配置以及远程连接</p>
+<p>这次我们来讲下具体功能的实现<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171003202042469.png" alt=""></p>
+<a id="more"></a>
+<h2 id="功能模块"><a href="#功能模块" class="headerlink" title="功能模块"></a>功能模块</h2><p>我将这个系统分为以下几个模块来实现</p>
+<ul>
+<li>爬虫模块<br>负责获取图书数据</li>
+<li>网站模块<br>负责网站前后端</li>
+<li>邮件服务模块<br>负责邮件发送的任务</li>
+<li>定时模块<br>负责定时执行任务</li>
+</ul>
+<h2 id="爬虫模块"><a href="#爬虫模块" class="headerlink" title="爬虫模块"></a>爬虫模块</h2><p>我们用JAVA做一个爬虫<br>去获取网页的数据<br>这里我用了<code>Jsoup</code>这个库</p>
+<h2 id="Jsoup安装与使用"><a href="#Jsoup安装与使用" class="headerlink" title="Jsoup安装与使用"></a>Jsoup安装与使用</h2><p>我用maven安装 在pom.xml里写入<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.jsoup<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jsoup<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.7.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>我们定一个方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getUrl</span><span class="params">(String url, String email)</span> </span>&#123;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        <span class="comment">//Jsoup来提取图书馆藏信息</span></div><div class="line">        Document doc = Jsoup.connect(url)</div><div class="line">                <span class="comment">//.data("query", "Java")</span></div><div class="line">                .userAgent(<span class="string">"'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) '                            'Chrome/51.0.2704.63 Safari/537.36'"</span>)</div><div class="line">                <span class="comment">//.cookie("auth", "token")</span></div><div class="line">                .timeout(<span class="number">10000</span>)</div><div class="line">                <span class="comment">//.post()</span></div><div class="line">                .get();</div><div class="line"></div><div class="line">        Elements elements = doc.select(<span class="string">".whitetext td"</span>);</div><div class="line">        <span class="keyword">for</span> (Element ele : elements) &#123;</div><div class="line">            String text = ele.text();</div><div class="line">            System.out.println(text);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们先通过<code>Jsoup.connect(url)</code>方法 获取一个Document对象<br>我们调用<code>doc.select()</code>方法来定位我们要的元素（详细使用方法参考<a href="https://jsoup.org/apidocs/" target="_blank" rel="external">Jsoup Selector文档</a>）<br>在获取完之后 这里我将获取的数据 打印出来了<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171001164957520.png" alt=""></p>
+<h2 id="网站模块"><a href="#网站模块" class="headerlink" title="网站模块"></a>网站模块</h2><p>这里 我用<code>thymeleaf</code>来作为模板<br>thymeleaf的具体用法不多介绍<br>有兴趣可以去看下<a href="http://www.thymeleaf.org/documentation.html" target="_blank" rel="external">Thymeleaf官方文档</a></p>
+<p>这里简单讲下一个表单功能的实现<br>先放代码<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">role</span>=<span class="string">"form"</span> <span class="attr">th:action</span>=<span class="string">"@&#123;/edit&#125;"</span> <span class="attr">th:object</span>=<span class="string">"$&#123;sub&#125;"</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"url"</span>&gt;</span>图书链接（带http://）:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">class</span>=<span class="string">"form-control"</span>  <span class="attr">id</span>=<span class="string">"url"</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">th:value</span>=<span class="string">"*&#123;url&#125;"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"email"</span>&gt;</span>邮箱:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"email"</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">id</span>=<span class="string">"email"</span> <span class="attr">name</span>=<span class="string">"email"</span> <span class="attr">th:value</span>=<span class="string">"*&#123;email&#125;"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">button</span>  <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">class</span>=<span class="string">"btn btn-default"</span>&gt;</span>提交<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>这里我提交到 是一个 对象<br>我把它命名为sub</p>
+<p>对应的在<code>controller</code>里我也接收这个<code>sub</code>对象<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"/edit"</span>, method= RequestMethod.POST)</div><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">edit</span><span class="params">(@ModelAttribute(<span class="string">"sub"</span>)</span>Subscription subscription, RedirectAttributes model) </span>&#123;</div><div class="line">    System.out.println(subscription.getUrl());</div><div class="line">    <span class="keyword">if</span> (addBookService.addBook(subscription)) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"redirect:/add_success"</span>;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"redirect:/add_error"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在controller里，我们对拿来的<code>sub</code>对象 强制转换成 <code>Subscription</code>对象<br>这个对象就是我们的实体类了</p>
+<p>然后将 <code>Subscription</code>对象交给我们的service层来执行具体的逻辑</p>
+<p>判断是否可以加入我们的数据库<br>如果成功加入数据库，我们将请求重定向到成功的页面<br>否则重定向到失败的页面</p>
+<p>这样，我们就完成了一个从前端到后台的交互。<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171003204110811.png" alt=""></p>
+<h2 id="邮件模块"><a href="#邮件模块" class="headerlink" title="邮件模块"></a>邮件模块</h2><p>关于邮件发送，我的博客之前也介绍过<br>有兴趣的话可以去 这篇<a href="http://blog.chenwe.top/2017/07/18/2017/SpringBoot%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/">SpringBoot发送邮件</a>看下</p>
+<h2 id="定时模块"><a href="#定时模块" class="headerlink" title="定时模块"></a>定时模块</h2><p>关于定时，我的博客之前也介绍过<br>有兴趣的话可以去，这篇<a href="http://blog.chenwe.top/2017/07/20/2017/SpringBoot%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/">SpringBoot定时任务</a>看下</p>
+<p>我这里讲下我这个推送的思路</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Scheduled</span>(cron = <span class="string">"0 0 7,8,9,10,11,12,13,14,15,16,17,18 * * ?"</span>)</div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">()</span> </span>&#123;</div><div class="line">    System.out.println(<span class="string">"这个是定时任务第 "</span> + (count++) + <span class="string">" 次执行"</span>);</div><div class="line"></div><div class="line">    List&lt;Subscription&gt; list = subscriptionRepository.findBySended(<span class="keyword">false</span>);</div><div class="line">    <span class="keyword">if</span> (list == <span class="keyword">null</span>) &#123;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span> (Subscription sub:</div><div class="line">         list) &#123;</div><div class="line">        String email = sub.getEmail();</div><div class="line">        String url = sub.getUrl();</div><div class="line">        libSpider.Get_Url(url, email);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我在每天白天每隔一个小时，自动开始运行这个服务<br>我们先获取之前在数据库登记的所有的订阅的且没发送过邮件的数据<br>遍历这个<code>List</code><br>获取url和邮箱，交给我们的爬虫邮件服务去处理<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Get_Url</span><span class="params">(String url, String email)</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        Boolean is_inLib = <span class="keyword">false</span>;</div><div class="line">        String[] book_info = <span class="keyword">new</span> String[<span class="number">7</span>];</div><div class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</div><div class="line"></div><div class="line">        <span class="comment">//Jsoup来提取图书馆藏信息</span></div><div class="line">        Document doc = Jsoup.connect(url)</div><div class="line">                <span class="comment">//.data("query", "Java")</span></div><div class="line">                .userAgent(<span class="string">"'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) '                            'Chrome/51.0.2704.63 Safari/537.36'"</span>)</div><div class="line">                <span class="comment">//.cookie("auth", "token")</span></div><div class="line">                .timeout(<span class="number">10000</span>)</div><div class="line">                <span class="comment">//.post()</span></div><div class="line">                .get();</div><div class="line"></div><div class="line">        Elements elements = doc.select(<span class="string">".whitetext td"</span>);</div><div class="line">        <span class="keyword">for</span> (Element ele : elements) &#123;</div><div class="line">            String text = ele.text();               <span class="comment">//获取当前标签（元素）的文本值</span></div><div class="line"></div><div class="line">            <span class="keyword">if</span> (count &lt; <span class="number">5</span>) &#123;</div><div class="line">                book_info[count] = text;</div><div class="line">                count ++;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> (text.equals(<span class="string">"可借"</span>)) &#123;</div><div class="line">                is_inLib = <span class="keyword">true</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (is_inLib) &#123;</div><div class="line">            <span class="comment">//正则表达式找出书名</span></div><div class="line">            String result = <span class="string">""</span>;</div><div class="line">            Pattern pattern = Pattern.compile(<span class="string">"document.title = \"(.*?)\";"</span>);</div><div class="line">            Matcher matcher = pattern.matcher(doc.toString());</div><div class="line">            <span class="keyword">while</span> (matcher.find()) &#123;</div><div class="line">                System.out.println(matcher.group(<span class="number">1</span>));</div><div class="line">                Book book = <span class="keyword">new</span> Book(book_info[<span class="number">0</span>], <span class="string">"《"</span> + matcher.group(<span class="number">1</span>) + <span class="string">"》"</span>, book_info[<span class="number">1</span>], book_info[<span class="number">3</span>]);</div><div class="line">                <span class="keyword">if</span> (mailUtil.sendGetBookMail(email, book)) &#123;</div><div class="line">                    List&lt;Subscription&gt; list = subscriptionRepository.findByEmailAndAndUrlAndAndSended(email, url, <span class="keyword">false</span>);</div><div class="line">                    <span class="keyword">for</span> (Subscription sub:</div><div class="line">                            list) &#123;</div><div class="line">                        sub.setSended(<span class="keyword">true</span>);</div><div class="line">                        subscriptionRepository.save(sub);</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line"></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>爬虫获取对应URL的数据<br>如果图书到馆，那么将图书的相关信息通过邮件服务发送给我们的订阅者</p>
+<p>邮件服务会生成一封HTML邮件，将图书相关数据发送到订阅者邮箱<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171003205045713.png" alt=""></p>
+<p><strong>这样我们的整个功能就实现了<br>接下来就是部署了<br>请听下回博客分解</strong><br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171003205141163.png" alt=""></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://otj6w86xd.bkt.clouddn.com/wxzf.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/27/2017/手机连接本地服务器调试/" class="archive-article-date">
-  	<time datetime="2017-08-27T08:49:21.822Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/27/2017/手机连接本地服务器调试/">手机连接本地服务器调试</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -226,227 +291,7 @@
 		</ul>
 	</div>
 
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/测试/" class="article-tag-list-link color3">测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/18/2017/Mysql登录的问题/" class="archive-article-date">
-  	<time datetime="2017-08-18T14:09:27.908Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/18/2017/Mysql登录的问题/">Mysql登录报错的问题</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/MySql/" class="article-tag-list-link color1">MySql</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/12/2017/git detached HEAD状态的解决方法/" class="archive-article-date">
-  	<time datetime="2017-08-12T15:17:02.886Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/12/2017/git detached HEAD状态的解决方法/">git detached HEAD状态的解决方法</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/git/" class="article-tag-list-link color4">git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/08/2017/Android BottomNavigationView无法添加依赖/" class="archive-article-date">
-  	<time datetime="2017-08-08T13:49:31.414Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/08/2017/Android BottomNavigationView无法添加依赖/">Android BottomNavigationView无法添加依赖</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Android/" class="article-tag-list-link color3">Android</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/03/2017/SpringBoot远程shell监控和管理/" class="archive-article-date">
-  	<time datetime="2017-08-03T12:39:38.610Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/03/2017/SpringBoot远程shell监控和管理/">SpringBoot远程shell监控和管理</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -459,296 +304,109 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://blog.chenwe.top/2017/10/03/2017/2017-10-03 图书信息推送系统（二）/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
 
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/02/2017/IDEA Maven项目依赖失效/" class="archive-article-date">
-  	<time datetime="2017-08-02T02:35:45.599Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/02/2017/IDEA Maven项目依赖失效/">IDEA Maven项目依赖失效</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/IDEA/" class="article-tag-list-link color5">IDEA</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/01/2017/关于百度搜索不到Github Pages的解决方法/" class="archive-article-date">
-  	<time datetime="2017-08-01T08:09:24.308Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/01/2017/关于百度搜索不到Github Pages的解决方法/">关于百度搜索不到Github Pages的解决方法.</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/GithubPages/" class="article-tag-list-link color3">Github Pages</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/31/2017/Vue.js实现按钮点击出现倒计时/" class="archive-article-date">
-  	<time datetime="2017-07-31T12:09:02.116Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-31</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/31/2017/Vue.js实现按钮点击出现倒计时/">Vue.js实现按钮点击出现倒计时</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Vue/" class="article-tag-list-link color4">Vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/30/2017/在Nginx上部署Vue.js项目/" class="archive-article-date">
-  	<time datetime="2017-07-30T11:26:28.043Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/30/2017/在Nginx上部署Vue.js项目/">在Nginx上部署Vue.js项目</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/vue.js/" class="article-tag-list-link color2">vue.js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/27/2017/关于API传递参数的一些小问题/" class="archive-article-date">
-  	<time datetime="2017-07-27T10:24:52.472Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/27/2017/关于API传递参数的一些小问题/">关于API传递参数的一些小问题</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/SpringBoot/" class="article-tag-list-link color1">SpringBoot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2017/10/01/2017/2017-10-01 图书信息推送系统（一）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">图书信息推送系统（一）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/tags/code/">&laquo; Prev</a><a class="page-number" href="/tags/code/">1</a><span class="page-number current">2</span><a class="page-number" href="/tags/code/page/3/">3</a><a class="page-number" href="/tags/code/page/4/">4</a><a class="extend next" rel="next" href="/tags/code/page/3/">Next &raquo;</a>
-    </nav>
+  
+
+  
+
+  
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTc5Mi82MzU4" style="padding: 25px">
+
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+  
+
   
 
 
@@ -785,9 +443,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",
