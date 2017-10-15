@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.chenwe.top/"/>
-  <updated>2017-10-04T12:15:32.122Z</updated>
+  <updated>2017-10-15T13:42:21.486Z</updated>
   <id>http://blog.chenwe.top/</id>
   
   <author>
@@ -14,6 +14,58 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>理解Java的继承与多态</title>
+    <link href="http://blog.chenwe.top/2017/10/15/2017/2017-10-15%20%E7%90%86%E8%A7%A3JAVA%E7%9A%84%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/"/>
+    <id>http://blog.chenwe.top/2017/10/15/2017/2017-10-15 理解JAVA的继承与多态/</id>
+    <published>2017-10-15T12:48:34.382Z</published>
+    <updated>2017-10-15T13:42:21.486Z</updated>
+    
+    <content type="html"><![CDATA[<p>很多人其实只是粗略的过了一遍Java的知识点<br>基础并不扎实<br>虽然一开始的时候不会发现有什么弊端<br>但是随着工作的深入，对于基础的要求更加重要了</p>
+<p>这里我来稍微总结下Java的继承与多态中需要注意的地方<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171015214220622.png" alt=""><br><a id="more"></a></p>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>继承可以提高代码复用<br>继承有下面几个特点</p>
+<ul>
+<li><p>1、子类拥有父类非 private 的属性和方法。</p>
+</li>
+<li><p>2、子类可以拥有自己属性和方法，即子类可以对父类进行扩展。</p>
+</li>
+<li><p>3、子类可以用自己的方式实现父类的方法。</p>
+</li>
+</ul>
+<p>下面来介绍下向上转型<br>假如我们有两个类 <code>Wine.java</code> 和 <code>WhiteWine.java</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Wine</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">one</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"Wine one"</span>);</div><div class="line">        two();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">two</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"Wine two"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WhiteWine</span> <span class="keyword">extends</span> <span class="title">Wine</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">one</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"WhiteWine one"</span>);</div><div class="line">        two();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">two</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"WhiteWine two"</span>);</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>WhiteWine 继承自 Wine<br>重载了one方法<br>重写了two方法</p>
+<p>我们编写一个测试类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Wine wine = <span class="keyword">new</span> WhiteWine();</div><div class="line">        wine.one();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们将<code>WhiteWine</code>这个子类向上转型为<code>Wine</code>这个父类<br>但是子类中被重载的方法会丢失<br>我们运行上面的测试类，可以得到如下结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Wine one</div><div class="line">WhiteWine two</div></pre></td></tr></table></figure></p>
+<p>在运行的时候，因为向上转型的关系，丢失了子类的<code>one(int i)</code>方法<br>所以调用了父类的<code>one()</code>方法<br>在 <code>one()</code>  方法中又要调用<code>two()</code>方法<br>因为子类重写亏了 <code>two()</code> 方法，所以再调用子类的 <code>two()</code>方法</p>
+<p>所以继承的时候用向上转型，会丢失部分方法与属性</p>
+<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><p>假如我们有三个类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">show</span><span class="params">(C obj)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> (<span class="string">"A and C"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">show</span><span class="params">(A obj)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> (<span class="string">"A and A"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">show</span><span class="params">(B obj)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> (<span class="string">"B and B"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">show</span><span class="params">(A obj)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> (<span class="string">"B and A"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">C</span> <span class="keyword">extends</span> <span class="title">B</span> </span>&#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>B 继承 A， C 继承 B<br>我们编写一个测试类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ABCDtest</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        A a = <span class="keyword">new</span> B();</div><div class="line">        B b = <span class="keyword">new</span> B();</div><div class="line">        C c = <span class="keyword">new</span> C();</div><div class="line">        System.out.println(a.show(b));</div><div class="line">        System.out.println(a.show(c));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们运行测试类<br>得到以下结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">B and A</div><div class="line">A and C</div></pre></td></tr></table></figure></p>
+<p>我们分析一下<br>因为在继承链中对象方法的调用存在一个优先级：this.show(O)、super.show(O)、this.show((super)O)、super.show((super)O)</p>
+<p>所以在运行的时候<br>我们调用了一个由B向上转型的A类的方法show(O)<br>并且传入一个b的对象<br>因为优先级的关系<br>所以他会先去找 this.show(O) 里面有没有这个方法<br>这里的 this 就是 A<br>在A对象中并没有以 B为传入参数的show方法</p>
+<p>所以我们去找下一个 super.show(O)方法<br>因为A没有父类<br>所以也没有</p>
+<p>然后我们去找下一个 this.show((super)O)<br>这里 我们发现 B的父类是A<br>所以 这里相当于 A.show(A) 在A类中有<br>又因为B重写了A里的 show(A)方法<br>所以系统会调用 B类里的 show(A) 方法</p>
+<p>于是就打出了 <code>B and A</code>这行</p>
+<p>然后执行a.show(c)<br>因为 A类里有 show(C) 方法 且子类没有重写<br>所以直接执行并打印 <code>A and C</code></p>
+<p><strong>这里是不是有点绕</strong><br>但其实自己去动手写下就很好理解了<br>一开始我也模模糊糊的<br>但是自己写了下，就很好理解了，主要是要自己亲自动手去做<br>慢慢来吧<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171015213944524.png" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;很多人其实只是粗略的过了一遍Java的知识点&lt;br&gt;基础并不扎实&lt;br&gt;虽然一开始的时候不会发现有什么弊端&lt;br&gt;但是随着工作的深入，对于基础的要求更加重要了&lt;/p&gt;
+&lt;p&gt;这里我来稍微总结下Java的继承与多态中需要注意的地方&lt;br&gt;&lt;img src=&quot;http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171015214220622.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Java" scheme="http://blog.chenwe.top/categories/Java/"/>
+    
+    
+      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
+    
+      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
+    
+  </entry>
   
   <entry>
     <title>图书信息推送系统（三）</title>
@@ -786,46 +838,6 @@
     </summary>
     
       <category term="Github Pages" scheme="http://blog.chenwe.top/categories/Github-Pages/"/>
-    
-    
-      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
-    
-      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Vue.js实现按钮点击出现倒计时</title>
-    <link href="http://blog.chenwe.top/2017/07/31/2017/Vue.js%E5%AE%9E%E7%8E%B0%E6%8C%89%E9%92%AE%E7%82%B9%E5%87%BB%E5%87%BA%E7%8E%B0%E5%80%92%E8%AE%A1%E6%97%B6/"/>
-    <id>http://blog.chenwe.top/2017/07/31/2017/Vue.js实现按钮点击出现倒计时/</id>
-    <published>2017-07-31T12:09:02.116Z</published>
-    <updated>2017-09-11T14:10:57.092Z</updated>
-    
-    <content type="html"><![CDATA[<p>有时候我们会遇到这种需求<br>比如我们在向客户发送一个验证码的时候<br>为了防止资源被浪费，所以要让客户每隔60秒才能再发送下一次验证码</p>
-<p>那么如何实现这个功能呢</p>
-<a id="more"></a>
-<h2 id="需要用到的东西"><a href="#需要用到的东西" class="headerlink" title="需要用到的东西"></a>需要用到的东西</h2><p>这里我用Vue.js的脚手架工具和Element UI 构建了一个简单的按钮示例<br><img src="http://otj6w86xd.bkt.clouddn.com/2017073101.png" alt=""></p>
-<p>我们点击右侧的获取验证码就能够出发按钮的事件<br>同时按钮开始变成不可点击<br>并显示倒计时</p>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>首先看下我们按钮和表单的实现<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">el-form-item</span> <span class="attr">label</span>=<span class="string">"验 证 码"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">el-input</span> <span class="attr">v-model</span>=<span class="string">"form.code"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">el-button</span> <span class="attr">slot</span>=<span class="string">"append"</span> <span class="attr">icon</span>=<span class="string">"message"</span> <span class="attr">:loading</span>=<span class="string">"sendLoad"</span> <span class="attr">placeholder</span>=<span class="string">"请输入验证码"</span></span></div><div class="line">              @<span class="attr">click</span>=<span class="string">"sendMail()"</span>&gt;&#123;&#123;text&#125;&#125;<span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">el-input</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">el-form-item</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>我们将按钮的文本定义为 text，通过sendMail() 方法来执行相关操作<br>我们定一个了一个sendLoad 作为加载的开关</p>
-<p>在 methods里，我是这样实现的<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">sendMail() &#123;</div><div class="line">  <span class="keyword">this</span>.sendLoad = <span class="literal">true</span>;</div><div class="line">  <span class="keyword">this</span>.time = <span class="number">60</span>;</div><div class="line">  <span class="keyword">this</span>.timer();</div><div class="line">&#125;,</div><div class="line">timer () &#123;</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.time &gt; <span class="number">0</span>) &#123;</div><div class="line">        <span class="keyword">this</span>.time--;</div><div class="line">        setTimeout(<span class="keyword">this</span>.timer, <span class="number">1000</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>紧接着，我在computed里来实现倒计时<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">text: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>.time == <span class="number">0</span>) &#123;</div><div class="line">      <span class="keyword">this</span>.sendLoad = <span class="literal">false</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.time &gt; <span class="number">0</span> ? <span class="keyword">this</span>.time + <span class="string">'s 后重新获取'</span> : <span class="string">'获取验证码'</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>我们来看下<br>点击按钮时，设置按钮为加载的不可点击状态<br>我们初始化time为60<br>然后执行timer()方法<br>里面有一个setTimeout方法<br>setTimeout() 方法用于在指定的毫秒数后调用函数或计算表达式。</p>
-<p>所以我们每个一秒就会减少一次数值<br>在computed里，我们设置当time的值等于0时，重置按钮状态<br>如果不等于0，我们显示按钮上的text为 剩余时间 + s 后重新获取</p>
-<p>因此，我们可以得到如下的功能</p>
-<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>点击前<br><img src="http://otj6w86xd.bkt.clouddn.com/2017073101.png" alt=""></p>
-<p>点击后<br><img src="http://otj6w86xd.bkt.clouddn.com/2017073102.png" alt=""></p>
-<p>我们的按钮开始转动且不可点击，当倒计时结束，又变成原来的样子<br><img src="http://otj6w86xd.bkt.clouddn.com/lianhong.jpg" alt=""><br>这样，我们就实现了一个简单的按钮倒计时控件</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;有时候我们会遇到这种需求&lt;br&gt;比如我们在向客户发送一个验证码的时候&lt;br&gt;为了防止资源被浪费，所以要让客户每隔60秒才能再发送下一次验证码&lt;/p&gt;
-&lt;p&gt;那么如何实现这个功能呢&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Vue" scheme="http://blog.chenwe.top/categories/Vue/"/>
     
     
       <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>

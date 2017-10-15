@@ -6,23 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.chenwe.top">
-  <title>图书信息推送系统（三） | Xiaoshidefeng的博客</title>
+  <title>Category: Java | Xiaoshidefeng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="上回书说到具体功能的实现 这次我们来讲下服务器的部署">
-<meta name="keywords" content="study,code">
-<meta property="og:type" content="article">
-<meta property="og:title" content="图书信息推送系统（三）">
-<meta property="og:url" content="http://blog.chenwe.top/2017/10/04/2017/2017-10-04 图书信息推送系统（三）/index.html">
+  <meta name="description" content="CW的个人Blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Xiaoshidefeng的博客">
+<meta property="og:url" content="http://blog.chenwe.top/categories/Java/index.html">
 <meta property="og:site_name" content="Xiaoshidefeng的博客">
-<meta property="og:description" content="上回书说到具体功能的实现 这次我们来讲下服务器的部署">
-<meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171004195538281.png">
-<meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171004201007493.png">
-<meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171004201503644.png">
-<meta property="og:updated_time" content="2017-10-04T12:15:32.122Z">
+<meta property="og:description" content="CW的个人Blog">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="图书信息推送系统（三）">
-<meta name="twitter:description" content="上回书说到具体功能的实现 这次我们来讲下服务器的部署">
-<meta name="twitter:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171004195538281.png">
+<meta name="twitter:title" content="Xiaoshidefeng的博客">
+<meta name="twitter:description" content="CW的个人Blog">
   
     <link rel="alternative" href="/atom.xml" title="Xiaoshidefeng的博客" type="application/atom+xml">
   
@@ -186,78 +180,37 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-2017/2017-10-04 图书信息推送系统（三）" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      图书信息推送系统（三）
-    </h1>
-    <span>&nbsp;&nbsp;&nbsp; | &nbsp;
-    <span id="busuanzi_value_page_pv" ></span>次阅读
-    </span>
   
-
-
-        
-        <a href="/2017/10/04/2017/2017-10-04 图书信息推送系统（三）/" class="archive-article-date">
-  	<time datetime="2017-10-04T11:54:40.530Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-04</time>
-</a>
-        
-      </header>
     
-    <div class="article-entry" itemprop="articleBody">
+    
       
-        <p>上回书说到<br>具体功能的实现</p>
-<p>这次我们来讲下服务器的部署<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171004195538281.png" alt=""></p>
-<a id="more"></a>
-<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>在第一篇里我们搭建了数据库的环境<br>现在我们要一个JAVA的运行环境<br>因为我的项目是用JAVA1.8做的<br>所以我们要安装JAVA1.8</p>
-<p>这里我用apt-get 来安装<br>先用 <code>apt-cache search package</code>这条命令来搜索相关的软件包<br>获取到的结果如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">cw@tang-pc:~$ apt-cache search java8</div><div class="line">default-jdk - Standard Java or Java compatible Development Kit</div><div class="line">default-jdk-headless - Standard Java or Java compatible Development Kit (headless)</div><div class="line">default-jre - Standard Java or Java compatible Runtime</div><div class="line">default-jre-headless - Standard Java or Java compatible Runtime (headless)</div><div class="line">openjdk-8-jdk - OpenJDK Development Kit (JDK)</div><div class="line">openjdk-8-jdk-headless - OpenJDK Development Kit (JDK) (headless)</div><div class="line">openjdk-8-jre - OpenJDK Java runtime, using Hotspot JIT</div><div class="line">openjdk-8-jre-headless - OpenJDK Java runtime, using Hotspot JIT (headless)</div><div class="line">openjdk-9-jdk - OpenJDK Development Kit (JDK)</div><div class="line">openjdk-9-jdk-headless - OpenJDK Development Kit (JDK) (headless)</div><div class="line">openjdk-9-jre - OpenJDK Java runtime, using Hotspot JIT</div><div class="line">openjdk-9-jre-headless - OpenJDK Java runtime, using Hotspot JIT (headless)</div><div class="line">oracle-java8 - Oracle Java(TM) Development Kit (JDK) 8</div></pre></td></tr></table></figure></p>
-<p>我这里选择最后一个 <code>oracle-java8</code>来安装</p>
-<p>输入 <code>sudo apt-get install oracle-java8</code><br>来在Linux下安装java8</p>
-<p>输入 <code>java -version</code> 来查看版本</p>
-<h2 id="更换JDK版本"><a href="#更换JDK版本" class="headerlink" title="更换JDK版本"></a>更换JDK版本</h2><p>可能因为原来就有一些老版本的jdk关系<br>所以安装的JAVA8可能不生效<br>如果这里版本不是我们想要的版本<br>我们可以输入 <code>update-alternatives --config java</code><br>来按照提示更改JAVA版本</p>
-<p>安装完成后<br>我们在外面的IDEA中我们用maven打包项目<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171004201007493.png" alt=""></p>
-<p>打包完成后，我们移动到Linux里面的目录下</p>
-<p>输入<code>java -jar 你的项目.jar mylog.txt &amp;</code><br>这样就能在后台运行了</p>
-<p>我们查看我们的日志内容是否正常<br>如果一切正常，那么我们就成功部署了</p>
-<p><strong>至此，我们的图书信息推送系统就完成了，可以去对应的地址去测试<br>但是要注意一点，因为我用的是学校里的电脑改的服务器，用的是校园网，所以只能由校园网来访问，外部的网络无法访问我们的系统页面。<br>当初选择学校的自制服务器，也是因为学校图书系统只能由校园网访问，所以只能通过我们在校园网上构建的爬虫来获取数据。</strong><br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171004201503644.png" alt=""></p>
-
       
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="http://otj6w86xd.bkt.clouddn.com/wxzf.png">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
         </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2017/10/15/2017/2017-10-15 理解JAVA的继承与多态/" class="archive-article-date">
+  	<time datetime="2017-10-15T12:48:34.382Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-15</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/10/15/2017/2017-10-15 理解JAVA的继承与多态/">理解Java的继承与多态</a>
+    </h1>
+  
+
+
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -273,132 +226,31 @@
 		</ul>
 	</div>
 
-      
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/SpringBoot/" class="article-tag-list-link color1">SpringBoot</a>
+        			<a href="/categories/Java/" class="article-tag-list-link color5">Java</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://blog.chenwe.top/2017/10/04/2017/2017-10-04 图书信息推送系统（三）/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
 
   
-<nav id="article-nav">
   
-    <a href="/2017/10/15/2017/2017-10-15 理解JAVA的继承与多态/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          理解Java的继承与多态
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2017/10/03/2017/2017-10-03 图书信息推送系统（二）/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">图书信息推送系统（二）</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-
-
-
+    </div></section>
   
 
-  
-
-  
-
-  
-  <!-- 来必力City版安装代码 -->
-<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTc5Mi82MzU4" style="padding: 25px">
-
-	<script type="text/javascript">
-   (function(d, s) {
-       var j, e = d.getElementsByTagName(s)[0];
-
-       if (typeof LivereTower === 'function') { return; }
-
-       j = d.createElement(s);
-       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-       j.async = true;
-
-       e.parentNode.insertBefore(j, e);
-   })(document, 'script');
-	</script>
-<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
-</div>
-<!-- City版安装代码已完成 -->
-
-  
-
-  
+    
 
 
           </div>
@@ -434,10 +286,10 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
-		isCategory: false,
+		isCategory: true,
 		open_in_new: false,
 		root: "/",
 		innerArchive: true,

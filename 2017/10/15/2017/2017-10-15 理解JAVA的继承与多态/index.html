@@ -6,23 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.chenwe.top">
-  <title>图书信息推送系统（三） | Xiaoshidefeng的博客</title>
+  <title>理解Java的继承与多态 | Xiaoshidefeng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="上回书说到具体功能的实现 这次我们来讲下服务器的部署">
+  <meta name="description" content="很多人其实只是粗略的过了一遍Java的知识点基础并不扎实虽然一开始的时候不会发现有什么弊端但是随着工作的深入，对于基础的要求更加重要了 这里我来稍微总结下Java的继承与多态中需要注意的地方">
 <meta name="keywords" content="study,code">
 <meta property="og:type" content="article">
-<meta property="og:title" content="图书信息推送系统（三）">
-<meta property="og:url" content="http://blog.chenwe.top/2017/10/04/2017/2017-10-04 图书信息推送系统（三）/index.html">
+<meta property="og:title" content="理解Java的继承与多态">
+<meta property="og:url" content="http://blog.chenwe.top/2017/10/15/2017/2017-10-15 理解JAVA的继承与多态/index.html">
 <meta property="og:site_name" content="Xiaoshidefeng的博客">
-<meta property="og:description" content="上回书说到具体功能的实现 这次我们来讲下服务器的部署">
-<meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171004195538281.png">
-<meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171004201007493.png">
-<meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171004201503644.png">
-<meta property="og:updated_time" content="2017-10-04T12:15:32.122Z">
+<meta property="og:description" content="很多人其实只是粗略的过了一遍Java的知识点基础并不扎实虽然一开始的时候不会发现有什么弊端但是随着工作的深入，对于基础的要求更加重要了 这里我来稍微总结下Java的继承与多态中需要注意的地方">
+<meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171015214220622.png">
+<meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171015213944524.png">
+<meta property="og:updated_time" content="2017-10-15T13:42:21.486Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="图书信息推送系统（三）">
-<meta name="twitter:description" content="上回书说到具体功能的实现 这次我们来讲下服务器的部署">
-<meta name="twitter:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171004195538281.png">
+<meta name="twitter:title" content="理解Java的继承与多态">
+<meta name="twitter:description" content="很多人其实只是粗略的过了一遍Java的知识点基础并不扎实虽然一开始的时候不会发现有什么弊端但是随着工作的深入，对于基础的要求更加重要了 这里我来稍微总结下Java的继承与多态中需要注意的地方">
+<meta name="twitter:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171015214220622.png">
   
     <link rel="alternative" href="/atom.xml" title="Xiaoshidefeng的博客" type="application/atom+xml">
   
@@ -186,14 +185,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-2017/2017-10-04 图书信息推送系统（三）" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-2017/2017-10-15 理解JAVA的继承与多态" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      图书信息推送系统（三）
+      理解Java的继承与多态
     </h1>
     <span>&nbsp;&nbsp;&nbsp; | &nbsp;
     <span id="busuanzi_value_page_pv" ></span>次阅读
@@ -202,28 +201,41 @@
 
 
         
-        <a href="/2017/10/04/2017/2017-10-04 图书信息推送系统（三）/" class="archive-article-date">
-  	<time datetime="2017-10-04T11:54:40.530Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-04</time>
+        <a href="/2017/10/15/2017/2017-10-15 理解JAVA的继承与多态/" class="archive-article-date">
+  	<time datetime="2017-10-15T12:48:34.382Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-15</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>上回书说到<br>具体功能的实现</p>
-<p>这次我们来讲下服务器的部署<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171004195538281.png" alt=""></p>
-<a id="more"></a>
-<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>在第一篇里我们搭建了数据库的环境<br>现在我们要一个JAVA的运行环境<br>因为我的项目是用JAVA1.8做的<br>所以我们要安装JAVA1.8</p>
-<p>这里我用apt-get 来安装<br>先用 <code>apt-cache search package</code>这条命令来搜索相关的软件包<br>获取到的结果如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">cw@tang-pc:~$ apt-cache search java8</div><div class="line">default-jdk - Standard Java or Java compatible Development Kit</div><div class="line">default-jdk-headless - Standard Java or Java compatible Development Kit (headless)</div><div class="line">default-jre - Standard Java or Java compatible Runtime</div><div class="line">default-jre-headless - Standard Java or Java compatible Runtime (headless)</div><div class="line">openjdk-8-jdk - OpenJDK Development Kit (JDK)</div><div class="line">openjdk-8-jdk-headless - OpenJDK Development Kit (JDK) (headless)</div><div class="line">openjdk-8-jre - OpenJDK Java runtime, using Hotspot JIT</div><div class="line">openjdk-8-jre-headless - OpenJDK Java runtime, using Hotspot JIT (headless)</div><div class="line">openjdk-9-jdk - OpenJDK Development Kit (JDK)</div><div class="line">openjdk-9-jdk-headless - OpenJDK Development Kit (JDK) (headless)</div><div class="line">openjdk-9-jre - OpenJDK Java runtime, using Hotspot JIT</div><div class="line">openjdk-9-jre-headless - OpenJDK Java runtime, using Hotspot JIT (headless)</div><div class="line">oracle-java8 - Oracle Java(TM) Development Kit (JDK) 8</div></pre></td></tr></table></figure></p>
-<p>我这里选择最后一个 <code>oracle-java8</code>来安装</p>
-<p>输入 <code>sudo apt-get install oracle-java8</code><br>来在Linux下安装java8</p>
-<p>输入 <code>java -version</code> 来查看版本</p>
-<h2 id="更换JDK版本"><a href="#更换JDK版本" class="headerlink" title="更换JDK版本"></a>更换JDK版本</h2><p>可能因为原来就有一些老版本的jdk关系<br>所以安装的JAVA8可能不生效<br>如果这里版本不是我们想要的版本<br>我们可以输入 <code>update-alternatives --config java</code><br>来按照提示更改JAVA版本</p>
-<p>安装完成后<br>我们在外面的IDEA中我们用maven打包项目<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171004201007493.png" alt=""></p>
-<p>打包完成后，我们移动到Linux里面的目录下</p>
-<p>输入<code>java -jar 你的项目.jar mylog.txt &amp;</code><br>这样就能在后台运行了</p>
-<p>我们查看我们的日志内容是否正常<br>如果一切正常，那么我们就成功部署了</p>
-<p><strong>至此，我们的图书信息推送系统就完成了，可以去对应的地址去测试<br>但是要注意一点，因为我用的是学校里的电脑改的服务器，用的是校园网，所以只能由校园网来访问，外部的网络无法访问我们的系统页面。<br>当初选择学校的自制服务器，也是因为学校图书系统只能由校园网访问，所以只能通过我们在校园网上构建的爬虫来获取数据。</strong><br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171004201503644.png" alt=""></p>
+        <p>很多人其实只是粗略的过了一遍Java的知识点<br>基础并不扎实<br>虽然一开始的时候不会发现有什么弊端<br>但是随着工作的深入，对于基础的要求更加重要了</p>
+<p>这里我来稍微总结下Java的继承与多态中需要注意的地方<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171015214220622.png" alt=""><br><a id="more"></a></p>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>继承可以提高代码复用<br>继承有下面几个特点</p>
+<ul>
+<li><p>1、子类拥有父类非 private 的属性和方法。</p>
+</li>
+<li><p>2、子类可以拥有自己属性和方法，即子类可以对父类进行扩展。</p>
+</li>
+<li><p>3、子类可以用自己的方式实现父类的方法。</p>
+</li>
+</ul>
+<p>下面来介绍下向上转型<br>假如我们有两个类 <code>Wine.java</code> 和 <code>WhiteWine.java</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Wine</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">one</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"Wine one"</span>);</div><div class="line">        two();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">two</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"Wine two"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WhiteWine</span> <span class="keyword">extends</span> <span class="title">Wine</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">one</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"WhiteWine one"</span>);</div><div class="line">        two();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">two</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"WhiteWine two"</span>);</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>WhiteWine 继承自 Wine<br>重载了one方法<br>重写了two方法</p>
+<p>我们编写一个测试类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Wine wine = <span class="keyword">new</span> WhiteWine();</div><div class="line">        wine.one();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们将<code>WhiteWine</code>这个子类向上转型为<code>Wine</code>这个父类<br>但是子类中被重载的方法会丢失<br>我们运行上面的测试类，可以得到如下结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Wine one</div><div class="line">WhiteWine two</div></pre></td></tr></table></figure></p>
+<p>在运行的时候，因为向上转型的关系，丢失了子类的<code>one(int i)</code>方法<br>所以调用了父类的<code>one()</code>方法<br>在 <code>one()</code>  方法中又要调用<code>two()</code>方法<br>因为子类重写亏了 <code>two()</code> 方法，所以再调用子类的 <code>two()</code>方法</p>
+<p>所以继承的时候用向上转型，会丢失部分方法与属性</p>
+<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><p>假如我们有三个类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">show</span><span class="params">(C obj)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> (<span class="string">"A and C"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">show</span><span class="params">(A obj)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> (<span class="string">"A and A"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">show</span><span class="params">(B obj)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> (<span class="string">"B and B"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">show</span><span class="params">(A obj)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> (<span class="string">"B and A"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">C</span> <span class="keyword">extends</span> <span class="title">B</span> </span>&#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>B 继承 A， C 继承 B<br>我们编写一个测试类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ABCDtest</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        A a = <span class="keyword">new</span> B();</div><div class="line">        B b = <span class="keyword">new</span> B();</div><div class="line">        C c = <span class="keyword">new</span> C();</div><div class="line">        System.out.println(a.show(b));</div><div class="line">        System.out.println(a.show(c));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们运行测试类<br>得到以下结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">B and A</div><div class="line">A and C</div></pre></td></tr></table></figure></p>
+<p>我们分析一下<br>因为在继承链中对象方法的调用存在一个优先级：this.show(O)、super.show(O)、this.show((super)O)、super.show((super)O)</p>
+<p>所以在运行的时候<br>我们调用了一个由B向上转型的A类的方法show(O)<br>并且传入一个b的对象<br>因为优先级的关系<br>所以他会先去找 this.show(O) 里面有没有这个方法<br>这里的 this 就是 A<br>在A对象中并没有以 B为传入参数的show方法</p>
+<p>所以我们去找下一个 super.show(O)方法<br>因为A没有父类<br>所以也没有</p>
+<p>然后我们去找下一个 this.show((super)O)<br>这里 我们发现 B的父类是A<br>所以 这里相当于 A.show(A) 在A类中有<br>又因为B重写了A里的 show(A)方法<br>所以系统会调用 B类里的 show(A) 方法</p>
+<p>于是就打出了 <code>B and A</code>这行</p>
+<p>然后执行a.show(c)<br>因为 A类里有 show(C) 方法 且子类没有重写<br>所以直接执行并打印 <code>A and C</code></p>
+<p><strong>这里是不是有点绕</strong><br>但其实自己去动手写下就很好理解了<br>一开始我也模模糊糊的<br>但是自己写了下，就很好理解了，主要是要自己亲自动手去做<br>慢慢来吧<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171015213944524.png" alt=""></p>
 
       
 
@@ -279,7 +291,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/SpringBoot/" class="article-tag-list-link color1">SpringBoot</a>
+        			<a href="/categories/Java/" class="article-tag-list-link color5">Java</a>
         		</li>
       		
 		</ul>
@@ -334,7 +346,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://blog.chenwe.top/2017/10/04/2017/2017-10-04 图书信息推送系统（三）/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://blog.chenwe.top/2017/10/15/2017/2017-10-15 理解JAVA的继承与多态/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -348,18 +360,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/10/15/2017/2017-10-15 理解JAVA的继承与多态/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          理解Java的继承与多态
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/10/03/2017/2017-10-03 图书信息推送系统（二）/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">图书信息推送系统（二）</div>
+    <a href="/2017/10/04/2017/2017-10-04 图书信息推送系统（三）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">图书信息推送系统（三）</div>
       <i class="icon-circle-right"></i>
     </a>
   
