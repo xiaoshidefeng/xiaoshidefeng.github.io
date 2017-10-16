@@ -17,7 +17,7 @@
 <meta property="og:description" content="很多人其实只是粗略的过了一遍Java的知识点基础并不扎实虽然一开始的时候不会发现有什么弊端但是随着工作的深入，对于基础的要求更加重要了 这里我来稍微总结下Java的继承与多态中需要注意的地方">
 <meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171015214220622.png">
 <meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171015213944524.png">
-<meta property="og:updated_time" content="2017-10-15T13:42:21.486Z">
+<meta property="og:updated_time" content="2017-10-16T08:20:54.784Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解Java的继承与多态">
 <meta name="twitter:description" content="很多人其实只是粗略的过了一遍Java的知识点基础并不扎实虽然一开始的时候不会发现有什么弊端但是随着工作的深入，对于基础的要求更加重要了 这里我来稍微总结下Java的继承与多态中需要注意的地方">
@@ -235,7 +235,7 @@
 <p>然后我们去找下一个 this.show((super)O)<br>这里 我们发现 B的父类是A<br>所以 这里相当于 A.show(A) 在A类中有<br>又因为B重写了A里的 show(A)方法<br>所以系统会调用 B类里的 show(A) 方法</p>
 <p>于是就打出了 <code>B and A</code>这行</p>
 <p>然后执行a.show(c)<br>因为 A类里有 show(C) 方法 且子类没有重写<br>所以直接执行并打印 <code>A and C</code></p>
-<p><strong>这里是不是有点绕</strong><br>但其实自己去动手写下就很好理解了<br>一开始我也模模糊糊的<br>但是自己写了下，就很好理解了，主要是要自己亲自动手去做<br>慢慢来吧<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171015213944524.png" alt=""></p>
+<p><strong>这里是不是有点绕</strong><br>但其实自己去动手写下就很好理解了<br>一开始我也模模糊糊的<br>但是自己写了下，就很好理解了，主要是要自己亲自动手去做<br>慢慢来吧<br>部分代码参考自 <a href="http://wiki.jikexueyuan.com/project/java-enhancement/java-three.html" target="_blank" rel="external">此教程</a><br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171015213944524.png" alt=""></p>
 
       
 
