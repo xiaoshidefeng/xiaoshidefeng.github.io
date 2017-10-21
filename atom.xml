@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.chenwe.top/"/>
-  <updated>2017-10-16T08:20:54.784Z</updated>
+  <updated>2017-10-21T11:47:55.521Z</updated>
   <id>http://blog.chenwe.top/</id>
   
   <author>
@@ -14,6 +14,87 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SpringBoot整合Oracle与Mybatis</title>
+    <link href="http://blog.chenwe.top/2017/10/21/2017/2017-10-21%20SpringBoot%E6%95%B4%E5%90%88Oracle%E4%B8%8EMybatis/"/>
+    <id>http://blog.chenwe.top/2017/10/21/2017/2017-10-21 SpringBoot整合Oracle与Mybatis/</id>
+    <published>2017-10-21T11:01:53.362Z</published>
+    <updated>2017-10-21T11:47:55.521Z</updated>
+    
+    <content type="html"><![CDATA[<p>之前用的都是Mysql来做数据库 spring data jpa来实现持久层<br>这次来试试Oracle 和 Mybatis<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171021190838349.png" alt=""><br><a id="more"></a></p>
+<h2 id="Oracle的驱动的安装"><a href="#Oracle的驱动的安装" class="headerlink" title="Oracle的驱动的安装"></a>Oracle的驱动的安装</h2><p>创建玩SpringBoot项目后<br>我们要把驱动也安装下<br>推荐用官方自带的驱动<br>位置在安装的目录下 <code>product\12.1.0\dbhome_1\jdbc\lib</code>里<br>里面的 <code>ojdbc6.jar</code>是JDK6的驱动<br>因为我现在的项目是JDK8的，所以我们要用<code>ojdbc7.jar</code>这个文件<br>打开IDEA -&gt; File -&gt; project Structure -&gt; Libraries 新建一个JAVA的依赖<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-2017102119152955.png" alt=""><br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171021191606391.png" alt=""><br>选中我们刚刚找到的<code>ojdbc7.jar</code> 文件</p>
+<p>在pom.xml中写入<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.oracle<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>ojdbc7<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h2 id="Oracle配置"><a href="#Oracle配置" class="headerlink" title="Oracle配置"></a>Oracle配置</h2><p>在application.properties 中写入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">spring.jpa.database=oracle</div><div class="line">spring.datasource.driver-class-name=oracle.jdbc.driver.OracleDriver</div><div class="line">spring.datasource.url=jdbc:oracle:thin:@localhost:1521:orcl</div><div class="line">spring.datasource.username=c##ccww</div><div class="line">spring.datasource.password=ccww</div><div class="line">spring.jpa.hibernate.ddl-auto=update</div></pre></td></tr></table></figure></p>
+<p>开启Oracle服务后<br>运行一下SpringBoot 项目，如果没有报错，说明我们Oracle成功配置</p>
+<h2 id="整合Mybatis"><a href="#整合Mybatis" class="headerlink" title="整合Mybatis"></a>整合Mybatis</h2><p>在pom.xml文件中写入<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.spring.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>我们还写了一个测试相关的东西，为了方便等下的测试<br>在application.properties 中写入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mybatis.typeAliasesPackage=com.example.oracletest.domain</div></pre></td></tr></table></figure></p>
+<p>指明实体类的所在文件夹</p>
+<p>下面我们编写一个实体类Users.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Users</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> Integer id;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">getId</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> id;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(Integer id)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.id = id;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> name;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>创建一个 mapper文件夹，用来存放Mybatis 的mapper文件<br>在这个文件夹下新建一个 UsersMapper.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Repository</span></div><div class="line"><span class="meta">@Mapper</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UsersMapper</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Insert</span>(<span class="string">"INSERT INTO Users(id, name) VALUES(#&#123;id&#125;, #&#123;name&#125;)"</span>)</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">addUser</span><span class="params">(@Param(<span class="string">"id"</span>)</span> Integer id, @<span class="title">Param</span><span class="params">(<span class="string">"name"</span>)</span> String name)</span>;</div><div class="line"></div><div class="line">    <span class="meta">@Delete</span>(<span class="string">"delete from Users where id=#&#123;id&#125;"</span>)</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">deleteByUserId</span><span class="params">(@Param(<span class="string">"id"</span>)</span> Integer id)</span>;</div><div class="line"></div><div class="line">    <span class="meta">@Update</span>(<span class="string">"update Users set name=#&#123;name&#125; where id=#&#123;id&#125;"</span>)</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">updateUser</span><span class="params">(@Param(<span class="string">"id"</span>)</span> Integer id, @<span class="title">Param</span><span class="params">(<span class="string">"name"</span>)</span> String name)</span>;</div><div class="line"></div><div class="line">    <span class="meta">@Select</span>(<span class="string">"SELECT * FROM Users"</span>)</div><div class="line">    <span class="meta">@Results</span>(&#123;</div><div class="line">            <span class="meta">@Result</span>(property = <span class="string">"id"</span>,  column = <span class="string">"id"</span>),</div><div class="line">            <span class="meta">@Result</span>(property = <span class="string">"name"</span>, column = <span class="string">"name"</span>)</div><div class="line">    &#125;)</div><div class="line">    <span class="function">List&lt;Users&gt; <span class="title">findAll</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们事先在数据库中新建一个Users的表，有id和name字段<br>并且先放入少量测试数据</p>
+<p>我们还要再启动类中添加注解 <code>@MapperScan(&quot;com.example.oracletest.Mapper&quot;)</code><br>来指明mapper的所在文件夹<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@SpringBootApplication</span></div><div class="line"><span class="meta">@MapperScan</span>(<span class="string">"com.example.oracletest.Mapper"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OracleTestApplication</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		SpringApplication.run(OracleTestApplication.class, args);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这样我们的Mybatis就整合好了<br>下面我们来测试下</p>
+<p>我们在测试的文件夹下新建一个测试<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RunWith</span>(SpringRunner.class)</div><div class="line"><span class="meta">@SpringBootTest</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OracleTestApplicationTests</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Autowired</span></div><div class="line">	<span class="keyword">private</span> UsersMapper usersMapper;</div><div class="line">	<span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">MybatisTest</span><span class="params">()</span> </span>&#123;</div><div class="line"></div><div class="line">		<span class="comment">//查询用户表所有数据</span></div><div class="line">		printUserList();</div><div class="line"></div><div class="line">		<span class="comment">//插入新数据</span></div><div class="line">		usersMapper.addUser(<span class="number">3</span>,<span class="string">"Jack"</span>);</div><div class="line">		printUserList();</div><div class="line"></div><div class="line">		<span class="comment">//删除数据</span></div><div class="line">		usersMapper.deleteByUserId(<span class="number">2</span>);</div><div class="line">		printUserList();</div><div class="line"></div><div class="line">		<span class="comment">//修改数据</span></div><div class="line">		usersMapper.updateUser(<span class="number">1</span>, <span class="string">"Chen"</span>);</div><div class="line">		printUserList();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printUserList</span><span class="params">()</span> </span>&#123;</div><div class="line">		List&lt;Users&gt; usersList = usersMapper.findAll();</div><div class="line">		<span class="keyword">for</span> (Users user:</div><div class="line">				usersList) &#123;</div><div class="line">			System.out.println(<span class="string">"User ID = "</span> + user.getId());</div><div class="line">			System.out.println(<span class="string">"User name = "</span> + user.getName());</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		System.out.println(<span class="string">"--------------------------"</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们来测试一下是否能够成功对数据库进行增删改查<br>右键 Run MybatisTest()<br>我这里成功获取了数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">User ID = 2</div><div class="line">User name = Marry</div><div class="line">User ID = 1</div><div class="line">User name = Tom</div><div class="line">--------------------------</div><div class="line">User ID = 2</div><div class="line">User name = Marry</div><div class="line">User ID = 3</div><div class="line">User name = Jack</div><div class="line">User ID = 1</div><div class="line">User name = Tom</div><div class="line">--------------------------</div><div class="line">User ID = 3</div><div class="line">User name = Jack</div><div class="line">User ID = 1</div><div class="line">User name = Tom</div><div class="line">--------------------------</div><div class="line">User ID = 3</div><div class="line">User name = Jack</div><div class="line">User ID = 1</div><div class="line">User name = Chen</div><div class="line">--------------------------</div></pre></td></tr></table></figure></p>
+<p>增删改查都成功实现了<br>说明我们成功整合了Mybatis 并使用</p>
+<p><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171021194754903.png" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;之前用的都是Mysql来做数据库 spring data jpa来实现持久层&lt;br&gt;这次来试试Oracle 和 Mybatis&lt;br&gt;&lt;img src=&quot;http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171021190838349.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="SpringBoot" scheme="http://blog.chenwe.top/categories/SpringBoot/"/>
+    
+    
+      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
+    
+      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Oracle的安装与新用户的创建</title>
+    <link href="http://blog.chenwe.top/2017/10/21/2017/2017-10-21%20Oracle%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E6%96%B0%E7%94%A8%E6%88%B7%E7%9A%84%E5%88%9B%E5%BB%BA/"/>
+    <id>http://blog.chenwe.top/2017/10/21/2017/2017-10-21 Oracle的安装与新用户的创建/</id>
+    <published>2017-10-21T08:42:15.276Z</published>
+    <updated>2017-10-21T11:45:17.437Z</updated>
+    
+    <content type="html"><![CDATA[<p>之前用的都是Mysql来做数据库<br>这次来试试Oracle<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-2017102118360441.png" alt=""><br><a id="more"></a></p>
+<h2 id="Oracle的安装"><a href="#Oracle的安装" class="headerlink" title="Oracle的安装"></a>Oracle的安装</h2><p>我这里使用的是Oracle 12c版本<br>在<a href="https://www.oracle.com/cn/database/index.html" target="_blank" rel="external">官方下载地址</a><br>里将两个压缩文件都下载过来<br>将这两个文件都解压出来<br>将<code>winx64_12102_database_2of2</code>里的stage 文件<br>与<code>winx64_12102_database_1of2</code>里的stage文件合并<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171021184009746.png" alt=""></p>
+<p>然后点击setup 安装Oracle<br>具体的安装方法可以参考<a href="http://www.cnblogs.com/soraka/p/5855724.html" target="_blank" rel="external">这篇博客</a><br>安装过程十分的慢，请耐心等待</p>
+<h2 id="启动Oracle服务"><a href="#启动Oracle服务" class="headerlink" title="启动Oracle服务"></a>启动Oracle服务</h2><p>我们首先要启动Oracle的服务<br>右键我的电脑 -&gt; 管理 -&gt; 服务和应用程序 -&gt; 服务<br>里面找到 <code>OracleServiceORCL</code> 和 <code>OracleOraDB12Home1TNSListener</code><br>选中后右键点击启动 来启动服务</p>
+<h2 id="Oracle创建新用户与权限设置"><a href="#Oracle创建新用户与权限设置" class="headerlink" title="Oracle创建新用户与权限设置"></a>Oracle创建新用户与权限设置</h2><p>打开cmd<br>输入 <code>sqlplus</code><br>输入用户名和密码（安装的时候已经设置了）<br>出现如下界面代表成功了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">λ sqlplus</div><div class="line"></div><div class="line">SQL*Plus: Release 12.1.0.2.0 Production on 星期六 10月 21 15:42:13 2017</div><div class="line"></div><div class="line">Copyright (c) 1982, 2014, Oracle.  All rights reserved.</div><div class="line"></div><div class="line">请输入用户名:  system</div><div class="line">输入口令:</div><div class="line">上次成功登录时间: 星期六 10月 21 2017 15:41:23 +08:00</div><div class="line"></div><div class="line">连接到:</div><div class="line">Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production</div><div class="line">With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options</div><div class="line"></div><div class="line">SQL&gt;</div></pre></td></tr></table></figure></p>
+<p>下面我们创建一个表空间给新的用户<br>输入<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">SQL&gt; create tablespace stusys</div><div class="line">  2  datafile 'f:\app\stuysy.dbf'</div><div class="line">  3  size 10M;</div><div class="line"></div><div class="line">  表空间已创建。</div></pre></td></tr></table></figure></p>
+<p>这里我们创建了一个 名为  <code>stusys</code>的表空间，位于f盘的app目录下，大小10M</p>
+<p>下面我们创建一个新用户<br>输入<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">SQL&gt; create user c##ccww</div><div class="line">  2  identified by ccww</div><div class="line">  3  default tablespace stusys</div><div class="line">  4  temporary tablespace temp;</div><div class="line"></div><div class="line">  用户已创建。</div></pre></td></tr></table></figure></p>
+<p>这里我们创建了一个名为c##ccww的用户<br><strong>在Oracle 12c版本里，创建新用户必须以c##开头</strong></p>
+<p>下面我们给他添加权限<br>输入<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">SQL&gt; grant connect to c##ccww</div><div class="line"></div><div class="line">授权成功。</div><div class="line"></div><div class="line">SQL&gt; grant resource to c##ccww;</div><div class="line"></div><div class="line">授权成功。</div><div class="line"></div><div class="line">SQL&gt; alter user c##ccww default tablespace stusys;</div><div class="line"></div><div class="line">用户已更改。</div><div class="line"></div><div class="line">SQL&gt; grant unlimited tablespace to c##ccww;</div><div class="line"></div><div class="line">授权成功。</div></pre></td></tr></table></figure></p>
+<p>我们还为他设置了用户空间</p>
+<p>这样我们新用户就创建好了</p>
+<h2 id="登录Sql-Developer"><a href="#登录Sql-Developer" class="headerlink" title="登录Sql Developer"></a>登录Sql Developer</h2><p>打开我们在安装Oracle的时候安装的 <code>Sql Developer</code>工具<br>这个是Oracle图形管理界面</p>
+<p>输入刚刚的用户名密码<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171021185629533.png" alt=""><br>点击连接</p>
+<p>这样我们成功登录了<br>下面我们可以选择表 来创建一个表了<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171021185720264.png" alt=""></p>
+<p>这样，我们就完成了Oracle的安装与用户配置<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171021185750824.png" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;之前用的都是Mysql来做数据库&lt;br&gt;这次来试试Oracle&lt;br&gt;&lt;img src=&quot;http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-2017102118360441.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Oracle" scheme="http://blog.chenwe.top/categories/Oracle/"/>
+    
+    
+      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
+    
+      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
+    
+  </entry>
   
   <entry>
     <title>理解Java的继承与多态</title>
@@ -760,84 +841,6 @@
     </summary>
     
       <category term="SpringBoot" scheme="http://blog.chenwe.top/categories/SpringBoot/"/>
-    
-    
-      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
-    
-      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>IDEA Maven项目依赖失效</title>
-    <link href="http://blog.chenwe.top/2017/08/02/2017/IDEA%20Maven%E9%A1%B9%E7%9B%AE%E4%BE%9D%E8%B5%96%E5%A4%B1%E6%95%88/"/>
-    <id>http://blog.chenwe.top/2017/08/02/2017/IDEA Maven项目依赖失效/</id>
-    <published>2017-08-02T02:35:45.599Z</published>
-    <updated>2017-08-02T03:05:18.097Z</updated>
-    
-    <content type="html"><![CDATA[<p>最近整理了一下硬盘<br>然后再打开我的SpringBoot项目<br>发现所有的依赖都没了，IDEA提示一片红，像满山的山楂树 红红火火恍恍惚惚</p>
-<p><img src="http://otj6w86xd.bkt.clouddn.com/xianruchensi.jpg" alt=""></p>
-<a id="more"></a>
-<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>我们需要打开我们的pom.xml文件<br>找到这几行代码<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.5.4.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">relativePath</span>/&gt;</span> <span class="comment">&lt;!-- lookup parent from repository --&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>关键在 <version>1.5.4.RELEASE</version> 这里</p>
-<p>我们可以在IDEA中重新创建一个SpringBoot项目<br>然后查看新项目的 pom文件中的version值，会发现和这个项目不一样<br>我们复制新项目的版本到这个版本中</p>
-<p>点击IDEA的import change 重新导入后就可以了</p>
-<p>这时我们会发现我们之前的依赖又回来了<br><img src="http://otj6w86xd.bkt.clouddn.com/lianhong.jpg" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;最近整理了一下硬盘&lt;br&gt;然后再打开我的SpringBoot项目&lt;br&gt;发现所有的依赖都没了，IDEA提示一片红，像满山的山楂树 红红火火恍恍惚惚&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://otj6w86xd.bkt.clouddn.com/xianruchensi.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="IDEA" scheme="http://blog.chenwe.top/categories/IDEA/"/>
-    
-    
-      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
-    
-      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>关于百度搜索不到Github Pages的解决方法.</title>
-    <link href="http://blog.chenwe.top/2017/08/01/2017/%E5%85%B3%E4%BA%8E%E7%99%BE%E5%BA%A6%E6%90%9C%E7%B4%A2%E4%B8%8D%E5%88%B0Github%20Pages%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
-    <id>http://blog.chenwe.top/2017/08/01/2017/关于百度搜索不到Github Pages的解决方法/</id>
-    <published>2017-08-01T08:09:24.308Z</published>
-    <updated>2017-08-01T09:10:22.909Z</updated>
-    
-    <content type="html"><![CDATA[<p>我的博客是托管在Github Pages上的<br>我们知道，Github是屏蔽百度的<br>所有我们的博客是不会被百度收录的<br>如果我们想要被百度收录的话该怎么办呢<br><img src="http://otj6w86xd.bkt.clouddn.com/wenhao.jpg" alt=""></p>
-<a id="more"></a>
-<h2 id="使用coding来一起托管"><a href="#使用coding来一起托管" class="headerlink" title="使用coding来一起托管"></a>使用coding来一起托管</h2><p>Coding也是一个代码托管平台<br>也有Coding Pages的服务<br>而且不会屏蔽百度爬虫<br>我们可以利用Coding Pages 来帮我们完成被百度收录的工作</p>
-<h2 id="讲代码迁移到coding上"><a href="#讲代码迁移到coding上" class="headerlink" title="讲代码迁移到coding上"></a>讲代码迁移到coding上</h2><p>我们首先要注册一个coding的账号<br>个人设置中配置好ssh公钥</p>
-<p>然后我们新建一个项目<br><img src="http://otj6w86xd.bkt.clouddn.com/2017080101.png" alt=""><br>将项目的名字命名为自己的 名字.coding.me</p>
-<p><img src="http://otj6w86xd.bkt.clouddn.com/2017080102.png" alt=""><br>复制我们的项目连接</p>
-<p>打开我们的博客<br>找到 _config 文件</p>
-<p>在 depoly里添加coding的仓库地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">- type: git</div><div class="line">  repository:</div><div class="line">    github: https://github.com/yourname/yourname.github.io,master</div><div class="line">    coding: git@git.coding.net:yourname/yourname.coding.me.git,master</div></pre></td></tr></table></figure></p>
-<p>我们打开命令行工具<br>执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo g</div><div class="line">hexo d</div></pre></td></tr></table></figure></p>
-<p>如果配置没问题的话，你的项目应该已经出现在coding的仓库里了</p>
-<h2 id="开启coding-pages服务"><a href="#开启coding-pages服务" class="headerlink" title="开启coding pages服务"></a>开启coding pages服务</h2><p>完善自己coding的个人信息<br>达到银牌才能开启pages服务</p>
-<p><img src="http://otj6w86xd.bkt.clouddn.com/2017080103.png" alt=""><br>在这里设置pages服务</p>
-<p>如果没有域名的话，看到这里就可以了</p>
-<p>有自己的域名的话接着往下看</p>
-<h2 id="绑定域名"><a href="#绑定域名" class="headerlink" title="绑定域名"></a>绑定域名</h2><p>我买的域名是阿里云的万网<br>支持智能路由<br><img src="http://otj6w86xd.bkt.clouddn.com/2017080104.png" alt=""><br>我们设置默认访问coding pages，海外访问github pages<br>这样我们域名就绑定好了</p>
-<p>但是因为coding pages 是有限制的，如果银牌会员绑定域名<br>每天第一次访问时会跳出一个5秒掉的引导页<br>这个会让搜索引擎的爬虫无法爬取数据</p>
-<h2 id="收录网站"><a href="#收录网站" class="headerlink" title="收录网站"></a>收录网站</h2><p>所以我们需要关掉这个引导页<br>官方的要求是在页面里加入 Host by coding pages<br><img src="http://otj6w86xd.bkt.clouddn.com/2017080105.png" alt=""></p>
-<p>毕竟用了人家的服务<br>还是要支持一下的嘛，不能总是想着占便宜，不付出</p>
-<p>加完Host by Coding Pages并通过审核后<br>我们的内容就可以被百度和Google爬虫爬取了</p>
-<p>测试是否能被百度收录<br>可以用百度的<a href="http://zhanzhang.baidu.com/" target="_blank" rel="external">站长工具</a><br>来测试<br>在网页抓取 -&gt; 抓取诊断里<br><img src="http://otj6w86xd.bkt.clouddn.com/2017080106.png" alt=""><br>测试能否被抓取<br>当然，要他们收录你的网站，你还要通过他的验证，这里就不赘述了</p>
-<p>Google收录的方法也是类似的，但是收录的速度比百度快很多，这里也不做赘述</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;我的博客是托管在Github Pages上的&lt;br&gt;我们知道，Github是屏蔽百度的&lt;br&gt;所有我们的博客是不会被百度收录的&lt;br&gt;如果我们想要被百度收录的话该怎么办呢&lt;br&gt;&lt;img src=&quot;http://otj6w86xd.bkt.clouddn.com/wenhao.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Github Pages" scheme="http://blog.chenwe.top/categories/Github-Pages/"/>
     
     
       <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
