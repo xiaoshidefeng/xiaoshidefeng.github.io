@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.chenwe.top/"/>
-  <updated>2017-10-23T08:54:21.424Z</updated>
+  <updated>2017-10-24T13:46:29.393Z</updated>
   <id>http://blog.chenwe.top/</id>
   
   <author>
@@ -14,6 +14,47 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SpringBoot中Mybatis配置</title>
+    <link href="http://blog.chenwe.top/2017/10/24/2017/2017-10-24%20SpringBoot%E4%B8%ADMybatis%E9%85%8D%E7%BD%AE/"/>
+    <id>http://blog.chenwe.top/2017/10/24/2017/2017-10-24 SpringBoot中Mybatis配置/</id>
+    <published>2017-10-24T13:30:42.176Z</published>
+    <updated>2017-10-24T13:46:29.393Z</updated>
+    
+    <content type="html"><![CDATA[<p>上次在SpringBoot中整合Oracle和Mybatis<br>用的是Mybatis的注解方法来使用<br>这次我们用xml文件的方法来试试</p>
+<p><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171024213257134.png" alt=""><br><a id="more"></a></p>
+<h2 id="Mybatis配置"><a href="#Mybatis配置" class="headerlink" title="Mybatis配置"></a>Mybatis配置</h2><p>在pom.xml文件中写入<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.spring.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.1.21<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>在 <code>application.properties</code>写入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">spring.datasource.url=jdbc:mysql://localhost:3306/test?characterEncoding=utf8</div><div class="line">spring.datasource.username=root</div><div class="line">spring.datasource.password=</div><div class="line">spring.datasource.driver-class-name=com.mysql.jdbc.Driver</div><div class="line"></div><div class="line">mybatis.mapper-locations=classpath:mapper/*.xml</div></pre></td></tr></table></figure></p>
+<p>这里的<code>mybatis.mapper-locations=classpath:mapper/*.xml</code>是指一会儿我们在resources目录下要新建的mapper文件夹<br>里面存放.xml文件</p>
+<p>然后新建一个实体类 Student<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</div><div class="line">    <span class="keyword">private</span> String names;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getId</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> id;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.id = id;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> names;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.names = name;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>再建一个StudentMapper文件<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Mapper</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">StudentMapper</span> </span>&#123;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">save</span><span class="params">(Student student)</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">delete</span><span class="params">(<span class="keyword">int</span> id)</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(@Param(<span class="string">"id"</span>)</span> <span class="keyword">int</span> id, @<span class="title">Param</span><span class="params">(<span class="string">"name"</span>)</span> String name)</span>;</div><div class="line"></div><div class="line">    <span class="function">List&lt;Student&gt; <span class="title">findAll</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在resources目录下新建一个 mapper文件夹 里面新建一个对应的 StudentMapper.xml文件<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</div><div class="line"><span class="meta">&lt;!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" &gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"com.example.oracletest.mapper.StudentMapper"</span> &gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"save"</span> <span class="attr">parameterType</span>=<span class="string">"com.example.oracletest.domain.Student"</span>&gt;</span></div><div class="line">        insert into student(id,names) values(#&#123;id&#125;,#&#123;name&#125;)</div><div class="line">    <span class="tag">&lt;/<span class="name">insert</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">delete</span> <span class="attr">id</span>=<span class="string">"delete"</span> <span class="attr">parameterType</span>=<span class="string">"com.example.oracletest.domain.Student"</span>&gt;</span></div><div class="line">        DELETE FROM student WHERE id=#&#123;id&#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">delete</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">update</span> <span class="attr">id</span>=<span class="string">"update"</span> <span class="attr">parameterType</span>=<span class="string">"com.example.oracletest.domain.Student"</span>&gt;</span></div><div class="line">        UPDATE student set names=#&#123;name&#125; WHERE id=#&#123;id&#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">update</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findAll"</span> <span class="attr">resultType</span>=<span class="string">"com.example.oracletest.domain.Student"</span>&gt;</span></div><div class="line">        select * from student</div><div class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>要和前面的StudentMapper.java相对应</p>
+<p>然后给我们的启动类上添加注解<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@SpringBootApplication</span></div><div class="line"><span class="meta">@EnableTransactionManagement</span></div><div class="line"><span class="meta">@MapperScan</span>(<span class="string">"com.example.test.mapper"</span>)</div></pre></td></tr></table></figure></p>
+<p>MapperScan 指定扫描的位置</p>
+<p>下面我们就可以写一个测试类来单元测试了<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">@RunWith</span>(SpringRunner.class)</div><div class="line"><span class="meta">@SpringBootTest</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OracleTestApplicationTests</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Autowired</span></div><div class="line">	<span class="keyword">private</span> StudentMapper mapper;</div><div class="line"></div><div class="line">	<span class="meta">@Test</span></div><div class="line">	<span class="meta">@Transactional</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testInsert</span><span class="params">()</span></span>&#123;</div><div class="line">		Student student = <span class="keyword">new</span> Student();</div><div class="line">		student.setName(<span class="string">"李四"</span>);</div><div class="line">		mapper.save(student);</div><div class="line">		printTable();</div><div class="line">		mapper.delete(<span class="number">1</span>);</div><div class="line">		printTable();</div><div class="line">		mapper.update(<span class="number">2</span>, <span class="string">"Jack"</span>);</div><div class="line">		printTable();</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">printTable</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">for</span> (Student s:</div><div class="line">		mapper.findAll()) &#123;</div><div class="line">			System.out.println(<span class="string">"用户信息"</span>+s.getName());</div><div class="line">		&#125;</div><div class="line">		System.out.println(<span class="string">"----------------------------"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这里的<code>@Transactional</code> 注解可以让这个测试进行回滚<br>也就是每次测试完成后，对数据库的原始数据并不会有影响</p>
+<p>运行测试并通过<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">用户信息张三</div><div class="line">用户信息aa</div><div class="line">用户信息李四</div><div class="line">----------------------------</div><div class="line">用户信息aa</div><div class="line">用户信息李四</div><div class="line">----------------------------</div><div class="line">用户信息Jack</div><div class="line">用户信息李四</div><div class="line">----------------------------</div></pre></td></tr></table></figure></p>
+<p>这样对于 Mybatis的增删改查我们都测试成功了</p>
+<p><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171024214514781.png" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;上次在SpringBoot中整合Oracle和Mybatis&lt;br&gt;用的是Mybatis的注解方法来使用&lt;br&gt;这次我们用xml文件的方法来试试&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171024213257134.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="SpringBoot" scheme="http://blog.chenwe.top/categories/SpringBoot/"/>
+    
+    
+      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
+    
+      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
+    
+  </entry>
   
   <entry>
     <title>阿里云服务器Docker部署Oracle</title>
@@ -825,48 +866,6 @@
       <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
     
       <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>练字记录（一）</title>
-    <link href="http://blog.chenwe.top/2017/08/04/2017/%E7%BB%83%E5%AD%97%E8%AE%B0%E5%BD%95%EF%BC%88%E4%B8%80%EF%BC%89/"/>
-    <id>http://blog.chenwe.top/2017/08/04/2017/练字记录（一）/</id>
-    <published>2017-08-04T08:27:24.136Z</published>
-    <updated>2017-08-04T08:46:16.704Z</updated>
-    
-    <content type="html"><![CDATA[<p>练字记录<br>每五天左右发一篇博客来记录<br>目前是楷书<br><img src="http://otj6w86xd.bkt.clouddn.com/huajizuo.jpg" alt=""></p>
-<a id="more"></a>
-<h2 id="为什么要练字？"><a href="#为什么要练字？" class="headerlink" title="为什么要练字？"></a>为什么要练字？</h2><p>打算把自己极丑的字改善下<br>陶冶情操</p>
-<h2 id="之前有练过吗？"><a href="#之前有练过吗？" class="headerlink" title="之前有练过吗？"></a>之前有练过吗？</h2><p>以前练字，都是练得英文字<br>而且有一定效果<br>因为英文练字成效快，收益大<br>好的英文字能在作文中取得一定优势</p>
-<h2 id="先从哪里练？"><a href="#先从哪里练？" class="headerlink" title="先从哪里练？"></a>先从哪里练？</h2><p>先练楷书吧<br>目前正在临摹 赵孟頫 的 《道德经》</p>
-<h2 id="五天的记录"><a href="#五天的记录" class="headerlink" title="五天的记录"></a>五天的记录</h2><ul>
-<li><p>2017年07月31日<br><img src="http://otj6w86xd.bkt.clouddn.com/zi01.jpg" alt=""></p>
-</li>
-<li><p>2017年08月01日<br><img src="http://otj6w86xd.bkt.clouddn.com/zi02.jpg" alt=""></p>
-</li>
-<li><p>2017年08月02日<br><img src="http://otj6w86xd.bkt.clouddn.com/zi03.jpg" alt=""></p>
-</li>
-<li><p>2017年08月03日<br><img src="http://otj6w86xd.bkt.clouddn.com/zi04.jpg" alt=""></p>
-</li>
-<li><p>2017年08月04日<br><img src="http://otj6w86xd.bkt.clouddn.com/zi05.jpg" alt=""></p>
-</li>
-</ul>
-<p><img src="http://otj6w86xd.bkt.clouddn.com/ha.jpg" alt=""><br><strong>虽然自己的字还是很难看</strong><br><strong>但还是要坚持下去</strong></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;练字记录&lt;br&gt;每五天左右发一篇博客来记录&lt;br&gt;目前是楷书&lt;br&gt;&lt;img src=&quot;http://otj6w86xd.bkt.clouddn.com/huajizuo.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="练字" scheme="http://blog.chenwe.top/categories/%E7%BB%83%E5%AD%97/"/>
-    
-    
-      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
-    
-      <category term="life" scheme="http://blog.chenwe.top/tags/life/"/>
     
   </entry>
   
