@@ -1,1 +1,1 @@
-http://blog.chenwe.top/2017/10/29/2017/2017-10-29 Oracle与jdbc实现增删改查/
+http://blog.chenwe.top/2017/11/05/2017/2017-11-05 基于机器学习的DeepVideoAnalytics开源视频检索工具的安装与简单使用/
