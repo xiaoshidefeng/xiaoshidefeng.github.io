@@ -1,1 +1,1 @@
-http://blog.chenwe.top/2017/11/05/2017/2017-11-05 基于机器学习的DeepVideoAnalytics开源视频检索工具的安装与简单使用/
+http://blog.chenwe.top/2017/11/13/2017/2017-11-19 SpringBoot使用properties配置文件实现多环境配置/

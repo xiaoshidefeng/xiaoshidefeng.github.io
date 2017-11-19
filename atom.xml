@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.chenwe.top/"/>
-  <updated>2017-11-05T09:04:29.692Z</updated>
+  <updated>2017-11-19T08:10:17.126Z</updated>
   <id>http://blog.chenwe.top/</id>
   
   <author>
@@ -14,6 +14,38 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SpringBoot使用properties配置文件实现多环境配置</title>
+    <link href="http://blog.chenwe.top/2017/11/13/2017/2017-11-19%20SpringBoot%E4%BD%BF%E7%94%A8properties%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%AE%9E%E7%8E%B0%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+    <id>http://blog.chenwe.top/2017/11/13/2017/2017-11-19 SpringBoot使用properties配置文件实现多环境配置/</id>
+    <published>2017-11-13T05:31:27.820Z</published>
+    <updated>2017-11-19T08:10:17.126Z</updated>
+    
+    <content type="html"><![CDATA[<p>我们在编写项目的时候<br>总是会有线上环境与线下环境<br>其中有些东西是不一样的，比如本地文件路径与线上文件路径之类的<br>但是每次打包都要去手动修改各个地方，十分麻烦也很容易出错<br>所以这次我们使用properties配置文件实现多环境配置<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171113133918221.png" alt=""><br><a id="more"></a></p>
+<h2 id="多环境配置"><a href="#多环境配置" class="headerlink" title="多环境配置"></a>多环境配置</h2><p>在application.properties 的同级目录下创建三个配置文件<br>分别为：<br>application-dev.properties  线下环境<br>application-pro.properties  线上环境<br>application-test.properties  测试环境</p>
+<p>假如我们需要根据不同的环境，来配置不同的默认文件夹<br>我们可以这样写</p>
+<p>application.properties<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">spring.profiles.active=pro</div><div class="line"></div><div class="line">spring.mvc.static-path-pattern=/**</div><div class="line">spring.resources.static-locations=classpath:/META-INF/resources/,classpath:/resources/,\</div><div class="line">  classpath:/static/,classpath:/public/,file:$&#123;config.me.fileroot&#125;</div></pre></td></tr></table></figure></p>
+<p>application-dev.properties<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#线下环境</div><div class="line">config.me.fileroot=h:/</div><div class="line">config.me.host=localhost</div></pre></td></tr></table></figure></p>
+<p>application-pro.properties<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#线上环境</div><div class="line">config.me.fileroot=/home/cw/cloud/cloudspace/</div><div class="line">config.me.host=10.30.90.16</div></pre></td></tr></table></figure></p>
+<p>根据 application.properties 里的 <code>spring.profiles.active=</code>的不同<br>来使用不同的配置文件<br>这里我们是 pro 也就是线上环境，所以他会加载<code>application-pro.properties</code> 里的内容<br>当然，application.properties里的内容它也会加载<br>如果两个配置文件里有内容有冲突的话，以指定的配置文件优先</p>
+<p>这样在每次发布项目的时候，就不用去改那么多东西了。<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171119161004815.png" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;我们在编写项目的时候&lt;br&gt;总是会有线上环境与线下环境&lt;br&gt;其中有些东西是不一样的，比如本地文件路径与线上文件路径之类的&lt;br&gt;但是每次打包都要去手动修改各个地方，十分麻烦也很容易出错&lt;br&gt;所以这次我们使用properties配置文件实现多环境配置&lt;br&gt;&lt;img src=&quot;http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171113133918221.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="SpringBoot" scheme="http://blog.chenwe.top/categories/SpringBoot/"/>
+    
+    
+      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
+    
+      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
+    
+  </entry>
   
   <entry>
     <title>基于机器学习的DeepVideoAnalytics开源视频检索工具的安装与简单使用</title>
@@ -843,58 +875,6 @@
     </summary>
     
       <category term="测试" scheme="http://blog.chenwe.top/categories/%E6%B5%8B%E8%AF%95/"/>
-    
-    
-      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
-    
-      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Mysql登录报错的问题</title>
-    <link href="http://blog.chenwe.top/2017/08/18/2017/Mysql%E7%99%BB%E5%BD%95%E7%9A%84%E9%97%AE%E9%A2%98/"/>
-    <id>http://blog.chenwe.top/2017/08/18/2017/Mysql登录的问题/</id>
-    <published>2017-08-18T14:09:27.908Z</published>
-    <updated>2017-09-11T14:53:42.298Z</updated>
-    
-    <content type="html"><![CDATA[<p>之前有一天我服务器里的mysql突然远程连接不上了<br>MySQL WorkBench 连上显示无法读取数据，丢失部分文件<br><img src="http://otj6w86xd.bkt.clouddn.com/wenhao.jpg" alt=""><br><a id="more"></a><br>我用ssh登录出现以下报错</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&apos;Access denied for user &apos;root&apos;@&apos;localhost&apos; (using password: YES)&apos;</div></pre></td></tr></table></figure>
-<p>经过资料查找<br>找到了解决方法</p>
-<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>输入以下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"># /etc/init.d/mysql stop</div><div class="line"></div><div class="line"># mysqld_safe --user=mysql --skip-grant-tables --skip-networking &amp;</div><div class="line"></div><div class="line"># mysql -u root mysql</div><div class="line"></div><div class="line">mysql&gt; UPDATE user SET Password=PASSWORD(&apos;新密码&apos;) where USER=&apos;root&apos;;</div><div class="line"></div><div class="line">mysql&gt; FLUSH PRIVILEGES;</div><div class="line"></div><div class="line">mysql&gt; quit</div><div class="line"></div><div class="line"># /etc/init.d/mysql restart</div><div class="line"></div><div class="line"># mysql -uroot -p</div><div class="line"></div><div class="line">Enter password: &lt;新密码&gt;</div><div class="line"></div><div class="line">mysql&gt;</div></pre></td></tr></table></figure></p>
-<p>这样我就解决了不能登录的问题</p>
-<p>下面我们来配置下远程 MySQL WorkBench连接的配置吧</p>
-<h2 id="MySQL-WorkBench远程连接"><a href="#MySQL-WorkBench远程连接" class="headerlink" title="MySQL WorkBench远程连接"></a>MySQL WorkBench远程连接</h2><ul>
-<li><p>开放mysql<br>mysql的配置文件在/etc/mysql/my.cnf文件内，里面有一行bind-address = 127.0.0.1表示只允许本地访问，将这行注释即可</p>
-</li>
-<li><p>创建新的mysql用户<br>在登录mysql后<br>输入以下命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GRANT ALL ON *.* to user@&apos;IP&apos; IDENTIFIED BY &apos;password&apos;;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>其中user表示需要创建用户的名字；IP表示哪台客户端想要访问mysql数据库<br>password表示密码 并赋予所有的权限。<br>如果想要所有IP都能登录<br>那么 将 <code>IP</code> 改成 <code>%</code> 即可</p>
-<ul>
-<li><p>刷新权限表</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">FLUSH PRIVILEGES;</div></pre></td></tr></table></figure>
-</li>
-<li><p>重启数据库</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo service mysql restart</div></pre></td></tr></table></figure>
-<ul>
-<li>用MySQL WorkBench连接<br>新建一个连接<br>输入ip地址 和 用户名<br>就可以测试连接了<br>连接的方法是 TCP/IP</li>
-</ul>
-<p>这样，我们就做好了mysql的远程连接</p>
-<p><img src="http://otj6w86xd.bkt.clouddn.com/lianhong.jpg" alt=""></p>
-<p>本篇部分内容参考自<br>简书 的<a href="http://www.jianshu.com/p/ae78ce8d8e14" target="_blank" rel="external">这个</a>解决方案<br>CSDN 的<a href="http://blog.csdn.net/gent__chen/article/details/51065723" target="_blank" rel="external">这个</a>解决方案</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;之前有一天我服务器里的mysql突然远程连接不上了&lt;br&gt;MySQL WorkBench 连上显示无法读取数据，丢失部分文件&lt;br&gt;&lt;img src=&quot;http://otj6w86xd.bkt.clouddn.com/wenhao.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="MySql" scheme="http://blog.chenwe.top/categories/MySql/"/>
     
     
       <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>

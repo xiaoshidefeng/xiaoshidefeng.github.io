@@ -6,36 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.chenwe.top">
-  <title>基于机器学习的DeepVideoAnalytics开源视频检索工具的安装与简单使用 | Xiaoshidefeng的博客</title>
+  <title>SpringBoot使用properties配置文件实现多环境配置 | Xiaoshidefeng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="DeepVideoAnalytics是一款强大的开源视频检索工具这是它的项目地址今天来讲下他的安装与简单使用">
+  <meta name="description" content="我们在编写项目的时候总是会有线上环境与线下环境其中有些东西是不一样的，比如本地文件路径与线上文件路径之类的但是每次打包都要去手动修改各个地方，十分麻烦也很容易出错所以这次我们使用properties配置文件实现多环境配置">
 <meta name="keywords" content="study,code">
 <meta property="og:type" content="article">
-<meta property="og:title" content="基于机器学习的DeepVideoAnalytics开源视频检索工具的安装与简单使用">
-<meta property="og:url" content="http://blog.chenwe.top/2017/11/05/2017/2017-11-05 基于机器学习的DeepVideoAnalytics开源视频检索工具的安装与简单使用/index.html">
+<meta property="og:title" content="SpringBoot使用properties配置文件实现多环境配置">
+<meta property="og:url" content="http://blog.chenwe.top/2017/11/13/2017/2017-11-19 SpringBoot使用properties配置文件实现多环境配置/index.html">
 <meta property="og:site_name" content="Xiaoshidefeng的博客">
-<meta property="og:description" content="DeepVideoAnalytics是一款强大的开源视频检索工具这是它的项目地址今天来讲下他的安装与简单使用">
-<meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171105153108742.png">
-<meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171105153720957.png">
-<meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171105153744149.png">
-<meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171105153748958.png">
-<meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171105154448431.png">
-<meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171105160313502.png">
-<meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171105160621423.png">
-<meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171105161546842.png">
-<meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-2017110516552488.png">
-<meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171105165632274.png">
-<meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171105165915443.png">
-<meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171105170021305.png">
-<meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171105170141552.png">
-<meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171105170301688.png">
-<meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171105170340403.png">
-<meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171105170429151.png">
-<meta property="og:updated_time" content="2017-11-05T09:04:29.692Z">
+<meta property="og:description" content="我们在编写项目的时候总是会有线上环境与线下环境其中有些东西是不一样的，比如本地文件路径与线上文件路径之类的但是每次打包都要去手动修改各个地方，十分麻烦也很容易出错所以这次我们使用properties配置文件实现多环境配置">
+<meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171113133918221.png">
+<meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171119161004815.png">
+<meta property="og:updated_time" content="2017-11-19T08:10:17.126Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="基于机器学习的DeepVideoAnalytics开源视频检索工具的安装与简单使用">
-<meta name="twitter:description" content="DeepVideoAnalytics是一款强大的开源视频检索工具这是它的项目地址今天来讲下他的安装与简单使用">
-<meta name="twitter:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171105153108742.png">
+<meta name="twitter:title" content="SpringBoot使用properties配置文件实现多环境配置">
+<meta name="twitter:description" content="我们在编写项目的时候总是会有线上环境与线下环境其中有些东西是不一样的，比如本地文件路径与线上文件路径之类的但是每次打包都要去手动修改各个地方，十分麻烦也很容易出错所以这次我们使用properties配置文件实现多环境配置">
+<meta name="twitter:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171113133918221.png">
   
     <link rel="alternative" href="/atom.xml" title="Xiaoshidefeng的博客" type="application/atom+xml">
   
@@ -199,14 +185,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-2017/2017-11-05 基于机器学习的DeepVideoAnalytics开源视频检索工具的安装与简单使用" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-2017/2017-11-19 SpringBoot使用properties配置文件实现多环境配置" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      基于机器学习的DeepVideoAnalytics开源视频检索工具的安装与简单使用
+      SpringBoot使用properties配置文件实现多环境配置
     </h1>
     <span>&nbsp;&nbsp;&nbsp; | &nbsp;
     <span id="busuanzi_value_page_pv" ></span>次阅读
@@ -215,47 +201,22 @@
 
 
         
-        <a href="/2017/11/05/2017/2017-11-05 基于机器学习的DeepVideoAnalytics开源视频检索工具的安装与简单使用/" class="archive-article-date">
-  	<time datetime="2017-11-05T07:21:32.586Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-05</time>
+        <a href="/2017/11/13/2017/2017-11-19 SpringBoot使用properties配置文件实现多环境配置/" class="archive-article-date">
+  	<time datetime="2017-11-13T05:31:27.820Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-13</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>DeepVideoAnalytics是一款强大的开源视频检索工具<br>这是<a href="https://github.com/AKSHAYUBHAT/DeepVideoAnalytics" target="_blank" rel="external">它的项目地址</a><br>今天来讲下他的安装与简单使用<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171105153108742.png" alt=""><br><a id="more"></a></p>
-<h2 id="它的架构，数据和处理模型"><a href="#它的架构，数据和处理模型" class="headerlink" title="它的架构，数据和处理模型"></a>它的架构，数据和处理模型</h2><p><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171105153720957.png" alt=""><br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171105153744149.png" alt=""><br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171105153748958.png" alt=""></p>
-<h3 id="他用到的库"><a href="#他用到的库" class="headerlink" title="他用到的库"></a>他用到的库</h3><ul>
-<li>FFmpeg (not linked, called via a Subprocess)</li>
-<li>Tensorflow</li>
-<li>OpenCV</li>
-<li>Numpy</li>
-<li>Pytorch</li>
-<li>Nvidia-docker</li>
-<li>Docker-compose</li>
-<li>All packages in requirements.txt &amp; used in Dockerfiles.</li>
-</ul>
-<h1 id="安装与使用"><a href="#安装与使用" class="headerlink" title="安装与使用"></a>安装与使用</h1><h2 id="服务器的选择"><a href="#服务器的选择" class="headerlink" title="服务器的选择"></a>服务器的选择</h2><p>这里我们采用docker 安装部署<br>因为镜像有点大，所以我们选用外国的 vultr来做我们的服务器<br>用<a href="https://www.vultr.com/?ref=7150491" target="_blank" rel="external">这个地址</a>注册可以获得优惠，充多少送多少</p>
-<p>这里有一点要注意<br>因为这个东西有点庞大，所以对服务器的性能要求也是比较大的<br>这里推荐用 ubuntu 16.04 x64的系统<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171105154448431.png" alt="">配置的</p>
-<h2 id="服务器安装部署"><a href="#服务器安装部署" class="headerlink" title="服务器安装部署"></a>服务器安装部署</h2><p>启动完服务器后，我们通过ssh远程连接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">λ ssh root@45.77.182.142</div><div class="line">The authenticity of host &apos;45.77.182.142 (45.77.182.142)&apos; can&apos;t be established.</div><div class="line">ECDSA key fingerprint is SHA256:DoHFnM4S93wKowhvmLcMHbq8WNzbER+dfd3KuMRIq4k.</div><div class="line">Are you sure you want to continue connecting (yes/no)? yes</div><div class="line">Warning: Permanently added &apos;45.77.182.142&apos; (ECDSA) to the list of known hosts.</div><div class="line">root@45.77.182.142&apos;s password:</div><div class="line">Welcome to Ubuntu 16.04.2 LTS (GNU/Linux 4.4.0-87-generic x86_64)</div><div class="line"></div><div class="line"> * Documentation:  https://help.ubuntu.com</div><div class="line"> * Management:     https://landscape.canonical.com</div><div class="line"> * Support:        https://ubuntu.com/advantage</div><div class="line"></div><div class="line">94 packages can be updated.</div><div class="line">30 updates are security updates.</div><div class="line"></div><div class="line"></div><div class="line">root@vultr:~#</div></pre></td></tr></table></figure></p>
-<p>下面安装 wget工具<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install wget</div></pre></td></tr></table></figure></p>
-<p>安装完成后，我们获取最新版本的 Docker 安装包并安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget -qO- https://get.docker.com/ | sh</div></pre></td></tr></table></figure></p>
-<p>安装完成后输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">root@vultr:~# docker version</div><div class="line">Client:</div><div class="line"> Version:      17.10.0-ce</div><div class="line"> API version:  1.33</div><div class="line"> Go version:   go1.8.3</div><div class="line"> Git commit:   f4ffd25</div><div class="line"> Built:        Tue Oct 17 19:04:16 2017</div><div class="line"> OS/Arch:      linux/amd64</div><div class="line"></div><div class="line">Server:</div><div class="line"> Version:      17.10.0-ce</div><div class="line"> API version:  1.33 (minimum version 1.12)</div><div class="line"> Go version:   go1.8.3</div><div class="line"> Git commit:   f4ffd25</div><div class="line"> Built:        Tue Oct 17 19:02:56 2017</div><div class="line"> OS/Arch:      linux/amd64</div><div class="line"> Experimental: false</div></pre></td></tr></table></figure></p>
-<p>可以查看版本</p>
-<p>下面安装 python的 pip工具<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apt install python-pip</div></pre></td></tr></table></figure></p>
-<p>安装完成后再安装 <code>setuptools</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install -U pip setuptools</div></pre></td></tr></table></figure></p>
-<p>下面再安装<code>compose</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- curl -sSL https://s3.amazonaws.com/circle-downloads/install-circleci-docker.sh | bash -s -- 1.10.0</div><div class="line">- pip install --upgrade pip</div><div class="line">- pip install docker-compose</div></pre></td></tr></table></figure></p>
-<p>安装完成后，我们要从github上clone项目了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/AKSHAYUBHAT/DeepVideoAnalytics</div></pre></td></tr></table></figure></p>
-<p>然后进入目录并用<code>docker-compose</code>运行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd DeepVideoAnalytics/deploy/demo &amp;&amp; docker-compose up</div></pre></td></tr></table></figure></p>
-<p>然后等待下载<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171105160313502.png" alt=""><br>等待服务启动<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171105160621423.png" alt=""><br>访问8000端口<br>看到这样的界面就代表成功部署了<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171105161546842.png" alt=""></p>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-2017110516552488.png" alt=""><br>点击上传视频<br>将我们想要检索的目标视频上传到服务器<br>服务器在接收到视频后，会在后台对其进行分类处理并标记特征</p>
-<p>分析完成后 点击添加图片，上传想要检索的图片到后台，<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171105165632274.png" alt=""></p>
-<p>上传完成后，调整图片大小到合适位置<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171105165915443.png" alt=""></p>
-<p>因为上传的是面部图片，所以用索引器里选择 facenet<br>点击精确检索<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171105170021305.png" alt=""></p>
-<p>这样我们就获得了视频中该面部的所有目标图像了<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171105170141552.png" alt=""><br>我们可以看即使是侧脸，也能够正确的被识别，说明这个识别率还是可以的。</p>
-<p>点击其中一个图片，还能看到他在视频中的完整原图<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171105170301688.png" alt=""></p>
-<p>也能分辨面部和人体<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171105170340403.png" alt=""></p>
-<p>不得不说 Deep Video Analytics 是一个强大的开源视频检索工具<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171105170429151.png" alt=""></p>
+        <p>我们在编写项目的时候<br>总是会有线上环境与线下环境<br>其中有些东西是不一样的，比如本地文件路径与线上文件路径之类的<br>但是每次打包都要去手动修改各个地方，十分麻烦也很容易出错<br>所以这次我们使用properties配置文件实现多环境配置<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171113133918221.png" alt=""><br><a id="more"></a></p>
+<h2 id="多环境配置"><a href="#多环境配置" class="headerlink" title="多环境配置"></a>多环境配置</h2><p>在application.properties 的同级目录下创建三个配置文件<br>分别为：<br>application-dev.properties  线下环境<br>application-pro.properties  线上环境<br>application-test.properties  测试环境</p>
+<p>假如我们需要根据不同的环境，来配置不同的默认文件夹<br>我们可以这样写</p>
+<p>application.properties<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">spring.profiles.active=pro</div><div class="line"></div><div class="line">spring.mvc.static-path-pattern=/**</div><div class="line">spring.resources.static-locations=classpath:/META-INF/resources/,classpath:/resources/,\</div><div class="line">  classpath:/static/,classpath:/public/,file:$&#123;config.me.fileroot&#125;</div></pre></td></tr></table></figure></p>
+<p>application-dev.properties<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#线下环境</div><div class="line">config.me.fileroot=h:/</div><div class="line">config.me.host=localhost</div></pre></td></tr></table></figure></p>
+<p>application-pro.properties<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#线上环境</div><div class="line">config.me.fileroot=/home/cw/cloud/cloudspace/</div><div class="line">config.me.host=10.30.90.16</div></pre></td></tr></table></figure></p>
+<p>根据 application.properties 里的 <code>spring.profiles.active=</code>的不同<br>来使用不同的配置文件<br>这里我们是 pro 也就是线上环境，所以他会加载<code>application-pro.properties</code> 里的内容<br>当然，application.properties里的内容它也会加载<br>如果两个配置文件里有内容有冲突的话，以指定的配置文件优先</p>
+<p>这样在每次发布项目的时候，就不用去改那么多东西了。<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171119161004815.png" alt=""></p>
 
       
 
@@ -311,7 +272,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/机器学习/" class="article-tag-list-link color5">机器学习</a>
+        			<a href="/categories/SpringBoot/" class="article-tag-list-link color1">SpringBoot</a>
         		</li>
       		
 		</ul>
@@ -366,7 +327,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://blog.chenwe.top/2017/11/05/2017/2017-11-05 基于机器学习的DeepVideoAnalytics开源视频检索工具的安装与简单使用/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://blog.chenwe.top/2017/11/13/2017/2017-11-19 SpringBoot使用properties配置文件实现多环境配置/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -380,18 +341,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/11/13/2017/2017-11-19 SpringBoot使用properties配置文件实现多环境配置/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          SpringBoot使用properties配置文件实现多环境配置
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/10/29/2017/2017-10-29 Oracle与jdbc实现增删改查/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Oracle与jdbc实现增删改查</div>
+    <a href="/2017/11/05/2017/2017-11-05 基于机器学习的DeepVideoAnalytics开源视频检索工具的安装与简单使用/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">基于机器学习的DeepVideoAnalytics开源视频检索工具的安装与简单使用</div>
       <i class="icon-circle-right"></i>
     </a>
   
