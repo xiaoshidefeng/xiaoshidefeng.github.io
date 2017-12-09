@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.chenwe.top/"/>
-  <updated>2017-11-19T08:10:17.126Z</updated>
+  <updated>2017-12-09T09:23:29.017Z</updated>
   <id>http://blog.chenwe.top/</id>
   
   <author>
@@ -14,6 +14,43 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>OKhttp的使用</title>
+    <link href="http://blog.chenwe.top/2017/12/03/2017/2017-12-03%20OKhttp%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <id>http://blog.chenwe.top/2017/12/03/2017/2017-12-03 OKhttp的使用/</id>
+    <published>2017-12-03T14:24:58.545Z</published>
+    <updated>2017-12-09T09:23:29.017Z</updated>
+    
+    <content type="html"><![CDATA[<p>以前在写Android项目的时候<br>遇到网络访问方面的内容<br>总是用原生的方法去访问网络<br>十分麻烦而且代码冗杂</p>
+<p>但是用框架就方便许多了<br>这里简单介绍下OKhttp的使用<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171203222856395.png" alt=""><br><a id="more"></a><br>这次对plus Android端进行了重构<br>首先就从网络访问这块改起</p>
+<h2 id="Gradle-依赖"><a href="#Gradle-依赖" class="headerlink" title="Gradle 依赖"></a>Gradle 依赖</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">    testCompile &apos;com.squareup.okhttp3:mockwebserver:3.9.1&apos;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>添加完依赖就可以开始搞事了</p>
+<h2 id="访问网络"><a href="#访问网络" class="headerlink" title="访问网络"></a>访问网络</h2><p>Get方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> OkHttpClient client = <span class="keyword">new</span> OkHttpClient();</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">getComments</span><span class="params">()</span> </span>&#123;</div><div class="line">    Request request = <span class="keyword">new</span> Request.Builder().url(<span class="string">"你的url"</span>).build();</div><div class="line">    client.newCall(request).enqueue(<span class="keyword">new</span> Callback() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onFailure</span><span class="params">(Call call, IOException e)</span> </span>&#123;</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResponse</span><span class="params">(Call call, Response response)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">            Message msg = <span class="keyword">new</span> Message();</div><div class="line">            msg.what = <span class="number">1</span>;</div><div class="line">            msg.obj = response.body().string();</div><div class="line">            myHandler.sendMessage(msg);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Post方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> OkHttpClient client = <span class="keyword">new</span> OkHttpClient();</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">sendComment</span><span class="params">()</span> </span>&#123;</div><div class="line">    RequestBody body = <span class="keyword">new</span> FormBody.Builder()</div><div class="line">            .add(<span class="string">"body"</span>, content)<span class="comment">//添加键值对</span></div><div class="line">            .add(<span class="string">"discussion_id"</span>, Id + <span class="string">""</span>)</div><div class="line">            .build();</div><div class="line">    Request request = <span class="keyword">new</span> Request.Builder()</div><div class="line">            .url(<span class="string">"你的url"</span>)</div><div class="line">            .post(body)</div><div class="line">            .build();</div><div class="line">    client.newCall(request).enqueue(<span class="keyword">new</span> Callback() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onFailure</span><span class="params">(Call call, IOException e)</span> </span>&#123;</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResponse</span><span class="params">(Call call, Response response)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">            Message msg = <span class="keyword">new</span> Message();</div><div class="line">            msg.what = <span class="number">2</span>;</div><div class="line">            msg.obj = response.body().string();</div><div class="line">            myHandler.sendMessage(msg);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们这里成功访问网络后，通过 <code>onResponse</code> 来执行<br>如果失败，则执行 <code>onFailure</code></p>
+<h2 id="更新UI"><a href="#更新UI" class="headerlink" title="更新UI"></a>更新UI</h2><p>这里讲下用Handler的方法<br>为了防止内存泄漏，所以我们要使用内部静态Handler类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> Handler myHandler;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">    myHandler = <span class="keyword">new</span> MyHandler(<span class="keyword">this</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 内部静态Handler 类 防止内存泄漏</div><div class="line"> */</div><div class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MyHandler</span> <span class="keyword">extends</span> <span class="title">Handler</span> </span>&#123;</div><div class="line">    WeakReference&lt;YourActivity&gt; mActivityReference;</div><div class="line"></div><div class="line">    MyHandler(YourActivity activity) &#123;</div><div class="line">        mActivityReference = <span class="keyword">new</span> WeakReference&lt;YourActivity&gt;(activity);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span> </span>&#123;</div><div class="line">        YourActivity activity = mActivityReference.get();</div><div class="line">          <span class="keyword">if</span> (msg.what == <span class="number">1</span>) &#123;</div><div class="line">            <span class="comment">//TODO 修改UI</span></div><div class="line">          &#125; <span class="keyword">else</span> <span class="keyword">if</span> (msg.what == <span class="number">2</span>) &#123;</div><div class="line">            <span class="comment">//TODO 修改UI</span></div><div class="line">          &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在onCreat方法里new一个myHandler后<br>就可以使用了</p>
+<p>这样就不会造成内存泄漏了，而且也能够修改UI</p>
+<p>以上就是OKhttp的简单使用了<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171209172147497.png" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;以前在写Android项目的时候&lt;br&gt;遇到网络访问方面的内容&lt;br&gt;总是用原生的方法去访问网络&lt;br&gt;十分麻烦而且代码冗杂&lt;/p&gt;
+&lt;p&gt;但是用框架就方便许多了&lt;br&gt;这里简单介绍下OKhttp的使用&lt;br&gt;&lt;img src=&quot;http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171203222856395.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://blog.chenwe.top/categories/Android/"/>
+    
+    
+      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
+    
+      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
+    
+  </entry>
   
   <entry>
     <title>SpringBoot使用properties配置文件实现多环境配置</title>
@@ -838,43 +875,6 @@
     </summary>
     
       <category term="Vue" scheme="http://blog.chenwe.top/categories/Vue/"/>
-    
-    
-      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
-    
-      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>手机连接本地服务器调试</title>
-    <link href="http://blog.chenwe.top/2017/08/27/2017/%E6%89%8B%E6%9C%BA%E8%BF%9E%E6%8E%A5%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B0%83%E8%AF%95/"/>
-    <id>http://blog.chenwe.top/2017/08/27/2017/手机连接本地服务器调试/</id>
-    <published>2017-08-27T08:49:21.822Z</published>
-    <updated>2017-08-27T08:58:59.219Z</updated>
-    
-    <content type="html"><![CDATA[<p>有时候我们要做一个面向手机端的项目<br>比如一个面向手机端的网页<br>我们在预览的时候，虽然可以用chrome浏览器的手机模式来预览<br>但是因为像素的关系<br>所以和实际手机端的表现还是有些差异的<br>最好的办法就是在手机端直接预览</p>
-<p>那么该怎么办呢</p>
-<p><img src="http://otj6w86xd.bkt.clouddn.com/lianhong.jpg" alt=""></p>
-<a id="more"></a>
-<h2 id="找到本机的ip地址"><a href="#找到本机的ip地址" class="headerlink" title="找到本机的ip地址"></a>找到本机的ip地址</h2><p>打开cmd(或者cmder)<br>输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ipconfig</div></pre></td></tr></table></figure></p>
-<p>然后就会获取到本机的ip信息<br>我们要的是这里<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">无线局域网适配器 WLAN:</div><div class="line"></div><div class="line">   连接特定的 DNS 后缀 . . . . . . . :</div><div class="line">   本地链接 IPv6 地址. . . . . . . . : fe80::30cd:b5f:ec67:3054%16</div><div class="line">   IPv4 地址 . . . . . . . . . . . . : 192.168.1.105</div><div class="line">   子网掩码  . . . . . . . . . . . . : 255.255.255.0</div><div class="line">   默认网关. . . . . . . . . . . . . : 192.168.1.1</div></pre></td></tr></table></figure></p>
-<p>里面的 IPv4 地址<br>也就是<code>192.168.1.105</code></p>
-<p>如果我们要访问本机的<br><a href="http://localhost:8080/goods" target="_blank" rel="external">http://localhost:8080/goods</a><br>地址<br>我们在手机上打开是没用的，因为localhost 只是本机的地址</p>
-<p>所以我们要把localhost 替换为 刚刚得到的ip地址<br>最终网址成了 <a href="http://192.168.1.105:8080/goods" target="_blank" rel="external">http://192.168.1.105:8080/goods</a></p>
-<p>为了方便使用<br>我们可以去 <a href="https://cli.im" target="_blank" rel="external">草料</a>把我们的连接生成一个二维码<br>然后用手机来扫一扫就可以访问了（要确保手机和电脑处在同一局域网中）</p>
-<p><img src="http://otj6w86xd.bkt.clouddn.com/lianhong.jpg" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;有时候我们要做一个面向手机端的项目&lt;br&gt;比如一个面向手机端的网页&lt;br&gt;我们在预览的时候，虽然可以用chrome浏览器的手机模式来预览&lt;br&gt;但是因为像素的关系&lt;br&gt;所以和实际手机端的表现还是有些差异的&lt;br&gt;最好的办法就是在手机端直接预览&lt;/p&gt;
-&lt;p&gt;那么该怎么办呢&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://otj6w86xd.bkt.clouddn.com/lianhong.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="测试" scheme="http://blog.chenwe.top/categories/%E6%B5%8B%E8%AF%95/"/>
     
     
       <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
