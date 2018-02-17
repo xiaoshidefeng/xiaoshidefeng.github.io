@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.chenwe.top/"/>
-  <updated>2017-12-09T09:23:29.017Z</updated>
+  <updated>2018-02-17T06:34:21.903Z</updated>
   <id>http://blog.chenwe.top/</id>
   
   <author>
@@ -14,6 +14,46 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>层次分析法</title>
+    <link href="http://blog.chenwe.top/2018/02/17/2018/2018-02-17%20%E5%B1%82%E6%AC%A1%E5%88%86%E6%9E%90%E6%B3%95/"/>
+    <id>http://blog.chenwe.top/2018/02/17/2018/2018-02-17 层次分析法/</id>
+    <published>2018-02-17T05:28:13.489Z</published>
+    <updated>2018-02-17T06:34:21.903Z</updated>
+    
+    <content type="html"><![CDATA[<p>前几天参加了数学建模美赛<br>里面用到了层次分析法，这里来简单讲解下<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20180217132951752.png" alt=""></p>
+<a id="more"></a>
+<blockquote>
+<p>层次分析法（Analytic Hierarchy Process，简称 AHP）是对一些较为复杂、较为模 糊的问题作出决策的简易方法，它特别适用于那些难于完全定量分析的问题。它是美 国运筹学家 T. L. Saaty 教授于上世纪 70 年代初期提出的一种简便、灵活而又实用的 多准则决策方法。</p>
+</blockquote>
+<h2 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h2><h3 id="建立递阶层次结构模型"><a href="#建立递阶层次结构模型" class="headerlink" title="建立递阶层次结构模型"></a>建立递阶层次结构模型</h3><p>挑选合适的工作。经双方恳谈，已有三个单位表示愿意录用某毕业生。该 生根据已有信息建立了一个层次结构模型<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20180217141624943.png" alt=""><br>在层次分析法中，我们一般会根据问题来建立三个层次。<br>最顶层是目标层，是我们的分析目标，一般只有一个。<br>第二层是用来判断的准则层，里面是那些影响你选择与决策的因素，例如这里是 研究课题、发展前途、待遇等。<br>最底层是方案层，一般放你想要决策的目标选项，这里是工作选项 工作1、工作2、工作3。</p>
+<h3 id="构造判断矩阵"><a href="#构造判断矩阵" class="headerlink" title="构造判断矩阵"></a>构造判断矩阵</h3><p>层次结构反映了因素之间的关系，但准则层中的各准则在目标衡量中所占的比重 并不一定相同，在决策者的心目中，它们各占有一定的比例。<br>比如可能有的人在这几个判断准则中更看重景色，有的人更看重费用。<br>在确定影响某因素的诸因子在该因素中所占的比重时，遇到的主要困难是这些比 重常常不易定量化。此外，当影响某因素的因子较多时，直接考虑各因子对该因素有 多大程度的影响时，常常会因考虑不周全、顾此失彼而使决策者提出与他实际认为的 重要性程度不相一致的数据，甚至有可能提出一组隐含矛盾的数据。<br>所以可以采取对因子进行两两比较建立成对比较矩阵的 办法。即每次取两个因子 Xi 和 Xj，以 Aij 表示 Xi 和 Xj 对Z 的影响大小之比，全部比较 结果用矩阵 A=(Aij)n*n 表示，称 A为 Z-X 之间的成对比较判断矩阵（简称判断矩 阵）。容易看出，若 Xi 与 Xj 对Z 的影响之比为 Aij ，则 Xj 与 Xi 对Z 的影响之比应为 Aji.</p>
+<p>建议引用数字 1~9 及其倒数作为标度。表 1 列出 了 1~9 标度的含义：<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-2018021714133988.png" alt=""></p>
+<p>我们可以构建出准则层的矩阵：<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20180217141813845.png" alt=""></p>
+<p>方案层的矩阵：<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20180217141833991.png" alt=""></p>
+<h3 id="matlab计算"><a href="#matlab计算" class="headerlink" title="matlab计算"></a>matlab计算</h3><p>计算就交给matlab 代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">clc,clear</div><div class="line">fid=fopen(&apos;data.txt&apos;,&apos;r&apos;);  </div><div class="line">n1=6;n2=3;</div><div class="line">a=[];</div><div class="line">if fid == -1</div><div class="line">    disp(&apos;读取文件出错&apos;)</div><div class="line">end</div><div class="line">for i=1:n1    </div><div class="line">    tmp=str2num(fgetl(fid));      </div><div class="line">    a=[a;tmp];</div><div class="line">    %读准则层判断矩阵</div><div class="line">end</div><div class="line">for i=1:n1     </div><div class="line">    str1=char([&apos;b&apos;,int2str(i),&apos;=[];&apos;]);   </div><div class="line">    str2=char([&apos;b&apos;,int2str(i),&apos;=[b&apos;,int2str(i),&apos;;tmp];&apos;]);    </div><div class="line">    eval(str1);     </div><div class="line">    for j=1:n2         </div><div class="line">        tmp=str2num(fgetl(fid));         </div><div class="line">        eval(str2); %读方案层的判断矩阵    </div><div class="line">    end</div><div class="line">end</div><div class="line">ri=[0,0,0.58,0.90,1.12,1.24,1.32,1.41,1.45];</div><div class="line">%一致性指标</div><div class="line">[x,y]=eig(a);</div><div class="line">lamda=max(diag(y));</div><div class="line">num=find(diag(y)==lamda);</div><div class="line">w0=x(:,num)/sum(x(:,num));</div><div class="line">cr0=(lamda-n1)/(n1-1)/ri(n1)</div><div class="line">for i=1:n1     </div><div class="line">    [x,y]=eig(eval(char([&apos;b&apos;,int2str(i)])));     </div><div class="line">    lamda=max(diag(y));     </div><div class="line">    num=find(diag(y)==lamda);     </div><div class="line">    w1(:,i)=x(:,num)/sum(x(:,num));     </div><div class="line">    cr1(i)=(lamda-n2)/(n2-1)/ri(n2);</div><div class="line">end</div><div class="line">cr1, ts=w1*w0, w0, w1, cr=cr1*w0</div></pre></td></tr></table></figure></p>
+<p>data.txt的数据如下：<br>1   1      1     4   1      1/2<br>1   1      2     4   1   1/2<br>1   1/2  1     5   3      1/2<br>1/4   1/4  1/5   1   1/3   1/3<br>1   1      1/3   3   1      1<br>2   2      2     3   3      1<br>1   1/4  1/2<br>4   1      3<br>2   1/3  1<br>1   1/4  1/5<br>4   1      1/2<br>5   2      1<br>1   3      1/3 1/3  1<br>1/7 3   7<br>1 1   1/3<br>5 3   1      7<br>1/5   1/7  1<br>1   1      7<br>1   1      7<br>1/7  1/7  1<br>1   7      9<br>1/7  1      1<br>1/9   1      1</p>
+<p>最后我们可以得到这样一个表格：<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20180217142949780.png" alt=""></p>
+<p>根据总权值排序，我们可以看出工作1是最满意的工作。</p>
+<p>这个就是层次分析法的简单介绍了，这次的比赛中也用到了<img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-2018021714310881.png" alt=""></p>
+<p>这篇博客参考了 《MATLAB数学建模算法及实例分析》一书</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;前几天参加了数学建模美赛&lt;br&gt;里面用到了层次分析法，这里来简单讲解下&lt;br&gt;&lt;img src=&quot;http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20180217132951752.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="数学建模" scheme="http://blog.chenwe.top/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/"/>
+    
+    
+      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
+    
+      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
+    
+  </entry>
   
   <entry>
     <title>OKhttp的使用</title>
@@ -830,47 +870,6 @@
       &lt;p&gt;在用vue.js 的时候&lt;br&gt;有个地方用到了router-link&lt;br&gt;并且要修改router-link的样式&lt;/p&gt;
 &lt;p&gt;但是我发现直接修改router-link是不行的&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;http://otj6w86xd.bkt.clouddn.com/wulian.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Vue" scheme="http://blog.chenwe.top/categories/Vue/"/>
-    
-    
-      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
-    
-      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Vue.js中使用axios数据赋值报错</title>
-    <link href="http://blog.chenwe.top/2017/08/28/2017/Vue.js%E4%B8%AD%E4%BD%BF%E7%94%A8axios%E6%95%B0%E6%8D%AE%E8%B5%8B%E5%80%BC%E6%8A%A5%E9%94%99/"/>
-    <id>http://blog.chenwe.top/2017/08/28/2017/Vue.js中使用axios数据赋值报错/</id>
-    <published>2017-08-28T09:04:57.623Z</published>
-    <updated>2017-09-11T14:10:59.690Z</updated>
-    
-    <content type="html"><![CDATA[<p>在用vue.js的axios插件来获取数据的时候<br>踩了一个坑</p>
-<p>获取到的数据对象不能赋值给变量</p>
-<p><img src="http://otj6w86xd.bkt.clouddn.com/bqb-cm.jpg" alt=""></p>
-<a id="more"></a>
-<h2 id="问题的代码"><a href="#问题的代码" class="headerlink" title="问题的代码"></a>问题的代码</h2><p>问题代码<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">data() &#123;</div><div class="line">  <span class="keyword">return</span> &#123;</div><div class="line">    <span class="attr">seller</span>: &#123;&#125;,</div><div class="line">  &#125;</div><div class="line">&#125;,</div><div class="line"><span class="attr">methods</span>: &#123;</div><div class="line">  getData() &#123;</div><div class="line">    axios.get(<span class="string">'./static/data.json'</span>)</div><div class="line">    .then(<span class="function"><span class="keyword">function</span> (<span class="params">response</span>) </span>&#123;</div><div class="line">      <span class="keyword">this</span>.seller = response.data.seller;</div><div class="line">    &#125;)</div><div class="line">    .catch(<span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(error);</div><div class="line">    &#125;);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>我想通过axios来获取data.json里面的seller对象<br>然后赋值给我们的seller<br>但是会报错<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">TypeError: Cannot set property &apos;seller&apos; of undefined</div><div class="line">    at eval (App.vue?87b3:54)</div><div class="line">    at &lt;anonymous&gt;</div></pre></td></tr></table></figure></p>
-<p>它说我们不能赋值给seller</p>
-<p>一开始我怀疑是不是数据没拿到<br>于是打印数据<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(response.data.seller);</div></pre></td></tr></table></figure></p>
-<p>发现是可以的<br>也就是说是赋值的时候出现了问题</p>
-<h2 id="问题的原因"><a href="#问题的原因" class="headerlink" title="问题的原因"></a>问题的原因</h2><p>经过自己的网上资料查找<br>找到了问题的原因</p>
-<p>因为 this 指向更改了<br>所以 this.seller 是拿不到对象的<br>（上面的代码可是官方推荐的代码。。居然容易踩坑）</p>
-<h2 id="问题的解决"><a href="#问题的解决" class="headerlink" title="问题的解决"></a>问题的解决</h2><p>使用箭头函数来获取数据</p>
-<p>示例代码:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">axios.get(<span class="string">'./static/data.json'</span>).then(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</div><div class="line">  <span class="keyword">this</span>.seller = response.data.seller;</div><div class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.seller);</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
-<p>用箭头函数来实现后<br>就不会报错了<br>问题也解决了</p>
-<p><img src="http://otj6w86xd.bkt.clouddn.com/bqb-bcm.jpg" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在用vue.js的axios插件来获取数据的时候&lt;br&gt;踩了一个坑&lt;/p&gt;
-&lt;p&gt;获取到的数据对象不能赋值给变量&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://otj6w86xd.bkt.clouddn.com/bqb-cm.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
     
     </summary>
     
