@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.chenwe.top/"/>
-  <updated>2018-02-19T05:41:24.226Z</updated>
+  <updated>2018-03-07T14:39:19.418Z</updated>
   <id>http://blog.chenwe.top/</id>
   
   <author>
@@ -14,6 +14,38 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>React Native开发中的一些坑（一）</title>
+    <link href="http://blog.chenwe.top/2018/03/07/2018/2018-03-07%20React%20Native%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91/"/>
+    <id>http://blog.chenwe.top/2018/03/07/2018/2018-03-07 React Native开发中的一些坑/</id>
+    <published>2018-03-07T14:19:02.213Z</published>
+    <updated>2018-03-07T14:39:19.418Z</updated>
+    
+    <content type="html"><![CDATA[<p>这几天在弄React Native<br>中间难免踩坑<br>这里记录下</p>
+<a id="more"></a>
+<h2 id="Configuration-with-name-‘default’-not-found-react-native"><a href="#Configuration-with-name-‘default’-not-found-react-native" class="headerlink" title="Configuration with name ‘default’ not found react-native"></a>Configuration with name ‘default’ not found react-native</h2><p>引入一些库再去运行，可能会报的错<br>原因：因为 android目录下的settings.gradle文件里有些东西的引用和node_modules里不同<br>解决方法： 删掉其中缺失的部分，重新安装。</p>
+<h2 id="react-native-camera-相关的错误"><a href="#react-native-camera-相关的错误" class="headerlink" title="react-native-camera 相关的错误"></a>react-native-camera 相关的错误</h2><h3 id="react-native-camera-unspecified"><a href="#react-native-camera-unspecified" class="headerlink" title="react-native-camera:unspecified"></a>react-native-camera:unspecified</h3><p>在 <code>react-native link react-native-camera</code> 之后容易报的错<br>原因：因为没有在 android/build.gradle 文件里添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">maven &#123; url &apos;https://jitpack.io&apos; &#125;</div></pre></td></tr></table></figure></p>
+<p>注意：添加到上一个maven的下面就行，中间不用加 ,<br>例如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">maven &#123; url &apos;https://jitpack.io&apos; &#125;</div><div class="line">maven &#123;</div><div class="line">    url &quot;https://maven.google.com&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>即可</p>
+<h3 id="Could-not-find-com-android-support-support-v4-26-0-1"><a href="#Could-not-find-com-android-support-support-v4-26-0-1" class="headerlink" title="Could not find com.android.support:support-v4:26.0.1."></a>Could not find com.android.support:support-v4:26.0.1.</h3><p>在 <code>react-native link react-native-camera</code> 之后容易报的错<br>原因：因为build tool 版本太低吗，要求26<br>解决方法：升级。<br>在android/app目录里，修改 build.gradle 里的版本信息为26<br>例如修改为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">compileSdkVersion 26</div><div class="line">buildToolsVersion &quot;26.0.1&quot;</div><div class="line"></div><div class="line">defaultConfig &#123;</div><div class="line">    applicationId &quot;com.came&quot;</div><div class="line">    minSdkVersion 16</div><div class="line">    targetSdkVersion 26</div><div class="line">    versionCode 1</div><div class="line">    versionName &quot;1.0&quot;</div><div class="line">    ndk &#123;</div><div class="line">        abiFilters &quot;armeabi-v7a&quot;, &quot;x86&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>修改之后也还是不行，要在android/build.gradle 文件里添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">maven &#123;</div><div class="line">    url &quot;https://maven.google.com&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这几天在弄React Native&lt;br&gt;中间难免踩坑&lt;br&gt;这里记录下&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="React Native" scheme="http://blog.chenwe.top/categories/React-Native/"/>
+    
+    
+      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
+    
+      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
+    
+  </entry>
   
   <entry>
     <title>LaTeX的入门</title>
@@ -831,51 +863,6 @@
     </summary>
     
       <category term="Vue" scheme="http://blog.chenwe.top/categories/Vue/"/>
-    
-    
-      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
-    
-      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用Xpath来制作python3爬虫</title>
-    <link href="http://blog.chenwe.top/2017/09/08/2017/%E4%BD%BF%E7%94%A8Xpath%E6%9D%A5%E5%88%B6%E4%BD%9Cpython3%E7%88%AC%E8%99%AB/"/>
-    <id>http://blog.chenwe.top/2017/09/08/2017/使用Xpath来制作python3爬虫/</id>
-    <published>2017-09-08T06:52:51.867Z</published>
-    <updated>2017-09-08T10:59:59.223Z</updated>
-    
-    <content type="html"><![CDATA[<p>之前用Python3制作了一个爬虫<br>但是在服务器运行后<br>发现每隔一段时间<br>爬虫就会崩溃</p>
-<p><img src="http://otj6w86xd.bkt.clouddn.com/wulian.jpg" alt=""></p>
-<a id="more"></a>
-<h2 id="问题的产生"><a href="#问题的产生" class="headerlink" title="问题的产生"></a>问题的产生</h2><p>发现每隔一段时间<br>爬虫就会崩溃<br>调查日志后发现是爬取的网页的一些样式变了<br>因为我用的是正则表达式来获取数据<br>所以一些样式变了会导致无法正常的获取数据</p>
-<p>在知道问题后，我觉定用 Xpath来优化爬虫</p>
-<h2 id="什么是Xpath"><a href="#什么是Xpath" class="headerlink" title="什么是Xpath"></a>什么是Xpath</h2><p>以下是Wiki的解释：</p>
-<blockquote>
-<p>XPath即为XML路径语言（XML Path Language），它是一种用来确定XML文档中某部分位置的语言。 XPath基于XML的树状结构，提供在数据结构树中找寻节点的能力。 起初XPath的提出的初衷是将其作为一个通用的、介于XPointer与XSL间的语法模型。</p>
-</blockquote>
-<p>如果用Xpath的话<br>就不会出现部分样式更改，而导致爬虫无法正常工作的情况出现了</p>
-<h2 id="Xpath库的安装"><a href="#Xpath库的安装" class="headerlink" title="Xpath库的安装"></a>Xpath库的安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install lxml</div></pre></td></tr></table></figure>
-<p> 如果是Python3<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install python3-lxml</div></pre></td></tr></table></figure></p>
-<h2 id="Xpath的引用"><a href="#Xpath的引用" class="headerlink" title="Xpath的引用"></a>Xpath的引用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">from lxml import etree</div></pre></td></tr></table></figure>
-<h2 id="Xpath入门"><a href="#Xpath入门" class="headerlink" title="Xpath入门"></a>Xpath入门</h2><p>可以看下w3school里关于<a href="http://www.w3school.com.cn/xpath/index.asp" target="_blank" rel="external">Xpath的教程</a></p>
-<h2 id="Xpath获取的小技巧"><a href="#Xpath获取的小技巧" class="headerlink" title="Xpath获取的小技巧"></a>Xpath获取的小技巧</h2><p>用chrome浏览器<br>按f12选中我们要的元素后<br>在HTML中 右键 -&gt; Copy -&gt; Copy Xpath<br>这样我们就复制了一段Xpath</p>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>我们在获取完HTML后<br>我们可以定义一个函数来格式化数据,返回xml结构<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">def getxpath(html):</div><div class="line">    return etree.HTML(html)</div></pre></td></tr></table></figure></p>
-<p>然后我们调用这个方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">contentTree = getxpath(contentBytes)</div><div class="line">content = contentTree.xpath(&apos;//*[@id=&quot;weisite&quot;]/div[1]/div/section/table/tbody/tr/td/text()&apos;)</div></pre></td></tr></table></figure></p>
-<p>这里的content是一个数组<br>表<code>tr</code>下的所有td元素里的text值</p>
-<p>这样我们就用Xpath完成了一个简单的爬虫</p>
-<p><img src="http://otj6w86xd.bkt.clouddn.com/lianhong.jpg" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;之前用Python3制作了一个爬虫&lt;br&gt;但是在服务器运行后&lt;br&gt;发现每隔一段时间&lt;br&gt;爬虫就会崩溃&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://otj6w86xd.bkt.clouddn.com/wulian.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="SpringMVC" scheme="http://blog.chenwe.top/categories/SpringMVC/"/>
     
     
       <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>

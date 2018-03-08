@@ -6,17 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.chenwe.top">
-  <title>Xiaoshidefeng的博客</title>
+  <title>React Native开发中的一些坑（一） | Xiaoshidefeng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="CW的个人Blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Xiaoshidefeng的博客">
-<meta property="og:url" content="http://blog.chenwe.top/page/3/index.html">
+  <meta name="description" content="这几天在弄React Native中间难免踩坑这里记录下">
+<meta name="keywords" content="study,code">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React Native开发中的一些坑（一）">
+<meta property="og:url" content="http://blog.chenwe.top/2018/03/07/2018/2018-03-07 React Native开发中的一些坑/index.html">
 <meta property="og:site_name" content="Xiaoshidefeng的博客">
-<meta property="og:description" content="CW的个人Blog">
+<meta property="og:description" content="这几天在弄React Native中间难免踩坑这里记录下">
+<meta property="og:updated_time" content="2018-03-07T14:39:19.418Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Xiaoshidefeng的博客">
-<meta name="twitter:description" content="CW的个人Blog">
+<meta name="twitter:title" content="React Native开发中的一些坑（一）">
+<meta name="twitter:description" content="这几天在弄React Native中间难免踩坑这里记录下">
   
     <link rel="alternative" href="/atom.xml" title="Xiaoshidefeng的博客" type="application/atom+xml">
   
@@ -180,36 +182,67 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-2017/使用Xpath来制作python3爬虫" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-2018/2018-03-07 React Native开发中的一些坑" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/08/2017/使用Xpath来制作python3爬虫/">使用Xpath来制作python3爬虫</a>
+    <h1 class="article-title" itemprop="name">
+      React Native开发中的一些坑（一）
     </h1>
+    <span>&nbsp;&nbsp;&nbsp; | &nbsp;
+    <span id="busuanzi_value_page_pv" ></span>次阅读
+    </span>
   
 
 
         
-        <a href="/2017/09/08/2017/使用Xpath来制作python3爬虫/" class="archive-article-date">
-  	<time datetime="2017-09-08T06:52:51.867Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-08</time>
+        <a href="/2018/03/07/2018/2018-03-07 React Native开发中的一些坑/" class="archive-article-date">
+  	<time datetime="2018-03-07T14:19:02.213Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-07</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>之前用Python3制作了一个爬虫<br>但是在服务器运行后<br>发现每隔一段时间<br>爬虫就会崩溃</p>
-<p><img src="http://otj6w86xd.bkt.clouddn.com/wulian.jpg" alt=""></p>
-        
-          <a class="article-more-a" href="/2017/09/08/2017/使用Xpath来制作python3爬虫/#more">more >></a>
-        
+        <p>这几天在弄React Native<br>中间难免踩坑<br>这里记录下</p>
+<a id="more"></a>
+<h2 id="Configuration-with-name-‘default’-not-found-react-native"><a href="#Configuration-with-name-‘default’-not-found-react-native" class="headerlink" title="Configuration with name ‘default’ not found react-native"></a>Configuration with name ‘default’ not found react-native</h2><p>引入一些库再去运行，可能会报的错<br>原因：因为 android目录下的settings.gradle文件里有些东西的引用和node_modules里不同<br>解决方法： 删掉其中缺失的部分，重新安装。</p>
+<h2 id="react-native-camera-相关的错误"><a href="#react-native-camera-相关的错误" class="headerlink" title="react-native-camera 相关的错误"></a>react-native-camera 相关的错误</h2><h3 id="react-native-camera-unspecified"><a href="#react-native-camera-unspecified" class="headerlink" title="react-native-camera:unspecified"></a>react-native-camera:unspecified</h3><p>在 <code>react-native link react-native-camera</code> 之后容易报的错<br>原因：因为没有在 android/build.gradle 文件里添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">maven &#123; url &apos;https://jitpack.io&apos; &#125;</div></pre></td></tr></table></figure></p>
+<p>注意：添加到上一个maven的下面就行，中间不用加 ,<br>例如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">maven &#123; url &apos;https://jitpack.io&apos; &#125;</div><div class="line">maven &#123;</div><div class="line">    url &quot;https://maven.google.com&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>即可</p>
+<h3 id="Could-not-find-com-android-support-support-v4-26-0-1"><a href="#Could-not-find-com-android-support-support-v4-26-0-1" class="headerlink" title="Could not find com.android.support:support-v4:26.0.1."></a>Could not find com.android.support:support-v4:26.0.1.</h3><p>在 <code>react-native link react-native-camera</code> 之后容易报的错<br>原因：因为build tool 版本太低吗，要求26<br>解决方法：升级。<br>在android/app目录里，修改 build.gradle 里的版本信息为26<br>例如修改为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">compileSdkVersion 26</div><div class="line">buildToolsVersion &quot;26.0.1&quot;</div><div class="line"></div><div class="line">defaultConfig &#123;</div><div class="line">    applicationId &quot;com.came&quot;</div><div class="line">    minSdkVersion 16</div><div class="line">    targetSdkVersion 26</div><div class="line">    versionCode 1</div><div class="line">    versionName &quot;1.0&quot;</div><div class="line">    ndk &#123;</div><div class="line">        abiFilters &quot;armeabi-v7a&quot;, &quot;x86&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>修改之后也还是不行，要在android/build.gradle 文件里添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">maven &#123;</div><div class="line">    url &quot;https://maven.google.com&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://otj6w86xd.bkt.clouddn.com/wxzf.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -236,7 +269,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/SpringMVC/" class="article-tag-list-link color5">SpringMVC</a>
+        			<a href="/categories/ReactNative/" class="article-tag-list-link color3">React Native</a>
         		</li>
       		
 		</ul>
@@ -244,726 +277,108 @@
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/08/2017/使用Xpath来制作python3爬虫/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://blog.chenwe.top/2018/03/07/2018/2018-03-07 React Native开发中的一些坑/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
 
-
-
-
-
   
-    <article id="post-2017/Vue.js中修改router-link的样式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/29/2017/Vue.js中修改router-link的样式/">Vue.js中修改router-link的样式</a>
-    </h1>
   
-
-
-        
-        <a href="/2017/08/29/2017/Vue.js中修改router-link的样式/" class="archive-article-date">
-  	<time datetime="2017-08-29T11:20:34.758Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在用vue.js 的时候<br>有个地方用到了router-link<br>并且要修改router-link的样式</p>
-<p>但是我发现直接修改router-link是不行的</p>
-<p><img src="http://otj6w86xd.bkt.clouddn.com/wulian.jpg" alt=""></p>
-        
-          <a class="article-more-a" href="/2017/08/29/2017/Vue.js中修改router-link的样式/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Vue/" class="article-tag-list-link color4">Vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/29/2017/Vue.js中修改router-link的样式/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
+    <a href="/2018/02/19/2018/2018-02-19 LaTeX的一些基本操作/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">LaTeX的入门</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
 
 
 
 
   
-    <article id="post-2017/Vue.js中使用axios数据赋值报错" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/28/2017/Vue.js中使用axios数据赋值报错/">Vue.js中使用axios数据赋值报错</a>
-    </h1>
-  
-
-
-        
-        <a href="/2017/08/28/2017/Vue.js中使用axios数据赋值报错/" class="archive-article-date">
-  	<time datetime="2017-08-28T09:04:57.623Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在用vue.js的axios插件来获取数据的时候<br>踩了一个坑</p>
-<p>获取到的数据对象不能赋值给变量</p>
-<p><img src="http://otj6w86xd.bkt.clouddn.com/bqb-cm.jpg" alt=""></p>
-        
-          <a class="article-more-a" href="/2017/08/28/2017/Vue.js中使用axios数据赋值报错/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Vue/" class="article-tag-list-link color4">Vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/28/2017/Vue.js中使用axios数据赋值报错/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
 
   
-    <article id="post-2017/手机连接本地服务器调试" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/27/2017/手机连接本地服务器调试/">手机连接本地服务器调试</a>
-    </h1>
-  
-
-
-        
-        <a href="/2017/08/27/2017/手机连接本地服务器调试/" class="archive-article-date">
-  	<time datetime="2017-08-27T08:49:21.822Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>有时候我们要做一个面向手机端的项目<br>比如一个面向手机端的网页<br>我们在预览的时候，虽然可以用chrome浏览器的手机模式来预览<br>但是因为像素的关系<br>所以和实际手机端的表现还是有些差异的<br>最好的办法就是在手机端直接预览</p>
-<p>那么该怎么办呢</p>
-<p><img src="http://otj6w86xd.bkt.clouddn.com/lianhong.jpg" alt=""></p>
-        
-          <a class="article-more-a" href="/2017/08/27/2017/手机连接本地服务器调试/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/测试/" class="article-tag-list-link color3">测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/27/2017/手机连接本地服务器调试/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
 
   
-    <article id="post-2017/Mysql登录的问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/18/2017/Mysql登录的问题/">Mysql登录报错的问题</a>
-    </h1>
-  
-
-
-        
-        <a href="/2017/08/18/2017/Mysql登录的问题/" class="archive-article-date">
-  	<time datetime="2017-08-18T14:09:27.908Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>之前有一天我服务器里的mysql突然远程连接不上了<br>MySQL WorkBench 连上显示无法读取数据，丢失部分文件<br><img src="http://otj6w86xd.bkt.clouddn.com/wenhao.jpg" alt=""><br>
-        
-          <a class="article-more-a" href="/2017/08/18/2017/Mysql登录的问题/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/MySql/" class="article-tag-list-link color1">MySql</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/18/2017/Mysql登录的问题/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
 
   
-    <article id="post-2017/git detached HEAD状态的解决方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/12/2017/git detached HEAD状态的解决方法/">git detached HEAD状态的解决方法</a>
-    </h1>
-  
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTc5Mi82MzU4" style="padding: 25px">
 
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
 
-        
-        <a href="/2017/08/12/2017/git detached HEAD状态的解决方法/" class="archive-article-date">
-  	<time datetime="2017-08-12T15:17:02.886Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在用IDEA的时候<br>一不小心就进入detached HEAD状态了<br><img src="http://otj6w86xd.bkt.clouddn.com/bqb-cm.jpg" alt=""><br>
-        
-          <a class="article-more-a" href="/2017/08/12/2017/git detached HEAD状态的解决方法/#more">more >></a>
-        
-      
+       if (typeof LivereTower === 'function') { return; }
 
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
 
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/git/" class="article-tag-list-link color4">git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/12/2017/git detached HEAD状态的解决方法/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
 
   
-    <article id="post-2017/Android BottomNavigationView无法添加依赖" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/08/2017/Android BottomNavigationView无法添加依赖/">Android BottomNavigationView无法添加依赖</a>
-    </h1>
-  
 
-
-        
-        <a href="/2017/08/08/2017/Android BottomNavigationView无法添加依赖/" class="archive-article-date">
-  	<time datetime="2017-08-08T13:49:31.414Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天在Android Studio上创建了一个Bottom Navigation Activity<br>但是创建完成后发现BottomNavigationView无法添加依赖<br><img src="http://otj6w86xd.bkt.clouddn.com/wenhao.jpg" alt=""><br>
-        
-          <a class="article-more-a" href="/2017/08/08/2017/Android BottomNavigationView无法添加依赖/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Android/" class="article-tag-list-link color3">Android</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/08/2017/Android BottomNavigationView无法添加依赖/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-2017/练字记录（一）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/04/2017/练字记录（一）/">练字记录（一）</a>
-    </h1>
-  
-
-
-        
-        <a href="/2017/08/04/2017/练字记录（一）/" class="archive-article-date">
-  	<time datetime="2017-08-04T08:27:24.136Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>练字记录<br>每五天左右发一篇博客来记录<br>目前是楷书<br><img src="http://otj6w86xd.bkt.clouddn.com/huajizuo.jpg" alt=""></p>
-        
-          <a class="article-more-a" href="/2017/08/04/2017/练字记录（一）/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">life</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/练字/" class="article-tag-list-link color3">练字</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/04/2017/练字记录（一）/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-2017/SpringBoot远程shell监控和管理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/03/2017/SpringBoot远程shell监控和管理/">SpringBoot远程shell监控和管理</a>
-    </h1>
-  
-
-
-        
-        <a href="/2017/08/03/2017/SpringBoot远程shell监控和管理/" class="archive-article-date">
-  	<time datetime="2017-08-03T12:39:38.610Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Spring Boot支持集成一个称为’CRaSH’的Java shell<br>你可以在CRaSH中使用ssh或telnet命令连接到运行的应用<br><img src="http://otj6w86xd.bkt.clouddn.com/bucunzaide.jpg" alt=""></p>
-        
-          <a class="article-more-a" href="/2017/08/03/2017/SpringBoot远程shell监控和管理/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/SpringBoot/" class="article-tag-list-link color1">SpringBoot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/03/2017/SpringBoot远程shell监控和管理/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-2017/IDEA Maven项目依赖失效" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/02/2017/IDEA Maven项目依赖失效/">IDEA Maven项目依赖失效</a>
-    </h1>
-  
-
-
-        
-        <a href="/2017/08/02/2017/IDEA Maven项目依赖失效/" class="archive-article-date">
-  	<time datetime="2017-08-02T02:35:45.599Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近整理了一下硬盘<br>然后再打开我的SpringBoot项目<br>发现所有的依赖都没了，IDEA提示一片红，像满山的山楂树 红红火火恍恍惚惚</p>
-<p><img src="http://otj6w86xd.bkt.clouddn.com/xianruchensi.jpg" alt=""></p>
-        
-          <a class="article-more-a" href="/2017/08/02/2017/IDEA Maven项目依赖失效/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/IDEA/" class="article-tag-list-link color5">IDEA</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/02/2017/IDEA Maven项目依赖失效/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
-    </nav>
   
 
 
@@ -999,8 +414,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
