@@ -6,17 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.chenwe.top">
-  <title>Archives: 2018/3 | Xiaoshidefeng的博客</title>
+  <title>docker安装owncloud | Xiaoshidefeng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="CW的个人Blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Xiaoshidefeng的博客">
-<meta property="og:url" content="http://blog.chenwe.top/archives/2018/03/index.html">
+  <meta name="description" content="ownCloud是一个自由且开源的个人云存储解决方案  因为偶尔会有文件想要备份或者共享所以就自己搭建了一下ownCloud，这里记录下搭建过程">
+<meta name="keywords" content="study,code">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker安装owncloud">
+<meta property="og:url" content="http://blog.chenwe.top/2018/03/25/2018/2018-03-25 docker安装owncloud/index.html">
 <meta property="og:site_name" content="Xiaoshidefeng的博客">
-<meta property="og:description" content="CW的个人Blog">
+<meta property="og:description" content="ownCloud是一个自由且开源的个人云存储解决方案  因为偶尔会有文件想要备份或者共享所以就自己搭建了一下ownCloud，这里记录下搭建过程">
+<meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720180325124304.png">
+<meta property="og:updated_time" content="2018-03-25T04:49:01.030Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Xiaoshidefeng的博客">
-<meta name="twitter:description" content="CW的个人Blog">
+<meta name="twitter:title" content="docker安装owncloud">
+<meta name="twitter:description" content="ownCloud是一个自由且开源的个人云存储解决方案  因为偶尔会有文件想要备份或者共享所以就自己搭建了一下ownCloud，这里记录下搭建过程">
+<meta name="twitter:image" content="http://ow9eu3p52.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720180325124304.png">
   
     <link rel="alternative" href="/atom.xml" title="Xiaoshidefeng的博客" type="application/atom+xml">
   
@@ -180,37 +184,81 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-2018/2018-03-25 docker安装owncloud" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      docker安装owncloud
+    </h1>
+    <span>&nbsp;&nbsp;&nbsp; | &nbsp;
+    <span id="busuanzi_value_page_pv" ></span>次阅读
+    </span>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/25/2018/2018-03-25 docker安装owncloud/" class="archive-article-date">
+
+
+        
+        <a href="/2018/03/25/2018/2018-03-25 docker安装owncloud/" class="archive-article-date">
   	<time datetime="2018-03-25T03:28:25.652Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-25</time>
 </a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>ownCloud是一个自由且开源的个人云存储解决方案</p>
+</blockquote>
+<p>因为偶尔会有文件想要备份或者共享<br>所以就自己搭建了一下ownCloud，这里记录下搭建过程</p>
+<a id="more"></a>
+<h2 id="安装数据库"><a href="#安装数据库" class="headerlink" title="安装数据库"></a>安装数据库</h2><p>我们要先安装数据库，我这里选择mysql 用docker来安装<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">acm@acm-Lenovo:~/acmcloud$ sudo docker pull registry.docker-cn.com/library/mysql</div><div class="line">Using default tag: latest</div><div class="line">latest: Pulling from library/mysql</div></pre></td></tr></table></figure></p>
+<p>这里我用了国内的镜像加速，提高速度。</p>
+<p>启动容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=mypassword -d mysql</div></pre></td></tr></table></figure></p>
+<p>MYSQL_ROOT_PASSWORD后面填写你要设置的的root密码</p>
+<p>输入 sudo docker ps 查看是否成功运行</p>
+<h2 id="安装owncloud"><a href="#安装owncloud" class="headerlink" title="安装owncloud"></a>安装owncloud</h2><p>用docker安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">acm@acm-Lenovo:~/acmcloud$ sudo docker pull registry.docker-cn.com/library/owncloud</div><div class="line">Using default tag: latest</div><div class="line">latest: Pulling from library/owncloud</div></pre></td></tr></table></figure></p>
+<p>还是利用了国内的镜像加速。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker run -d -p 80:80 owncloud</div></pre></td></tr></table></figure>
+<p>启动容器</p>
+<p>启动成功后访问服务器ip<br><img src="http://ow9eu3p52.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720180325124304.png" alt=""><br>会看到这样的界面<br>我们填写创建管理员账号密码<br>配置下数据库</p>
+<p>这里我们选择mysql数据库，我们创建一个表 名字就叫做owncloud<br>然后填写数据库用户名密码就好了</p>
+<p>等待安装完成<br>完成后，我们再次打开页面，就会看到登陆界面了<br>这样我们的云盘就搭好了<br>开始愉快的使用吧</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://otj6w86xd.bkt.clouddn.com/wxzf.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/25/2018/2018-03-25 docker安装owncloud/">docker安装owncloud</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -226,7 +274,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -239,183 +287,119 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://blog.chenwe.top/2018/03/25/2018/2018-03-25 docker安装owncloud/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
 
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/17/2018/2018-03-17 UItimateRecyclerView的使用/" class="archive-article-date">
-  	<time datetime="2018-03-17T07:37:29.240Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-17</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/17/2018/2018-03-17 UItimateRecyclerView的使用/">UItimateRecyclerView的使用</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Android/" class="article-tag-list-link color3">Android</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/08/2018/2018-03-08 React Native开发中的一些坑 (二)/" class="archive-article-date">
-  	<time datetime="2018-03-08T11:34:08.099Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/08/2018/2018-03-08 React Native开发中的一些坑 (二)/">React Native开发中的一些坑 (二)</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ReactNative/" class="article-tag-list-link color3">React Native</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/07/2018/2018-03-07 React Native开发中的一些坑/" class="archive-article-date">
-  	<time datetime="2018-03-07T14:19:02.213Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/07/2018/2018-03-07 React Native开发中的一些坑/">React Native开发中的一些坑（一）</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ReactNative/" class="article-tag-list-link color3">React Native</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-
+    <a href="/2018/05/07/2018/2018-05-07 Ubuntu交换空间设置/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Ubuntu交换空间设置
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2018/03/17/2018/2018-03-17 UItimateRecyclerView的使用/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">UItimateRecyclerView的使用</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
   
 
-    
+  
+
+  
+
+  
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTc5Mi82MzU4" style="padding: 25px">
+
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+  
+
+  
 
 
           </div>
@@ -451,8 +435,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

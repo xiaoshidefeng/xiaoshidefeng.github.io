@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://blog.chenwe.top/2018/03/08/2018/2018-03-08 React Native开发中的一些坑 (二)/index.html">
 <meta property="og:site_name" content="Xiaoshidefeng的博客">
 <meta property="og:description" content="这几天在弄React Native中间难免踩坑这里继续记录下">
-<meta property="og:updated_time" content="2018-03-08T11:42:04.082Z">
+<meta property="og:updated_time" content="2018-03-31T06:23:17.367Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React Native开发中的一些坑 (二)">
 <meta name="twitter:description" content="这几天在弄React Native中间难免踩坑这里继续记录下">
@@ -218,6 +218,13 @@
 <p>Execution failed for task ‘:app:transformClassesWithDexForDebug’.<br>java.io.IOException: Could not delete path ‘D:\ReactNative\came\android\app\build\intermediates\transforms\dex\debug\folders’.</p>
 </blockquote>
 <p>解决方法：<br>删除相关问题的node_module 然后重装。</p>
+<h2 id="undefined-is-not-an-object-evaluating-this-props-navigation-navigate"><a href="#undefined-is-not-an-object-evaluating-this-props-navigation-navigate" class="headerlink" title="undefined is not an object (evaluating this.props.navigation.navigate)"></a>undefined is not an object (evaluating this.props.navigation.navigate)</h2><p>问题产生：<br>想从一个页面的组件中实现导航跳转<br>但是没有传入navigation这个props</p>
+<p>解决方法：<br>传入navigation<br>例如 <me navigation="{this.props.navigation}/"></me></p>
+<h2 id="图片点击没反应"><a href="#图片点击没反应" class="headerlink" title="图片点击没反应"></a>图片点击没反应</h2><p>图片之类的控件要在外面加上<code>TouchableWithoutFeedback</code> 才能监听点击</p>
+<p>例如：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">TouchableWithoutFeedback</span> <span class="attr">onPress</span>=<span class="string">&#123;()</span> =&gt;</span> this.toTakePhoto()&#125; &gt;</div><div class="line">  <span class="tag">&lt;<span class="name">View</span> <span class="attr">style</span>=<span class="string">&#123;styles.img_facewarpper&#125;</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">Image</span> <span class="attr">style</span>=<span class="string">&#123;styles.img_face&#125;</span></span></div><div class="line">          <span class="attr">source</span>=<span class="string">&#123;require(</span>'<span class="attr">.</span>/<span class="attr">components</span>/<span class="attr">img</span>/<span class="attr">face.png</span>')&#125; /&gt;</div><div class="line">  <span class="tag">&lt;/<span class="name">View</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">TouchableWithoutFeedback</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h2 id="Undefined-is-not-an-object-evaluating-this-state"><a href="#Undefined-is-not-an-object-evaluating-this-state" class="headerlink" title="Undefined is not an object evaluating this.state.*"></a>Undefined is not an object evaluating this.state.*</h2><p>这个state的值取不到，说是未定义。</p>
+<p>我们只要在对应调用的方法后面加上 <code>.bind(this)</code> 就好了。<br>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 错误</div><div class="line">renderHeader=&#123;this._renderHeader&#125;</div><div class="line"></div><div class="line">// 正确</div><div class="line">renderHeader=&#123;this._renderHeader.bind(this)&#125;</div></pre></td></tr></table></figure></p>
+<p>上面那种方法，在_renderHeader里的state是取不到的<br>要像下面那种方法那样.bing(this)</p>
 
       
 

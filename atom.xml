@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.chenwe.top/"/>
-  <updated>2018-03-19T06:18:38.812Z</updated>
+  <updated>2018-05-07T12:16:08.198Z</updated>
   <id>http://blog.chenwe.top/</id>
   
   <author>
@@ -14,6 +14,95 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Ubuntu交换空间设置</title>
+    <link href="http://blog.chenwe.top/2018/05/07/2018/2018-05-07%20Ubuntu%E4%BA%A4%E6%8D%A2%E7%A9%BA%E9%97%B4%E8%AE%BE%E7%BD%AE/"/>
+    <id>http://blog.chenwe.top/2018/05/07/2018/2018-05-07 Ubuntu交换空间设置/</id>
+    <published>2018-05-07T11:41:46.463Z</published>
+    <updated>2018-05-07T12:16:08.198Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>Swap分区，即交换区，Swap空间的作用可简单描述为：当系统的物理内存不够用的时候，就需要将物理内存中的一部分空间释放出来，以供当前运行的程序使用。那些被释放的空间可能来自一些很长时间没有什么操作的程序，这些被释放的空间被临时保存到Swap空间中，等到那些程序要运行时，再从Swap中恢复保存的数据到内存中。这样，系统总是在物理内存不够时，才进行Swap交换。</p>
+</blockquote>
+<p>这次来讲下交换分区的设置</p>
+<a id="more"></a>
+<h2 id="查看当前的内存情况"><a href="#查看当前的内存情况" class="headerlink" title="查看当前的内存情况"></a>查看当前的内存情况</h2><p>输入 free -m<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">root@iZbp14fsydxm6juwspn5gjZ:~# free -m</div><div class="line">              total        used        free      shared  buff/cache   available</div><div class="line">Mem:           2000          84         143           2        1772        1713</div><div class="line">Swap:             0           0           0</div></pre></td></tr></table></figure></p>
+<p>我们可以看到，物理内存为2,交换分区为0</p>
+<p>所以我们要设置一下</p>
+<h2 id="设置交换分区"><a href="#设置交换分区" class="headerlink" title="设置交换分区"></a>设置交换分区</h2><p>我们先去根目录新建一个swap文件夹</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">root@iZbp14fsydxm6juwspn5gjZ:~# cd ..</div><div class="line">root@iZbp14fsydxm6juwspn5gjZ:/# ls</div><div class="line">bin   dev  home        initrd.img.old  lib64       media  opt   root  sbin  sys  usr  vmlinuz</div><div class="line">boot  etc  initrd.img  lib             lost+found  mnt    proc  run   srv   tmp  var  vmlinuz.old</div><div class="line">root@iZbp14fsydxm6juwspn5gjZ:/# mkdir /swap</div><div class="line">root@iZbp14fsydxm6juwspn5gjZ:/# ls</div><div class="line">bin   etc         initrd.img.old  lost+found  opt   run   swap  usr      vmlinuz.old</div><div class="line">boot  home        lib             media       proc  sbin  sys   var</div><div class="line">dev   initrd.img  lib64           mnt         root  srv   tmp   vmlinuz</div></pre></td></tr></table></figure>
+<p>然后进入刚刚建立的swap文件夹里<br><code>cd swap</code></p>
+<p>创建一个2G的分区<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">root@iZbp14fsydxm6juwspn5gjZ:/swap# dd if=/dev/zero of=swap bs=1M count=2k</div><div class="line">2048+0 records in</div><div class="line">2048+0 records out</div><div class="line">2147483648 bytes (2.1 GB, 2.0 GiB) copied, 18.8597 s, 114 MB/s</div><div class="line">root@iZbp14fsydxm6juwspn5gjZ:/swap# sudo mkswap /swap</div><div class="line">sudo: unable to resolve host iZbp14fsydxm6juwspn5gjZ</div><div class="line">mkswap: warning: truncating swap area to 17179869180 KiB</div><div class="line">mkswap: cannot open /swap: Is a directory</div><div class="line">root@iZbp14fsydxm6juwspn5gjZ:/swap# ls</div><div class="line">swap</div></pre></td></tr></table></figure></p>
+<p>创建交换文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">root@iZbp14fsydxm6juwspn5gjZ:/swap# mkswap swap</div><div class="line">Setting up swapspace version 1, size = 2 GiB (2147479552 bytes)</div><div class="line">no label, UUID=0c2db10b-0f48-41f5-b158-8e2c57f95bc3</div></pre></td></tr></table></figure></p>
+<p>挂载交换信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">root@iZbp14fsydxm6juwspn5gjZ:/swap# swapon swap</div><div class="line">swapon: /swap/swap: insecure permissions 0644, 0600 suggested.</div></pre></td></tr></table></figure></p>
+<p>下面再输入 <code>free -m</code> 来查看</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">root@iZbp14fsydxm6juwspn5gjZ:/swap# free -m</div><div class="line">              total        used        free      shared  buff/cache   available</div><div class="line">Mem:           2000          85          72           2        1842        1713</div><div class="line">Swap:          2047           0        2047</div></pre></td></tr></table></figure>
+<p>成功增加2G交换空间</p>
+<p><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20180507201314759.png" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;Swap分区，即交换区，Swap空间的作用可简单描述为：当系统的物理内存不够用的时候，就需要将物理内存中的一部分空间释放出来，以供当前运行的程序使用。那些被释放的空间可能来自一些很长时间没有什么操作的程序，这些被释放的空间被临时保存到Swap空间中，等到那些程序要运行时，再从Swap中恢复保存的数据到内存中。这样，系统总是在物理内存不够时，才进行Swap交换。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这次来讲下交换分区的设置&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="ubuntu" scheme="http://blog.chenwe.top/categories/ubuntu/"/>
+    
+    
+      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
+    
+      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>docker安装owncloud</title>
+    <link href="http://blog.chenwe.top/2018/03/25/2018/2018-03-25%20docker%E5%AE%89%E8%A3%85owncloud/"/>
+    <id>http://blog.chenwe.top/2018/03/25/2018/2018-03-25 docker安装owncloud/</id>
+    <published>2018-03-25T03:28:25.652Z</published>
+    <updated>2018-03-25T04:49:01.030Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>ownCloud是一个自由且开源的个人云存储解决方案</p>
+</blockquote>
+<p>因为偶尔会有文件想要备份或者共享<br>所以就自己搭建了一下ownCloud，这里记录下搭建过程</p>
+<a id="more"></a>
+<h2 id="安装数据库"><a href="#安装数据库" class="headerlink" title="安装数据库"></a>安装数据库</h2><p>我们要先安装数据库，我这里选择mysql 用docker来安装<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">acm@acm-Lenovo:~/acmcloud$ sudo docker pull registry.docker-cn.com/library/mysql</div><div class="line">Using default tag: latest</div><div class="line">latest: Pulling from library/mysql</div></pre></td></tr></table></figure></p>
+<p>这里我用了国内的镜像加速，提高速度。</p>
+<p>启动容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=mypassword -d mysql</div></pre></td></tr></table></figure></p>
+<p>MYSQL_ROOT_PASSWORD后面填写你要设置的的root密码</p>
+<p>输入 sudo docker ps 查看是否成功运行</p>
+<h2 id="安装owncloud"><a href="#安装owncloud" class="headerlink" title="安装owncloud"></a>安装owncloud</h2><p>用docker安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">acm@acm-Lenovo:~/acmcloud$ sudo docker pull registry.docker-cn.com/library/owncloud</div><div class="line">Using default tag: latest</div><div class="line">latest: Pulling from library/owncloud</div></pre></td></tr></table></figure></p>
+<p>还是利用了国内的镜像加速。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker run -d -p 80:80 owncloud</div></pre></td></tr></table></figure>
+<p>启动容器</p>
+<p>启动成功后访问服务器ip<br><img src="http://ow9eu3p52.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720180325124304.png" alt=""><br>会看到这样的界面<br>我们填写创建管理员账号密码<br>配置下数据库</p>
+<p>这里我们选择mysql数据库，我们创建一个表 名字就叫做owncloud<br>然后填写数据库用户名密码就好了</p>
+<p>等待安装完成<br>完成后，我们再次打开页面，就会看到登陆界面了<br>这样我们的云盘就搭好了<br>开始愉快的使用吧</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;ownCloud是一个自由且开源的个人云存储解决方案&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;因为偶尔会有文件想要备份或者共享&lt;br&gt;所以就自己搭建了一下ownCloud，这里记录下搭建过程&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="docker" scheme="http://blog.chenwe.top/categories/docker/"/>
+    
+    
+      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
+    
+      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
+    
+  </entry>
   
   <entry>
     <title>UItimateRecyclerView的使用</title>
@@ -84,7 +173,7 @@
     <link href="http://blog.chenwe.top/2018/03/08/2018/2018-03-08%20React%20Native%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91%20(%E4%BA%8C)/"/>
     <id>http://blog.chenwe.top/2018/03/08/2018/2018-03-08 React Native开发中的一些坑 (二)/</id>
     <published>2018-03-08T11:34:08.099Z</published>
-    <updated>2018-03-08T11:42:04.082Z</updated>
+    <updated>2018-03-31T06:23:17.367Z</updated>
     
     <content type="html"><![CDATA[<p>这几天在弄React Native<br>中间难免踩坑<br>这里继续记录下</p>
 <a id="more"></a>
@@ -98,6 +187,13 @@
 <p>Execution failed for task ‘:app:transformClassesWithDexForDebug’.<br>java.io.IOException: Could not delete path ‘D:\ReactNative\came\android\app\build\intermediates\transforms\dex\debug\folders’.</p>
 </blockquote>
 <p>解决方法：<br>删除相关问题的node_module 然后重装。</p>
+<h2 id="undefined-is-not-an-object-evaluating-this-props-navigation-navigate"><a href="#undefined-is-not-an-object-evaluating-this-props-navigation-navigate" class="headerlink" title="undefined is not an object (evaluating this.props.navigation.navigate)"></a>undefined is not an object (evaluating this.props.navigation.navigate)</h2><p>问题产生：<br>想从一个页面的组件中实现导航跳转<br>但是没有传入navigation这个props</p>
+<p>解决方法：<br>传入navigation<br>例如 <me navigation="{this.props.navigation}/"></me></p>
+<h2 id="图片点击没反应"><a href="#图片点击没反应" class="headerlink" title="图片点击没反应"></a>图片点击没反应</h2><p>图片之类的控件要在外面加上<code>TouchableWithoutFeedback</code> 才能监听点击</p>
+<p>例如：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">TouchableWithoutFeedback</span> <span class="attr">onPress</span>=<span class="string">&#123;()</span> =&gt;</span> this.toTakePhoto()&#125; &gt;</div><div class="line">  <span class="tag">&lt;<span class="name">View</span> <span class="attr">style</span>=<span class="string">&#123;styles.img_facewarpper&#125;</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">Image</span> <span class="attr">style</span>=<span class="string">&#123;styles.img_face&#125;</span></span></div><div class="line">          <span class="attr">source</span>=<span class="string">&#123;require(</span>'<span class="attr">.</span>/<span class="attr">components</span>/<span class="attr">img</span>/<span class="attr">face.png</span>')&#125; /&gt;</div><div class="line">  <span class="tag">&lt;/<span class="name">View</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">TouchableWithoutFeedback</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h2 id="Undefined-is-not-an-object-evaluating-this-state"><a href="#Undefined-is-not-an-object-evaluating-this-state" class="headerlink" title="Undefined is not an object evaluating this.state.*"></a>Undefined is not an object evaluating this.state.*</h2><p>这个state的值取不到，说是未定义。</p>
+<p>我们只要在对应调用的方法后面加上 <code>.bind(this)</code> 就好了。<br>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 错误</div><div class="line">renderHeader=&#123;this._renderHeader&#125;</div><div class="line"></div><div class="line">// 正确</div><div class="line">renderHeader=&#123;this._renderHeader.bind(this)&#125;</div></pre></td></tr></table></figure></p>
+<p>上面那种方法，在_renderHeader里的state是取不到的<br>要像下面那种方法那样.bing(this)</p>
 ]]></content>
     
     <summary type="html">
@@ -797,94 +893,6 @@
     </summary>
     
       <category term="SpringBoot" scheme="http://blog.chenwe.top/categories/SpringBoot/"/>
-    
-    
-      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
-    
-      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数据库RAID简介</title>
-    <link href="http://blog.chenwe.top/2017/09/14/2017/2017-09-14%20%E6%95%B0%E6%8D%AE%E5%BA%93RAID%E7%AE%80%E4%BB%8B/"/>
-    <id>http://blog.chenwe.top/2017/09/14/2017/2017-09-14 数据库RAID简介/</id>
-    <published>2017-09-14T08:04:23.254Z</published>
-    <updated>2017-09-15T08:44:10.696Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote>
-<p>RAID （ Redundant Array of Independent Disks ）即独立磁盘冗余阵列，通常简称为磁盘阵列。 简单地说， RAID 是由多个独立的高性能磁盘驱动器组成的磁盘子系统，从而提供比单个磁盘更高的存储性能和数据冗余的技术。</p>
-</blockquote>
-<p><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20170914160646934.png" alt=""></p>
-<a id="more"></a>
-<h2 id="有哪些RAID"><a href="#有哪些RAID" class="headerlink" title="有哪些RAID"></a>有哪些RAID</h2><p>常见的有6种RAID类型<br>RAID 等级 | RAID0 | RAID1 | RAID5 | RAID6 | RAID10 |</p>
-<p>这里我们简单的介绍一下 RAID0 RAID1 RAID5 RAID10</p>
-<h2 id="RAID0"><a href="#RAID0" class="headerlink" title="RAID0"></a>RAID0</h2><p><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-2017091416153039.png" alt=""></p>
-<blockquote>
-<p>RAID 0又称为Stripe或Striping，它代表了所有RAID级别中最高的存储性能。RAID 0提高存储性能的原理是把连续的数据分散到多个磁盘上存取，这样，系统有数据请求就可以被多个磁盘并行的执行，每个磁盘执行属于它自己的那部分数据请求。这种数据上的并行操作可以充分利用总线的带宽，显著提高磁盘整体存取性能。</p>
-</blockquote>
-<p>RAID0 没有数据冗余，没有数据校验的磁盘阵列。<br>实现它需要至少两块以上的硬盘，将两个硬盘并成一块，数据连续分割在各个盘上。<br>因为带宽加倍，所以读写速度加倍，但是在提高速度的同时，却带来了安全上的问题。<br>只要任何一块硬盘损坏就会丢失所有数据。因此RAID 0 不可应用于需要数据高可用性的关键领域。</p>
-<h2 id="RAID1"><a href="#RAID1" class="headerlink" title="RAID1"></a>RAID1</h2><p><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-2017091416172531.png" alt=""></p>
-<blockquote>
-<p>RAID 1通过磁盘数据镜像实现数据冗余，在成对的独立磁盘上产生互 为备份的数据。当原始数据繁忙时，可直接从镜像拷贝中读取数据，因此RAID 1可以提高读取性能。RAID 1是磁盘阵列中单位成本最高的，但提供了很高的数据安全性和可用性。当一个磁盘失效时，系统可以自动切换到镜像磁盘上读写，而不需要重组失效的数据。</p>
-</blockquote>
-<p>RAID1是将一个两块硬盘所构成RAID磁盘阵列。<br>其容量仅等于一块硬盘的容量，因为另一块只是当作数据“镜像”。<br>在提升速度的时候，也保护了数据的安全，但是成本较高。</p>
-<h2 id="RAID5"><a href="#RAID5" class="headerlink" title="RAID5"></a>RAID5</h2><p><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20170914161833407.png" alt=""></p>
-<blockquote>
-<p>RAID 5 是一种存储性能、数据安全和存储成本兼顾的存储解决方案。 RAID 5可以理解为是RAID 0和RAID 1的折中方案。RAID 5可以为系统提供数据安全保障，但保障程度要比Mirror低而磁盘空间利用率要比Mirror高。RAID 5具有和RAID 0相近似的数据读取速度，只是多了一个奇偶校验信息，写入数据的速度比对单个磁盘进行写入操作稍慢。同时由于多个数据对应一个奇偶校验信息，RAID 5的磁盘空间利用率要比RAID 1高，存储成本相对较低，是目前运用较多的一种解决方案。</p>
-</blockquote>
-<p>RAID5 可以通过<a href="https://baike.baidu.com/item/%E5%A5%87%E5%81%B6%E6%A0%A1%E9%AA%8C" target="_blank" rel="external">奇偶校验</a>来恢复损坏的盘的数据<br>但是只能损坏一块硬盘，如果同时损坏两块硬盘，那么数据也是无法恢复</p>
-<h2 id="RAID10"><a href="#RAID10" class="headerlink" title="RAID10"></a>RAID10</h2><p><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20170914162321744.png" alt=""></p>
-<blockquote>
-<p>Raid 10是一个Raid 1与Raid0的组合体，它是利用奇偶校验实现条带集镜像，所以它继承了Raid0的快速和Raid1的安全。我们知道，RAID 1在这里就是一个冗余的备份阵列，而RAID 0则负责数据的读写阵列。其实，右图只是一种RAID 10方式，更多的情况是从主通路分出两路，做Striping操作，即把数据分割，而这分出来的每一路则再分两路，做Mirroring操作，即互做镜像。</p>
-</blockquote>
-<p>RAID10 将 RAID0 RAID1 的标准相结合<br>在连续地以位或字节为单位分割数据并且并行读/写多个磁盘的同时，为每一块磁盘作磁盘镜像进行冗余。<br>它有效的吸收了两者的优点<br>这种结构的可扩充性不好，这种解决方案被广泛应用，使用此方案比较昂贵。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;RAID （ Redundant Array of Independent Disks ）即独立磁盘冗余阵列，通常简称为磁盘阵列。 简单地说， RAID 是由多个独立的高性能磁盘驱动器组成的磁盘子系统，从而提供比单个磁盘更高的存储性能和数据冗余的技术。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&quot;http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20170914160646934.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="数据库" scheme="http://blog.chenwe.top/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-    
-      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
-    
-      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>获取Cookie时中文乱码</title>
-    <link href="http://blog.chenwe.top/2017/09/11/2017/%E8%8E%B7%E5%8F%96Cookie%E6%97%B6%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/"/>
-    <id>http://blog.chenwe.top/2017/09/11/2017/获取Cookie时中文乱码/</id>
-    <published>2017-09-11T08:45:12.450Z</published>
-    <updated>2017-09-11T08:53:06.240Z</updated>
-    
-    <content type="html"><![CDATA[<p>在获取Cookie时出现了中文乱码<br>服务器传来的数据是正常的，没有乱码</p>
-<p><img src="http://otj6w86xd.bkt.clouddn.com/wenhao.jpg" alt=""></p>
-<a id="more"></a>
-<h2 id="如何解决"><a href="#如何解决" class="headerlink" title="如何解决"></a>如何解决</h2><p>这里先放出正确的代码(已Vue为例<br>  )<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//设置Cookie</span></div><div class="line">Vue.prototype.setCookie = <span class="function">(<span class="params">c_name, value, expiredays</span>) =&gt;</span> &#123;</div><div class="line">  <span class="keyword">var</span> exdate = <span class="keyword">new</span> <span class="built_in">Date</span>();　　　　</div><div class="line">  exdate.setDate(exdate.getDate() + expiredays);　　　　</div><div class="line">  <span class="built_in">document</span>.cookie = c_name + <span class="string">"="</span> + <span class="built_in">escape</span>(value) + ((expiredays == <span class="literal">null</span>) ? <span class="string">""</span> : <span class="string">";expires="</span> + exdate.toGMTString());</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>在设置Cookie里<code>escape()</code>函数进行了编码<br>它能将一些特殊符号使用十六进制表示</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//获取cookie、</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getCookie</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> arr, reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"(^| )"</span> + name + <span class="string">"=([^;]*)(;|$)"</span>);</div><div class="line">  <span class="keyword">if</span> (arr = <span class="built_in">document</span>.cookie.match(reg))</div><div class="line">    <span class="keyword">return</span> <span class="built_in">unescape</span>(arr[<span class="number">2</span>]);</div><div class="line">  <span class="keyword">else</span></div><div class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这里的<code>unescape()</code>函数可对通过<code>escape()</code> 编码的字符串进行解码。</p>
-<p>这样我们就可以在获取Cookie的时候不会出现中文乱码了</p>
-<p><img src="http://otj6w86xd.bkt.clouddn.com/lianhong.jpg" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在获取Cookie时出现了中文乱码&lt;br&gt;服务器传来的数据是正常的，没有乱码&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://otj6w86xd.bkt.clouddn.com/wenhao.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Cookie" scheme="http://blog.chenwe.top/categories/Cookie/"/>
     
     
       <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>

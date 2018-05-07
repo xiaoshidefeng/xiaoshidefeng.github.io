@@ -6,17 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.chenwe.top">
-  <title>Archives: 2018/3 | Xiaoshidefeng的博客</title>
+  <title>Ubuntu交换空间设置 | Xiaoshidefeng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="CW的个人Blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Xiaoshidefeng的博客">
-<meta property="og:url" content="http://blog.chenwe.top/archives/2018/03/index.html">
+  <meta name="description" content="Swap分区，即交换区，Swap空间的作用可简单描述为：当系统的物理内存不够用的时候，就需要将物理内存中的一部分空间释放出来，以供当前运行的程序使用。那些被释放的空间可能来自一些很长时间没有什么操作的程序，这些被释放的空间被临时保存到Swap空间中，等到那些程序要运行时，再从Swap中恢复保存的数据到内存中。这样，系统总是在物理内存不够时，才进行Swap交换。  这次来讲下交换分区的设置">
+<meta name="keywords" content="study,code">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu交换空间设置">
+<meta property="og:url" content="http://blog.chenwe.top/2018/05/07/2018/2018-05-07 Ubuntu交换空间设置/index.html">
 <meta property="og:site_name" content="Xiaoshidefeng的博客">
-<meta property="og:description" content="CW的个人Blog">
+<meta property="og:description" content="Swap分区，即交换区，Swap空间的作用可简单描述为：当系统的物理内存不够用的时候，就需要将物理内存中的一部分空间释放出来，以供当前运行的程序使用。那些被释放的空间可能来自一些很长时间没有什么操作的程序，这些被释放的空间被临时保存到Swap空间中，等到那些程序要运行时，再从Swap中恢复保存的数据到内存中。这样，系统总是在物理内存不够时，才进行Swap交换。  这次来讲下交换分区的设置">
+<meta property="og:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20180507201314759.png">
+<meta property="og:updated_time" content="2018-05-07T12:16:08.198Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Xiaoshidefeng的博客">
-<meta name="twitter:description" content="CW的个人Blog">
+<meta name="twitter:title" content="Ubuntu交换空间设置">
+<meta name="twitter:description" content="Swap分区，即交换区，Swap空间的作用可简单描述为：当系统的物理内存不够用的时候，就需要将物理内存中的一部分空间释放出来，以供当前运行的程序使用。那些被释放的空间可能来自一些很长时间没有什么操作的程序，这些被释放的空间被临时保存到Swap空间中，等到那些程序要运行时，再从Swap中恢复保存的数据到内存中。这样，系统总是在物理内存不够时，才进行Swap交换。  这次来讲下交换分区的设置">
+<meta name="twitter:image" content="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20180507201314759.png">
   
     <link rel="alternative" href="/atom.xml" title="Xiaoshidefeng的博客" type="application/atom+xml">
   
@@ -180,37 +184,82 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-2018/2018-05-07 Ubuntu交换空间设置" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Ubuntu交换空间设置
+    </h1>
+    <span>&nbsp;&nbsp;&nbsp; | &nbsp;
+    <span id="busuanzi_value_page_pv" ></span>次阅读
+    </span>
+  
+
+
+        
+        <a href="/2018/05/07/2018/2018-05-07 Ubuntu交换空间设置/" class="archive-article-date">
+  	<time datetime="2018-05-07T11:41:46.463Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-07</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>Swap分区，即交换区，Swap空间的作用可简单描述为：当系统的物理内存不够用的时候，就需要将物理内存中的一部分空间释放出来，以供当前运行的程序使用。那些被释放的空间可能来自一些很长时间没有什么操作的程序，这些被释放的空间被临时保存到Swap空间中，等到那些程序要运行时，再从Swap中恢复保存的数据到内存中。这样，系统总是在物理内存不够时，才进行Swap交换。</p>
+</blockquote>
+<p>这次来讲下交换分区的设置</p>
+<a id="more"></a>
+<h2 id="查看当前的内存情况"><a href="#查看当前的内存情况" class="headerlink" title="查看当前的内存情况"></a>查看当前的内存情况</h2><p>输入 free -m<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">root@iZbp14fsydxm6juwspn5gjZ:~# free -m</div><div class="line">              total        used        free      shared  buff/cache   available</div><div class="line">Mem:           2000          84         143           2        1772        1713</div><div class="line">Swap:             0           0           0</div></pre></td></tr></table></figure></p>
+<p>我们可以看到，物理内存为2,交换分区为0</p>
+<p>所以我们要设置一下</p>
+<h2 id="设置交换分区"><a href="#设置交换分区" class="headerlink" title="设置交换分区"></a>设置交换分区</h2><p>我们先去根目录新建一个swap文件夹</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">root@iZbp14fsydxm6juwspn5gjZ:~# cd ..</div><div class="line">root@iZbp14fsydxm6juwspn5gjZ:/# ls</div><div class="line">bin   dev  home        initrd.img.old  lib64       media  opt   root  sbin  sys  usr  vmlinuz</div><div class="line">boot  etc  initrd.img  lib             lost+found  mnt    proc  run   srv   tmp  var  vmlinuz.old</div><div class="line">root@iZbp14fsydxm6juwspn5gjZ:/# mkdir /swap</div><div class="line">root@iZbp14fsydxm6juwspn5gjZ:/# ls</div><div class="line">bin   etc         initrd.img.old  lost+found  opt   run   swap  usr      vmlinuz.old</div><div class="line">boot  home        lib             media       proc  sbin  sys   var</div><div class="line">dev   initrd.img  lib64           mnt         root  srv   tmp   vmlinuz</div></pre></td></tr></table></figure>
+<p>然后进入刚刚建立的swap文件夹里<br><code>cd swap</code></p>
+<p>创建一个2G的分区<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">root@iZbp14fsydxm6juwspn5gjZ:/swap# dd if=/dev/zero of=swap bs=1M count=2k</div><div class="line">2048+0 records in</div><div class="line">2048+0 records out</div><div class="line">2147483648 bytes (2.1 GB, 2.0 GiB) copied, 18.8597 s, 114 MB/s</div><div class="line">root@iZbp14fsydxm6juwspn5gjZ:/swap# sudo mkswap /swap</div><div class="line">sudo: unable to resolve host iZbp14fsydxm6juwspn5gjZ</div><div class="line">mkswap: warning: truncating swap area to 17179869180 KiB</div><div class="line">mkswap: cannot open /swap: Is a directory</div><div class="line">root@iZbp14fsydxm6juwspn5gjZ:/swap# ls</div><div class="line">swap</div></pre></td></tr></table></figure></p>
+<p>创建交换文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">root@iZbp14fsydxm6juwspn5gjZ:/swap# mkswap swap</div><div class="line">Setting up swapspace version 1, size = 2 GiB (2147479552 bytes)</div><div class="line">no label, UUID=0c2db10b-0f48-41f5-b158-8e2c57f95bc3</div></pre></td></tr></table></figure></p>
+<p>挂载交换信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">root@iZbp14fsydxm6juwspn5gjZ:/swap# swapon swap</div><div class="line">swapon: /swap/swap: insecure permissions 0644, 0600 suggested.</div></pre></td></tr></table></figure></p>
+<p>下面再输入 <code>free -m</code> 来查看</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">root@iZbp14fsydxm6juwspn5gjZ:/swap# free -m</div><div class="line">              total        used        free      shared  buff/cache   available</div><div class="line">Mem:           2000          85          72           2        1842        1713</div><div class="line">Swap:          2047           0        2047</div></pre></td></tr></table></figure>
+<p>成功增加2G交换空间</p>
+<p><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20180507201314759.png" alt=""></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://otj6w86xd.bkt.clouddn.com/wxzf.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/25/2018/2018-03-25 docker安装owncloud/" class="archive-article-date">
-  	<time datetime="2018-03-25T03:28:25.652Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/25/2018/2018-03-25 docker安装owncloud/">docker安装owncloud</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -226,196 +275,123 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/docker/" class="article-tag-list-link color2">docker</a>
+        			<a href="/categories/ubuntu/" class="article-tag-list-link color2">ubuntu</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://blog.chenwe.top/2018/05/07/2018/2018-05-07 Ubuntu交换空间设置/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
 
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/17/2018/2018-03-17 UItimateRecyclerView的使用/" class="archive-article-date">
-  	<time datetime="2018-03-17T07:37:29.240Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/17/2018/2018-03-17 UItimateRecyclerView的使用/">UItimateRecyclerView的使用</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Android/" class="article-tag-list-link color3">Android</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/08/2018/2018-03-08 React Native开发中的一些坑 (二)/" class="archive-article-date">
-  	<time datetime="2018-03-08T11:34:08.099Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/08/2018/2018-03-08 React Native开发中的一些坑 (二)/">React Native开发中的一些坑 (二)</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ReactNative/" class="article-tag-list-link color3">React Native</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/07/2018/2018-03-07 React Native开发中的一些坑/" class="archive-article-date">
-  	<time datetime="2018-03-07T14:19:02.213Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/07/2018/2018-03-07 React Native开发中的一些坑/">React Native开发中的一些坑（一）</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ReactNative/" class="article-tag-list-link color3">React Native</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2018/03/25/2018/2018-03-25 docker安装owncloud/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">docker安装owncloud</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
   
 
-    
+  
+
+  
+
+  
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTc5Mi82MzU4" style="padding: 25px">
+
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+  
+
+  
 
 
           </div>
@@ -451,8 +427,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

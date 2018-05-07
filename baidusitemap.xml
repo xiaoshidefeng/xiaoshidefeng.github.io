@@ -4,6 +4,72 @@
 
     
   <url>
+    <loc>http://blog.chenwe.top/2018/05/07/2018/2018-05-07%20Ubuntu%E4%BA%A4%E6%8D%A2%E7%A9%BA%E9%97%B4%E8%AE%BE%E7%BD%AE/</loc>
+    <lastmod>2018-05-07T12:16:08.198Z</lastmod>
+    <data>
+        <display>
+        <title>Ubuntu交换空间设置</title>
+        <pubTime>2018-05-07T11:41:46.463Z</pubTime>
+        
+        <tag>study</tag>
+         
+        <tag>code</tag>
+         
+         
+           
+             
+              <breadCrumb title="ubuntu" url="http://blog.chenwe.top/categories/ubuntu/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.chenwe.top/2018/03/08/2018/2018-03-08%20React%20Native%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91%20(%E4%BA%8C)/</loc>
+    <lastmod>2018-03-31T06:23:17.367Z</lastmod>
+    <data>
+        <display>
+        <title>React Native开发中的一些坑 (二)</title>
+        <pubTime>2018-03-08T11:34:08.099Z</pubTime>
+        
+        <tag>study</tag>
+         
+        <tag>code</tag>
+         
+         
+           
+             
+              <breadCrumb title="React Native" url="http://blog.chenwe.top/categories/React-Native/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.chenwe.top/2018/03/25/2018/2018-03-25%20docker%E5%AE%89%E8%A3%85owncloud/</loc>
+    <lastmod>2018-03-25T04:49:01.030Z</lastmod>
+    <data>
+        <display>
+        <title>docker安装owncloud</title>
+        <pubTime>2018-03-25T03:28:25.652Z</pubTime>
+        
+        <tag>study</tag>
+         
+        <tag>code</tag>
+         
+         
+           
+             
+              <breadCrumb title="docker" url="http://blog.chenwe.top/categories/docker/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.chenwe.top/2018/03/17/2018/2018-03-17%20UItimateRecyclerView%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
     <lastmod>2018-03-19T06:18:38.812Z</lastmod>
     <data>
@@ -19,28 +85,6 @@
            
              
               <breadCrumb title="Android" url="http://blog.chenwe.top/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://blog.chenwe.top/2018/03/08/2018/2018-03-08%20React%20Native%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91%20(%E4%BA%8C)/</loc>
-    <lastmod>2018-03-08T11:42:04.082Z</lastmod>
-    <data>
-        <display>
-        <title>React Native开发中的一些坑 (二)</title>
-        <pubTime>2018-03-08T11:34:08.099Z</pubTime>
-        
-        <tag>study</tag>
-         
-        <tag>code</tag>
-         
-         
-           
-             
-              <breadCrumb title="React Native" url="http://blog.chenwe.top/categories/React-Native/"/>
           
         </display>
     </data>
