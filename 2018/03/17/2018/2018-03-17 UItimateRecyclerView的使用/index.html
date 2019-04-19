@@ -38,6 +38,11 @@
 
   
 
+
+  <link rel="stylesheet" type="text/css" href="http://localhost:8080/comment.css">
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+
 </head>
 
 <body>
@@ -398,26 +403,29 @@
   
 
   
-  <!-- 来必力City版安装代码 -->
-<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTc5Mi82MzU4" style="padding: 25px">
 
-	<script type="text/javascript">
-   (function(d, s) {
-       var j, e = d.getElementsByTagName(s)[0];
-
-       if (typeof LivereTower === 'function') { return; }
-
-       j = d.createElement(s);
-       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-       j.async = true;
-
-       e.parentNode.insertBefore(j, e);
-   })(document, 'script');
-	</script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.22/dist/vue.js"></script>
+    
+  <!-- 引入组件库 -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <div id="light_thread"></div>
+    <!-- 来必力City版安装代码 -->
+<div id="lv-container" style="padding: 25px" >
+    <script type="text/javascript" src="http://47.98.163.103:8080/static.js">
+        </script>
+        <script type="text/javascript">
+            var config = {
+                title: 'UItimateRecyclerView的使用',
+                url: 'http://blog.chenwe.top/2018/03/17/2018/2018-03-17 UItimateRecyclerView的使用/',
+                key: '2018/2018-03-17 UItimateRecyclerView的使用'
+            }
+            LightComment(config);
+            
+        </script>
 <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
 </div>
 <!-- City版安装代码已完成 -->
-
   
 
   
@@ -430,7 +438,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2018 ChenWei
+    		&copy; 2019 ChenWei
     	</div>
       <div class="footer-right">
         <!-- <a href="https://coding.net/u/xiaoshidefeng" target="_blank">Hosted by Coding Pages</a> -->
@@ -535,11 +543,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">read</a>
+                <a href="javascript:void(0)" class="js-tag color5">life</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">life</a>
+                <a href="javascript:void(0)" class="js-tag color5">read</a>
               </li>
             
             <div class="clearfix"></div>
