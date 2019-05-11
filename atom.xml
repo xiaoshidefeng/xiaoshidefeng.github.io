@@ -140,8 +140,8 @@
     <title>UItimateRecyclerView的使用</title>
     <link href="http://blog.chenwe.top/2018/03/17/2018/2018-03-17%20UItimateRecyclerView%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
     <id>http://blog.chenwe.top/2018/03/17/2018/2018-03-17 UItimateRecyclerView的使用/</id>
-    <published>2018-03-17T07:37:29.240Z</published>
-    <updated>2018-03-19T06:18:38.812Z</updated>
+    <published>2018-03-17T07:37:29.241Z</published>
+    <updated>2018-03-19T06:18:38.813Z</updated>
     
     <content type="html"><![CDATA[<p>如果说项目里有用到RecyclerView的话<br>那么UItimateRecyclerView的使用能让你更加轻松的完成你想要的功能</p>
 <a id="more"></a>
@@ -204,8 +204,8 @@
     <title>React Native开发中的一些坑 (二)</title>
     <link href="http://blog.chenwe.top/2018/03/08/2018/2018-03-08%20React%20Native%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91%20(%E4%BA%8C)/"/>
     <id>http://blog.chenwe.top/2018/03/08/2018/2018-03-08 React Native开发中的一些坑 (二)/</id>
-    <published>2018-03-08T11:34:08.099Z</published>
-    <updated>2018-03-31T06:23:17.367Z</updated>
+    <published>2018-03-08T11:34:08.100Z</published>
+    <updated>2018-03-31T06:23:17.368Z</updated>
     
     <content type="html"><![CDATA[<p>这几天在弄React Native<br>中间难免踩坑<br>这里继续记录下</p>
 <a id="more"></a>
@@ -247,8 +247,8 @@
     <title>React Native开发中的一些坑（一）</title>
     <link href="http://blog.chenwe.top/2018/03/07/2018/2018-03-07%20React%20Native%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91/"/>
     <id>http://blog.chenwe.top/2018/03/07/2018/2018-03-07 React Native开发中的一些坑/</id>
-    <published>2018-03-07T14:19:02.213Z</published>
-    <updated>2018-03-07T14:39:19.418Z</updated>
+    <published>2018-03-07T14:19:02.214Z</published>
+    <updated>2018-03-07T14:39:19.419Z</updated>
     
     <content type="html"><![CDATA[<p>这几天在弄React Native<br>中间难免踩坑<br>这里记录下</p>
 <a id="more"></a>
@@ -280,7 +280,7 @@
     <link href="http://blog.chenwe.top/2018/02/19/2018/2018-02-19%20LaTeX%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/"/>
     <id>http://blog.chenwe.top/2018/02/19/2018/2018-02-19 LaTeX的一些基本操作/</id>
     <published>2018-02-19T04:51:54.324Z</published>
-    <updated>2018-02-19T05:41:24.226Z</updated>
+    <updated>2018-02-19T05:41:24.227Z</updated>
     
     <content type="html"><![CDATA[<p>前几天参加了数学建模美赛<br>里面用到了LaTeX来排版，这里来简单讲解下<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20180219125407218.png" alt=""></p>
 <a id="more"></a>
@@ -394,7 +394,7 @@
     <title>SpringBoot使用properties配置文件实现多环境配置</title>
     <link href="http://blog.chenwe.top/2017/11/13/2017/2017-11-19%20SpringBoot%E4%BD%BF%E7%94%A8properties%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%AE%9E%E7%8E%B0%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
     <id>http://blog.chenwe.top/2017/11/13/2017/2017-11-19 SpringBoot使用properties配置文件实现多环境配置/</id>
-    <published>2017-11-13T05:31:27.820Z</published>
+    <published>2017-11-13T05:31:27.821Z</published>
     <updated>2017-11-19T08:10:17.126Z</updated>
     
     <content type="html"><![CDATA[<p>我们在编写项目的时候<br>总是会有线上环境与线下环境<br>其中有些东西是不一样的，比如本地文件路径与线上文件路径之类的<br>但是每次打包都要去手动修改各个地方，十分麻烦也很容易出错<br>所以这次我们使用properties配置文件实现多环境配置<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171113133918221.png" alt=""><br><a id="more"></a></p>
@@ -426,7 +426,7 @@
     <title>基于机器学习的DeepVideoAnalytics开源视频检索工具的安装与简单使用</title>
     <link href="http://blog.chenwe.top/2017/11/05/2017/2017-11-05%20%E5%9F%BA%E4%BA%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9A%84DeepVideoAnalytics%E5%BC%80%E6%BA%90%E8%A7%86%E9%A2%91%E6%A3%80%E7%B4%A2%E5%B7%A5%E5%85%B7%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/"/>
     <id>http://blog.chenwe.top/2017/11/05/2017/2017-11-05 基于机器学习的DeepVideoAnalytics开源视频检索工具的安装与简单使用/</id>
-    <published>2017-11-05T07:21:32.586Z</published>
+    <published>2017-11-05T07:21:32.587Z</published>
     <updated>2017-11-05T09:04:29.692Z</updated>
     
     <content type="html"><![CDATA[<p>DeepVideoAnalytics是一款强大的开源视频检索工具<br>这是<a href="https://github.com/AKSHAYUBHAT/DeepVideoAnalytics" target="_blank" rel="external">它的项目地址</a><br>今天来讲下他的安装与简单使用<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171105153108742.png" alt=""><br><a id="more"></a></p>
@@ -483,7 +483,7 @@
     <title>Oracle与jdbc实现增删改查</title>
     <link href="http://blog.chenwe.top/2017/10/29/2017/2017-10-29%20Oracle%E4%B8%8Ejdbc%E5%AE%9E%E7%8E%B0%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5/"/>
     <id>http://blog.chenwe.top/2017/10/29/2017/2017-10-29 Oracle与jdbc实现增删改查/</id>
-    <published>2017-10-29T07:40:47.153Z</published>
+    <published>2017-10-29T07:40:47.154Z</published>
     <updated>2017-10-29T09:45:17.190Z</updated>
     
     <content type="html"><![CDATA[<p>这次会归本源<br>采用jdbc的方式连接Oracle 并实现CURD</p>
@@ -523,7 +523,7 @@
     <link href="http://blog.chenwe.top/2017/10/24/2017/2017-10-24%20SpringBoot%E4%B8%ADMybatis%E9%85%8D%E7%BD%AE/"/>
     <id>http://blog.chenwe.top/2017/10/24/2017/2017-10-24 SpringBoot中Mybatis配置/</id>
     <published>2017-10-24T13:30:42.176Z</published>
-    <updated>2017-10-24T13:46:29.393Z</updated>
+    <updated>2017-10-24T13:46:29.394Z</updated>
     
     <content type="html"><![CDATA[<p>上次在SpringBoot中整合Oracle和Mybatis<br>用的是Mybatis的注解方法来使用<br>这次我们用xml文件的方法来试试</p>
 <p><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171024213257134.png" alt=""><br><a id="more"></a></p>
@@ -564,7 +564,7 @@
     <link href="http://blog.chenwe.top/2017/10/23/2017/2017-10-23%20%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8Docker%E9%83%A8%E7%BD%B2Oracle/"/>
     <id>http://blog.chenwe.top/2017/10/23/2017/2017-10-23 阿里云服务器Docker部署Oracle/</id>
     <published>2017-10-23T08:16:55.870Z</published>
-    <updated>2017-10-23T08:54:21.424Z</updated>
+    <updated>2017-10-23T08:54:21.425Z</updated>
     
     <content type="html"><![CDATA[<p>上次在自己的电脑上装Oracle<br>装了很久，而且用起来很卡，十分占资源，配置起来也很麻烦<br>于是打算用阿里云的服务器来装Oracle 远程使用<br>为了简化配置，所以用Docker来部署</p>
 <p><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171023162041418.png" alt=""><br><a id="more"></a></p>
@@ -661,7 +661,7 @@
     <link href="http://blog.chenwe.top/2017/10/21/2017/2017-10-21%20Oracle%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E6%96%B0%E7%94%A8%E6%88%B7%E7%9A%84%E5%88%9B%E5%BB%BA/"/>
     <id>http://blog.chenwe.top/2017/10/21/2017/2017-10-21 Oracle的安装与新用户的创建/</id>
     <published>2017-10-21T08:42:15.276Z</published>
-    <updated>2017-10-21T11:45:17.437Z</updated>
+    <updated>2017-10-21T11:45:17.438Z</updated>
     
     <content type="html"><![CDATA[<p>之前用的都是Mysql来做数据库<br>这次来试试Oracle<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-2017102118360441.png" alt=""><br><a id="more"></a></p>
 <h2 id="Oracle的安装"><a href="#Oracle的安装" class="headerlink" title="Oracle的安装"></a>Oracle的安装</h2><p>我这里使用的是Oracle 12c版本<br>在<a href="https://www.oracle.com/cn/database/index.html" target="_blank" rel="external">官方下载地址</a><br>里将两个压缩文件都下载过来<br>将这两个文件都解压出来<br>将<code>winx64_12102_database_2of2</code>里的stage 文件<br>与<code>winx64_12102_database_1of2</code>里的stage文件合并<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171021184009746.png" alt=""></p>
@@ -701,7 +701,7 @@
     <link href="http://blog.chenwe.top/2017/10/15/2017/2017-10-15%20%E7%90%86%E8%A7%A3JAVA%E7%9A%84%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/"/>
     <id>http://blog.chenwe.top/2017/10/15/2017/2017-10-15 理解JAVA的继承与多态/</id>
     <published>2017-10-15T12:48:34.382Z</published>
-    <updated>2017-10-16T08:20:54.784Z</updated>
+    <updated>2017-10-16T08:20:54.785Z</updated>
     
     <content type="html"><![CDATA[<p>很多人其实只是粗略的过了一遍Java的知识点<br>基础并不扎实<br>虽然一开始的时候不会发现有什么弊端<br>但是随着工作的深入，对于基础的要求更加重要了</p>
 <p>这里我来稍微总结下Java的继承与多态中需要注意的地方<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171015214220622.png" alt=""><br><a id="more"></a></p>
@@ -752,8 +752,8 @@
     <title>图书信息推送系统（三）</title>
     <link href="http://blog.chenwe.top/2017/10/04/2017/2017-10-04%20%E5%9B%BE%E4%B9%A6%E4%BF%A1%E6%81%AF%E6%8E%A8%E9%80%81%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%B8%89%EF%BC%89/"/>
     <id>http://blog.chenwe.top/2017/10/04/2017/2017-10-04 图书信息推送系统（三）/</id>
-    <published>2017-10-04T11:54:40.530Z</published>
-    <updated>2017-10-04T12:15:32.122Z</updated>
+    <published>2017-10-04T11:54:40.531Z</published>
+    <updated>2017-10-04T12:15:32.123Z</updated>
     
     <content type="html"><![CDATA[<p>上回书说到<br>具体功能的实现</p>
 <p>这次我们来讲下服务器的部署<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171004195538281.png" alt=""></p>
@@ -791,8 +791,8 @@
     <title>图书信息推送系统（二）</title>
     <link href="http://blog.chenwe.top/2017/10/03/2017/2017-10-03%20%E5%9B%BE%E4%B9%A6%E4%BF%A1%E6%81%AF%E6%8E%A8%E9%80%81%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%BA%8C%EF%BC%89/"/>
     <id>http://blog.chenwe.top/2017/10/03/2017/2017-10-03 图书信息推送系统（二）/</id>
-    <published>2017-10-03T12:16:23.865Z</published>
-    <updated>2017-10-03T12:51:42.236Z</updated>
+    <published>2017-10-03T12:16:23.866Z</published>
+    <updated>2017-10-03T12:51:42.237Z</updated>
     
     <content type="html"><![CDATA[<p>上回书说到<br>Linux数据库的配置以及远程连接</p>
 <p>这次我们来讲下具体功能的实现<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171003202042469.png" alt=""></p>
@@ -846,8 +846,8 @@
     <title>图书信息推送系统（一）</title>
     <link href="http://blog.chenwe.top/2017/10/01/2017/2017-10-01%20%E5%9B%BE%E4%B9%A6%E4%BF%A1%E6%81%AF%E6%8E%A8%E9%80%81%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%B8%80%EF%BC%89/"/>
     <id>http://blog.chenwe.top/2017/10/01/2017/2017-10-01 图书信息推送系统（一）/</id>
-    <published>2017-10-01T07:46:23.184Z</published>
-    <updated>2017-10-01T08:54:58.321Z</updated>
+    <published>2017-10-01T07:46:23.185Z</published>
+    <updated>2017-10-01T08:54:58.322Z</updated>
     
     <content type="html"><![CDATA[<p>之前把实验室的一台废弃的主机改装成了Ubuntu系统<br>于是我准备把它拿来搞事请</p>
 <p>我们学校的图书馆虽然可以网上查询图书信息<br>但是却没有提供图书到馆通知的功能<br>有时候想借一本书，但是却被别人借走了<br>自己就要时不时关注图书的信息，十分麻烦<br>所以，开始搞事<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171001155255849.png" alt=""></p>
