@@ -6,27 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.chenwe.top">
-  <title>关于百度搜索不到Github Pages的解决方法. | Xiaoshidefeng的博客</title>
+  <title>KNN算法简析 | Xiaoshidefeng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="我的博客是托管在Github Pages上的我们知道，Github是屏蔽百度的所有我们的博客是不会被百度收录的如果我们想要被百度收录的话该怎么办呢">
+  <meta name="description" content="学习Peter Harrington的《Machine Learning in Action》的一些笔记与个人理解这次是关于KNN算法部分的内容">
 <meta name="keywords" content="study,code">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于百度搜索不到Github Pages的解决方法.">
-<meta property="og:url" content="http://blog.chenwe.top/2017/08/01/2017/关于百度搜索不到Github Pages的解决方法/index.html">
+<meta property="og:title" content="KNN算法简析">
+<meta property="og:url" content="http://blog.chenwe.top/2019/02/28/2019/2019-05-09 KNN算法简析/index.html">
 <meta property="og:site_name" content="Xiaoshidefeng的博客">
-<meta property="og:description" content="我的博客是托管在Github Pages上的我们知道，Github是屏蔽百度的所有我们的博客是不会被百度收录的如果我们想要被百度收录的话该怎么办呢">
-<meta property="og:image" content="http://otj6w86xd.bkt.clouddn.com/wenhao.jpg">
-<meta property="og:image" content="http://otj6w86xd.bkt.clouddn.com/2017080101.png">
-<meta property="og:image" content="http://otj6w86xd.bkt.clouddn.com/2017080102.png">
-<meta property="og:image" content="http://otj6w86xd.bkt.clouddn.com/2017080103.png">
-<meta property="og:image" content="http://otj6w86xd.bkt.clouddn.com/2017080104.png">
-<meta property="og:image" content="http://otj6w86xd.bkt.clouddn.com/2017080105.png">
-<meta property="og:image" content="http://otj6w86xd.bkt.clouddn.com/2017080106.png">
-<meta property="og:updated_time" content="2017-08-01T09:10:22.909Z">
+<meta property="og:description" content="学习Peter Harrington的《Machine Learning in Action》的一些笔记与个人理解这次是关于KNN算法部分的内容">
+<meta property="og:updated_time" content="2019-05-11T06:29:58.498Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于百度搜索不到Github Pages的解决方法.">
-<meta name="twitter:description" content="我的博客是托管在Github Pages上的我们知道，Github是屏蔽百度的所有我们的博客是不会被百度收录的如果我们想要被百度收录的话该怎么办呢">
-<meta name="twitter:image" content="http://otj6w86xd.bkt.clouddn.com/wenhao.jpg">
+<meta name="twitter:title" content="KNN算法简析">
+<meta name="twitter:description" content="学习Peter Harrington的《Machine Learning in Action》的一些笔记与个人理解这次是关于KNN算法部分的内容">
   
     <link rel="alternative" href="/atom.xml" title="Xiaoshidefeng的博客" type="application/atom+xml">
   
@@ -195,14 +187,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-2017/关于百度搜索不到Github Pages的解决方法" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-2019/2019-05-09 KNN算法简析" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      关于百度搜索不到Github Pages的解决方法.
+      KNN算法简析
     </h1>
     <span>&nbsp;&nbsp;&nbsp; | &nbsp;
     <span id="busuanzi_value_page_pv" ></span>次阅读
@@ -211,35 +203,22 @@
 
 
         
-        <a href="/2017/08/01/2017/关于百度搜索不到Github Pages的解决方法/" class="archive-article-date">
-  	<time datetime="2017-08-01T08:09:24.308Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-01</time>
+        <a href="/2019/02/28/2019/2019-05-09 KNN算法简析/" class="archive-article-date">
+  	<time datetime="2019-02-28T03:33:26.599Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>我的博客是托管在Github Pages上的<br>我们知道，Github是屏蔽百度的<br>所有我们的博客是不会被百度收录的<br>如果我们想要被百度收录的话该怎么办呢<br><img src="http://otj6w86xd.bkt.clouddn.com/wenhao.jpg" alt=""></p>
+        <p>学习Peter Harrington的《Machine Learning in Action》的一些笔记与个人理解<br>这次是关于KNN算法部分的内容</p>
 <a id="more"></a>
-<h2 id="使用coding来一起托管"><a href="#使用coding来一起托管" class="headerlink" title="使用coding来一起托管"></a>使用coding来一起托管</h2><p>Coding也是一个代码托管平台<br>也有Coding Pages的服务<br>而且不会屏蔽百度爬虫<br>我们可以利用Coding Pages 来帮我们完成被百度收录的工作</p>
-<h2 id="讲代码迁移到coding上"><a href="#讲代码迁移到coding上" class="headerlink" title="讲代码迁移到coding上"></a>讲代码迁移到coding上</h2><p>我们首先要注册一个coding的账号<br>个人设置中配置好ssh公钥</p>
-<p>然后我们新建一个项目<br><img src="http://otj6w86xd.bkt.clouddn.com/2017080101.png" alt=""><br>将项目的名字命名为自己的 名字.coding.me</p>
-<p><img src="http://otj6w86xd.bkt.clouddn.com/2017080102.png" alt=""><br>复制我们的项目连接</p>
-<p>打开我们的博客<br>找到 _config 文件</p>
-<p>在 depoly里添加coding的仓库地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">- type: git</div><div class="line">  repository:</div><div class="line">    github: https://github.com/yourname/yourname.github.io,master</div><div class="line">    coding: git@git.coding.net:yourname/yourname.coding.me.git,master</div></pre></td></tr></table></figure></p>
-<p>我们打开命令行工具<br>执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo g</div><div class="line">hexo d</div></pre></td></tr></table></figure></p>
-<p>如果配置没问题的话，你的项目应该已经出现在coding的仓库里了</p>
-<h2 id="开启coding-pages服务"><a href="#开启coding-pages服务" class="headerlink" title="开启coding pages服务"></a>开启coding pages服务</h2><p>完善自己coding的个人信息<br>达到银牌才能开启pages服务</p>
-<p><img src="http://otj6w86xd.bkt.clouddn.com/2017080103.png" alt=""><br>在这里设置pages服务</p>
-<p>如果没有域名的话，看到这里就可以了</p>
-<p>有自己的域名的话接着往下看</p>
-<h2 id="绑定域名"><a href="#绑定域名" class="headerlink" title="绑定域名"></a>绑定域名</h2><p>我买的域名是阿里云的万网<br>支持智能路由<br><img src="http://otj6w86xd.bkt.clouddn.com/2017080104.png" alt=""><br>我们设置默认访问coding pages，海外访问github pages<br>这样我们域名就绑定好了</p>
-<p>但是因为coding pages 是有限制的，如果银牌会员绑定域名<br>每天第一次访问时会跳出一个5秒掉的引导页<br>这个会让搜索引擎的爬虫无法爬取数据</p>
-<h2 id="收录网站"><a href="#收录网站" class="headerlink" title="收录网站"></a>收录网站</h2><p>所以我们需要关掉这个引导页<br>官方的要求是在页面里加入 Host by coding pages<br><img src="http://otj6w86xd.bkt.clouddn.com/2017080105.png" alt=""></p>
-<p>毕竟用了人家的服务<br>还是要支持一下的嘛，不能总是想着占便宜，不付出</p>
-<p>加完Host by Coding Pages并通过审核后<br>我们的内容就可以被百度和Google爬虫爬取了</p>
-<p>测试是否能被百度收录<br>可以用百度的<a href="http://zhanzhang.baidu.com/" target="_blank" rel="external">站长工具</a><br>来测试<br>在网页抓取 -&gt; 抓取诊断里<br><img src="http://otj6w86xd.bkt.clouddn.com/2017080106.png" alt=""><br>测试能否被抓取<br>当然，要他们收录你的网站，你还要通过他的验证，这里就不赘述了</p>
-<p>Google收录的方法也是类似的，但是收录的速度比百度快很多，这里也不做赘述</p>
+<p>Peter Harrington的《Machine Learning in Action》还是挺适合入门的，简单易懂<br>他的第一个机器学习算法就是KNN算法（K-最近邻算法）</p>
+<h1 id="KNN"><a href="#KNN" class="headerlink" title="KNN"></a>KNN</h1><p>KNN其实就是基于距离来进行分类的算法</p>
+<h2 id="距离"><a href="#距离" class="headerlink" title="距离"></a>距离</h2><p>关于不同特征值之间的距离的定义有很多的方法。<br>我们比较常见的有：欧式距离与曼哈顿距离等。<br>欧式距离就是我们中学阶段学过的在几何空间中的两点直线距离。<br>曼哈顿距离是两点间水平距离与纵向距离想家的距离，类似于城市不同街道中的两点距离。</p>
+<h2 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h2><p>KNN算法先存在一个样本数据的集合，并且每个样本中每个数据都有自己的标签（知道这个数据的所属类别），这个数据集合就是训练样本集。<br>然后输入没有标签的数据，计算它和所有点之间的距离。然后取出前K个最近的距离的点（KNN的K的由来），统计K个中出现次数最多的分类，那么这个没有标签的数据也作为这个分类。</p>
+<h2 id="一些优化"><a href="#一些优化" class="headerlink" title="一些优化"></a>一些优化</h2><p>算法浅显易懂，但还是有很多值得优化的地方。<br>首先，就是计算量较大，如果所有的数都两两比较来计算距离，那将是一笔巨大的开销。<br>所以可以构建KD-TREE来优化。KD-TREE就像一个二叉搜索树，但它是空间化的搜索树，以某一特征值作为一次划分的节点。通过搜索，免去了不必要的点的计算，节省了计算开销。关于KD-TREE的详细介绍，网络上已经有了许多文章，这里不再赘述。</p>
+<p>其次，KNN中某些距离的值可能对结果的影响较大。例如部分数据数值较大，差值较大，而一些数据的数值变化较小，数值较小。所以还要采用归一化的方法来合理分类。<br>归一化将数值的取值范围统一到0-1之间，公式为<code>newValue = (oldValue - min) / (max - min)</code></p>
 
       
 
@@ -295,7 +274,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/GithubPages/" class="article-tag-list-link color3">Github Pages</a>
+        			<a href="/categories/MachineLearning/" class="article-tag-list-link color2">Machine Learning</a>
         		</li>
       		
 		</ul>
@@ -350,7 +329,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://blog.chenwe.top/2017/08/01/2017/关于百度搜索不到Github Pages的解决方法/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://blog.chenwe.top/2019/02/28/2019/2019-05-09 KNN算法简析/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -364,18 +343,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/08/02/2017/IDEA Maven项目依赖失效/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          IDEA Maven项目依赖失效
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/07/31/2017/Vue.js实现按钮点击出现倒计时/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Vue.js实现按钮点击出现倒计时</div>
+    <a href="/2018/05/07/2018/2018-05-07 Ubuntu交换空间设置/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Ubuntu交换空间设置</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -405,9 +375,9 @@
         </script>
         <script type="text/javascript">
             var config = {
-                title: '关于百度搜索不到Github Pages的解决方法.',
-                url: 'http://blog.chenwe.top/2017/08/01/2017/关于百度搜索不到Github Pages的解决方法/',
-                key: '2017/关于百度搜索不到Github Pages的解决方法'
+                title: 'KNN算法简析',
+                url: 'http://blog.chenwe.top/2019/02/28/2019/2019-05-09 KNN算法简析/',
+                key: '2019/2019-05-09 KNN算法简析'
             }
             LightComment(config);
             

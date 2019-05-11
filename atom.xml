@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.chenwe.top/"/>
-  <updated>2019-02-28T03:55:46.473Z</updated>
+  <updated>2019-05-11T06:29:58.498Z</updated>
   <id>http://blog.chenwe.top/</id>
   
   <author>
@@ -16,37 +16,25 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>机器学习与梯度下降</title>
-    <link href="http://blog.chenwe.top/2019/02/28/2019/2018-02-17%20%E5%B1%82%E6%AC%A1%E5%88%86%E6%9E%90%E6%B3%95/"/>
-    <id>http://blog.chenwe.top/2019/02/28/2019/2018-02-17 层次分析法/</id>
+    <title>KNN算法简析</title>
+    <link href="http://blog.chenwe.top/2019/02/28/2019/2019-05-09%20KNN%E7%AE%97%E6%B3%95%E7%AE%80%E6%9E%90/"/>
+    <id>http://blog.chenwe.top/2019/02/28/2019/2019-05-09 KNN算法简析/</id>
     <published>2019-02-28T03:33:26.599Z</published>
-    <updated>2019-02-28T03:55:46.473Z</updated>
+    <updated>2019-05-11T06:29:58.498Z</updated>
     
-    <content type="html"><![CDATA[<p>看吴恩达视频的一些笔记</p>
+    <content type="html"><![CDATA[<p>学习Peter Harrington的《Machine Learning in Action》的一些笔记与个人理解<br>这次是关于KNN算法部分的内容</p>
 <a id="more"></a>
-<p>目前机器学习分为两个类型</p>
-<ul>
-<li>监督学习</li>
-<li>无监督学习</li>
-</ul>
-<p><code>监督学习</code>下又有</p>
-<ul>
-<li>分类问题</li>
-<li>回归问题</li>
-<li>…</li>
-</ul>
-<p><code>无监督学习</code>有</p>
-<ul>
-<li>鸡尾酒会问题</li>
-<li>聚类问题</li>
-<li>…</li>
-</ul>
-<p>这两类的主要区别，我目前的理解是监督学习是人为提供样本，有目的的进行学习。无监督学习是不是告诉计算机怎么做，而是让它自己去学习怎样做事情。</p>
-<h2 id="梯度下降"><a href="#梯度下降" class="headerlink" title="梯度下降"></a>梯度下降</h2>]]></content>
+<p>Peter Harrington的《Machine Learning in Action》还是挺适合入门的，简单易懂<br>他的第一个机器学习算法就是KNN算法（K-最近邻算法）</p>
+<h1 id="KNN"><a href="#KNN" class="headerlink" title="KNN"></a>KNN</h1><p>KNN其实就是基于距离来进行分类的算法</p>
+<h2 id="距离"><a href="#距离" class="headerlink" title="距离"></a>距离</h2><p>关于不同特征值之间的距离的定义有很多的方法。<br>我们比较常见的有：欧式距离与曼哈顿距离等。<br>欧式距离就是我们中学阶段学过的在几何空间中的两点直线距离。<br>曼哈顿距离是两点间水平距离与纵向距离想家的距离，类似于城市不同街道中的两点距离。</p>
+<h2 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h2><p>KNN算法先存在一个样本数据的集合，并且每个样本中每个数据都有自己的标签（知道这个数据的所属类别），这个数据集合就是训练样本集。<br>然后输入没有标签的数据，计算它和所有点之间的距离。然后取出前K个最近的距离的点（KNN的K的由来），统计K个中出现次数最多的分类，那么这个没有标签的数据也作为这个分类。</p>
+<h2 id="一些优化"><a href="#一些优化" class="headerlink" title="一些优化"></a>一些优化</h2><p>算法浅显易懂，但还是有很多值得优化的地方。<br>首先，就是计算量较大，如果所有的数都两两比较来计算距离，那将是一笔巨大的开销。<br>所以可以构建KD-TREE来优化。KD-TREE就像一个二叉搜索树，但它是空间化的搜索树，以某一特征值作为一次划分的节点。通过搜索，免去了不必要的点的计算，节省了计算开销。关于KD-TREE的详细介绍，网络上已经有了许多文章，这里不再赘述。</p>
+<p>其次，KNN中某些距离的值可能对结果的影响较大。例如部分数据数值较大，差值较大，而一些数据的数值变化较小，数值较小。所以还要采用归一化的方法来合理分类。<br>归一化将数值的取值范围统一到0-1之间，公式为<code>newValue = (oldValue - min) / (max - min)</code></p>
+]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;看吴恩达视频的一些笔记&lt;/p&gt;
+      &lt;p&gt;学习Peter Harrington的《Machine Learning in Action》的一些笔记与个人理解&lt;br&gt;这次是关于KNN算法部分的内容&lt;/p&gt;
     
     </summary>
     
