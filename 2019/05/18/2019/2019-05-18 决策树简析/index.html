@@ -6,17 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.chenwe.top">
-  <title>Archives | Xiaoshidefeng的博客</title>
+  <title>决策树简析 | Xiaoshidefeng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="CW的个人Blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Xiaoshidefeng的博客">
-<meta property="og:url" content="http://blog.chenwe.top/archives/page/6/index.html">
+  <meta name="description" content="学习Peter Harrington的《Machine Learning in Action》的一些笔记与个人理解这次是关于决策树算法部分的内容">
+<meta name="keywords" content="study,code">
+<meta property="og:type" content="article">
+<meta property="og:title" content="决策树简析">
+<meta property="og:url" content="http://blog.chenwe.top/2019/05/18/2019/2019-05-18 决策树简析/index.html">
 <meta property="og:site_name" content="Xiaoshidefeng的博客">
-<meta property="og:description" content="CW的个人Blog">
+<meta property="og:description" content="学习Peter Harrington的《Machine Learning in Action》的一些笔记与个人理解这次是关于决策树算法部分的内容">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/754644/201609/754644-20160924102146715-235068092.png">
+<meta property="og:updated_time" content="2019-05-18T08:34:11.057Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Xiaoshidefeng的博客">
-<meta name="twitter:description" content="CW的个人Blog">
+<meta name="twitter:title" content="决策树简析">
+<meta name="twitter:description" content="学习Peter Harrington的《Machine Learning in Action》的一些笔记与个人理解这次是关于决策树算法部分的内容">
+<meta name="twitter:image" content="https://images2015.cnblogs.com/blog/754644/201609/754644-20160924102146715-235068092.png">
   
     <link rel="alternative" href="/atom.xml" title="Xiaoshidefeng的博客" type="application/atom+xml">
   
@@ -185,227 +189,206 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
+            <article id="post-2019/2019-05-18 决策树简析" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      决策树简析
+    </h1>
+    <span>&nbsp;&nbsp;&nbsp; | &nbsp;
+    <span id="busuanzi_value_page_pv" ></span>次阅读
+    </span>
+  
+
+
+        
+        <a href="/2019/05/18/2019/2019-05-18 决策树简析/" class="archive-article-date">
+  	<time datetime="2019-05-18T08:07:06.669Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>学习Peter Harrington的《Machine Learning in Action》的一些笔记与个人理解<br>这次是关于决策树算法部分的内容</p>
+<a id="more"></a>
+<h1 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h1><p>决策树在分类问题中表示基于特征对实例进行分类的过程<br>决策树的生成通常包括：特征选择、决策树构建、剪枝三个过程<br>目前有ID3、C4.5、CART三种决策树模型<br>这里简单介绍下ID3的决策树</p>
+<h1 id="ID3"><a href="#ID3" class="headerlink" title="ID3"></a>ID3</h1><p>ID3主要通过信息增益来进行决策树的抉择划分</p>
+<h2 id="熵与信息增益"><a href="#熵与信息增益" class="headerlink" title="熵与信息增益"></a>熵与信息增益</h2><p>熵：表示随机变量的不确定性</p>
+<p>条件熵：在一个条件下，随机变量的不确定性</p>
+<p>信息增益：熵 - 条件熵</p>
+<p>公式如图：<br><img src="https://images2015.cnblogs.com/blog/754644/201609/754644-20160924102146715-235068092.png" alt=""></p>
+<p>信息增益就是在划分数据集前后信息发生的变化<br>ID3就是每次根据“最大信息熵增益”选取当前最佳的特征来分割数据（贪心）</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://otj6w86xd.bkt.clouddn.com/wxzf.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/MachineLearning/" class="article-tag-list-link color2">Machine Learning</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://blog.chenwe.top/2019/05/18/2019/2019-05-18 决策树简析/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2019/02/28/2019/2019-05-09 KNN算法简析/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">KNN算法简析</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.22/dist/vue.js"></script>
+    
+  <!-- 引入组件库 -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <div id="light_thread"></div>
+    
+<div id="lv-container" style="padding: 25px" >
+    <script type="text/javascript" src="http://localhost:8080/static-dev.js">
+        </script>
+        <script type="text/javascript">
+            var config = {
+                title: '决策树简析',
+                url: 'http://blog.chenwe.top/2019/05/18/2019/2019-05-18 决策树简析/',
+                key: '2019/2019-05-18 决策树简析'
+            }
+            LightComment(config);
             
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/09/2017/关于SpringBoot部署上的一些坑/" class="archive-article-date">
-  	<time datetime="2017-07-09T06:53:00.354Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/09/2017/关于SpringBoot部署上的一些坑/">关于SpringBoot部署上的一些坑</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/SpringBoot/" class="article-tag-list-link color1">SpringBoot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        </script>
+</div>
 
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/11/2017/IDEA SpringBoot 环境搭建/" class="archive-article-date">
-  	<time datetime="2017-05-11T10:33:16.472Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/11/2017/IDEA SpringBoot 环境搭建/">IDEA里构建SpringBoot项目</a>
-    </h1>
-  
 
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/SpringBoot/" class="article-tag-list-link color1">SpringBoot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/09/2017/关于这个博客/" class="archive-article-date">
-  	<time datetime="2017-05-09T06:46:15.247Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/09/2017/关于这个博客/">关于博客</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">life</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">read</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/测试/" class="article-tag-list-link color3">测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/08/2017/hello-world/" class="archive-article-date">
-  	<time datetime="2017-05-08T11:55:07.525Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/08/2017/hello-world/">Hello World</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/page/5/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/4/">4</a><a class="page-number" href="/archives/page/5/">5</a><span class="page-number current">6</span>
-    </nav>
   
 
 
@@ -444,8 +427,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
