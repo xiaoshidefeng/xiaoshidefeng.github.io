@@ -4,8 +4,54 @@
 
     
   <url>
+    <loc>http://blog.chenwe.top/2019/07/12/2019/2019-07-12%20Kaggle%E5%85%A5%E9%97%A8%E9%A2%98%E7%9B%AETitanic%E7%9A%84%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E5%BA%94%E7%94%A8%EF%BC%88%E4%B8%80%EF%BC%89/</loc>
+    <lastmod>2019-07-13T09:00:31.137Z</lastmod>
+    <data>
+        <display>
+        <title>Kaggle入门题目Titanic的逻辑回归应用（一）</title>
+        <pubTime>2019-07-12T12:41:57.977Z</pubTime>
+        
+        <tag>study</tag>
+         
+        <tag>code</tag>
+         
+        <tag>kaggle</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine Learning" url="http://blog.chenwe.top/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.chenwe.top/2019/05/19/2019/2019-05-19%20%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/</loc>
+    <lastmod>2019-07-12T12:39:00.799Z</lastmod>
+    <data>
+        <display>
+        <title>朴素贝叶斯</title>
+        <pubTime>2019-05-19T07:25:09.787Z</pubTime>
+        
+        <tag>study</tag>
+         
+        <tag>code</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine Learning" url="http://blog.chenwe.top/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.chenwe.top/2019/05/18/2019/2019-05-18%20%E5%86%B3%E7%AD%96%E6%A0%91%E7%AE%80%E6%9E%90/</loc>
-    <lastmod>2019-05-18T08:34:11.057Z</lastmod>
+    <lastmod>2019-05-18T12:30:35.724Z</lastmod>
     <data>
         <display>
         <title>决策树简析</title>

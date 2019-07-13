@@ -1,1 +1,1 @@
-http://blog.chenwe.top/2019/05/18/2019/2019-05-18 决策树简析/
+http://blog.chenwe.top/2019/07/12/2019/2019-07-12 Kaggle入门题目Titanic的逻辑回归应用（一）/
