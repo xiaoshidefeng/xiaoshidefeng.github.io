@@ -237,7 +237,8 @@
 <p>StringHeadViewHolder.java    头部的ViewHolder<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.example.asus.ultimaterecyclerviewtest;</div><div class="line"></div><div class="line"><span class="keyword">import</span> android.view.View;</div><div class="line"><span class="keyword">import</span> android.widget.TextView;</div><div class="line"></div><div class="line"><span class="keyword">import</span> com.marshalchen.ultimaterecyclerview.UltimateRecyclerviewViewHolder;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by asus on 2018/3/17.</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringHeadViewHolder</span> <span class="keyword">extends</span> <span class="title">UltimateRecyclerviewViewHolder</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> TextView tv2;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">StringHeadViewHolder</span><span class="params">(View itemView)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(itemView);</div><div class="line">        tv2 = (TextView) itemView.findViewById(R.id.tv2);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>StringViewHolder.java  列表的ViewHolder<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">package</span> com.example.asus.ultimaterecyclerviewtest;</div><div class="line"></div><div class="line"><span class="keyword">import</span> android.view.View;</div><div class="line"><span class="keyword">import</span> android.widget.TextView;</div><div class="line"></div><div class="line"><span class="keyword">import</span> com.marshalchen.ultimaterecyclerview.UltimateRecyclerviewViewHolder;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by asus on 2018/3/17.</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringViewHolder</span> <span class="keyword">extends</span> <span class="title">UltimateRecyclerviewViewHolder</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> TextView tv;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">StringViewHolder</span><span class="params">(View itemView, <span class="keyword">boolean</span> isItem)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(itemView);</div><div class="line">        <span class="keyword">if</span> (isItem) &#123;</div><div class="line">            tv = (TextView) itemView;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>这里再说下关于viewholder知识。<br>ViewHolder通常出现在适配器里，为的是列表滚动的时候快速设置值，而不必每次都重新创建很多对象，从而提升性能。<br>也可以说是一个持有者的类，他里面一般没有方法，只有属性，作用就是一个临时的储存器，把你getView方法中每次返回的View存起来，可以下次再用。这样做的好处就是不必每次都到布局文件中去拿到你的View，提高了效率。</p>
-<h2 id="效果演示"><a href="#效果演示" class="headerlink" title="效果演示"></a>效果演示</h2><video src="http://ow9eu3p52.bkt.clouddn.com/Screenrecorder-2018-03-19-13-52-14-486.mp4" type="video/mp4" controls="controls" width="33%" height="33%"><br></video>
+<h2 id="效果演示"><a href="#效果演示" class="headerlink" title="效果演示"></a>效果演示</h2><video src="http://ow9eu3p52.bkt.clouddn.com/Screenrecorder-2018-03-19-13-52-14-486.mp4" type="video/mp4" controls="controls" width="33%" height="33%">
+</video>
 
 
 <h2 id="框架文档"><a href="#框架文档" class="headerlink" title="框架文档"></a>框架文档</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><blockquote>
@@ -404,25 +405,23 @@
 
   
   <!-- 来必力City版安装代码 -->
-<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTc5Mi82MzU4" style="padding: 25px">
-
-	<script type="text/javascript">
-   (function(d, s) {
-       var j, e = d.getElementsByTagName(s)[0];
-
-       if (typeof LivereTower === 'function') { return; }
-
-       j = d.createElement(s);
-       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-       j.async = true;
-
-       e.parentNode.insertBefore(j, e);
-   })(document, 'script');
-	</script>
-<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
-</div>
-<!-- City版安装代码已完成 -->
-
+<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTc5Mi82MzU4">
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
+    
+           if (typeof LivereTower === 'function') { return; }
+    
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
+    
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    </div>
+    <!-- City版安装代码已完成 -->
   
 
   
@@ -563,15 +562,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">kaggle</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">life</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">read</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">kaggle</a>
               </li>
             
             <div class="clearfix"></div>
