@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.chenwe.top/"/>
-  <updated>2019-07-16T05:44:15.680Z</updated>
+  <updated>2019-07-23T05:32:13.782Z</updated>
   <id>http://blog.chenwe.top/</id>
   
   <author>
@@ -16,11 +16,63 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>CCF YOCSEF杭州总结</title>
+    <link href="http://blog.chenwe.top/2019/07/22/2019/2019-07-22%20CCF%20YOCSEF%E6%9D%AD%E5%B7%9E%E6%80%BB%E7%BB%93/"/>
+    <id>http://blog.chenwe.top/2019/07/22/2019/2019-07-22 CCF YOCSEF杭州总结/</id>
+    <published>2019-07-22T03:05:12.025Z</published>
+    <updated>2019-07-23T05:32:13.782Z</updated>
+    
+    <content type="html"><![CDATA[<p>昨天参加了CCF YOCSEF杭州，硬核技术系列论坛之人工智能，这里做下一些记录和总结。</p>
+<a id="more"></a>
+<h1 id="论坛一：深度学习能否继续引爆人工智能？"><a href="#论坛一：深度学习能否继续引爆人工智能？" class="headerlink" title="论坛一：深度学习能否继续引爆人工智能？"></a>论坛一：深度学习能否继续引爆人工智能？</h1><p>这是第一个论坛。主要讨论的是在深度学习火爆的今天，存在着很多质疑的声音，深度学习能否继续引爆人工智能成为整个行业关注的焦点问题。<br>上午的第一个论坛，主要由北大，浙大，北交，上交的教授做了talk，题目是：</p>
+<ul>
+<li>AI热潮下的冷思索：我们应该研究什么？</li>
+<li>视觉结构学习理论和应用</li>
+<li>深度学习解释性：从“能”到“不能”</li>
+<li>Learning Deep Regression Model for Visual Tracking</li>
+</ul>
+<p>因为内容过多，所以我选取几个我印象较深的话题来记录。</p>
+<h2 id="当下的AI遇到的一些问题"><a href="#当下的AI遇到的一些问题" class="headerlink" title="当下的AI遇到的一些问题"></a>当下的AI遇到的一些问题</h2><p>这块主要是北大的教授讲的，目前AI领域的学术论文投稿呈现爆炸式增长，在AI火爆的同时也暴露出了很多的问题，比如论文数太多，找不到那么多的审稿人，我们需要把期刊建设好。<br>同时近两年来，质疑AI的声音也开始出现，例如Yann LeCun 和Gary Marcus关于就 AI 是否需要类似人类和动物的内置的认知机制，以实现类似人类的智能这一问题，展开了激烈的辩论。<br>教授对于国内的一些创新问题也发表了看法。国外的DeepMind公司近两年来取得很大的创新与成功，但国内的公司却浮躁，总是用一些花式的组合去解决问题，而忽略了创新，总是不计算力的去改进问题，而忽略了本质的创新，AI成了算力的竞争。<br>第一个talk是田教授讲的，主要是一个比较笼统的概括性talk，同时也能让人引起一些思考。比如我们在AI火爆的今天，不要太过浮躁，要脚踏实地的去创新，而不是简单的去通过算力追求什么排行榜的第一名。同时要认真对待论文，不要灌水论文。<br>因为上午大多是深度学习相关的内容，以为本身这方面只是储备还是不够，所以目前对于上午的内容，可能理解还不够深刻。</p>
+<h1 id="论坛二：人工智能安全发展之路"><a href="#论坛二：人工智能安全发展之路" class="headerlink" title="论坛二：人工智能安全发展之路"></a>论坛二：人工智能安全发展之路</h1><p>这是下午的第二个论坛，主要针对人工智能安全发展之路，围绕人工智能与安全的关系，如何用安全技术促进人工智能等问题展开讨论。<br>下午talk题目是：</p>
+<ul>
+<li>智能化漏洞攻防探索</li>
+<li>Machine Learning for Inclusive Finance</li>
+<li>Deep Learning System Security</li>
+<li>eNASA电商风控图算法平台</li>
+<li>基于代码属性图及注意力神经网络的漏洞挖掘方法</li>
+<li>从AI安全检测到安全AI</li>
+<li>系统安全智能化的理论研究与技术实践</li>
+</ul>
+<h2 id="AI攻防与数据投毒"><a href="#AI攻防与数据投毒" class="headerlink" title="AI攻防与数据投毒"></a>AI攻防与数据投毒</h2><p>目前的攻防已经开始从AI辅助攻防逐渐过渡到自动化攻防，但这发面的发展也遇到了一些问题，例如数据的稀缺与难以获取，特征提取的不明确，数据预处理和可解释性的问题（如何验证漏洞）。<br>同时数据投毒也越来越引起人们的注意。针对人工智能“数据投毒”有以下两种方式：第一种攻击模式是采用“模型倾斜”的方式，主要攻击目标是人工智能的学习训练的数据样本。二种攻击模式是采取反馈武器化的方式，主要攻击目标是人工智能的学习模型本身。<br>现代深度网络是非常容易受到对抗样本的攻击的。这些对抗样本仅有很轻微的扰动，以至于人类视觉系统无法察觉这种扰动（图片看起来几乎一样）。如图所示：<br><img src="https://i.loli.net/2019/07/23/5d36792c4c96780431.jpeg" alt=""><br>黑客可以通过向真实样本中添加人眼不可见的噪声，导致深度学习模型发生预测错误的样本。<br>目前，在对抗攻击防御上存在三个主要方向：</p>
+<p>1）在学习过程中修改训练过程或者修改的输入样本。</p>
+<p>2）修改网络，比如：添加更多层/子网络、改变损失/激活函数等。</p>
+<p>3）当分类未见过的样本时，用外部模型作为附加网络。</p>
+<h2 id="漏洞挖掘与恶意代码检测"><a href="#漏洞挖掘与恶意代码检测" class="headerlink" title="漏洞挖掘与恶意代码检测"></a>漏洞挖掘与恶意代码检测</h2><p>由于Android应用市场的缺乏监管、Android应用开发、部署模式以及Permission权限粒度过粗等问题导致Android应用存在大量的安<br>全问题。恶意应用自动检测和分类技术主要分为2种基本类型:静态检测技术通过逆向分析获得 APK样本源代码进而从中识别恶意代码,检测恶意行为。动态检测技术通过在受控环境中部署和运行APK样本监控其运行状态进而识别恶意行为发现恶意应用。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;昨天参加了CCF YOCSEF杭州，硬核技术系列论坛之人工智能，这里做下一些记录和总结。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Machine Learning" scheme="http://blog.chenwe.top/categories/Machine-Learning/"/>
+    
+    
+      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
+    
+      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
+    
+      <category term="life" scheme="http://blog.chenwe.top/tags/life/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Kaggle入门题目Titanic的逻辑回归应用（二）</title>
     <link href="http://blog.chenwe.top/2019/07/14/2019/2019-07-13%20Kaggle%E5%85%A5%E9%97%A8%E9%A2%98%E7%9B%AETitanic%E7%9A%84%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E5%BA%94%E7%94%A8%EF%BC%88%E4%BA%8C%EF%BC%89/"/>
     <id>http://blog.chenwe.top/2019/07/14/2019/2019-07-13 Kaggle入门题目Titanic的逻辑回归应用（二）/</id>
     <published>2019-07-14T02:33:42.415Z</published>
-    <updated>2019-07-16T05:44:15.680Z</updated>
+    <updated>2019-07-22T03:04:30.462Z</updated>
     
     <content type="html"><![CDATA[<p>上次只是做了一个简单的baseline model，这次要对它进行优化。</p>
 <a id="more"></a>
@@ -69,7 +121,7 @@ h_\theta(x) = \frac{1}{1+e^{(-\theta^Tx)}}</script><p>其中 θ 是模型参数�
     <link href="http://blog.chenwe.top/2019/07/12/2019/2019-07-12%20Kaggle%E5%85%A5%E9%97%A8%E9%A2%98%E7%9B%AETitanic%E7%9A%84%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E5%BA%94%E7%94%A8%EF%BC%88%E4%B8%80%EF%BC%89/"/>
     <id>http://blog.chenwe.top/2019/07/12/2019/2019-07-12 Kaggle入门题目Titanic的逻辑回归应用（一）/</id>
     <published>2019-07-12T12:41:57.977Z</published>
-    <updated>2019-07-16T05:43:47.537Z</updated>
+    <updated>2019-07-16T05:44:38.606Z</updated>
     
     <content type="html"><![CDATA[<p>Kaggle是一个数据建模和数据分析竞赛平台。企业和研究者可在其上发布数据，统计学者和数据挖掘专家可在其上进行竞赛以产生最好的模型。<br>这次记录一下Kaggle上的入门题目Titanic人员幸存预测，用了逻辑回归。</p>
 <a id="more"></a>
@@ -871,46 +923,6 @@ h_\theta(x) = \frac{1}{1+e^{(-\theta^Tx)}}</script><p>其中 θ 是模型参数�
     </summary>
     
       <category term="SpringBoot" scheme="http://blog.chenwe.top/categories/SpringBoot/"/>
-    
-    
-      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
-    
-      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Oracle的安装与新用户的创建</title>
-    <link href="http://blog.chenwe.top/2017/10/21/2017/2017-10-21%20Oracle%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E6%96%B0%E7%94%A8%E6%88%B7%E7%9A%84%E5%88%9B%E5%BB%BA/"/>
-    <id>http://blog.chenwe.top/2017/10/21/2017/2017-10-21 Oracle的安装与新用户的创建/</id>
-    <published>2017-10-21T08:42:15.276Z</published>
-    <updated>2017-10-21T11:45:17.438Z</updated>
-    
-    <content type="html"><![CDATA[<p>之前用的都是Mysql来做数据库<br>这次来试试Oracle<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-2017102118360441.png" alt=""><br><a id="more"></a></p>
-<h2 id="Oracle的安装"><a href="#Oracle的安装" class="headerlink" title="Oracle的安装"></a>Oracle的安装</h2><p>我这里使用的是Oracle 12c版本<br>在<a href="https://www.oracle.com/cn/database/index.html" target="_blank" rel="external">官方下载地址</a><br>里将两个压缩文件都下载过来<br>将这两个文件都解压出来<br>将<code>winx64_12102_database_2of2</code>里的stage 文件<br>与<code>winx64_12102_database_1of2</code>里的stage文件合并<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171021184009746.png" alt=""></p>
-<p>然后点击setup 安装Oracle<br>具体的安装方法可以参考<a href="http://www.cnblogs.com/soraka/p/5855724.html" target="_blank" rel="external">这篇博客</a><br>安装过程十分的慢，请耐心等待</p>
-<h2 id="启动Oracle服务"><a href="#启动Oracle服务" class="headerlink" title="启动Oracle服务"></a>启动Oracle服务</h2><p>我们首先要启动Oracle的服务<br>右键我的电脑 -&gt; 管理 -&gt; 服务和应用程序 -&gt; 服务<br>里面找到 <code>OracleServiceORCL</code> 和 <code>OracleOraDB12Home1TNSListener</code><br>选中后右键点击启动 来启动服务</p>
-<h2 id="Oracle创建新用户与权限设置"><a href="#Oracle创建新用户与权限设置" class="headerlink" title="Oracle创建新用户与权限设置"></a>Oracle创建新用户与权限设置</h2><p>打开cmd<br>输入 <code>sqlplus</code><br>输入用户名和密码（安装的时候已经设置了）<br>出现如下界面代表成功了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">λ sqlplus</div><div class="line"></div><div class="line">SQL*Plus: Release 12.1.0.2.0 Production on 星期六 10月 21 15:42:13 2017</div><div class="line"></div><div class="line">Copyright (c) 1982, 2014, Oracle.  All rights reserved.</div><div class="line"></div><div class="line">请输入用户名:  system</div><div class="line">输入口令:</div><div class="line">上次成功登录时间: 星期六 10月 21 2017 15:41:23 +08:00</div><div class="line"></div><div class="line">连接到:</div><div class="line">Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production</div><div class="line">With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options</div><div class="line"></div><div class="line">SQL&gt;</div></pre></td></tr></table></figure></p>
-<p>下面我们创建一个表空间给新的用户<br>输入<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">SQL&gt; create tablespace stusys</div><div class="line">  2  datafile 'f:\app\stuysy.dbf'</div><div class="line">  3  size 10M;</div><div class="line"></div><div class="line">  表空间已创建。</div></pre></td></tr></table></figure></p>
-<p>这里我们创建了一个 名为  <code>stusys</code>的表空间，位于f盘的app目录下，大小10M</p>
-<p>下面我们创建一个新用户<br>输入<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">SQL&gt; create user c##ccww</div><div class="line">  2  identified by ccww</div><div class="line">  3  default tablespace stusys</div><div class="line">  4  temporary tablespace temp;</div><div class="line"></div><div class="line">  用户已创建。</div></pre></td></tr></table></figure></p>
-<p>这里我们创建了一个名为c##ccww的用户<br><strong>在Oracle 12c版本里，创建新用户必须以c##开头</strong></p>
-<p>下面我们给他添加权限<br>输入<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">SQL&gt; grant connect to c##ccww</div><div class="line"></div><div class="line">授权成功。</div><div class="line"></div><div class="line">SQL&gt; grant resource to c##ccww;</div><div class="line"></div><div class="line">授权成功。</div><div class="line"></div><div class="line">SQL&gt; alter user c##ccww default tablespace stusys;</div><div class="line"></div><div class="line">用户已更改。</div><div class="line"></div><div class="line">SQL&gt; grant unlimited tablespace to c##ccww;</div><div class="line"></div><div class="line">授权成功。</div></pre></td></tr></table></figure></p>
-<p>我们还为他设置了用户空间</p>
-<p>这样我们新用户就创建好了</p>
-<h2 id="登录Sql-Developer"><a href="#登录Sql-Developer" class="headerlink" title="登录Sql Developer"></a>登录Sql Developer</h2><p>打开我们在安装Oracle的时候安装的 <code>Sql Developer</code>工具<br>这个是Oracle图形管理界面</p>
-<p>输入刚刚的用户名密码<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171021185629533.png" alt=""><br>点击连接</p>
-<p>这样我们成功登录了<br>下面我们可以选择表 来创建一个表了<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171021185720264.png" alt=""></p>
-<p>这样，我们就完成了Oracle的安装与用户配置<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171021185750824.png" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;之前用的都是Mysql来做数据库&lt;br&gt;这次来试试Oracle&lt;br&gt;&lt;img src=&quot;http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-2017102118360441.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Oracle" scheme="http://blog.chenwe.top/categories/Oracle/"/>
     
     
       <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
