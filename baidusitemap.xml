@@ -5,7 +5,7 @@
     
   <url>
     <loc>http://blog.chenwe.top/2019/07/22/2019/2019-07-22%20CCF%20YOCSEF%E6%9D%AD%E5%B7%9E%E6%80%BB%E7%BB%93/</loc>
-    <lastmod>2019-07-23T05:32:13.782Z</lastmod>
+    <lastmod>2019-07-29T15:44:42.612Z</lastmod>
     <data>
         <display>
         <title>CCF YOCSEF杭州总结</title>
@@ -16,6 +16,30 @@
         <tag>code</tag>
          
         <tag>life</tag>
+         
+         
+           
+             
+              <breadCrumb title="Machine Learning" url="http://blog.chenwe.top/categories/Machine-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.chenwe.top/2019/07/29/2019/2019-07-29%20Kaggle%E5%85%A5%E9%97%A8%E9%A2%98%E7%9B%AETitanic%E7%9A%84%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E5%BA%94%E7%94%A8%EF%BC%88%E4%B8%89%EF%BC%89/</loc>
+    <lastmod>2019-07-29T12:56:47.788Z</lastmod>
+    <data>
+        <display>
+        <title>Kaggle入门题目Titanic的逻辑回归应用（三）</title>
+        <pubTime>2019-07-29T10:53:49.699Z</pubTime>
+        
+        <tag>study</tag>
+         
+        <tag>code</tag>
+         
+        <tag>kaggle</tag>
          
          
            

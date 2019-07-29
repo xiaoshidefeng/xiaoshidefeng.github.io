@@ -6,17 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.chenwe.top">
-  <title>Tag: study | Xiaoshidefeng的博客</title>
+  <title>Kaggle入门题目Titanic的逻辑回归应用（三） | Xiaoshidefeng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="CW的个人Blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Xiaoshidefeng的博客">
-<meta property="og:url" content="http://blog.chenwe.top/tags/study/page/2/index.html">
+  <meta name="description" content="在上次优化的基础上，在进行一些feature engineering">
+<meta name="keywords" content="study,code,kaggle">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kaggle入门题目Titanic的逻辑回归应用（三）">
+<meta property="og:url" content="http://blog.chenwe.top/2019/07/29/2019/2019-07-29 Kaggle入门题目Titanic的逻辑回归应用（三）/index.html">
 <meta property="og:site_name" content="Xiaoshidefeng的博客">
-<meta property="og:description" content="CW的个人Blog">
+<meta property="og:description" content="在上次优化的基础上，在进行一些feature engineering">
+<meta property="og:image" content="https://i.loli.net/2019/07/29/5d3eeaedb013c52783.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/29/5d3eec9c2767d73210.png">
+<meta property="og:updated_time" content="2019-07-29T12:56:47.788Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Xiaoshidefeng的博客">
-<meta name="twitter:description" content="CW的个人Blog">
+<meta name="twitter:title" content="Kaggle入门题目Titanic的逻辑回归应用（三）">
+<meta name="twitter:description" content="在上次优化的基础上，在进行一些feature engineering">
+<meta name="twitter:image" content="https://i.loli.net/2019/07/29/5d3eeaedb013c52783.png">
   
     <link rel="alternative" href="/atom.xml" title="Xiaoshidefeng的博客" type="application/atom+xml">
   
@@ -177,37 +182,55 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-2019/2019-07-29 Kaggle入门题目Titanic的逻辑回归应用（三）" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Kaggle入门题目Titanic的逻辑回归应用（三）
+    </h1>
+    <span>&nbsp;&nbsp;&nbsp; | &nbsp;
+    <span id="busuanzi_value_page_pv" ></span>次阅读
+    </span>
+  
+
+
+        
+        <a href="/2019/07/29/2019/2019-07-29 Kaggle入门题目Titanic的逻辑回归应用（三）/" class="archive-article-date">
+  	<time datetime="2019-07-29T10:53:49.699Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-29</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在上次优化的基础上，在进行一些feature engineering</p>
+<a id="more"></a>
+<h1 id="利用好Cabin"><a href="#利用好Cabin" class="headerlink" title="利用好Cabin"></a>利用好Cabin</h1><p>之前我们在处理Cabin的时候，我们只是将它是否缺失作为特征，并没有利用Cabin数据里面的内容。<br>我们可以先通过<code>cross_validation_bad_case(df)</code>函数来看下我们做交叉验证时那些预测错误的Cabin有什么信息。(前两篇博客中有提到这个函数)<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">cross_validation_bad_case</span><span class="params">(df)</span>:</span></div><div class="line">    <span class="comment"># .train_test_split将原始数据按照比例分割为“测试集”和“训练集”</span></div><div class="line">    <span class="comment"># train_size：可以为浮点、整数或None，默认为None</span></div><div class="line">    <span class="comment"># ①若为浮点时，表示训练集占总样本的百分比</span></div><div class="line">    <span class="comment"># ②若为整数时，表示训练样本的样本数</span></div><div class="line">    <span class="comment"># ③若为None时，train_size自动被设置成0.75</span></div><div class="line">    <span class="comment"># random_state：随机数的种子。可以为整数、RandomState实例或None，默认为Non</span></div><div class="line">    <span class="comment"># ①若为None时，每次生成的数据都是随机，可能不一样</span></div><div class="line">    <span class="comment"># ②若为整数时，每次生成的数据都相同</span></div><div class="line">    split_train, split_cv = model_selection.train_test_split(df, test_size=<span class="number">0.3</span>, random_state=<span class="number">42</span>)</div><div class="line">    <span class="comment"># 获取需要的数据</span></div><div class="line">    train_df = split_train.filter(regex=<span class="string">'Survived|Age_.*|SibSp|Parch|Fare_.*|Cabin_.*|Embarked_.*|Sex_.*|Pclass_.*'</span>)</div><div class="line">    clf = linear_model.LogisticRegression(solver=<span class="string">'liblinear'</span>, C=<span class="number">1.0</span>, penalty=<span class="string">'l1'</span>, tol=<span class="number">1e-6</span>)</div><div class="line">    <span class="comment"># 拟合训练集数据</span></div><div class="line">    clf.fit(train_df.values[:, <span class="number">1</span>:], train_df.values[:, <span class="number">0</span>])</div><div class="line"></div><div class="line">    <span class="comment"># 交叉验证的测试集</span></div><div class="line">    cv_df = split_cv.filter(regex=<span class="string">'Survived|Age_.*|SibSp|Parch|Fare_.*|Cabin_.*|Embarked_.*|Sex_.*|Pclass_.*'</span>)</div><div class="line">    <span class="comment"># 预测测试集的结果</span></div><div class="line">    predictions = clf.predict(cv_df.values[:, <span class="number">1</span>:])</div><div class="line"></div><div class="line">    <span class="comment"># 获取原始数据来比较结果</span></div><div class="line">    origin_data_train = pd.read_csv(<span class="string">"data/train.csv"</span>)</div><div class="line">    <span class="comment"># 获取预测结果与测试集的第一列（Survived值）不同的行，他们的PassengerId在原始train.csv中的乘客信息作为bad_cases</span></div><div class="line">    bad_cases = origin_data_train.loc[</div><div class="line">        origin_data_train[<span class="string">'PassengerId'</span>].isin(split_cv[predictions != cv_df.values[:, <span class="number">0</span>]][<span class="string">'PassengerId'</span>].values)]</div><div class="line">    print(bad_cases.head(<span class="number">10</span>))</div></pre></td></tr></table></figure></p>
+<p>控制台打印<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">     PassengerId  Survived  Pclass  ...      Fare    Cabin  Embarked</div><div class="line">23            24         1       1  ...   35.5000       A6         S</div><div class="line">25            26         1       3  ...   31.3875      NaN         S</div><div class="line">49            50         0       3  ...   17.8000      NaN         S</div><div class="line">55            56         1       1  ...   35.5000      C52         S</div><div class="line">65            66         1       3  ...   15.2458      NaN         C</div><div class="line">78            79         1       2  ...   29.0000      NaN         S</div><div class="line">81            82         1       3  ...    9.5000      NaN         S</div><div class="line">118          119         0       1  ...  247.5208  B58 B60         C</div><div class="line">139          140         0       1  ...   79.2000      B86         C</div><div class="line">165          166         1       3  ...   20.5250      NaN         S</div></pre></td></tr></table></figure></p>
+<p>观察Cabin这一列，发现缺失很多，但是结合Survived情况来看，我们发现Cabin中B开头的Survived情况都是0（未获救）,而A和C没有这种情况。<br>而且字母后面的数字和Survived也没有什么联系，所以我们可以猜测，Cabin的首字母与最后的获救情况有关系。<br>所以我们要对它做处理。</p>
+<h2 id="处理Cabin"><a href="#处理Cabin" class="headerlink" title="处理Cabin"></a>处理Cabin</h2><p>我们写一个format_cabin来获取Cabin的首字母并作为特征加入到data中。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">format_cabin</span><span class="params">(data)</span>:</span></div><div class="line">    <span class="comment"># 由于Cabin为缺失值的情况python会将它读取为NaN，所以n开头就是缺失值</span></div><div class="line">    cabin_str_array = []</div><div class="line">    <span class="keyword">for</span> cabin <span class="keyword">in</span> data.Cabin:</div><div class="line">        cabin_str = str(cabin)</div><div class="line">        cabin_str = cabin_str[<span class="number">0</span>:<span class="number">1</span>]</div><div class="line">        <span class="comment"># python 数组添加值要调用函数 不能直接赋值</span></div><div class="line">        cabin_str_array.append(cabin_str)</div><div class="line">    data[<span class="string">'Cabin_Str'</span>] = cabin_str_array</div><div class="line">    print(data.head(<span class="number">10</span>))</div><div class="line">    <span class="keyword">return</span> data</div></pre></td></tr></table></figure></p>
+<p>控制台打印<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">   PassengerId  Survived  Pclass  ... Cabin Embarked  Cabin_Str</div><div class="line">0            1         0       3  ...   NaN        S          n</div><div class="line">1            2         1       1  ...   C85        C          C</div><div class="line">2            3         1       3  ...   NaN        S          n</div><div class="line">3            4         1       1  ...  C123        S          C</div><div class="line">4            5         0       3  ...   NaN        S          n</div><div class="line">5            6         0       3  ...   NaN        Q          n</div><div class="line">6            7         0       1  ...   E46        S          E</div><div class="line">7            8         0       3  ...   NaN        S          n</div><div class="line">8            9         1       3  ...   NaN        S          n</div><div class="line">9           10         1       2  ...   NaN        C          n</div></pre></td></tr></table></figure></p>
+<p>可以看到成功的取出了首字母。<br>然后我们将它像之前那样处理，改成0/1的形式表示。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">change_dummies</span><span class="params">(pd, data)</span>:</span></div><div class="line">    <span class="comment"># dummies_cabin = pd.get_dummies(data['Cabin'], prefix='Cabin')</span></div><div class="line">    dummies_embarked = pd.get_dummies(data[<span class="string">'Embarked'</span>], prefix=<span class="string">'Embarked'</span>)</div><div class="line">    dummies_sex = pd.get_dummies(data[<span class="string">'Sex'</span>], prefix=<span class="string">'Sex'</span>)</div><div class="line">    dummies_pclass = pd.get_dummies(data[<span class="string">'Pclass'</span>], prefix=<span class="string">'Pclass'</span>)</div><div class="line">    dummies_cabin_str = pd.get_dummies(data[<span class="string">'Cabin_Str'</span>], prefix=<span class="string">'Cabin_Str'</span>)</div><div class="line"></div><div class="line">    <span class="comment"># 拼接新的列数据</span></div><div class="line">    df = pd.concat([data, dummies_embarked, dummies_sex, dummies_pclass, dummies_cabin_str], axis=<span class="number">1</span>)</div><div class="line"></div><div class="line">    <span class="comment"># 删除多余的列</span></div><div class="line">    df.drop([<span class="string">'Pclass'</span>, <span class="string">'Name'</span>, <span class="string">'Sex'</span>, <span class="string">'Ticket'</span>, <span class="string">'Cabin'</span>, <span class="string">'Embarked'</span>, <span class="string">'Cabin_Str'</span>], axis=<span class="number">1</span>, inplace=<span class="keyword">True</span>)</div><div class="line">    <span class="comment"># 因为test数据中没有T开头的所以删除train中T开头的</span></div><div class="line">    <span class="keyword">if</span> <span class="string">'Cabin_Str_T'</span> <span class="keyword">in</span> df:</div><div class="line">        df.drop([<span class="string">'Cabin_Str_T'</span>], axis=<span class="number">1</span>, inplace=<span class="keyword">True</span>)</div><div class="line"></div><div class="line">    <span class="keyword">return</span> df</div></pre></td></tr></table></figure>
+<p>我们可以打印控制台查看，就会发现达到了预期的效果。<br>同样的我们要对test数据做处理，但是这里要注意test中没有T开头的Cabin但是train数据中有，所以在上面的代码里，我们做了处理。<br>删除多余的Cabin_Str_T，防止它出错。</p>
+<h2 id="生成结果并提交"><a href="#生成结果并提交" class="headerlink" title="生成结果并提交"></a>生成结果并提交</h2><p>按照以前的方式再次生成结果，先不通过bagging来生成<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 取出需要的列</span></div><div class="line">test = df_test.filter(regex=<span class="string">'Age_.*|SibSp|Parch|Fare_.*|Cabin_.*|Embarked_.*|Sex_.*|Pclass_.*'</span>)</div><div class="line">predictions = clf.predict(test)</div><div class="line"><span class="comment"># 得出结果 写入csv文件</span></div><div class="line">result = pd.DataFrame(&#123;<span class="string">'PassengerId'</span>:data_test[<span class="string">'PassengerId'</span>].values, <span class="string">'Survived'</span>:predictions.astype(np.int32)&#125;)</div><div class="line">result.to_csv(<span class="string">"data/logistic_regression_prediction.csv"</span>, index=<span class="keyword">False</span>)</div></pre></td></tr></table></figure></p>
+<p>将生成的结果提交的kaggle<br><img src="https://i.loli.net/2019/07/29/5d3eeaedb013c52783.png" alt="titanic0301.png"><br>发现比没有做feature engineering分数还要低</p>
+<p>我们试着做一次bagging看看结果<br><img src="https://i.loli.net/2019/07/29/5d3eec9c2767d73210.png" alt="titanic0302.png"><br>做了bagging之后，分数超过了之前几次的分数，是当前的最高分。</p>
+<h1 id="利用好Name"><a href="#利用好Name" class="headerlink" title="利用好Name"></a>利用好Name</h1><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上就是对机器学习问题的一个简单流程，从最开始的分析，到后来做一个baseline model，然后在此基础上一步步的分析与提高。<br>下次做一下feature engineering的内容。</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/han_xiaoyang/article/details/49797143" target="_blank" rel="external">参考博客</a><br>自己对其中的一些代码做了注释方便理解。<br>自己的代码已经上传到了github，欢迎查看<a href="https://github.com/xiaoshidefeng/MachineLearning/tree/master/kaggle/Titanic" target="_blank" rel="external">kaggle Titanic</a></p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/08/2018/2018-03-08 React Native开发中的一些坑 (二)/" class="archive-article-date">
-  	<time datetime="2018-03-08T11:34:08.100Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/08/2018/2018-03-08 React Native开发中的一些坑 (二)/">React Native开发中的一些坑 (二)</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -219,529 +242,130 @@
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
         		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ReactNative/" class="article-tag-list-link color3">React Native</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/07/2018/2018-03-07 React Native开发中的一些坑/" class="archive-article-date">
-  	<time datetime="2018-03-07T14:19:02.214Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/07/2018/2018-03-07 React Native开发中的一些坑/">React Native开发中的一些坑（一）</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">kaggle</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ReactNative/" class="article-tag-list-link color3">React Native</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/02/19/2018/2018-02-19 LaTeX的一些基本操作/" class="archive-article-date">
-  	<time datetime="2018-02-19T04:51:54.324Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/02/19/2018/2018-02-19 LaTeX的一些基本操作/">LaTeX的入门</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数学建模/" class="article-tag-list-link color5">数学建模</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/02/17/2018/2018-02-17 层次分析法/" class="archive-article-date">
-  	<time datetime="2018-02-17T05:28:13.489Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/02/17/2018/2018-02-17 层次分析法/">层次分析法</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数学建模/" class="article-tag-list-link color5">数学建模</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
       
-        </div></section>
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/MachineLearning/" class="article-tag-list-link color2">Machine Learning</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
       
+
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/12/03/2017/2017-12-03 OKhttp的使用/" class="archive-article-date">
-  	<time datetime="2017-12-03T14:24:58.545Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/12/03/2017/2017-12-03 OKhttp的使用/">OKhttp的使用</a>
-    </h1>
-  
+      </div>
+    </span>
+  </div>
+</div>
 
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://blog.chenwe.top/2019/07/29/2019/2019-07-29 Kaggle入门题目Titanic的逻辑回归应用（三）/" alt="微信分享二维码">
+    </div>
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Android/" class="article-tag-list-link color3">Android</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
+<nav id="article-nav">
+  
+  
+    <a href="/2019/07/22/2019/2019-07-22 CCF YOCSEF杭州总结/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">CCF YOCSEF杭州总结</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTc5Mi82MzU4">
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
     
+           if (typeof LivereTower === 'function') { return; }
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/13/2017/2017-11-19 SpringBoot使用properties配置文件实现多环境配置/" class="archive-article-date">
-  	<time datetime="2017-11-13T05:31:27.821Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/13/2017/2017-11-19 SpringBoot使用properties配置文件实现多环境配置/">SpringBoot使用properties配置文件实现多环境配置</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/SpringBoot/" class="article-tag-list-link color1">SpringBoot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/05/2017/2017-11-05 基于机器学习的DeepVideoAnalytics开源视频检索工具的安装与简单使用/" class="archive-article-date">
-  	<time datetime="2017-11-05T07:21:32.587Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/05/2017/2017-11-05 基于机器学习的DeepVideoAnalytics开源视频检索工具的安装与简单使用/">基于机器学习的DeepVideoAnalytics开源视频检索工具的安装与简单使用</a>
-    </h1>
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    </div>
+    <!-- City版安装代码已完成 -->
   
 
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/机器学习/" class="article-tag-list-link color5">机器学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/29/2017/2017-10-29 Oracle与jdbc实现增删改查/" class="archive-article-date">
-  	<time datetime="2017-10-29T07:40:47.154Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/29/2017/2017-10-29 Oracle与jdbc实现增删改查/">Oracle与jdbc实现增删改查</a>
-    </h1>
   
 
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/jdbc/" class="article-tag-list-link color5">jdbc</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/24/2017/2017-10-24 SpringBoot中Mybatis配置/" class="archive-article-date">
-  	<time datetime="2017-10-24T13:30:42.176Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/24/2017/2017-10-24 SpringBoot中Mybatis配置/">SpringBoot中Mybatis配置</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/SpringBoot/" class="article-tag-list-link color1">SpringBoot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/23/2017/2017-10-23 阿里云服务器Docker部署Oracle/" class="archive-article-date">
-  	<time datetime="2017-10-23T08:16:55.870Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/23/2017/2017-10-23 阿里云服务器Docker部署Oracle/">阿里云服务器Docker部署Oracle</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Docker/" class="article-tag-list-link color2">Docker</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/tags/study/">&laquo; Prev</a><a class="page-number" href="/tags/study/">1</a><span class="page-number current">2</span><a class="page-number" href="/tags/study/page/3/">3</a><a class="page-number" href="/tags/study/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/tags/study/page/6/">6</a><a class="extend next" rel="next" href="/tags/study/page/3/">Next &raquo;</a>
-    </nav>
   
 
 
@@ -779,9 +403,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",

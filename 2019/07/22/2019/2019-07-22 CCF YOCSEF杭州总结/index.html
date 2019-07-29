@@ -16,7 +16,8 @@
 <meta property="og:site_name" content="Xiaoshidefeng的博客">
 <meta property="og:description" content="昨天参加了CCF YOCSEF杭州，硬核技术系列论坛之人工智能，这里做下一些记录和总结。">
 <meta property="og:image" content="https://i.loli.net/2019/07/23/5d36792c4c96780431.jpeg">
-<meta property="og:updated_time" content="2019-07-23T05:32:13.782Z">
+<meta property="og:image" content="http://blogs.360.cn/wp-content/uploads/2017/10/1-2.png">
+<meta property="og:updated_time" content="2019-07-29T15:44:42.612Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CCF YOCSEF杭州总结">
 <meta name="twitter:description" content="昨天参加了CCF YOCSEF杭州，硬核技术系列论坛之人工智能，这里做下一些记录和总结。">
@@ -226,11 +227,41 @@
 <li>从AI安全检测到安全AI</li>
 <li>系统安全智能化的理论研究与技术实践</li>
 </ul>
-<h2 id="AI攻防与数据投毒"><a href="#AI攻防与数据投毒" class="headerlink" title="AI攻防与数据投毒"></a>AI攻防与数据投毒</h2><p>目前的攻防已经开始从AI辅助攻防逐渐过渡到自动化攻防，但这发面的发展也遇到了一些问题，例如数据的稀缺与难以获取，特征提取的不明确，数据预处理和可解释性的问题（如何验证漏洞）。<br>同时数据投毒也越来越引起人们的注意。针对人工智能“数据投毒”有以下两种方式：第一种攻击模式是采用“模型倾斜”的方式，主要攻击目标是人工智能的学习训练的数据样本。二种攻击模式是采取反馈武器化的方式，主要攻击目标是人工智能的学习模型本身。<br>现代深度网络是非常容易受到对抗样本的攻击的。这些对抗样本仅有很轻微的扰动，以至于人类视觉系统无法察觉这种扰动（图片看起来几乎一样）。如图所示：<br><img src="https://i.loli.net/2019/07/23/5d36792c4c96780431.jpeg" alt=""><br>黑客可以通过向真实样本中添加人眼不可见的噪声，导致深度学习模型发生预测错误的样本。<br>目前，在对抗攻击防御上存在三个主要方向：</p>
-<p>1）在学习过程中修改训练过程或者修改的输入样本。</p>
+<h2 id="AI攻防"><a href="#AI攻防" class="headerlink" title="AI攻防"></a>AI攻防</h2><p>目前的网络攻防主要是机器辅助攻防，辅助攻防的现状如下：</p>
+<ul>
+<li>攻击：需要数天时间挖掘漏洞、编写漏洞利用。</li>
+<li>防御：需要数月时间部署安全补丁，攻击时间窗口大。<br>但机器辅助攻防面临很多的挑战</li>
+<li>繁琐，易出错</li>
+<li>需要经验、创造力</li>
+<li>不容易学习，不容易传承</li>
+</ul>
+<p>所以目前的攻防已经开始从AI辅助攻防逐渐过渡到自动化攻防，自动化攻防的火热也催生了很多的比赛比如CGC（机器自动化攻防超级挑战赛）也就是就是人机大战，目前人和机器特点如下：<br>人类技巧</p>
+<ul>
+<li>重用其他队伍的补丁（风险：后门）</li>
+<li>重放其他队伍的攻击<br>机器优势</li>
+<li>免疫简单代码混淆</li>
+<li>快速发现漏洞、尝试经典攻击方式<br>目前还有正在探索中的智能化攻防。<br>比如VDiscover是一种用于训练漏洞检测预测器的工具。给出了漏洞发现程序和足够数量的训练过多的training，它提取了轻量级的特征来预测哪些sql查询可能是脆弱的。</li>
+</ul>
+<h2 id="数据投毒"><a href="#数据投毒" class="headerlink" title="数据投毒"></a>数据投毒</h2><p>数据投毒也越来越引起人们的注意。针对人工智能“数据投毒”有以下两种方式：第一种攻击模式是采用“模型倾斜”的方式，主要攻击目标是人工智能的学习训练的数据样本。二种攻击模式是采取反馈武器化的方式，主要攻击目标是人工智能的学习模型本身。<br>现代深度网络是非常容易受到对抗样本的攻击的。这些对抗样本仅有很轻微的扰动，以至于人类视觉系统无法察觉这种扰动（图片看起来几乎一样）。如图所示：<br><img src="https://i.loli.net/2019/07/23/5d36792c4c96780431.jpeg" alt=""><br>黑客可以通过向真实样本中添加人眼不可见的噪声，导致深度学习模型发生预测错误的样本。<br>目前，在对抗攻击防御上存在三个主要方向：</p>
+<p>1）在学习过程中修改训练过程或者修改的输入样本。<br>通过不断输入新类型的对抗样本并执行对抗训练，从而不断提升网络的鲁棒性。</p>
 <p>2）修改网络，比如：添加更多层/子网络、改变损失/激活函数等。</p>
-<p>3）当分类未见过的样本时，用外部模型作为附加网络。</p>
-<h2 id="漏洞挖掘与恶意代码检测"><a href="#漏洞挖掘与恶意代码检测" class="headerlink" title="漏洞挖掘与恶意代码检测"></a>漏洞挖掘与恶意代码检测</h2><p>由于Android应用市场的缺乏监管、Android应用开发、部署模式以及Permission权限粒度过粗等问题导致Android应用存在大量的安<br>全问题。恶意应用自动检测和分类技术主要分为2种基本类型:静态检测技术通过逆向分析获得 APK样本源代码进而从中识别恶意代码,检测恶意行为。动态检测技术通过在受控环境中部署和运行APK样本监控其运行状态进而识别恶意行为发现恶意应用。</p>
+<p>3）当分类未见过的样本时，用外部模型作为附加网络。<br>有人提出了一种防御框架，该框架将额外的预输入层附加到目标网络中，并训练它们对对抗样本进行校正，使分类器对同一图像的干净版本的预测与对抗样本预测相同。</p>
+<h2 id="漏洞挖掘"><a href="#漏洞挖掘" class="headerlink" title="漏洞挖掘"></a>漏洞挖掘</h2><p>漏洞挖掘的技术发展从上世纪70年代的<code>符号执行</code>（系统性的探索程序执行路径），到后来的撒谎给你实际80年代的<code>规则检查</code>（检测程序是否满足编程安全规则），再到后来<code>数据流分析</code>(通过分析程序状态在控制流中的传播来计算静态程序点在运行时的状态)，再到后来的<code>模糊测试</code>（是一种通过向目标系统提供非预期的输入并监视异常结果来发现软件漏洞的方法），再到02年的<code>模型检测</code>（利用工具将程序结构抽象为状态机并对其进行遍历来检测漏洞），漏洞挖掘技术已经反正了很多。<br>但随着软件规模的扩大，传统的漏洞挖掘方法已经效率不高了。所以现在将漏洞挖掘与深度学习结合起来，利用深度学习技术，搭建神经网络模型，研究并实现一种基于深度学习的静态漏洞检测方法。<br>它的整体框架如下：</p>
+<ol>
+<li>输入源代码</li>
+<li>生成代码属性属性图（抽象语法树与控制流图和程序依赖图的联合数据结构）</li>
+<li>生成特征张量</li>
+<li>神经网络训练与预测</li>
+<li>输出预测结果</li>
+</ol>
+<h2 id="恶意代码检测"><a href="#恶意代码检测" class="headerlink" title="恶意代码检测"></a>恶意代码检测</h2><p>由于Android应用市场的缺乏监管、Android应用开发、部署模式以及Permission权限粒度过粗等问题导致Android应用存在大量的安<br>全问题。恶意应用自动检测和分类技术主要分为2种基本类型:静态检测技术通过逆向分析获得 APK样本源代码进而从中识别恶意代码,检测恶意行为。动态检测技术通过在受控环境中部署和运行APK样本监控其运行状态进而识别恶意行为发现恶意应用。</p>
+<h2 id="evasion-attack（逃逸攻击）"><a href="#evasion-attack（逃逸攻击）" class="headerlink" title="evasion attack（逃逸攻击）"></a>evasion attack（逃逸攻击）</h2><p>逃逸是指攻击者在不改变目标机器学习系统的情况下，通过构造特定输入样本以完成欺骗目标系统的攻击。攻击者可以修改一个恶意软件样本的非关键特征，使得它被一个反病毒系统判定为良性样本，从而绕过检测。<br><img src="http://blogs.360.cn/wp-content/uploads/2017/10/1-2.png" alt=""></p>
+<h2 id="NLP与安全"><a href="#NLP与安全" class="headerlink" title="NLP与安全"></a>NLP与安全</h2><p>NLP对于安全的应用主要有三点：</p>
+<ol>
+<li>安全信息抽取分析</li>
+<li>代码语义辅助推断</li>
+<li>自主编程<br>同时随着智能语音理解成为接受人类命令的常用方式，也出现了安全的问题。<br>传统的攻击需要入侵到汽车系统或者机器人的系统。<br>但是人工智能的攻击只需要突破语音逆向识别技术和传播技术。例如在自动驾驶的汽车上黑客只需播放一段音乐就能控制汽车系统。</li>
+</ol>
 
       
 
@@ -333,6 +364,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2019/07/29/2019/2019-07-29 Kaggle入门题目Titanic的逻辑回归应用（三）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Kaggle入门题目Titanic的逻辑回归应用（三）
+        
+      </div>
+    </a>
+  
   
     <a href="/2019/07/14/2019/2019-07-13 Kaggle入门题目Titanic的逻辑回归应用（二）/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">Kaggle入门题目Titanic的逻辑回归应用（二）</div>
@@ -398,7 +438,6 @@
     
     <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     
-    <!-- <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script> -->
 
 本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp&nbsp
 您是第<span id="busuanzi_value_site_uv"></span>个来到的小伙伴
