@@ -6,17 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.chenwe.top">
-  <title>Tag: code | Xiaoshidefeng的博客</title>
+  <title>误差逆传播算法 | Xiaoshidefeng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="CW的个人Blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Xiaoshidefeng的博客">
-<meta property="og:url" content="http://blog.chenwe.top/tags/code/index.html">
+  <meta name="description" content="本文是周志华的《机器学习》第5章5.3部分的误差逆传播算法的公式推导解释本文默认读者已知晓多层前馈网络的知识">
+<meta name="keywords" content="study,code">
+<meta property="og:type" content="article">
+<meta property="og:title" content="误差逆传播算法">
+<meta property="og:url" content="http://blog.chenwe.top/2019/09/27/2019/2019-09-27 误差逆传播算法/index.html">
 <meta property="og:site_name" content="Xiaoshidefeng的博客">
-<meta property="og:description" content="CW的个人Blog">
+<meta property="og:description" content="本文是周志华的《机器学习》第5章5.3部分的误差逆传播算法的公式推导解释本文默认读者已知晓多层前馈网络的知识">
+<meta property="og:image" content="https://i.loli.net/2019/09/27/JRegOK9S3quYjEI.png">
+<meta property="og:updated_time" content="2019-09-28T01:47:54.457Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Xiaoshidefeng的博客">
-<meta name="twitter:description" content="CW的个人Blog">
+<meta name="twitter:title" content="误差逆传播算法">
+<meta name="twitter:description" content="本文是周志华的《机器学习》第5章5.3部分的误差逆传播算法的公式推导解释本文默认读者已知晓多层前馈网络的知识">
+<meta name="twitter:image" content="https://i.loli.net/2019/09/27/JRegOK9S3quYjEI.png">
   
     <link rel="alternative" href="/atom.xml" title="Xiaoshidefeng的博客" type="application/atom+xml">
   
@@ -177,495 +181,86 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-2019/2019-09-27 误差逆传播算法" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      误差逆传播算法
+    </h1>
+    <span>&nbsp;&nbsp;&nbsp; | &nbsp;
+    <span id="busuanzi_value_page_pv" ></span>次阅读
+    </span>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/27/2019/2019-09-27 误差逆传播算法/" class="archive-article-date">
+
+
+        
+        <a href="/2019/09/27/2019/2019-09-27 误差逆传播算法/" class="archive-article-date">
   	<time datetime="2019-09-27T02:17:11.377Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-27</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/27/2019/2019-09-27 误差逆传播算法/">误差逆传播算法</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/MachineLearning/" class="article-tag-list-link color2">Machine Learning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
+        
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/29/2019/2019-07-29 Kaggle入门题目Titanic的逻辑回归应用（三）/" class="archive-article-date">
-  	<time datetime="2019-07-29T10:53:49.699Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/29/2019/2019-07-29 Kaggle入门题目Titanic的逻辑回归应用（三）/">Kaggle入门题目Titanic的逻辑回归应用（三）</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">kaggle</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/MachineLearning/" class="article-tag-list-link color2">Machine Learning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/22/2019/2019-07-22 CCF YOCSEF杭州总结/" class="archive-article-date">
-  	<time datetime="2019-07-22T03:05:12.025Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/22/2019/2019-07-22 CCF YOCSEF杭州总结/">CCF YOCSEF杭州总结</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">life</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/MachineLearning/" class="article-tag-list-link color2">Machine Learning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/14/2019/2019-07-13 Kaggle入门题目Titanic的逻辑回归应用（二）/" class="archive-article-date">
-  	<time datetime="2019-07-14T02:33:42.415Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/14/2019/2019-07-13 Kaggle入门题目Titanic的逻辑回归应用（二）/">Kaggle入门题目Titanic的逻辑回归应用（二）</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">kaggle</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/MachineLearning/" class="article-tag-list-link color2">Machine Learning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/12/2019/2019-07-12 Kaggle入门题目Titanic的逻辑回归应用（一）/" class="archive-article-date">
-  	<time datetime="2019-07-12T12:41:57.977Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/12/2019/2019-07-12 Kaggle入门题目Titanic的逻辑回归应用（一）/">Kaggle入门题目Titanic的逻辑回归应用（一）</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">kaggle</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/MachineLearning/" class="article-tag-list-link color2">Machine Learning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/19/2019/2019-05-19 朴素贝叶斯/" class="archive-article-date">
-  	<time datetime="2019-05-19T07:25:09.787Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/19/2019/2019-05-19 朴素贝叶斯/">朴素贝叶斯</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/MachineLearning/" class="article-tag-list-link color2">Machine Learning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/18/2019/2019-05-18 决策树简析/" class="archive-article-date">
-  	<time datetime="2019-05-18T08:07:06.669Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/18/2019/2019-05-18 决策树简析/">决策树简析</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/MachineLearning/" class="article-tag-list-link color2">Machine Learning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/28/2019/2019-05-09 KNN算法简析/" class="archive-article-date">
-  	<time datetime="2019-02-28T03:33:26.599Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/28/2019/2019-05-09 KNN算法简析/">KNN算法简析</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/MachineLearning/" class="article-tag-list-link color2">Machine Learning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
+    <div class="article-entry" itemprop="articleBody">
       
-        </div></section>
+        <p>本文是周志华的《机器学习》第5章5.3部分的误差逆传播算法的公式推导解释<br>本文默认读者已知晓<code>多层前馈网络</code>的知识</p>
+<a id="more"></a>
+<h1 id="BackPropagation"><a href="#BackPropagation" class="headerlink" title="BackPropagation"></a>BackPropagation</h1><p>BackPropagation 即 误差逆传播算法 也称 反向传播算法。<br>是一种神经网络的学习算法。训练多层网络，简单的感知机规则不够用，需要采用误差逆传播算法进行训练，得到各个连接处的权值。</p>
+<h2 id="符号含义"><a href="#符号含义" class="headerlink" title="符号含义"></a>符号含义</h2><p>以下是本文的一些符号含义<br><img src="https://i.loli.net/2019/09/27/JRegOK9S3quYjEI.png" alt="QQ截图20190927132617.png"><br>如图以西瓜书上的图5.7 的神经网络为例子。<br>给定训练集$D={(x_1,y_1),(x_2,y_2),……(x_m,y_m)},x_i \in R^d,y_i \in R^l$<br>如图所示有 $d$ 个输入神经元，$l$ 个输出神经元， $q$ 个隐层神经元。<br>记：</p>
+<ul>
+<li>输出层第 $j$ 个神经元的阈值用$\theta_j$表示</li>
+<li>隐层第 $h$个神经元的阈值用$\gamma_h$表示</li>
+<li>输入层第$i$ 个神经元与隐层第$h$个神经元之间的连接权为$v_{ih}$</li>
+<li>隐层第$h$个神经元与输出层第$j$个神经元之间的连接权为$w_{hj}$</li>
+</ul>
+<p>隐层的神经元接受到的输入是输入层$d$个神经元的属性与权重的乘积之和，所以记：</p>
+<ul>
+<li>隐层第$h$个神经元接收到的输入为$\alpha_h=\sum_{i=1}^dv_{ih}x_i$</li>
+</ul>
+<p>记$b_n$为隐层第$h$个神经元的输出同理可得：</p>
+<ul>
+<li>输出层第$j$个神经元接收到的输入为$\beta_j=\sum_{h=1}^qw_{hj}b_h$</li>
+</ul>
+<p>这里我们假设隐层和输出层的神经元都使用Sigmoid函数：</p>
+<script type="math/tex; mode=display">
+h_\theta(x) = \frac{1}{1+e^{(-\theta^Tx)}}</script><p>对于训练例子 ($x_k$, $y_k$) ，我们假定神经元输出为$\widehat{y}_k=(\widehat{y}_1^k,\widehat{y}_2^k,……,\widehat{y}_l^k)$，即：</p>
+<script type="math/tex; mode=display">
+\widehat{y}_j^k=f(\beta_j-\theta_j)       \hspace{2cm}(1)</script><p>因此，该神经网络在 ($x_k$, $y_k$)上的均方误差为:</p>
+<script type="math/tex; mode=display">
+E_k=\frac{1}{2}\sum_{j=1}^{l}(\widehat{y}_j^k-y_j^k)^2       \hspace{2cm}(2)</script><p>这里的 1/2 是为了等下求导的时候可以抵消掉多余的 2 .</p>
+<h2 id="隐层与输出层神经元之间的连接权更新"><a href="#隐层与输出层神经元之间的连接权更新" class="headerlink" title="隐层与输出层神经元之间的连接权更新"></a>隐层与输出层神经元之间的连接权更新</h2><p>BackPropagation算法类似于梯度下降，任意参数$v$的更新式为：</p>
+<script type="math/tex; mode=display">
+v\leftarrow v+\Delta v     \hspace{2cm}(3)</script><p>我们以目标的负梯度方向对参数进行调整，对于（2）式的误差$E_k$，给定学习率$\eta$,有：</p>
+<script type="math/tex; mode=display">
+\Delta w_{ij}=-\eta\frac{\partial E_k}{\partial w_{ij}}     \hspace{2cm}(4)</script><p>这里的负号是因为根据式（3）的更新式，我们希望误差$E_k$尽可能的小（即尽可能接近极值，导数为0），当$\frac{\partial E_k}{\partial w_{ij}}&gt;0$时，有$\Delta w_{ij}=-\eta\frac{\partial E_k}{\partial w_{ij}}$小于0，根据（3）式$w$会减小，使得$E_k$也变小。<br>同理可得当$\frac{\partial E_k}{\partial w_{ij}}&lt;0$时，有$\Delta w_{ij}=-\eta\frac{\partial E_k}{\partial w_{ij}}$大于0，根据（3）式$w$会增加，使得$E_k$也变小。</p>
+<p>根据神经网络的结构，我们$w_{hj}$先通过影响第$j$个输出层神经元的输入值$\beta_j$，再影响输出值$\widehat{y}_j^k$，最后影响到$E_k$，因此有：</p>
+<script type="math/tex; mode=display">
+\frac{\partial E_k}{\partial w_{ij}}=\frac{\partial E_k}{\partial \widehat{y}_j^k}.\frac{\partial \widehat{y}_j^k}{\partial \beta_j}. \frac{\partial \beta_j}{\partial w_{ij}}            \hspace{2cm}(5)</script><p>这就是<code>链式法则</code>，是微积分中的求导法则，用于求一个复合函数的导数，是在微积分的求导运算中一种常用的方法。</p>
+<p>根据前面$\beta_j$的定义$\beta_j=\sum_{h=1}^qw_{hj}b_h$，将他对$\partial w_{ij}$求偏导<br>可以得到</p>
+<script type="math/tex; mode=display">
+\frac{\partial \beta_j}{\partial w_{ij}} = b_n  \hspace{2cm}(6)</script><p>同理$E_k=\frac{1}{2}\sum_{j=1}^{l}(\widehat{y}_j^k-y_j^k)^2$对$\widehat{y}_j^k$求偏导可得：</p>
+<script type="math/tex; mode=display">
+\begin{aligned} \frac{\partial E_k}{\partial \widehat{y}_j^k}&=\frac{1}{2}.2(\widehat{y}_j^k-y_j^k)(1-0) \\ &=(\widehat{y}_j^k-y_j^k)\end{aligned}</script><p>同理将$\widehat{y}_j^k=f(\beta_j-\theta_j)$对$\beta_j$求偏导可得：</p>
+<script type="math/tex; mode=display">
+\frac{\partial \widehat{y}_j^k}{\partial \beta_j}=f'(\beta_j-\theta_j)</script><p>因为我们这里隐层和输出层神经元都是使用Sigmoid函数，而Sigmoid函数有以下性质：</p>
+<script type="math/tex; mode=display">
+f'(x)=f(x)(1-f(x))</script><p>因此$\frac{\partial \widehat{y}_j^k}{\partial \beta_j}$可以继续化简为：</p>
+<script type="math/tex; mode=display">
+\frac{\partial \widehat{y}_j^k}{\partial \beta_j}=\widehat{y}_j^k(1-\widehat{y}_j^k)</script><p>我们令：</p>
+<script type="math/tex; mode=display">
+\begin{aligned} g_j&=-\frac{\partial E_k}{\partial \widehat{y}_j^k}.\frac{\partial \widehat{y}_j^k}{\partial \beta_j} \\ &=\widehat{y}_j^k(1-\widehat{y}_j^k)(y_j^k-\widehat{y}_j^k) \end{aligned}    \hspace{2cm}(7)</script><p>我们将以上(6)和（7）化简的结果带入（5）式中，得到：</p>
+<script type="math/tex; mode=display">
+\Delta w_{hj}=\eta g_jb_n</script><p>这就是BackPropagation算法中关于$w_{hj}$的更新公式</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/05/07/2018/2018-05-07 Ubuntu交换空间设置/" class="archive-article-date">
-  	<time datetime="2018-05-07T11:41:46.463Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/07/2018/2018-05-07 Ubuntu交换空间设置/">Ubuntu交换空间设置</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -681,87 +276,122 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/ubuntu/" class="article-tag-list-link color2">ubuntu</a>
+        			<a href="/categories/MachineLearning/" class="article-tag-list-link color2">Machine Learning</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://blog.chenwe.top/2019/09/27/2019/2019-09-27 误差逆传播算法/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
+<nav id="article-nav">
+  
+  
+    <a href="/2019/07/29/2019/2019-07-29 Kaggle入门题目Titanic的逻辑回归应用（三）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Kaggle入门题目Titanic的逻辑回归应用（三）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTc5Mi82MzU4">
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
     
+           if (typeof LivereTower === 'function') { return; }
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/25/2018/2018-03-25 docker安装owncloud/" class="archive-article-date">
-  	<time datetime="2018-03-25T03:28:25.652Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/25/2018/2018-03-25 docker安装owncloud/">docker安装owncloud</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/docker/" class="article-tag-list-link color2">docker</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
     
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/tags/code/page/2/">2</a><a class="page-number" href="/tags/code/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/tags/code/page/6/">6</a><a class="extend next" rel="next" href="/tags/code/page/2/">Next &raquo;</a>
-    </nav>
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    </div>
+    <!-- City版安装代码已完成 -->
+  
+
+  
+
   
 
 
@@ -799,9 +429,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",

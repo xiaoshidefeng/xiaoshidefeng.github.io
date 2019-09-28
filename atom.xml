@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Xiaoshidefeng的博客</title>
-  <subtitle>一个计算机本科生</subtitle>
+  <subtitle>一个计算机研究生</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.chenwe.top/"/>
-  <updated>2019-07-31T05:06:35.274Z</updated>
+  <updated>2019-09-28T01:47:54.457Z</updated>
   <id>http://blog.chenwe.top/</id>
   
   <author>
@@ -14,6 +14,78 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>误差逆传播算法</title>
+    <link href="http://blog.chenwe.top/2019/09/27/2019/2019-09-27%20%E8%AF%AF%E5%B7%AE%E9%80%86%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95/"/>
+    <id>http://blog.chenwe.top/2019/09/27/2019/2019-09-27 误差逆传播算法/</id>
+    <published>2019-09-27T02:17:11.377Z</published>
+    <updated>2019-09-28T01:47:54.457Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文是周志华的《机器学习》第5章5.3部分的误差逆传播算法的公式推导解释<br>本文默认读者已知晓<code>多层前馈网络</code>的知识</p>
+<a id="more"></a>
+<h1 id="BackPropagation"><a href="#BackPropagation" class="headerlink" title="BackPropagation"></a>BackPropagation</h1><p>BackPropagation 即 误差逆传播算法 也称 反向传播算法。<br>是一种神经网络的学习算法。训练多层网络，简单的感知机规则不够用，需要采用误差逆传播算法进行训练，得到各个连接处的权值。</p>
+<h2 id="符号含义"><a href="#符号含义" class="headerlink" title="符号含义"></a>符号含义</h2><p>以下是本文的一些符号含义<br><img src="https://i.loli.net/2019/09/27/JRegOK9S3quYjEI.png" alt="QQ截图20190927132617.png"><br>如图以西瓜书上的图5.7 的神经网络为例子。<br>给定训练集$D={(x_1,y_1),(x_2,y_2),……(x_m,y_m)},x_i \in R^d,y_i \in R^l$<br>如图所示有 $d$ 个输入神经元，$l$ 个输出神经元， $q$ 个隐层神经元。<br>记：</p>
+<ul>
+<li>输出层第 $j$ 个神经元的阈值用$\theta_j$表示</li>
+<li>隐层第 $h$个神经元的阈值用$\gamma_h$表示</li>
+<li>输入层第$i$ 个神经元与隐层第$h$个神经元之间的连接权为$v_{ih}$</li>
+<li>隐层第$h$个神经元与输出层第$j$个神经元之间的连接权为$w_{hj}$</li>
+</ul>
+<p>隐层的神经元接受到的输入是输入层$d$个神经元的属性与权重的乘积之和，所以记：</p>
+<ul>
+<li>隐层第$h$个神经元接收到的输入为$\alpha_h=\sum_{i=1}^dv_{ih}x_i$</li>
+</ul>
+<p>记$b_n$为隐层第$h$个神经元的输出同理可得：</p>
+<ul>
+<li>输出层第$j$个神经元接收到的输入为$\beta_j=\sum_{h=1}^qw_{hj}b_h$</li>
+</ul>
+<p>这里我们假设隐层和输出层的神经元都使用Sigmoid函数：</p>
+<script type="math/tex; mode=display">
+h_\theta(x) = \frac{1}{1+e^{(-\theta^Tx)}}</script><p>对于训练例子 ($x_k$, $y_k$) ，我们假定神经元输出为$\widehat{y}_k=(\widehat{y}_1^k,\widehat{y}_2^k,……,\widehat{y}_l^k)$，即：</p>
+<script type="math/tex; mode=display">
+\widehat{y}_j^k=f(\beta_j-\theta_j)       \hspace{2cm}(1)</script><p>因此，该神经网络在 ($x_k$, $y_k$)上的均方误差为:</p>
+<script type="math/tex; mode=display">
+E_k=\frac{1}{2}\sum_{j=1}^{l}(\widehat{y}_j^k-y_j^k)^2       \hspace{2cm}(2)</script><p>这里的 1/2 是为了等下求导的时候可以抵消掉多余的 2 .</p>
+<h2 id="隐层与输出层神经元之间的连接权更新"><a href="#隐层与输出层神经元之间的连接权更新" class="headerlink" title="隐层与输出层神经元之间的连接权更新"></a>隐层与输出层神经元之间的连接权更新</h2><p>BackPropagation算法类似于梯度下降，任意参数$v$的更新式为：</p>
+<script type="math/tex; mode=display">
+v\leftarrow v+\Delta v     \hspace{2cm}(3)</script><p>我们以目标的负梯度方向对参数进行调整，对于（2）式的误差$E_k$，给定学习率$\eta$,有：</p>
+<script type="math/tex; mode=display">
+\Delta w_{ij}=-\eta\frac{\partial E_k}{\partial w_{ij}}     \hspace{2cm}(4)</script><p>这里的负号是因为根据式（3）的更新式，我们希望误差$E_k$尽可能的小（即尽可能接近极值，导数为0），当$\frac{\partial E_k}{\partial w_{ij}}&gt;0$时，有$\Delta w_{ij}=-\eta\frac{\partial E_k}{\partial w_{ij}}$小于0，根据（3）式$w$会减小，使得$E_k$也变小。<br>同理可得当$\frac{\partial E_k}{\partial w_{ij}}&lt;0$时，有$\Delta w_{ij}=-\eta\frac{\partial E_k}{\partial w_{ij}}$大于0，根据（3）式$w$会增加，使得$E_k$也变小。</p>
+<p>根据神经网络的结构，我们$w_{hj}$先通过影响第$j$个输出层神经元的输入值$\beta_j$，再影响输出值$\widehat{y}_j^k$，最后影响到$E_k$，因此有：</p>
+<script type="math/tex; mode=display">
+\frac{\partial E_k}{\partial w_{ij}}=\frac{\partial E_k}{\partial \widehat{y}_j^k}.\frac{\partial \widehat{y}_j^k}{\partial \beta_j}. \frac{\partial \beta_j}{\partial w_{ij}}            \hspace{2cm}(5)</script><p>这就是<code>链式法则</code>，是微积分中的求导法则，用于求一个复合函数的导数，是在微积分的求导运算中一种常用的方法。</p>
+<p>根据前面$\beta_j$的定义$\beta_j=\sum_{h=1}^qw_{hj}b_h$，将他对$\partial w_{ij}$求偏导<br>可以得到</p>
+<script type="math/tex; mode=display">
+\frac{\partial \beta_j}{\partial w_{ij}} = b_n  \hspace{2cm}(6)</script><p>同理$E_k=\frac{1}{2}\sum_{j=1}^{l}(\widehat{y}_j^k-y_j^k)^2$对$\widehat{y}_j^k$求偏导可得：</p>
+<script type="math/tex; mode=display">
+\begin{aligned} \frac{\partial E_k}{\partial \widehat{y}_j^k}&=\frac{1}{2}.2(\widehat{y}_j^k-y_j^k)(1-0) \\ &=(\widehat{y}_j^k-y_j^k)\end{aligned}</script><p>同理将$\widehat{y}_j^k=f(\beta_j-\theta_j)$对$\beta_j$求偏导可得：</p>
+<script type="math/tex; mode=display">
+\frac{\partial \widehat{y}_j^k}{\partial \beta_j}=f'(\beta_j-\theta_j)</script><p>因为我们这里隐层和输出层神经元都是使用Sigmoid函数，而Sigmoid函数有以下性质：</p>
+<script type="math/tex; mode=display">
+f'(x)=f(x)(1-f(x))</script><p>因此$\frac{\partial \widehat{y}_j^k}{\partial \beta_j}$可以继续化简为：</p>
+<script type="math/tex; mode=display">
+\frac{\partial \widehat{y}_j^k}{\partial \beta_j}=\widehat{y}_j^k(1-\widehat{y}_j^k)</script><p>我们令：</p>
+<script type="math/tex; mode=display">
+\begin{aligned} g_j&=-\frac{\partial E_k}{\partial \widehat{y}_j^k}.\frac{\partial \widehat{y}_j^k}{\partial \beta_j} \\ &=\widehat{y}_j^k(1-\widehat{y}_j^k)(y_j^k-\widehat{y}_j^k) \end{aligned}    \hspace{2cm}(7)</script><p>我们将以上(6)和（7）化简的结果带入（5）式中，得到：</p>
+<script type="math/tex; mode=display">
+\Delta w_{hj}=\eta g_jb_n</script><p>这就是BackPropagation算法中关于$w_{hj}$的更新公式</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文是周志华的《机器学习》第5章5.3部分的误差逆传播算法的公式推导解释&lt;br&gt;本文默认读者已知晓&lt;code&gt;多层前馈网络&lt;/code&gt;的知识&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Machine Learning" scheme="http://blog.chenwe.top/categories/Machine-Learning/"/>
+    
+    
+      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
+    
+      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
+    
+  </entry>
   
   <entry>
     <title>Kaggle入门题目Titanic的逻辑回归应用（三）</title>
@@ -906,62 +978,6 @@ h_\theta(x) = \frac{1}{1+e^{(-\theta^Tx)}}</script><p>其中 θ 是模型参数�
     </summary>
     
       <category term="SpringBoot" scheme="http://blog.chenwe.top/categories/SpringBoot/"/>
-    
-    
-      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
-    
-      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>阿里云服务器Docker部署Oracle</title>
-    <link href="http://blog.chenwe.top/2017/10/23/2017/2017-10-23%20%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8Docker%E9%83%A8%E7%BD%B2Oracle/"/>
-    <id>http://blog.chenwe.top/2017/10/23/2017/2017-10-23 阿里云服务器Docker部署Oracle/</id>
-    <published>2017-10-23T08:16:55.870Z</published>
-    <updated>2017-10-23T08:54:21.425Z</updated>
-    
-    <content type="html"><![CDATA[<p>上次在自己的电脑上装Oracle<br>装了很久，而且用起来很卡，十分占资源，配置起来也很麻烦<br>于是打算用阿里云的服务器来装Oracle 远程使用<br>为了简化配置，所以用Docker来部署</p>
-<p><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171023162041418.png" alt=""><br><a id="more"></a></p>
-<h2 id="在Ubuntu上安装Docker服务"><a href="#在Ubuntu上安装Docker服务" class="headerlink" title="在Ubuntu上安装Docker服务"></a>在Ubuntu上安装Docker服务</h2><p>我这里服务器用的是Ubuntu 14系统<br>我用apt-get的方式来安装Docker服务</p>
-<p>输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install docker.io</div></pre></td></tr></table></figure></p>
-<p>中间让你确认，就输入 Y</p>
-<p>安装完成后输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker version</div></pre></td></tr></table></figure></p>
-<p>出现如下字样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">Client version: 1.6.2</div><div class="line">Client API version: 1.18</div><div class="line">Go version (client): go1.2.1</div><div class="line">Git commit (client): 7c8fca2</div><div class="line">OS/Arch (client): linux/amd64</div><div class="line">Server version: 1.6.2</div><div class="line">Server API version: 1.18</div><div class="line">Go version (server): go1.2.1</div><div class="line">Git commit (server): 7c8fca2</div><div class="line">OS/Arch (server): linux/amd64</div></pre></td></tr></table></figure></p>
-<p>就代表安装完成了<br>docker 的详细 可以查看这里<a href="https://docs.docker.com/" target="_blank" rel="external">Docker文档</a></p>
-<h2 id="下载镜像"><a href="#下载镜像" class="headerlink" title="下载镜像"></a>下载镜像</h2><p>因为用的是阿里云服务器<br>位于国内<br>所以为了加快下载速度，同时防止下载失败<br>所以我这里选用 阿里云的<a href="https://dev.aliyun.com/search.html" target="_blank" rel="external">容器Hub</a>来下载镜像<br>我这里安装的Oracle容器是 <a href="https://dev.aliyun.com/detail.html?spm=5176.1972343.2.2.193eeedbr2a2iL&amp;repoId=1969" target="_blank" rel="external">helowin/oracle_11g</a>的容器</p>
-<p>因为这个容器较大（有近7个G）<br>下载要耗费很多时间<br>所以我选择挂在后台下载<br>输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nohup docker pull registry.cn-hangzhou.aliyuncs.com/helowin/oracle_11g &amp;</div></pre></td></tr></table></figure></p>
-<p>nohup 使得它即使退出中端也会继续下载， &amp;  让他保持在后台运行</p>
-<p>等了足够长的一段时间后<br>我们输入命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">root@iZwz97zhk0psfzbsaxakxzZ:~# docker images</div><div class="line">REPOSITORY                                             TAG                 IMAGE ID            CREATED             VIRTUAL SIZE</div><div class="line">registry.cn-hangzhou.aliyuncs.com/helowin/oracle_11g   latest              0c8d2ee3b120        21 months ago       6.849 GB</div></pre></td></tr></table></figure></p>
-<p>查看我们本地拥有的镜像容器<br>我们看到我们已经拥有了一个 6.8G的镜像了</p>
-<h2 id="运行与配置Docker里的Oracle"><a href="#运行与配置Docker里的Oracle" class="headerlink" title="运行与配置Docker里的Oracle"></a>运行与配置Docker里的Oracle</h2><p>输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -d -p 1521:1521 --name oracle_11g registry.aliyuncs.com/helowin/oracle_11g</div></pre></td></tr></table></figure></p>
-<p>这里我将端口从里面的 1521 映射到 外部的1521端口<br>等待一段时间<br>输入 <code>docker ps</code> 查看docker的运行情况<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">root@iZwz97zhk0psfzbsaxakxzZ:~# docker ps</div><div class="line">CONTAINER ID        IMAGE                                             COMMAND                CREATED             STATUS              PORTS                    NAMES</div><div class="line">00bcc1c3577f        registry.aliyuncs.com/helowin/oracle_11g:latest   &quot;/bin/sh -c &apos;/home/o   3 hours ago         Up 3 hours          0.0.0.0:1521-&gt;1521/tcp   oracle_11g</div></pre></td></tr></table></figure></p>
-<p>进入容器： <code>docker exec -it 容器ID /bin/bash</code><br>这里的容器ID是 <code>00bcc1c3577f</code></p>
-<p>进入之后我们输入 <code>sqlplus</code> 是没有反应的<br>因为权限不够<br>所以我们输入<code>su root</code><br>获取root权限 密码是 helowin</p>
-<p>获取到root权限后<br>输入 <code>vi /etc/profile</code>并在文件最后添加如下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">export ORACLE_HOME=/home/oracle/app/oracle/product/11.2.0/dbhome_2</div><div class="line">export ORACLE_SID=helowin</div><div class="line">export PATH=$ORACLE_HOME/bin:$PATH</div></pre></td></tr></table></figure></p>
-<p>退出并保存</p>
-<p>输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ln -s $ORACLE_HOME/bin/sqlplus /usr/bin</div></pre></td></tr></table></figure></p>
-<p>来连接软件</p>
-<p>然后 输入 <code>su - oracle</code> 切换成 Oracle用户<br>再登录sqlplus 输入<br><code>sqlplus /nolog</code><br><code>conn /as sysdba</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[oracle@00bcc1c3577f ~]$ sqlplus /nolog</div><div class="line"></div><div class="line">SQL*Plus: Release 11.2.0.1.0 Production on Mon Oct 23 13:13:00 2017</div><div class="line"></div><div class="line">Copyright (c) 1982, 2009, Oracle.  All rights reserved.</div><div class="line"></div><div class="line">SQL&gt; conn /as sysdba</div><div class="line">Connected.</div></pre></td></tr></table></figure></p>
-<p>成后之后来执行下面的命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">alter user system identified by oracle;</div><div class="line">alter user sys identified by oracle;</div><div class="line">ALTER PROFILE DEFAULT LIMIT PASSWORD_LIFE_TIME UNLIMITED;</div></pre></td></tr></table></figure>
-<p>我们把 system 和 sys的密码都定义成 oracle了</p>
-<p>我们下面可以新建一个用户<br>输入以下命令查看我们用户空间的路径<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">SQL&gt; select name from v$datafile;</div><div class="line"></div><div class="line">NAME</div><div class="line">--------------------------------------------------------------------------------</div><div class="line">/home/oracle/app/oracle/oradata/helowin/system01.dbf</div><div class="line">/home/oracle/app/oracle/oradata/helowin/sysaux01.dbf</div><div class="line">/home/oracle/app/oracle/oradata/helowin/undotbs01.dbf</div><div class="line">/home/oracle/app/oracle/oradata/helowin/users01.dbf</div><div class="line">/home/oracle/app/oracle/oradata/helowin/example01.dbf</div></pre></td></tr></table></figure></p>
-<p>我们看到我们的用户空间位于<code>/home/oracle/app/oracle/oradata/helowin/</code>下<br>所以我们可以创建新用户按照以下步骤<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">SQL&gt; create tablespace myspace datafile &apos;/home/oracle/app/oracle/oradata/helowin/myspace.dbf&apos; size 15M;</div><div class="line"></div><div class="line">Tablespace created.</div><div class="line"></div><div class="line">SQL&gt; create user me identified by mypassword default tablespace myspace;</div><div class="line"></div><div class="line">User created.</div><div class="line"></div><div class="line">SQL&gt; grant dba,connect to me;</div><div class="line"></div><div class="line">Grant succeeded.</div></pre></td></tr></table></figure></p>
-<p>这样我们就创建了一个名为 <code>myspace.dbf</code>的用户空间<br>创建了一个名为 <code>me</code>的用户，密码是 mypassword ,用户空间是myspace<br>并赋予了 dba 和 connect权限</p>
-<p>下面我们就可以通过  <code>SQL Developer</code>工具来连接了<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171023165301584.png" alt=""></p>
-<p>这样我们就能远程连接我们在阿里云上的 Oracle数据库了</p>
-<p><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171023165411222.png" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;上次在自己的电脑上装Oracle&lt;br&gt;装了很久，而且用起来很卡，十分占资源，配置起来也很麻烦&lt;br&gt;于是打算用阿里云的服务器来装Oracle 远程使用&lt;br&gt;为了简化配置，所以用Docker来部署&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171023162041418.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Docker" scheme="http://blog.chenwe.top/categories/Docker/"/>
     
     
       <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>

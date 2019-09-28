@@ -1,1 +1,1 @@
-http://blog.chenwe.top/2019/07/29/2019/2019-07-29 Kaggle入门题目Titanic的逻辑回归应用（三）/
+http://blog.chenwe.top/2019/09/27/2019/2019-09-27 误差逆传播算法/
