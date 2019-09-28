@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.chenwe.top/"/>
-  <updated>2019-09-28T01:47:54.457Z</updated>
+  <updated>2019-09-28T07:11:52.146Z</updated>
   <id>http://blog.chenwe.top/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://blog.chenwe.top/2019/09/27/2019/2019-09-27%20%E8%AF%AF%E5%B7%AE%E9%80%86%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95/"/>
     <id>http://blog.chenwe.top/2019/09/27/2019/2019-09-27 误差逆传播算法/</id>
     <published>2019-09-27T02:17:11.377Z</published>
-    <updated>2019-09-28T01:47:54.457Z</updated>
+    <updated>2019-09-28T07:11:52.146Z</updated>
     
     <content type="html"><![CDATA[<p>本文是周志华的《机器学习》第5章5.3部分的误差逆传播算法的公式推导解释<br>本文默认读者已知晓<code>多层前馈网络</code>的知识</p>
 <a id="more"></a>
@@ -69,8 +69,23 @@ f'(x)=f(x)(1-f(x))</script><p>因此$\frac{\partial \widehat{y}_j^k}{\partial \b
 <script type="math/tex; mode=display">
 \begin{aligned} g_j&=-\frac{\partial E_k}{\partial \widehat{y}_j^k}.\frac{\partial \widehat{y}_j^k}{\partial \beta_j} \\ &=\widehat{y}_j^k(1-\widehat{y}_j^k)(y_j^k-\widehat{y}_j^k) \end{aligned}    \hspace{2cm}(7)</script><p>我们将以上(6)和（7）化简的结果带入（5）式中，得到：</p>
 <script type="math/tex; mode=display">
-\Delta w_{hj}=\eta g_jb_n</script><p>这就是BackPropagation算法中关于$w_{hj}$的更新公式</p>
-]]></content>
+\Delta w_{hj}=\eta g_jb_n</script><p><strong>这就是BackPropagation算法中关于$w_{hj}$的更新公式</strong></p>
+<p>同理我们可以对$\theta_j$进行相同的操作。<br>因为$\theta_j$通过影响$\widehat{y}_j^k$来影响$E_k$，所以有：</p>
+<script type="math/tex; mode=display">
+\Delta\theta_j=-\eta\frac{\partial E_k}{\partial \theta_j}=-\eta.\frac{\partial E_k}{\partial \widehat{y}_j^k}.\frac{\partial \widehat{y}_j^k}{\partial \theta_j}     \hspace{2cm}(8)</script><p>其中:</p>
+<script type="math/tex; mode=display">
+\frac{\partial E_k}{\partial \widehat{y}_j^k}=(\widehat{y}_j^k-{y}_j^k)</script><p>因为输出层神经元使用的是Sigmoid函数，所以有：</p>
+<script type="math/tex; mode=display">
+\begin{aligned} \frac{\partial \widehat{y}_j^k}{\partial \theta_j}&=-f'(\beta_j-\theta_j) \\ &=-f(\beta_j-\theta_j)(1-f(\beta_j-\theta_j) \\ &=-\widehat{y}_j^k(1-\widehat{y}_j^k)
+\end{aligned}</script><p><strong>因此我们得出$\theta_j$的更新公式：</strong></p>
+<script type="math/tex; mode=display">
+\Delta \theta_j=-\eta.\frac{\partial E_k}{\partial \theta_j}=-\eta.\frac{\partial E_k}{\partial \widehat{y}_j^k}.\frac{\partial \widehat{y}_j^k}{\partial \theta_j}=-\eta g_j</script><h2 id="输入层与隐层之间连接权更新"><a href="#输入层与隐层之间连接权更新" class="headerlink" title="输入层与隐层之间连接权更新"></a>输入层与隐层之间连接权更新</h2><p>我们可以将上面的计算方法用到输入层和隐层上，但是要注意，因为隐层中的某个神经元连接了$l$个输出层神经元，所以要做一个求和操作。<br>计算后可得:</p>
+<script type="math/tex; mode=display">
+\Delta v_{ih}=\eta e_hx_i</script><script type="math/tex; mode=display">
+\Delta \gamma_h=-\eta e_h</script><p>其中$e_h$如下:</p>
+<script type="math/tex; mode=display">
+\begin{aligned} e_h&=\frac{\partial E_k}{\partial b_n}.\frac{\partial b_n}{\partial \alpha_n} \\ &=b_n(1-bn)\sum_{j=1}^lw_{hj}g_j
+\end{aligned}</script>]]></content>
     
     <summary type="html">
     
