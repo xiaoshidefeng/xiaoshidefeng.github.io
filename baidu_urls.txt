@@ -1,1 +1,1 @@
-http://blog.chenwe.top/2019/09/27/2019/2019-09-27 误差逆传播算法/
+http://blog.chenwe.top/2019/10/17/2019/2019-10-17 AlexNet网络简析/
