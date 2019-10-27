@@ -6,17 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.chenwe.top">
-  <title>Xiaoshidefeng的博客</title>
+  <title>R-CNN简析 | Xiaoshidefeng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="CW的个人Blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Xiaoshidefeng的博客">
-<meta property="og:url" content="http://blog.chenwe.top/index.html">
+  <meta name="description" content="本文是RCNN的经典论文《Rich feature hierarchies for accurate oject detection and semantic segmentation》的一些阅读总结这篇论文是在2012年的CNN论文基础上，增加了物体检测的RCNN开山之作，在它后续还有FastRCNN 和 FasterRCNN">
+<meta name="keywords" content="study,code">
+<meta property="og:type" content="article">
+<meta property="og:title" content="R-CNN简析">
+<meta property="og:url" content="http://blog.chenwe.top/2019/10/27/2019/2019-10-27 R-CNN简析/index.html">
 <meta property="og:site_name" content="Xiaoshidefeng的博客">
-<meta property="og:description" content="CW的个人Blog">
+<meta property="og:description" content="本文是RCNN的经典论文《Rich feature hierarchies for accurate oject detection and semantic segmentation》的一些阅读总结这篇论文是在2012年的CNN论文基础上，增加了物体检测的RCNN开山之作，在它后续还有FastRCNN 和 FasterRCNN">
+<meta property="og:image" content="https://i.loli.net/2019/10/27/BbmPjwqSdxHK9rc.png">
+<meta property="og:image" content="https://i.loli.net/2019/10/27/MKRtYfAZCTgUVie.png">
+<meta property="og:image" content="https://i.loli.net/2019/10/27/wGArmyaXDs7b25n.png">
+<meta property="og:updated_time" content="2019-10-27T12:15:52.734Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Xiaoshidefeng的博客">
-<meta name="twitter:description" content="CW的个人Blog">
+<meta name="twitter:title" content="R-CNN简析">
+<meta name="twitter:description" content="本文是RCNN的经典论文《Rich feature hierarchies for accurate oject detection and semantic segmentation》的一些阅读总结这篇论文是在2012年的CNN论文基础上，增加了物体检测的RCNN开山之作，在它后续还有FastRCNN 和 FasterRCNN">
+<meta name="twitter:image" content="https://i.loli.net/2019/10/27/BbmPjwqSdxHK9rc.png">
   
     <link rel="alternative" href="/atom.xml" title="Xiaoshidefeng的博客" type="application/atom+xml">
   
@@ -177,17 +183,18 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-2019/2019-10-27 R-CNN简析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-2019/2019-10-27 R-CNN简析" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/27/2019/2019-10-27 R-CNN简析/">R-CNN简析</a>
+    <h1 class="article-title" itemprop="name">
+      R-CNN简析
     </h1>
+    <span>&nbsp;&nbsp;&nbsp; | &nbsp;
+    <span id="busuanzi_value_page_pv" ></span>次阅读
+    </span>
   
 
 
@@ -201,9 +208,15 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>本文是RCNN的经典论文《Rich feature hierarchies for accurate oject detection and semantic segmentation》的一些阅读总结<br>这篇论文是在2012年的CNN论文基础上，增加了物体检测的RCNN开山之作，在它后续还有FastRCNN 和 FasterRCNN</p>
-        
-          <a class="article-more-a" href="/2019/10/27/2019/2019-10-27 R-CNN简析/#more">more >></a>
-        
+<a id="more"></a>
+<p><a href="https://arxiv.org/pdf/1311.2524.pdf" target="_blank" rel="external"><strong>论文阅读地址</strong></a></p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>作者提出了一种简单并且可扩展的检测算法，可以在VOC2012（一个图像识别challenge主要目的是识别真实场景中一些类别的物体）最好结果的基础上提高30%以上——达到了53.3%。他们的方法结合了两个关键的因素：在候选区域上自下而上使用大型卷积神经网络(CNNs)，用以定位和分割物体。当带标签的训练数据不足时，先针对辅助任务进行有监督预训练，再进行特定任务的调优，就可以产生明显的性能提升。他们把region proposal和CNNs结合起来，所以该方法被称为R-CNN：Regions with CNN features。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>当2012年CNN在图像识别大赛上取得巨大成功后，人们开始把注意力转向了如何将CNN分类结果应用到物体检测任务上。作者通过连接图像分类和目标检测，回答了这个问题。作者主要关注了两个问题：使用深度网络定位物体和在小规模的标注数据集上进行大型网络模型的训练。图像检测需要定位一个图像内的许多物体，传统的方法是将它看成回归问题，但是效果并不好。另一个方法是使用滑动窗口探测器，但是随着网络层次的加深，滑动窗口使用变得困难。作者的方法是通过操作”recognition using regions”范式，解决了CNN的定位问题。在作者测试时，对每一张图片图片，产生近2000个与类别无关的region proposal，对每个CNN抽取一个固定长度的特征向量，然后借助专门针对特定类别数据的线性SVM对每个区域进行分类。使用放射图像变形的方法来对每个不同形状的region proposal产生一个固定长度的作为CNN输入的特征向量（也就是把不同大小的proposal放到同一个大小）。整个流程入下图<br><img src="https://i.loli.net/2019/10/27/BbmPjwqSdxHK9rc.png" alt="QQ截图20191023213328.png"><br>第二个挑战是标签数据太少，可用的数据不能够用来训练大型卷积网络。传统方法多是采用无监督与训练，再进行有监督调优。本文的第二个核心贡献是在辅助数据集（ILSVRC）上进行有监督预训练，再在小数据集上针对特定问题进行调优。除此之外，作者还发现如果将CNN隔开，移除掉其中94%的参数，精度只会下降一点点。但如果通过探测单元，可以发现卷积层学习了丰富的特性如下图：<br><img src="https://i.loli.net/2019/10/27/MKRtYfAZCTgUVie.png" alt="QQ截图20191027201351.png"><br>这说明在网络中，对识别起主要作用的是卷积层。</p>
+<h2 id="系统模块"><a href="#系统模块" class="headerlink" title="系统模块"></a>系统模块</h2><p>物体检测系统有三个模块构成。第一个，产生类别无关的region proposal。第二个是一个大型卷积神经网络，用于从每个区域抽取特定大小的特征向量；第三个是一个用于分类的线性SVM。</p>
+<h2 id="特征提取"><a href="#特征提取" class="headerlink" title="特征提取"></a>特征提取</h2><p>对每个推荐区域抽取一个4096维度的特征向量把一个输入为277*277大小的图片，通过五个卷积层和两个全连接层进行前向传播,最终得到一个4096-D的特征向量。网络的细节可以参考AlexNet。但作者在对图像进行转换时用了不同于AlexNet的方法（原方法是缩放后裁剪），作者是在图片变形之前，在候选框周围加上16像素的padding，再进行各向异形缩放。</p>
+<h2 id="测试阶段的物体检测"><a href="#测试阶段的物体检测" class="headerlink" title="测试阶段的物体检测"></a>测试阶段的物体检测</h2><p>抽取2000个推荐区域。然后变形每一个推荐区域，再通过CNN前向传播计算出特征。然后我们使用对每个类别训练出的SVM给整个特征向量中的每个类别单独打分。然后给出一张图像中所有的打分区域，然后使用NMS，拒绝掉一些和高分区域的IOU大于阈值的候选框。<br>NMS是非极大值抑制，即不是局部的最大值的那些值都去掉。如下图所示，去掉局部的非极大值。</p>
+<p><img src="https://i.loli.net/2019/10/27/wGArmyaXDs7b25n.png" alt="QQ截图20191027201539.png"></p>
+
       
 
       
@@ -240,735 +253,108 @@
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/27/2019/2019-10-27 R-CNN简析/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://blog.chenwe.top/2019/10/27/2019/2019-10-27 R-CNN简析/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
 
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2019/10/17/2019/2019-10-17 AlexNet网络简析/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">AlexNet网络简析</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 
 
 
   
-    <article id="post-2019/2019-10-17 AlexNet网络简析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+
+  
+
+  
+
+  
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTc5Mi82MzU4">
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/17/2019/2019-10-17 AlexNet网络简析/">AlexNet网络简析</a>
-    </h1>
-  
-
-
-        
-        <a href="/2019/10/17/2019/2019-10-17 AlexNet网络简析/" class="archive-article-date">
-  	<time datetime="2019-10-17T13:47:25.248Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-17</time>
-</a>
-        
-      </header>
+           if (typeof LivereTower === 'function') { return; }
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本文是卷积神经网络的经典论文《ImageNet Classification with Deep Convolutional Neural Networks》的一些阅读总结<br>这篇论文摘得了2010年ILSVRC比赛的桂冠。是剖析 CNN 领域的经典之作，也是入门 CNN 的必读paper。<br>由于采用了深度卷积神经网络后极大的提升了图片识别的准确率，所以从这篇paper后引发了卷积神经网络计算机视觉的浪潮。</p>
-        
-          <a class="article-more-a" href="/2019/10/17/2019/2019-10-17 AlexNet网络简析/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/MachineLearning/" class="article-tag-list-link color2">Machine Learning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/17/2019/2019-10-17 AlexNet网络简析/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-2019/2019-09-27 误差逆传播算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/27/2019/2019-09-27 误差逆传播算法/">误差逆传播算法</a>
-    </h1>
-  
-
-
-        
-        <a href="/2019/09/27/2019/2019-09-27 误差逆传播算法/" class="archive-article-date">
-  	<time datetime="2019-09-27T02:17:11.377Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本文是周志华的《机器学习》第5章5.3部分的误差逆传播算法的公式推导解释<br>本文默认读者已知晓<code>多层前馈网络</code>的知识</p>
-        
-          <a class="article-more-a" href="/2019/09/27/2019/2019-09-27 误差逆传播算法/#more">more >></a>
-        
-      
-
-      
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
     </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/MachineLearning/" class="article-tag-list-link color2">Machine Learning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/27/2019/2019-09-27 误差逆传播算法/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-2019/2019-07-29 Kaggle入门题目Titanic的逻辑回归应用（三）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/29/2019/2019-07-29 Kaggle入门题目Titanic的逻辑回归应用（三）/">Kaggle入门题目Titanic的逻辑回归应用（三）</a>
-    </h1>
+    <!-- City版安装代码已完成 -->
   
 
-
-        
-        <a href="/2019/07/29/2019/2019-07-29 Kaggle入门题目Titanic的逻辑回归应用（三）/" class="archive-article-date">
-  	<time datetime="2019-07-29T10:53:49.699Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在上次优化的基础上，在进行一些feature engineering</p>
-        
-          <a class="article-more-a" href="/2019/07/29/2019/2019-07-29 Kaggle入门题目Titanic的逻辑回归应用（三）/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">kaggle</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/MachineLearning/" class="article-tag-list-link color2">Machine Learning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/29/2019/2019-07-29 Kaggle入门题目Titanic的逻辑回归应用（三）/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-2019/2019-07-22 CCF YOCSEF杭州总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/22/2019/2019-07-22 CCF YOCSEF杭州总结/">CCF YOCSEF杭州总结</a>
-    </h1>
   
 
-
-        
-        <a href="/2019/07/22/2019/2019-07-22 CCF YOCSEF杭州总结/" class="archive-article-date">
-  	<time datetime="2019-07-22T03:05:12.025Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>昨天参加了CCF YOCSEF杭州，硬核技术系列论坛之人工智能，这里做下一些记录和总结。</p>
-        
-          <a class="article-more-a" href="/2019/07/22/2019/2019-07-22 CCF YOCSEF杭州总结/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">life</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/MachineLearning/" class="article-tag-list-link color2">Machine Learning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/22/2019/2019-07-22 CCF YOCSEF杭州总结/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-2019/2019-07-13 Kaggle入门题目Titanic的逻辑回归应用（二）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/14/2019/2019-07-13 Kaggle入门题目Titanic的逻辑回归应用（二）/">Kaggle入门题目Titanic的逻辑回归应用（二）</a>
-    </h1>
-  
-
-
-        
-        <a href="/2019/07/14/2019/2019-07-13 Kaggle入门题目Titanic的逻辑回归应用（二）/" class="archive-article-date">
-  	<time datetime="2019-07-14T02:33:42.415Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>上次只是做了一个简单的baseline model，这次要对它进行优化。</p>
-        
-          <a class="article-more-a" href="/2019/07/14/2019/2019-07-13 Kaggle入门题目Titanic的逻辑回归应用（二）/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">kaggle</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/MachineLearning/" class="article-tag-list-link color2">Machine Learning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/14/2019/2019-07-13 Kaggle入门题目Titanic的逻辑回归应用（二）/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-2019/2019-07-12 Kaggle入门题目Titanic的逻辑回归应用（一）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/12/2019/2019-07-12 Kaggle入门题目Titanic的逻辑回归应用（一）/">Kaggle入门题目Titanic的逻辑回归应用（一）</a>
-    </h1>
-  
-
-
-        
-        <a href="/2019/07/12/2019/2019-07-12 Kaggle入门题目Titanic的逻辑回归应用（一）/" class="archive-article-date">
-  	<time datetime="2019-07-12T12:41:57.977Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Kaggle是一个数据建模和数据分析竞赛平台。企业和研究者可在其上发布数据，统计学者和数据挖掘专家可在其上进行竞赛以产生最好的模型。<br>这次记录一下Kaggle上的入门题目Titanic人员幸存预测，用了逻辑回归。</p>
-        
-          <a class="article-more-a" href="/2019/07/12/2019/2019-07-12 Kaggle入门题目Titanic的逻辑回归应用（一）/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">kaggle</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/MachineLearning/" class="article-tag-list-link color2">Machine Learning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/12/2019/2019-07-12 Kaggle入门题目Titanic的逻辑回归应用（一）/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-2019/2019-05-19 朴素贝叶斯" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/19/2019/2019-05-19 朴素贝叶斯/">朴素贝叶斯</a>
-    </h1>
-  
-
-
-        
-        <a href="/2019/05/19/2019/2019-05-19 朴素贝叶斯/" class="archive-article-date">
-  	<time datetime="2019-05-19T07:25:09.787Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>学习Peter Harrington的《Machine Learning in Action》的一些笔记与个人理解<br>这次是关于朴素贝叶斯算法部分的内容</p>
-        
-          <a class="article-more-a" href="/2019/05/19/2019/2019-05-19 朴素贝叶斯/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/MachineLearning/" class="article-tag-list-link color2">Machine Learning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/19/2019/2019-05-19 朴素贝叶斯/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-2019/2019-05-18 决策树简析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/18/2019/2019-05-18 决策树简析/">决策树简析</a>
-    </h1>
-  
-
-
-        
-        <a href="/2019/05/18/2019/2019-05-18 决策树简析/" class="archive-article-date">
-  	<time datetime="2019-05-18T08:07:06.669Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>学习Peter Harrington的《Machine Learning in Action》的一些笔记与个人理解<br>这次是关于决策树算法部分的内容</p>
-        
-          <a class="article-more-a" href="/2019/05/18/2019/2019-05-18 决策树简析/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/MachineLearning/" class="article-tag-list-link color2">Machine Learning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/18/2019/2019-05-18 决策树简析/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-2019/2019-05-09 KNN算法简析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/28/2019/2019-05-09 KNN算法简析/">KNN算法简析</a>
-    </h1>
-  
-
-
-        
-        <a href="/2019/02/28/2019/2019-05-09 KNN算法简析/" class="archive-article-date">
-  	<time datetime="2019-02-28T03:33:26.599Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>学习Peter Harrington的《Machine Learning in Action》的一些笔记与个人理解<br>这次是关于KNN算法部分的内容</p>
-        
-          <a class="article-more-a" href="/2019/02/28/2019/2019-05-09 KNN算法简析/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/MachineLearning/" class="article-tag-list-link color2">Machine Learning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/28/2019/2019-05-09 KNN算法简析/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-    </nav>
   
 
 
@@ -1005,8 +391,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
