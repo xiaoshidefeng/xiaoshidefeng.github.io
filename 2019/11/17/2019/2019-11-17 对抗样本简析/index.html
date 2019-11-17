@@ -6,17 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.chenwe.top">
-  <title>Tag: study | Xiaoshidefeng的博客</title>
+  <title>对抗样本简析 | Xiaoshidefeng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="CW的个人Blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Xiaoshidefeng的博客">
-<meta property="og:url" content="http://blog.chenwe.top/tags/study/page/2/index.html">
+  <meta name="description" content="本文先介绍对抗样本，再通过这篇经典的对抗样本论文《Explaining and Harnessing Adversarial Examples》讲解一些对抗样本形成的可能原因，以及一个快速生成对抗样本的方法FSGM。">
+<meta name="keywords" content="study,code">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对抗样本简析">
+<meta property="og:url" content="http://blog.chenwe.top/2019/11/17/2019/2019-11-17 对抗样本简析/index.html">
 <meta property="og:site_name" content="Xiaoshidefeng的博客">
-<meta property="og:description" content="CW的个人Blog">
+<meta property="og:description" content="本文先介绍对抗样本，再通过这篇经典的对抗样本论文《Explaining and Harnessing Adversarial Examples》讲解一些对抗样本形成的可能原因，以及一个快速生成对抗样本的方法FSGM。">
+<meta property="og:image" content="https://i.loli.net/2019/11/17/MsLb6DGkFeTaIW1.png">
+<meta property="og:image" content="https://i.loli.net/2019/11/17/DQ7lWmViFZc5np2.png">
+<meta property="og:image" content="https://i.loli.net/2019/11/17/di7xtMf9YF1Jqsn.png">
+<meta property="og:image" content="https://i.loli.net/2019/11/17/J7MSZENRT8pWH3o.png">
+<meta property="og:updated_time" content="2019-11-17T13:09:19.926Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Xiaoshidefeng的博客">
-<meta name="twitter:description" content="CW的个人Blog">
+<meta name="twitter:title" content="对抗样本简析">
+<meta name="twitter:description" content="本文先介绍对抗样本，再通过这篇经典的对抗样本论文《Explaining and Harnessing Adversarial Examples》讲解一些对抗样本形成的可能原因，以及一个快速生成对抗样本的方法FSGM。">
+<meta name="twitter:image" content="https://i.loli.net/2019/11/17/MsLb6DGkFeTaIW1.png">
   
     <link rel="alternative" href="/atom.xml" title="Xiaoshidefeng的博客" type="application/atom+xml">
   
@@ -177,37 +184,50 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-2019/2019-11-17 对抗样本简析" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/18/2019/2019-05-18 决策树简析/" class="archive-article-date">
-  	<time datetime="2019-05-18T08:07:06.669Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-18</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/18/2019/2019-05-18 决策树简析/">决策树简析</a>
+    <h1 class="article-title" itemprop="name">
+      对抗样本简析
     </h1>
+    <span>&nbsp;&nbsp;&nbsp; | &nbsp;
+    <span id="busuanzi_value_page_pv" ></span>次阅读
+    </span>
   
 
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/11/17/2019/2019-11-17 对抗样本简析/" class="archive-article-date">
+  	<time datetime="2019-11-17T12:19:22.235Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文先介绍对抗样本，再通过这篇经典的对抗样本论文《Explaining and Harnessing Adversarial Examples》讲解一些对抗样本形成的可能原因，以及一个快速生成对抗样本的方法FSGM。</p>
+<a id="more"></a>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><strong>什么是对抗样本？</strong><br><img src="https://i.loli.net/2019/11/17/MsLb6DGkFeTaIW1.png" alt="1.png"><br>这幅图左边第一眼看着是一直乌鸦，而仔细一看，在对比右边的图片后，我们就能发现这是一直黑猫的图片。我们人的肉眼容易被左边的图片欺骗，对于物体图像产生错误的判断，上面这个图片就是一个对人的对抗样本图片。<br>而我们今天的主角对抗样本它欺骗的对象不是人，而是机器。<br><strong>对抗样本指的是一个经过微小调整就可以让机器学习算法输出错误结果的输入样本。</strong><br><img src="https://i.loli.net/2019/11/17/DQ7lWmViFZc5np2.png" alt="2.png"><br>如上图所示，左边是一张大熊猫的图片，右边也是一张大熊猫的图片，但是左边机器认为是大熊猫，而右边机器认为99.3%是长臂猿。<br>我们在中间加了点非常细微甚至人眼无法察觉的改动，就让机器产生了错误的结果。人工智能瞬间变成了人工智障。<br><img src="https://i.loli.net/2019/11/17/di7xtMf9YF1Jqsn.png" alt="3.png"><br>对抗样本指的是一个经过微小调整就可以让机器学习算法输出错误结果的输入样本。</p>
+<p>下面我来介绍一下关于对抗样本的原理的一篇论文<br>《Explaining and Harnessing Adversarial Examples》这是GAN的作者的一篇文章。<br>需要注意的是，目前学术界对于对抗样本的原理与形成原因还没有一个准确的论断，目前还处于争议之中，这篇论文只是提供一种说法而已。</p>
+<p><a href="https://arxiv.org/pdf/1412.6572.pdf" target="_blank" rel="external"><strong>论文阅读地址</strong></a></p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>Szegedy等人于2014年首先发现当前的机器学习模型包括神经网络等模型容易受到对抗样本(Adversarial Examples)的攻击。所谓对抗样本，即攻击者通过轻微地扰动正常样本产生对抗样本，在且保证该攻击不影响人眼的识别的情况下，达到误导分类器的目的。<br>在当前的研究中，对抗样本的原因产生的原因有很多争议。作者在这篇文章里的主要观点是对抗样本的产生是因为高维空间与过于线性的原因。作者还根据这个观点，设计了一种快速产生对抗样本的方法。</p>
+<h2 id="对抗样本的原理"><a href="#对抗样本的原理" class="headerlink" title="对抗样本的原理"></a>对抗样本的原理</h2><p>作者认为对抗样本是由于高维空间与过于线性的原因而产生的。<br>因为样本输入特征的精度有限（一些模型通常为了效率会丢弃一些信息），所以当每个输入样本x添加一些小于样本输入精度的干扰值η后，机器将无法准确的区分样本x与x = x +η<br>。如果这些干扰足够小，那么机器将认为x与x 是同一个类。 因为整个模型是高维度的，所以一个样本中大量维度的无限小的干扰加在一起就可以对输出造成很大的变化。因此对抗样本的线性解释表明，对线性模型而言，如果其输入样本有足够大的维度，那么线性模型也容易受到对抗样本的攻击。</p>
+<h2 id="构建对抗样本"><a href="#构建对抗样本" class="headerlink" title="构建对抗样本"></a>构建对抗样本</h2><p>作者利用对抗样本的线性解释提出了一个快速产生对抗样本的方式，也即Fast Gradient Sign Method(FGSM)方法。<br>假设模型的参数值为θ，模型的输入是 x， y 是模型对应的label值， J(θ,x,y)是训练神经网络的损失函数。对某个特定的模型参数 θ 而言，FGSM方法将损失函数近似线性化，从而获得保证无穷范数限制的最优的扰动，扰动值具体为：</p>
+<script type="math/tex; mode=display">\eta =\epsilon sign(\nabla_xJ(\theta,x,y ) )</script><p>FGSM这种简单的算法确实可以产生误分类的对抗样本，从而证明了作者假设的对抗样本的产生原因是由于模型的线性特性。</p>
+<h2 id="Fast-Gradient-Sign-Method"><a href="#Fast-Gradient-Sign-Method" class="headerlink" title="Fast Gradient Sign Method"></a>Fast Gradient Sign Method</h2><p>通过在梯度方向上进行添加增量来诱导网络对生成的图片X’进行误分类。我们可以通过指定我们期待的分类使得网络针对任何输入图片均产生指定分类的对抗样本，同时也可以不指定期待的分类，只需要使得生成的图片被网络识别为与正确分类不同的分类即可。</p>
+<h2 id="对抗样本泛化与原因"><a href="#对抗样本泛化与原因" class="headerlink" title="对抗样本泛化与原因"></a>对抗样本泛化与原因</h2><p>目前的对抗样本有一个泛化的特点，即从一个模型中得到的对抗样本，对许多的用不同的数据训练的不同的模型有着同样的作用，也就是一个特定模型上产生的对抗样本通常也容易被其他的模型错误的分类，甚至错误的分类结果相同。<br>在本文的线性解释下，作者认为对抗样本存在与广泛的子空间中。<br><img src="https://i.loli.net/2019/11/17/J7MSZENRT8pWH3o.png" alt="4.png"></p>
+<p>如图所示，在不同的ϵ下，可以看到FGSM可以在一堆连续的子空间内产生对抗样本，而不是特定的区域。这也可以说明为什么同一个模型，可以产生很多个对抗样本。<br>为了解释为什么不同的分类器将对抗样本误分类到同一个类，作者假设目前的方法训练神经网络都类似于在同一个训练集上学习的线性分类器。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -223,7 +243,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -236,522 +256,109 @@
 	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/28/2019/2019-05-09 KNN算法简析/" class="archive-article-date">
-  	<time datetime="2019-02-28T03:33:26.599Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/28/2019/2019-05-09 KNN算法简析/">KNN算法简析</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/MachineLearning/" class="article-tag-list-link color2">Machine Learning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
       
-        </div></section>
+
       
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://blog.chenwe.top/2019/11/17/2019/2019-11-17 对抗样本简析/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/05/07/2018/2018-05-07 Ubuntu交换空间设置/" class="archive-article-date">
-  	<time datetime="2018-05-07T11:41:46.463Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/07/2018/2018-05-07 Ubuntu交换空间设置/">Ubuntu交换空间设置</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ubuntu/" class="article-tag-list-link color2">ubuntu</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
+<nav id="article-nav">
+  
+  
+    <a href="/2019/11/13/2019/2019-11-13 GAN简析/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">GAN简析</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTc5Mi82MzU4">
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
     
+           if (typeof LivereTower === 'function') { return; }
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/25/2018/2018-03-25 docker安装owncloud/" class="archive-article-date">
-  	<time datetime="2018-03-25T03:28:25.652Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/25/2018/2018-03-25 docker安装owncloud/">docker安装owncloud</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/docker/" class="article-tag-list-link color2">docker</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/17/2018/2018-03-17 UItimateRecyclerView的使用/" class="archive-article-date">
-  	<time datetime="2018-03-17T07:37:29.241Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/17/2018/2018-03-17 UItimateRecyclerView的使用/">UItimateRecyclerView的使用</a>
-    </h1>
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    </div>
+    <!-- City版安装代码已完成 -->
   
 
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Android/" class="article-tag-list-link color3">Android</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/08/2018/2018-03-08 React Native开发中的一些坑 (二)/" class="archive-article-date">
-  	<time datetime="2018-03-08T11:34:08.100Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/08/2018/2018-03-08 React Native开发中的一些坑 (二)/">React Native开发中的一些坑 (二)</a>
-    </h1>
   
 
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ReactNative/" class="article-tag-list-link color3">React Native</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/07/2018/2018-03-07 React Native开发中的一些坑/" class="archive-article-date">
-  	<time datetime="2018-03-07T14:19:02.214Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/07/2018/2018-03-07 React Native开发中的一些坑/">React Native开发中的一些坑（一）</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ReactNative/" class="article-tag-list-link color3">React Native</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/02/19/2018/2018-02-19 LaTeX的一些基本操作/" class="archive-article-date">
-  	<time datetime="2018-02-19T04:51:54.324Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/02/19/2018/2018-02-19 LaTeX的一些基本操作/">LaTeX的入门</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数学建模/" class="article-tag-list-link color5">数学建模</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/02/17/2018/2018-02-17 层次分析法/" class="archive-article-date">
-  	<time datetime="2018-02-17T05:28:13.489Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/02/17/2018/2018-02-17 层次分析法/">层次分析法</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数学建模/" class="article-tag-list-link color5">数学建模</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-      
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/12/03/2017/2017-12-03 OKhttp的使用/" class="archive-article-date">
-  	<time datetime="2017-12-03T14:24:58.545Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/12/03/2017/2017-12-03 OKhttp的使用/">OKhttp的使用</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Android/" class="article-tag-list-link color3">Android</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/tags/study/">&laquo; Prev</a><a class="page-number" href="/tags/study/">1</a><span class="page-number current">2</span><a class="page-number" href="/tags/study/page/3/">3</a><a class="page-number" href="/tags/study/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/tags/study/page/7/">7</a><a class="extend next" rel="next" href="/tags/study/page/3/">Next &raquo;</a>
-    </nav>
   
 
 
@@ -789,9 +396,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",
