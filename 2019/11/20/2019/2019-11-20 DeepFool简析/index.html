@@ -6,17 +6,28 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.chenwe.top">
-  <title>Category: Machine Learning | Xiaoshidefeng的博客</title>
+  <title>DeepFool | Xiaoshidefeng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="CW的个人Blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Xiaoshidefeng的博客">
-<meta property="og:url" content="http://blog.chenwe.top/categories/Machine-Learning/page/2/index.html">
+  <meta name="description" content="本文介绍产生对抗样本的一种算法Deep Fool的论文《DeepFool: a simple and accurate method to fool deep neural networks》。">
+<meta name="keywords" content="study,code">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DeepFool">
+<meta property="og:url" content="http://blog.chenwe.top/2019/11/20/2019/2019-11-20 DeepFool简析/index.html">
 <meta property="og:site_name" content="Xiaoshidefeng的博客">
-<meta property="og:description" content="CW的个人Blog">
+<meta property="og:description" content="本文介绍产生对抗样本的一种算法Deep Fool的论文《DeepFool: a simple and accurate method to fool deep neural networks》。">
+<meta property="og:image" content="https://i.loli.net/2019/11/20/GCWnhb12wZSmkiR.png">
+<meta property="og:image" content="https://i.loli.net/2019/11/20/OuoMmpU7BFHerzi.png">
+<meta property="og:image" content="https://i.loli.net/2019/11/20/IfqmrCN2MQbPklg.png">
+<meta property="og:image" content="https://i.loli.net/2019/11/20/rJ57MFjsB1pWNlw.png">
+<meta property="og:image" content="https://i.loli.net/2019/11/20/XkTKOiaHv8hoPpc.png">
+<meta property="og:image" content="https://i.loli.net/2019/11/20/NGageVU3wsmIz24.png">
+<meta property="og:image" content="https://i.loli.net/2019/11/20/LyWEPfBDXN7eCRl.png">
+<meta property="og:image" content="https://i.loli.net/2019/11/20/OpoZRrwYlFhKn53.png">
+<meta property="og:updated_time" content="2019-11-20T14:13:03.785Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Xiaoshidefeng的博客">
-<meta name="twitter:description" content="CW的个人Blog">
+<meta name="twitter:title" content="DeepFool">
+<meta name="twitter:description" content="本文介绍产生对抗样本的一种算法Deep Fool的论文《DeepFool: a simple and accurate method to fool deep neural networks》。">
+<meta name="twitter:image" content="https://i.loli.net/2019/11/20/GCWnhb12wZSmkiR.png">
   
     <link rel="alternative" href="/atom.xml" title="Xiaoshidefeng的博客" type="application/atom+xml">
   
@@ -177,37 +188,86 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-2019/2019-11-20 DeepFool简析" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      DeepFool
+    </h1>
+    <span>&nbsp;&nbsp;&nbsp; | &nbsp;
+    <span id="busuanzi_value_page_pv" ></span>次阅读
+    </span>
+  
+
+
+        
+        <a href="/2019/11/20/2019/2019-11-20 DeepFool简析/" class="archive-article-date">
+  	<time datetime="2019-11-20T11:18:35.240Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-20</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文介绍产生对抗样本的一种算法Deep Fool的论文《DeepFool: a simple and accurate method to fool deep neural networks》。</p>
+<a id="more"></a>
+<p><a href="https://arxiv.org/pdf/1511.04599" target="_blank" rel="external"><strong>论文阅读地址</strong></a></p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>现有的对抗样本尚未提出有效的方法来准确计算最新的深度分类器对大规模数据集的这种扰动的鲁棒性。作者这篇文章填补了这方面的空白，并提出了DeepFool算法，来获得对于深层网络有作用的扰动。</p>
+<h2 id="分类器鲁棒性的评估指标"><a href="#分类器鲁棒性的评估指标" class="headerlink" title="分类器鲁棒性的评估指标"></a>分类器鲁棒性的评估指标</h2><p>作者定义分类器在x处的鲁棒性:</p>
+<script type="math/tex; mode=display">
+\Delta(x;\hat{k}):=\min_{\textbf{r}}\left||\textbf{r}|\right|_2 \ \ s.t.\hat{k}(x+\textbf{r})\neq\hat{k}(x)</script><p>其中 x代表图像样本，$\hat{k}(x)$是分类器，r是对抗的干扰。<br>分类器$\hat{k}(x)$的鲁棒性可以用</p>
+<script type="math/tex; mode=display">
+\rho_{adv}(\hat{k})=\mathbb{E}_{x}\dfrac{\Delta(x;\hat{k})}{||x||_2}</script><p>来表示。</p>
+<h2 id="主要贡献"><a href="#主要贡献" class="headerlink" title="主要贡献"></a>主要贡献</h2><ul>
+<li>提出了一种简单而准确的方法来计算和比较不同分类器对于对抗扰动的鲁棒性。</li>
+<li>作者的方法比现有的方法更可靠、更有效地计算了对抗性扰动。</li>
+<li>发现用对抗性的例子增加训练数据可以显著增强对对抗性扰动的鲁棒性。</li>
+<li>使用不精确的方法来计算对抗性扰动，可能导致不同结论，有时还会产生误导。</li>
+</ul>
+<h2 id="DeepFool在二分类问题的应用"><a href="#DeepFool在二分类问题的应用" class="headerlink" title="DeepFool在二分类问题的应用"></a>DeepFool在二分类问题的应用</h2><p>由于多分类器可以看作是二分类器的延申，所以作者先从二分类器入手。<br>f是一个线性二分类分类器：</p>
+<script type="math/tex; mode=display">
+f=\textbf{w}^Tx+b</script><p>如下图所示<br><img src="https://i.loli.net/2019/11/20/GCWnhb12wZSmkiR.png" alt="1.png"></p>
+<p>二维平面被f=0分为两块，一块是f<0，一块是f>0。<br>假设有一个样本点$x_0$，它作为正常的样本，被分在$f&gt;0$的区域中，如果我们想让分类的结果产生错误，那么就要对样本$x_0$添加扰动，为了使得扰动达到最小，最小的方向就是垂直与分类面的方向（这里是垂直与$f=0$这条线）。<br>要达到这个这个扰动的最小距离我们记为$r_<em>$，我们得出关于$r_</em>$的公式：<br><img src="https://i.loli.net/2019/11/20/OuoMmpU7BFHerzi.png" alt="2.png"></0，一块是f></p>
+<script type="math/tex; mode=display">
+\textbf{r}_{\star}(\textbf{x}_0):=\arg\min\limits_{\textbf{r}}||\textbf{r}||_2 \\
+s.t.\ sign(f(x_0+\textbf{r}))\neq sign(f(x_0)) \\
+=-\dfrac{f(x_0)}{||\textbf{w}||_2^2}\textbf{w}</script><p>sign是一个非线性函数，表达式为</p>
+<script type="math/tex; mode=display">
+sign=\left\{\begin{matrix}
+ & 1 & ,x>0 \\ 
+ & 0 & ,x=0 \\ 
+ & -1 & ,x<0 \\ 
+\end{matrix}\right.</script><p>它的函数图像为:<br><img src="https://i.loli.net/2019/11/20/IfqmrCN2MQbPklg.png" alt="3.png"></p>
+<p>$r_*$要满足$sign(f(x_0+r)) \neq  sign(f(x_0))$,即当样本$x_0$在$x_0$之后的分类结果不同。</p>
+<p>$\dfrac{f(x_0)}{||w||_2^2}{w}$可以拆成如下形式：</p>
+<script type="math/tex; mode=display">
+\dfrac{f(x_0)}{||w||_2^2}=\frac{f\left ( x_{0} \right )}{\left \| w \right \|_{2}}.\frac{w }{\left \| w \right \|_{2}}</script><p>其中$\frac{f\left ( x_{0} \right )}{\left | w \right |_{2}}$可以理解为，点到平面f的距离乘上它的向量方向(点到线的距离公式为$d=|\frac{Ax_0+By_0+C}{\sqrt{A^2+B^2}}|$，由于$f$只有一个系数$w$，所以$||w||$即$w$平方后开根号)。</p>
+<p>如果只是加上$r$的话，那么也只是分类到这条分界线上，所以要添加一个极小的$η$让他超过这条线，分类到错误的地方。作者会将最终的$r$乘以一个常系数$1+η$，在作者的实验中，他选取$η=0.02$。</p>
+<p>他的算法流程如下：<br><img src="https://i.loli.net/2019/11/20/rJ57MFjsB1pWNlw.png" alt="4.png"></p>
+<h2 id="DeepFool在多分类问题的应用"><a href="#DeepFool在多分类问题的应用" class="headerlink" title="DeepFool在多分类问题的应用"></a>DeepFool在多分类问题的应用</h2><p>作者采用的是one-vs-all的方法将多分类问题转为二分类问题。<br>对于一个多类分类问题，我们的数据集或许看起来像这样:<br><img src="https://i.loli.net/2019/11/20/XkTKOiaHv8hoPpc.png" alt="5.png"><br>上图左边是二分类问题，右边是多分类问题，我们可以使用多个分类器，对于每一个类假设其为正类，然后使用一次二分类的判别算法即可分别得出各个类的分类。如下图<br><img src="https://i.loli.net/2019/11/20/NGageVU3wsmIz24.png" alt="6.png"><br>多分类中，作者采用$\hat{k}(x)=\arg\max\limits_{k}{f_k(x)}$来完成分类，$f_k(x)$是$f(x)$的第k个输出，这里是表示令$f(x)$最大的那个$\hat{k}(x)$。<br>只要在原样本$x_0$上加上扰动r后，满足下式即攻击成功(只要出现某个类的输出置信度高于原类别即满足)</p>
+<script type="math/tex; mode=display">
+\arg\min\limits_{\textbf{r}}||\textbf{r}||_2 \\
+s.t. \exists k: \textbf{w}^T_k(x_0+\textbf{r})+\textbf{b}_k\geq \textbf{w}^T_{\hat{k}(x_0)}(x_0+\textbf{r})+\textbf{b}_{\hat{k}(x_0)}</script><p>对于文中提到的$k(x_0)=4$而言，它的决策边界如下图：<br><img src="https://i.loli.net/2019/11/20/LyWEPfBDXN7eCRl.png" alt="7.png"><br>途中$x_0$是样本点，绿色部分是它能够被正确分类的区域P，他的定义为：</p>
+<script type="math/tex; mode=display">
+P=\bigcap\limits_{k=1}^{c}\{x:f_{\hat{k}(x_0)}(x)\geq f_{k}(x)\}</script><p>我们只需找到它离他的三个边界最近的距离，即可让他产生错误的分类结果。<br>我们令$l(x_0)$为距离P最近的超平面，可以通过如下公式计算出$l$。</p>
+<script type="math/tex; mode=display">
+\hat{l}(x_0)=\arg\min\limits_{k\neq \hat{k}(x_0)}\dfrac{|f_k(x_0)-f_{\hat{k}(x_0)}(x_0)|}{||\textbf{w}_{k}-\textbf{w}_{\hat{k}(x_0)}||_2}</script><p>计算出$l$后，可以得出计算扰动的公式如下：</p>
+<script type="math/tex; mode=display">
+\textbf{r}_{\star}(x_0)=\dfrac{|f_{\hat{l}(x_0)}(x_0)-f_{\hat{k}(x_0)}(x_0)|}{||\textbf{w}_{\hat{l}(x_0)}-\textbf{w}_{\hat{k}(x_0)}||_2^2}(\textbf{w}_{\hat{l}(x_0)}-\textbf{w}_{\hat{k}(x_0)})</script><h2 id="平均鲁棒性"><a href="#平均鲁棒性" class="headerlink" title="平均鲁棒性"></a>平均鲁棒性</h2><p>为了评估分类器$f$的对抗扰动的鲁棒性，作者计算了平均鲁棒性$\hat{p}_{adv}(f)$，定义为：</p>
+<script type="math/tex; mode=display">
+\hat{p}(f)=\frac{1}{|D|}.\sum_{x\in D}{\frac{||\hat{r}(x)||_2}{||x||_2}}</script><p>其中$r$是从DeepFool中获得的最小扰动，$D$是测试集。</p>
+<h2 id="对比FGSM算法"><a href="#对比FGSM算法" class="headerlink" title="对比FGSM算法"></a>对比FGSM算法</h2><p>FGSM算法获得扰动的方法为$\hat{r}(x) =\epsilon sign(\nabla_xJ(\theta,x,y ) )$，作者通过对不同数据集的平均鲁棒性比较，得出了以下表格：<br><img src="https://i.loli.net/2019/11/20/OpoZRrwYlFhKn53.png" alt="8.png"><br>发现在同一个数据集下产生同样的效果时，DeepFool的扰动小于FSGSM算法的扰动。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/19/2019/2019-05-19 朴素贝叶斯/" class="archive-article-date">
-  	<time datetime="2019-05-19T07:25:09.787Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/19/2019/2019-05-19 朴素贝叶斯/">朴素贝叶斯</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -223,7 +283,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -236,128 +296,109 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://blog.chenwe.top/2019/11/20/2019/2019-11-20 DeepFool简析/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
+<nav id="article-nav">
+  
+  
+    <a href="/2019/11/17/2019/2019-11-17 对抗样本简析/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">对抗样本简析</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTc5Mi82MzU4">
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
     
+           if (typeof LivereTower === 'function') { return; }
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/18/2019/2019-05-18 决策树简析/" class="archive-article-date">
-  	<time datetime="2019-05-18T08:07:06.669Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/18/2019/2019-05-18 决策树简析/">决策树简析</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/MachineLearning/" class="article-tag-list-link color2">Machine Learning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/28/2019/2019-05-09 KNN算法简析/" class="archive-article-date">
-  	<time datetime="2019-02-28T03:33:26.599Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/28/2019/2019-05-09 KNN算法简析/">KNN算法简析</a>
-    </h1>
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    </div>
+    <!-- City版安装代码已完成 -->
   
 
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/MachineLearning/" class="article-tag-list-link color2">Machine Learning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/categories/Machine-Learning/">&laquo; Prev</a><a class="page-number" href="/categories/Machine-Learning/">1</a><span class="page-number current">2</span>
-    </nav>
   
 
 
@@ -395,10 +436,10 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
-		isCategory: true,
+		isCategory: false,
 		open_in_new: false,
 		root: "/",
 		innerArchive: true,

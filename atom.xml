@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.chenwe.top/"/>
-  <updated>2019-11-17T13:09:19.926Z</updated>
+  <updated>2019-11-20T14:13:03.785Z</updated>
   <id>http://blog.chenwe.top/</id>
   
   <author>
@@ -14,6 +14,78 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>DeepFool</title>
+    <link href="http://blog.chenwe.top/2019/11/20/2019/2019-11-20%20DeepFool%E7%AE%80%E6%9E%90/"/>
+    <id>http://blog.chenwe.top/2019/11/20/2019/2019-11-20 DeepFool简析/</id>
+    <published>2019-11-20T11:18:35.240Z</published>
+    <updated>2019-11-20T14:13:03.785Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文介绍产生对抗样本的一种算法Deep Fool的论文《DeepFool: a simple and accurate method to fool deep neural networks》。</p>
+<a id="more"></a>
+<p><a href="https://arxiv.org/pdf/1511.04599" target="_blank" rel="external"><strong>论文阅读地址</strong></a></p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>现有的对抗样本尚未提出有效的方法来准确计算最新的深度分类器对大规模数据集的这种扰动的鲁棒性。作者这篇文章填补了这方面的空白，并提出了DeepFool算法，来获得对于深层网络有作用的扰动。</p>
+<h2 id="分类器鲁棒性的评估指标"><a href="#分类器鲁棒性的评估指标" class="headerlink" title="分类器鲁棒性的评估指标"></a>分类器鲁棒性的评估指标</h2><p>作者定义分类器在x处的鲁棒性:</p>
+<script type="math/tex; mode=display">
+\Delta(x;\hat{k}):=\min_{\textbf{r}}\left||\textbf{r}|\right|_2 \ \ s.t.\hat{k}(x+\textbf{r})\neq\hat{k}(x)</script><p>其中 x代表图像样本，$\hat{k}(x)$是分类器，r是对抗的干扰。<br>分类器$\hat{k}(x)$的鲁棒性可以用</p>
+<script type="math/tex; mode=display">
+\rho_{adv}(\hat{k})=\mathbb{E}_{x}\dfrac{\Delta(x;\hat{k})}{||x||_2}</script><p>来表示。</p>
+<h2 id="主要贡献"><a href="#主要贡献" class="headerlink" title="主要贡献"></a>主要贡献</h2><ul>
+<li>提出了一种简单而准确的方法来计算和比较不同分类器对于对抗扰动的鲁棒性。</li>
+<li>作者的方法比现有的方法更可靠、更有效地计算了对抗性扰动。</li>
+<li>发现用对抗性的例子增加训练数据可以显著增强对对抗性扰动的鲁棒性。</li>
+<li>使用不精确的方法来计算对抗性扰动，可能导致不同结论，有时还会产生误导。</li>
+</ul>
+<h2 id="DeepFool在二分类问题的应用"><a href="#DeepFool在二分类问题的应用" class="headerlink" title="DeepFool在二分类问题的应用"></a>DeepFool在二分类问题的应用</h2><p>由于多分类器可以看作是二分类器的延申，所以作者先从二分类器入手。<br>f是一个线性二分类分类器：</p>
+<script type="math/tex; mode=display">
+f=\textbf{w}^Tx+b</script><p>如下图所示<br><img src="https://i.loli.net/2019/11/20/GCWnhb12wZSmkiR.png" alt="1.png"></p>
+<p>二维平面被f=0分为两块，一块是f<0，一块是f>0。<br>假设有一个样本点$x_0$，它作为正常的样本，被分在$f&gt;0$的区域中，如果我们想让分类的结果产生错误，那么就要对样本$x_0$添加扰动，为了使得扰动达到最小，最小的方向就是垂直与分类面的方向（这里是垂直与$f=0$这条线）。<br>要达到这个这个扰动的最小距离我们记为$r_<em>$，我们得出关于$r_</em>$的公式：<br><img src="https://i.loli.net/2019/11/20/OuoMmpU7BFHerzi.png" alt="2.png"></0，一块是f></p>
+<script type="math/tex; mode=display">
+\textbf{r}_{\star}(\textbf{x}_0):=\arg\min\limits_{\textbf{r}}||\textbf{r}||_2 \\
+s.t.\ sign(f(x_0+\textbf{r}))\neq sign(f(x_0)) \\
+=-\dfrac{f(x_0)}{||\textbf{w}||_2^2}\textbf{w}</script><p>sign是一个非线性函数，表达式为</p>
+<script type="math/tex; mode=display">
+sign=\left\{\begin{matrix}
+ & 1 & ,x>0 \\ 
+ & 0 & ,x=0 \\ 
+ & -1 & ,x<0 \\ 
+\end{matrix}\right.</script><p>它的函数图像为:<br><img src="https://i.loli.net/2019/11/20/IfqmrCN2MQbPklg.png" alt="3.png"></p>
+<p>$r_*$要满足$sign(f(x_0+r)) \neq  sign(f(x_0))$,即当样本$x_0$在$x_0$之后的分类结果不同。</p>
+<p>$\dfrac{f(x_0)}{||w||_2^2}{w}$可以拆成如下形式：</p>
+<script type="math/tex; mode=display">
+\dfrac{f(x_0)}{||w||_2^2}=\frac{f\left ( x_{0} \right )}{\left \| w \right \|_{2}}.\frac{w }{\left \| w \right \|_{2}}</script><p>其中$\frac{f\left ( x_{0} \right )}{\left | w \right |_{2}}$可以理解为，点到平面f的距离乘上它的向量方向(点到线的距离公式为$d=|\frac{Ax_0+By_0+C}{\sqrt{A^2+B^2}}|$，由于$f$只有一个系数$w$，所以$||w||$即$w$平方后开根号)。</p>
+<p>如果只是加上$r$的话，那么也只是分类到这条分界线上，所以要添加一个极小的$η$让他超过这条线，分类到错误的地方。作者会将最终的$r$乘以一个常系数$1+η$，在作者的实验中，他选取$η=0.02$。</p>
+<p>他的算法流程如下：<br><img src="https://i.loli.net/2019/11/20/rJ57MFjsB1pWNlw.png" alt="4.png"></p>
+<h2 id="DeepFool在多分类问题的应用"><a href="#DeepFool在多分类问题的应用" class="headerlink" title="DeepFool在多分类问题的应用"></a>DeepFool在多分类问题的应用</h2><p>作者采用的是one-vs-all的方法将多分类问题转为二分类问题。<br>对于一个多类分类问题，我们的数据集或许看起来像这样:<br><img src="https://i.loli.net/2019/11/20/XkTKOiaHv8hoPpc.png" alt="5.png"><br>上图左边是二分类问题，右边是多分类问题，我们可以使用多个分类器，对于每一个类假设其为正类，然后使用一次二分类的判别算法即可分别得出各个类的分类。如下图<br><img src="https://i.loli.net/2019/11/20/NGageVU3wsmIz24.png" alt="6.png"><br>多分类中，作者采用$\hat{k}(x)=\arg\max\limits_{k}{f_k(x)}$来完成分类，$f_k(x)$是$f(x)$的第k个输出，这里是表示令$f(x)$最大的那个$\hat{k}(x)$。<br>只要在原样本$x_0$上加上扰动r后，满足下式即攻击成功(只要出现某个类的输出置信度高于原类别即满足)</p>
+<script type="math/tex; mode=display">
+\arg\min\limits_{\textbf{r}}||\textbf{r}||_2 \\
+s.t. \exists k: \textbf{w}^T_k(x_0+\textbf{r})+\textbf{b}_k\geq \textbf{w}^T_{\hat{k}(x_0)}(x_0+\textbf{r})+\textbf{b}_{\hat{k}(x_0)}</script><p>对于文中提到的$k(x_0)=4$而言，它的决策边界如下图：<br><img src="https://i.loli.net/2019/11/20/LyWEPfBDXN7eCRl.png" alt="7.png"><br>途中$x_0$是样本点，绿色部分是它能够被正确分类的区域P，他的定义为：</p>
+<script type="math/tex; mode=display">
+P=\bigcap\limits_{k=1}^{c}\{x:f_{\hat{k}(x_0)}(x)\geq f_{k}(x)\}</script><p>我们只需找到它离他的三个边界最近的距离，即可让他产生错误的分类结果。<br>我们令$l(x_0)$为距离P最近的超平面，可以通过如下公式计算出$l$。</p>
+<script type="math/tex; mode=display">
+\hat{l}(x_0)=\arg\min\limits_{k\neq \hat{k}(x_0)}\dfrac{|f_k(x_0)-f_{\hat{k}(x_0)}(x_0)|}{||\textbf{w}_{k}-\textbf{w}_{\hat{k}(x_0)}||_2}</script><p>计算出$l$后，可以得出计算扰动的公式如下：</p>
+<script type="math/tex; mode=display">
+\textbf{r}_{\star}(x_0)=\dfrac{|f_{\hat{l}(x_0)}(x_0)-f_{\hat{k}(x_0)}(x_0)|}{||\textbf{w}_{\hat{l}(x_0)}-\textbf{w}_{\hat{k}(x_0)}||_2^2}(\textbf{w}_{\hat{l}(x_0)}-\textbf{w}_{\hat{k}(x_0)})</script><h2 id="平均鲁棒性"><a href="#平均鲁棒性" class="headerlink" title="平均鲁棒性"></a>平均鲁棒性</h2><p>为了评估分类器$f$的对抗扰动的鲁棒性，作者计算了平均鲁棒性$\hat{p}_{adv}(f)$，定义为：</p>
+<script type="math/tex; mode=display">
+\hat{p}(f)=\frac{1}{|D|}.\sum_{x\in D}{\frac{||\hat{r}(x)||_2}{||x||_2}}</script><p>其中$r$是从DeepFool中获得的最小扰动，$D$是测试集。</p>
+<h2 id="对比FGSM算法"><a href="#对比FGSM算法" class="headerlink" title="对比FGSM算法"></a>对比FGSM算法</h2><p>FGSM算法获得扰动的方法为$\hat{r}(x) =\epsilon sign(\nabla_xJ(\theta,x,y ) )$，作者通过对不同数据集的平均鲁棒性比较，得出了以下表格：<br><img src="https://i.loli.net/2019/11/20/OpoZRrwYlFhKn53.png" alt="8.png"><br>发现在同一个数据集下产生同样的效果时，DeepFool的扰动小于FSGSM算法的扰动。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文介绍产生对抗样本的一种算法Deep Fool的论文《DeepFool: a simple and accurate method to fool deep neural networks》。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Machine Learning" scheme="http://blog.chenwe.top/categories/Machine-Learning/"/>
+    
+    
+      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
+    
+      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
+    
+  </entry>
   
   <entry>
     <title>对抗样本简析</title>
@@ -943,43 +1015,6 @@ h_\theta(x) = \frac{1}{1+e^{(-\theta^Tx)}}</script><p>其中 θ 是模型参数�
     </summary>
     
       <category term="数学建模" scheme="http://blog.chenwe.top/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/"/>
-    
-    
-      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
-    
-      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>OKhttp的使用</title>
-    <link href="http://blog.chenwe.top/2017/12/03/2017/2017-12-03%20OKhttp%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
-    <id>http://blog.chenwe.top/2017/12/03/2017/2017-12-03 OKhttp的使用/</id>
-    <published>2017-12-03T14:24:58.545Z</published>
-    <updated>2017-12-09T09:23:29.017Z</updated>
-    
-    <content type="html"><![CDATA[<p>以前在写Android项目的时候<br>遇到网络访问方面的内容<br>总是用原生的方法去访问网络<br>十分麻烦而且代码冗杂</p>
-<p>但是用框架就方便许多了<br>这里简单介绍下OKhttp的使用<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171203222856395.png" alt=""><br><a id="more"></a><br>这次对plus Android端进行了重构<br>首先就从网络访问这块改起</p>
-<h2 id="Gradle-依赖"><a href="#Gradle-依赖" class="headerlink" title="Gradle 依赖"></a>Gradle 依赖</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">    testCompile &apos;com.squareup.okhttp3:mockwebserver:3.9.1&apos;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>添加完依赖就可以开始搞事了</p>
-<h2 id="访问网络"><a href="#访问网络" class="headerlink" title="访问网络"></a>访问网络</h2><p>Get方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> OkHttpClient client = <span class="keyword">new</span> OkHttpClient();</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">getComments</span><span class="params">()</span> </span>&#123;</div><div class="line">    Request request = <span class="keyword">new</span> Request.Builder().url(<span class="string">"你的url"</span>).build();</div><div class="line">    client.newCall(request).enqueue(<span class="keyword">new</span> Callback() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onFailure</span><span class="params">(Call call, IOException e)</span> </span>&#123;</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResponse</span><span class="params">(Call call, Response response)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">            Message msg = <span class="keyword">new</span> Message();</div><div class="line">            msg.what = <span class="number">1</span>;</div><div class="line">            msg.obj = response.body().string();</div><div class="line">            myHandler.sendMessage(msg);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>Post方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> OkHttpClient client = <span class="keyword">new</span> OkHttpClient();</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">sendComment</span><span class="params">()</span> </span>&#123;</div><div class="line">    RequestBody body = <span class="keyword">new</span> FormBody.Builder()</div><div class="line">            .add(<span class="string">"body"</span>, content)<span class="comment">//添加键值对</span></div><div class="line">            .add(<span class="string">"discussion_id"</span>, Id + <span class="string">""</span>)</div><div class="line">            .build();</div><div class="line">    Request request = <span class="keyword">new</span> Request.Builder()</div><div class="line">            .url(<span class="string">"你的url"</span>)</div><div class="line">            .post(body)</div><div class="line">            .build();</div><div class="line">    client.newCall(request).enqueue(<span class="keyword">new</span> Callback() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onFailure</span><span class="params">(Call call, IOException e)</span> </span>&#123;</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResponse</span><span class="params">(Call call, Response response)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">            Message msg = <span class="keyword">new</span> Message();</div><div class="line">            msg.what = <span class="number">2</span>;</div><div class="line">            msg.obj = response.body().string();</div><div class="line">            myHandler.sendMessage(msg);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>我们这里成功访问网络后，通过 <code>onResponse</code> 来执行<br>如果失败，则执行 <code>onFailure</code></p>
-<h2 id="更新UI"><a href="#更新UI" class="headerlink" title="更新UI"></a>更新UI</h2><p>这里讲下用Handler的方法<br>为了防止内存泄漏，所以我们要使用内部静态Handler类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> Handler myHandler;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">    myHandler = <span class="keyword">new</span> MyHandler(<span class="keyword">this</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 内部静态Handler 类 防止内存泄漏</div><div class="line"> */</div><div class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MyHandler</span> <span class="keyword">extends</span> <span class="title">Handler</span> </span>&#123;</div><div class="line">    WeakReference&lt;YourActivity&gt; mActivityReference;</div><div class="line"></div><div class="line">    MyHandler(YourActivity activity) &#123;</div><div class="line">        mActivityReference = <span class="keyword">new</span> WeakReference&lt;YourActivity&gt;(activity);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span> </span>&#123;</div><div class="line">        YourActivity activity = mActivityReference.get();</div><div class="line">          <span class="keyword">if</span> (msg.what == <span class="number">1</span>) &#123;</div><div class="line">            <span class="comment">//TODO 修改UI</span></div><div class="line">          &#125; <span class="keyword">else</span> <span class="keyword">if</span> (msg.what == <span class="number">2</span>) &#123;</div><div class="line">            <span class="comment">//TODO 修改UI</span></div><div class="line">          &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>在onCreat方法里new一个myHandler后<br>就可以使用了</p>
-<p>这样就不会造成内存泄漏了，而且也能够修改UI</p>
-<p>以上就是OKhttp的简单使用了<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171209172147497.png" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;以前在写Android项目的时候&lt;br&gt;遇到网络访问方面的内容&lt;br&gt;总是用原生的方法去访问网络&lt;br&gt;十分麻烦而且代码冗杂&lt;/p&gt;
-&lt;p&gt;但是用框架就方便许多了&lt;br&gt;这里简单介绍下OKhttp的使用&lt;br&gt;&lt;img src=&quot;http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20171203222856395.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="http://blog.chenwe.top/categories/Android/"/>
     
     
       <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
