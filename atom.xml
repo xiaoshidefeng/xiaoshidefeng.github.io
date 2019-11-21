@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.chenwe.top/"/>
-  <updated>2019-11-20T14:13:03.785Z</updated>
+  <updated>2019-11-21T10:11:06.264Z</updated>
   <id>http://blog.chenwe.top/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://blog.chenwe.top/2019/11/20/2019/2019-11-20%20DeepFool%E7%AE%80%E6%9E%90/"/>
     <id>http://blog.chenwe.top/2019/11/20/2019/2019-11-20 DeepFool简析/</id>
     <published>2019-11-20T11:18:35.240Z</published>
-    <updated>2019-11-20T14:13:03.785Z</updated>
+    <updated>2019-11-21T10:11:06.264Z</updated>
     
     <content type="html"><![CDATA[<p>本文介绍产生对抗样本的一种算法Deep Fool的论文《DeepFool: a simple and accurate method to fool deep neural networks》。</p>
 <a id="more"></a>
@@ -40,7 +40,7 @@
 <h2 id="DeepFool在二分类问题的应用"><a href="#DeepFool在二分类问题的应用" class="headerlink" title="DeepFool在二分类问题的应用"></a>DeepFool在二分类问题的应用</h2><p>由于多分类器可以看作是二分类器的延申，所以作者先从二分类器入手。<br>f是一个线性二分类分类器：</p>
 <script type="math/tex; mode=display">
 f=\textbf{w}^Tx+b</script><p>如下图所示<br><img src="https://i.loli.net/2019/11/20/GCWnhb12wZSmkiR.png" alt="1.png"></p>
-<p>二维平面被f=0分为两块，一块是f<0，一块是f>0。<br>假设有一个样本点$x_0$，它作为正常的样本，被分在$f&gt;0$的区域中，如果我们想让分类的结果产生错误，那么就要对样本$x_0$添加扰动，为了使得扰动达到最小，最小的方向就是垂直与分类面的方向（这里是垂直与$f=0$这条线）。<br>要达到这个这个扰动的最小距离我们记为$r_<em>$，我们得出关于$r_</em>$的公式：<br><img src="https://i.loli.net/2019/11/20/OuoMmpU7BFHerzi.png" alt="2.png"></0，一块是f></p>
+<p>二维平面被f=0分为两块，一块是f<0，一块是f>0。<br>假设有一个样本点$x_0$，它作为正常的样本，被分在$f&gt;0$的区域中，如果我们想让分类的结果产生错误，那么就要对样本$x_0$添加扰动，为了使得扰动达到最小，最小的方向就是垂直与分类面的方向（这里是垂直与$f=0$这条线）。<br>要达到这个这个扰动的最小距离我们记为$r_*$，我们得出关于$r_*$的公式：</0，一块是f></p>
 <script type="math/tex; mode=display">
 \textbf{r}_{\star}(\textbf{x}_0):=\arg\min\limits_{\textbf{r}}||\textbf{r}||_2 \\
 s.t.\ sign(f(x_0+\textbf{r}))\neq sign(f(x_0)) \\
@@ -68,8 +68,8 @@ P=\bigcap\limits_{k=1}^{c}\{x:f_{\hat{k}(x_0)}(x)\geq f_{k}(x)\}</script><p>我�
 <script type="math/tex; mode=display">
 \textbf{r}_{\star}(x_0)=\dfrac{|f_{\hat{l}(x_0)}(x_0)-f_{\hat{k}(x_0)}(x_0)|}{||\textbf{w}_{\hat{l}(x_0)}-\textbf{w}_{\hat{k}(x_0)}||_2^2}(\textbf{w}_{\hat{l}(x_0)}-\textbf{w}_{\hat{k}(x_0)})</script><h2 id="平均鲁棒性"><a href="#平均鲁棒性" class="headerlink" title="平均鲁棒性"></a>平均鲁棒性</h2><p>为了评估分类器$f$的对抗扰动的鲁棒性，作者计算了平均鲁棒性$\hat{p}_{adv}(f)$，定义为：</p>
 <script type="math/tex; mode=display">
-\hat{p}(f)=\frac{1}{|D|}.\sum_{x\in D}{\frac{||\hat{r}(x)||_2}{||x||_2}}</script><p>其中$r$是从DeepFool中获得的最小扰动，$D$是测试集。</p>
-<h2 id="对比FGSM算法"><a href="#对比FGSM算法" class="headerlink" title="对比FGSM算法"></a>对比FGSM算法</h2><p>FGSM算法获得扰动的方法为$\hat{r}(x) =\epsilon sign(\nabla_xJ(\theta,x,y ) )$，作者通过对不同数据集的平均鲁棒性比较，得出了以下表格：<br><img src="https://i.loli.net/2019/11/20/OpoZRrwYlFhKn53.png" alt="8.png"><br>发现在同一个数据集下产生同样的效果时，DeepFool的扰动小于FSGSM算法的扰动。</p>
+\hat{p}_{adv}(f)=\frac{1}{|D|}.\sum_{x\in D}{\frac{||\hat{r}(x)||_2}{||x||_2}}</script><p>其中$r$是从DeepFool中获得的最小扰动，$D$是测试集。</p>
+<h2 id="对比FGSM算法"><a href="#对比FGSM算法" class="headerlink" title="对比FGSM算法"></a>对比FGSM算法</h2><p>FGSM算法获得扰动的方法为$\hat{r}(x) =\epsilon sign(\nabla_xJ(\theta,x,y ) )$，作者通过对不同数据集的平均鲁棒性比较，得出了以下表格：<br><img src="https://i.loli.net/2019/11/20/OpoZRrwYlFhKn53.png" alt="8.png"><br>发现在同一个数据集下产生同样的效果时，DeepFool的扰动小于FGSM算法的扰动。</p>
 ]]></content>
     
     <summary type="html">
