@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.chenwe.top/"/>
-  <updated>2019-11-21T10:11:06.264Z</updated>
+  <updated>2019-12-06T07:22:18.323Z</updated>
   <id>http://blog.chenwe.top/</id>
   
   <author>
@@ -14,6 +14,77 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Threat of Adversarial Attacks on Deep Learning in Computer Vision</title>
+    <link href="http://blog.chenwe.top/2019/12/05/2019/2019-12-05%20Threat%20of%20Adversarial%20Attacks%20on%20Deep%20Learning%20in%20Computer%20Vision/"/>
+    <id>http://blog.chenwe.top/2019/12/05/2019/2019-12-05 Threat of Adversarial Attacks on Deep Learning in Computer Vision/</id>
+    <published>2019-12-05T12:10:37.564Z</published>
+    <updated>2019-12-06T07:22:18.323Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文介绍对抗样本的一篇调查型论文《Threat of Adversarial Attacks on Deep Learning in Computer Vision: A Survey Naveed》。</p>
+<a id="more"></a>
+<p><a href="https://arxiv.org/pdf/1801.00553" target="_blank" rel="external"><strong>论文阅读地址</strong></a></p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>深度学习的火热推动计算机视觉领域的发展，但近年来的研究发现，深度学习对于一些微小的扰动导致的预测输出错误的对抗样本攻击具有脆弱性，对抗性攻击对深度学习的成功构成了严重威胁。这篇论文介绍了有关计算机视觉中深度学习的对抗性攻击的首次全面调查。</p>
+<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>深度学习在计算机视觉等多个领域取得巨大成功，并应用在日常生活中。Szegedy 首先发现了深度神经网络一个有趣的软肋：对图像做一个微小的扰动，尽管人类的视觉无法区分，但是深度学习分类器以高置信度做出了一个错误的判断。自此以后，该领域吸引了一大批研究者进入，来探究深度学习对抗攻击的攻击和防御。<br><img src="https://i.loli.net/2019/12/06/qFkVZQ29KYDeLrg.png" alt="1.png"><br>如上图所示，不同的网络结构对于对抗样本的攻击都具有脆弱性。</p>
+<h2 id="对抗攻击方法"><a href="#对抗攻击方法" class="headerlink" title="对抗攻击方法"></a>对抗攻击方法</h2><p>Box-constrained L-BFGS：<br>Szegady等人首次证明了图片的微小扰动的存在，通过L-BFGS方法来找到扰动，BFGS方法类似于牛顿法通过迭代来逼近，而L-BFGS是舍弃部分内容的BFGS，提高计算效率。</p>
+<p>Fast Gradient Sign Method (FGSM)：<br>Goodfellow提出了有效生成对抗样本的方法 $\eta =\epsilon sign(\nabla_xJ(\theta,x,y ) )$，类似梯度下降的方法，通过在梯度方向上进行添加增量来诱导网络对生成的图片进行误分类。</p>
+<p>Basic &amp; Least-likely-class Iterative Methods：<br>one-step 方法通过一大步运算增大分类器的损失函数而进行图像扰动，因而可以直接将其扩展为通过多个小步增大损失函数的变体，从而得到 Basic Iterative Methods。</p>
+<p>Jacobian-based Saliency Map Attack：<br>仅改变几个像素的值，而不是扰动整张图像，来产生对抗样本。像素的数目有一个阈值。</p>
+<p>One Pixel Attack：<br>一种极端的对抗攻击方法，仅改变图像中的一个像素值就可以实现对抗攻击。<br><img src="https://i.loli.net/2019/12/06/lJgVrdFI7Q6NEOp.png" alt="2.png"></p>
+<p>Carlini and Wagner Attacks：<br>是一个基于优化的攻击，它的优点在于，可以调节置信度，生成的扰动小，可以破解很多的防御方法。</p>
+<p>DeepFool：<br>通过迭代计算的方法生成最小规范对抗扰动，将位于分类边界内的图像逐步推到边界外，直到出现错误分类。作者证明他们生成的扰动比 FGSM 更小，同时有相似的欺骗率。</p>
+<p>Universal Adversarial Perturbations：<br>诸如 FGSM 、 ILCM 、 DeepFool  等方法只能生成单张图像的对抗扰动，而 Universal Adversarial Perturbations 能生成对任何图像实现攻击的扰动，这些扰动同样对人类是几乎不可见的。</p>
+<p>UPSET and ANGRI：<br>两个黑箱攻击算法，UPSET 和 ANGRI。UPSET 可以为特定的目标类别生成对抗扰动，使得该扰动添加到任何图像时都可以将该图像分类成目标类别。</p>
+<p>Houdini：<br>Houdini是一种用于欺骗基于梯度的机器学习算法的方法，通过生成特定于任务损失函数的对抗样本实现对抗攻击，即利用网络的可微损失函数的梯度信息生成对抗扰动。除了图像分类网络，该算法还可以用于欺骗语音识别网络。</p>
+<p>Adversarial Transformation Networks：<br>训练多个前向神经网络来生成对抗样本，可用于攻击一个或多个网络。</p>
+<p>攻击的一些总结如下表：<br><img src="https://i.loli.net/2019/12/06/Jxhl3gVyGpYiRFq.png" alt="3.png"></p>
+<h2 id="现实场景下的对抗攻击"><a href="#现实场景下的对抗攻击" class="headerlink" title="现实场景下的对抗攻击"></a>现实场景下的对抗攻击</h2><p>Attacks on Face Attributes 面部特征攻击。<br>人脸图像的性别(性别分类器)被修改，而人脸匹配系统的生物识别功能保持不变，下面为图例：</p>
+<p><img src="https://i.loli.net/2019/12/06/bX4sljxzETgSf6w.png" alt="4.png"></p>
+<p>Cell-phone camera attack 手机相机攻击：<br>Kurakin等首先证明了对抗性攻击的威胁也存在于物质世界中。为了说明这一点，他们打印了对抗性的图像，并从手机摄像头拍下了快照。这些图像进行对象分类。结果显示，即使是通过相机，也有很大一部分图像被错误分类。下面为图例：<br><img src="https://i.loli.net/2019/12/06/TD842Zb1Xya7r3N.png" alt="5.png"></p>
+<p>Road sign attack 路标攻击：<br>攻击者打印一个路标扰动图像替换真正标志或者贴纸扰动，打印一些贴纸形成扰动。下面为图例：<br><img src="https://i.loli.net/2019/12/06/YldGtKjFMTyeWP8.png" alt="6.png"></p>
+<h2 id="对抗样本的存在性分析"><a href="#对抗样本的存在性分析" class="headerlink" title="对抗样本的存在性分析"></a>对抗样本的存在性分析</h2><p>这部分讲了为什么会存在对抗样本的原因，这部分是目前学术界有争议的话题，主要有以下几个观点：</p>
+<ol>
+<li>Limits on adversarial robustness </li>
+<li>Space of adversarial examples </li>
+<li>Boundary tilting perspective </li>
+<li>Prediction uncertainty and evolutionary stalling of training cause adversaries</li>
+<li>Accuracy-adversarial robustness correlation</li>
+<li>More on linearity as the source</li>
+<li>Existence of universal perturbations</li>
+</ol>
+<h2 id="对抗攻击防御"><a href="#对抗攻击防御" class="headerlink" title="对抗攻击防御"></a>对抗攻击防御</h2><p>这部分讲对于对抗攻击的防御，主要有三个方向：</p>
+<ul>
+<li>在学习过程中修改训练过程或者在测试阶段修改的输入样本。</li>
+<li>修改网络，比如：添加更多层/子网络、改变损失/激活函数等。</li>
+<li>当分类未见过的样本时，用外部模型作为附加网络。</li>
+</ul>
+<p>具体分类如下图<br><img src="https://i.loli.net/2019/12/06/gEM5JUvG3muQzaB.png" alt="7.png"></p>
+<h2 id="研究方向展望"><a href="#研究方向展望" class="headerlink" title="研究方向展望"></a>研究方向展望</h2><p>作者通过这次调查总结以下对抗攻击的特点与一些方向：</p>
+<ol>
+<li>对抗攻击的威胁是真实存在的</li>
+<li>对抗的脆弱性是普遍存在的</li>
+<li>对抗样本有不错的泛化性</li>
+<li>对于对抗的脆弱性需要进一步研究</li>
+<li>线性确实会增加脆弱性</li>
+</ol>
+<p>深度神经网络容易受到对抗性干扰的深刻暗示，使得对抗性攻击及其防御的研究在最近变得非常活跃。 在本次调查中回顾的大多数文献是在最近两年浮出水面的，并且目前有不断涌入的文献朝这个方向发展。 一方面，提出了一些技术来保护神经网络免受已知攻击。 同时正在设计更多且更强大的攻击。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文介绍对抗样本的一篇调查型论文《Threat of Adversarial Attacks on Deep Learning in Computer Vision: A Survey Naveed》。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Machine Learning" scheme="http://blog.chenwe.top/categories/Machine-Learning/"/>
+    
+    
+      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
+    
+      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
+    
+  </entry>
   
   <entry>
     <title>DeepFool</title>
@@ -980,46 +1051,6 @@ h_\theta(x) = \frac{1}{1+e^{(-\theta^Tx)}}</script><p>其中 θ 是模型参数�
     
     
       <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>层次分析法</title>
-    <link href="http://blog.chenwe.top/2018/02/17/2018/2018-02-17%20%E5%B1%82%E6%AC%A1%E5%88%86%E6%9E%90%E6%B3%95/"/>
-    <id>http://blog.chenwe.top/2018/02/17/2018/2018-02-17 层次分析法/</id>
-    <published>2018-02-17T05:28:13.489Z</published>
-    <updated>2018-02-17T06:34:21.903Z</updated>
-    
-    <content type="html"><![CDATA[<p>前几天参加了数学建模美赛<br>里面用到了层次分析法，这里来简单讲解下<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20180217132951752.png" alt=""></p>
-<a id="more"></a>
-<blockquote>
-<p>层次分析法（Analytic Hierarchy Process，简称 AHP）是对一些较为复杂、较为模 糊的问题作出决策的简易方法，它特别适用于那些难于完全定量分析的问题。它是美 国运筹学家 T. L. Saaty 教授于上世纪 70 年代初期提出的一种简便、灵活而又实用的 多准则决策方法。</p>
-</blockquote>
-<h2 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h2><h3 id="建立递阶层次结构模型"><a href="#建立递阶层次结构模型" class="headerlink" title="建立递阶层次结构模型"></a>建立递阶层次结构模型</h3><p>挑选合适的工作。经双方恳谈，已有三个单位表示愿意录用某毕业生。该 生根据已有信息建立了一个层次结构模型<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20180217141624943.png" alt=""><br>在层次分析法中，我们一般会根据问题来建立三个层次。<br>最顶层是目标层，是我们的分析目标，一般只有一个。<br>第二层是用来判断的准则层，里面是那些影响你选择与决策的因素，例如这里是 研究课题、发展前途、待遇等。<br>最底层是方案层，一般放你想要决策的目标选项，这里是工作选项 工作1、工作2、工作3。</p>
-<h3 id="构造判断矩阵"><a href="#构造判断矩阵" class="headerlink" title="构造判断矩阵"></a>构造判断矩阵</h3><p>层次结构反映了因素之间的关系，但准则层中的各准则在目标衡量中所占的比重 并不一定相同，在决策者的心目中，它们各占有一定的比例。<br>比如可能有的人在这几个判断准则中更看重景色，有的人更看重费用。<br>在确定影响某因素的诸因子在该因素中所占的比重时，遇到的主要困难是这些比 重常常不易定量化。此外，当影响某因素的因子较多时，直接考虑各因子对该因素有 多大程度的影响时，常常会因考虑不周全、顾此失彼而使决策者提出与他实际认为的 重要性程度不相一致的数据，甚至有可能提出一组隐含矛盾的数据。<br>所以可以采取对因子进行两两比较建立成对比较矩阵的 办法。即每次取两个因子 Xi 和 Xj，以 Aij 表示 Xi 和 Xj 对Z 的影响大小之比，全部比较 结果用矩阵 A=(Aij)n*n 表示，称 A为 Z-X 之间的成对比较判断矩阵（简称判断矩 阵）。容易看出，若 Xi 与 Xj 对Z 的影响之比为 Aij ，则 Xj 与 Xi 对Z 的影响之比应为 Aji.</p>
-<p>建议引用数字 1~9 及其倒数作为标度。表 1 列出 了 1~9 标度的含义：<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-2018021714133988.png" alt=""></p>
-<p>我们可以构建出准则层的矩阵：<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20180217141813845.png" alt=""></p>
-<p>方案层的矩阵：<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20180217141833991.png" alt=""></p>
-<h3 id="matlab计算"><a href="#matlab计算" class="headerlink" title="matlab计算"></a>matlab计算</h3><p>计算就交给matlab 代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">clc,clear</div><div class="line">fid=fopen(&apos;data.txt&apos;,&apos;r&apos;);  </div><div class="line">n1=6;n2=3;</div><div class="line">a=[];</div><div class="line">if fid == -1</div><div class="line">    disp(&apos;读取文件出错&apos;)</div><div class="line">end</div><div class="line">for i=1:n1    </div><div class="line">    tmp=str2num(fgetl(fid));      </div><div class="line">    a=[a;tmp];</div><div class="line">    %读准则层判断矩阵</div><div class="line">end</div><div class="line">for i=1:n1     </div><div class="line">    str1=char([&apos;b&apos;,int2str(i),&apos;=[];&apos;]);   </div><div class="line">    str2=char([&apos;b&apos;,int2str(i),&apos;=[b&apos;,int2str(i),&apos;;tmp];&apos;]);    </div><div class="line">    eval(str1);     </div><div class="line">    for j=1:n2         </div><div class="line">        tmp=str2num(fgetl(fid));         </div><div class="line">        eval(str2); %读方案层的判断矩阵    </div><div class="line">    end</div><div class="line">end</div><div class="line">ri=[0,0,0.58,0.90,1.12,1.24,1.32,1.41,1.45];</div><div class="line">%一致性指标</div><div class="line">[x,y]=eig(a);</div><div class="line">lamda=max(diag(y));</div><div class="line">num=find(diag(y)==lamda);</div><div class="line">w0=x(:,num)/sum(x(:,num));</div><div class="line">cr0=(lamda-n1)/(n1-1)/ri(n1)</div><div class="line">for i=1:n1     </div><div class="line">    [x,y]=eig(eval(char([&apos;b&apos;,int2str(i)])));     </div><div class="line">    lamda=max(diag(y));     </div><div class="line">    num=find(diag(y)==lamda);     </div><div class="line">    w1(:,i)=x(:,num)/sum(x(:,num));     </div><div class="line">    cr1(i)=(lamda-n2)/(n2-1)/ri(n2);</div><div class="line">end</div><div class="line">cr1, ts=w1*w0, w0, w1, cr=cr1*w0</div></pre></td></tr></table></figure></p>
-<p>data.txt的数据如下：<br>1   1      1     4   1      1/2<br>1   1      2     4   1   1/2<br>1   1/2  1     5   3      1/2<br>1/4   1/4  1/5   1   1/3   1/3<br>1   1      1/3   3   1      1<br>2   2      2     3   3      1<br>1   1/4  1/2<br>4   1      3<br>2   1/3  1<br>1   1/4  1/5<br>4   1      1/2<br>5   2      1<br>1   3      1/3 1/3  1<br>1/7 3   7<br>1 1   1/3<br>5 3   1      7<br>1/5   1/7  1<br>1   1      7<br>1   1      7<br>1/7  1/7  1<br>1   7      9<br>1/7  1      1<br>1/9   1      1</p>
-<p>最后我们可以得到这样一个表格：<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20180217142949780.png" alt=""></p>
-<p>根据总权值排序，我们可以看出工作1是最满意的工作。</p>
-<p>这个就是层次分析法的简单介绍了，这次的比赛中也用到了<img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-2018021714310881.png" alt=""></p>
-<p>这篇博客参考了 《MATLAB数学建模算法及实例分析》一书</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;前几天参加了数学建模美赛&lt;br&gt;里面用到了层次分析法，这里来简单讲解下&lt;br&gt;&lt;img src=&quot;http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20180217132951752.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="数学建模" scheme="http://blog.chenwe.top/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/"/>
-    
-    
-      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
-    
-      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
     
   </entry>
   
