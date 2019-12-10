@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.chenwe.top/"/>
-  <updated>2019-12-06T07:22:18.323Z</updated>
+  <updated>2019-12-10T14:14:46.294Z</updated>
   <id>http://blog.chenwe.top/</id>
   
   <author>
@@ -14,6 +14,38 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Adversarial Examples Are Not Bugs They Are Features</title>
+    <link href="http://blog.chenwe.top/2019/12/10/2019/2019-12-10%20Adversarial%20Examples%20Are%20Not%20Bugs%20They%20Are%20Features/"/>
+    <id>http://blog.chenwe.top/2019/12/10/2019/2019-12-10 Adversarial Examples Are Not Bugs They Are Features/</id>
+    <published>2019-12-10T13:59:42.000Z</published>
+    <updated>2019-12-10T14:14:46.294Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文介绍对抗样本的一篇今年上半年的论文《Adversarial Examples Are Not Bugs They Are Features》，观点比较新颖他认为对抗样本并不是模型的bug而是模型的一种特征。</p>
+<a id="more"></a>
+<p><a href="https://arxiv.org/pdf/1905.02175.pdf" target="_blank" rel="external"><strong>论文阅读地址</strong></a></p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>对抗性例子在机器学习中引起了极大的关注，但其存在和普遍性的原因仍不清楚。作者在这篇文章中认为，对抗性样本的存在不是网络架构的问题，而是数据集的一个属性。对抗性漏洞是我们的模型对数据中的一般特征敏感的直接结果。存在着各种各样的输入特征可以预测标签，而其中只有一些特征是人类可以察觉的。</p>
+<h2 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h2><p>作者构建了两种图像特征：robust和non-robust。<br>Robust features(鲁棒性特征)对应于能够预测真实标签的模式，即使在某些人为预先定义的扰动集造成对抗性扰动的情况下。<br>non-robust features(非鲁棒性特征)对应的模式虽然具有预测性，但在预先定义的扰动集会被攻击者“翻转”，造成指示的分类错误。如果用这些样本去训练，假如该样本人眼认为是狗，但其对应标签为猫，训练好后再拿这个网络去识别猫，却能达到比较好的准确度。<br><img src="https://i.loli.net/2019/12/10/QFUzBcP7ny4ksoC.png" alt="1.png"></p>
+<p>左图是对于robust的实验结果，右图是对于non-robust的实验结果。<br>鲁棒和非鲁棒特征都可以用于预测训练集，但只有非鲁棒性特征才会导致对原始测试集的泛化。</p>
+<p>作者在没有对抗训练的情况下在结果数据集上训练模型，发现得到的模型具有非常高的准确性和鲁棒性。这与标准训练集的训练形成鲜明对比，后者训练出的模型虽然准确，但非常脆弱。如下图所示<br><img src="https://i.loli.net/2019/12/10/FXq19MiGB7DTjcv.png" alt="2.png"></p>
+<p>上图中，左：在 CIFAR-10（D）上正常训练；左2：在 CIFAR-10（D）上的对抗性训练；右2：重新构建的数据集上正常训练（该训练集仅限于包含已经训练过的高鲁棒性模型使用的特征）。右1：重新构建的数据集上正常训练（该训练集仅限于包含已经训练过的非鲁棒性模型使用的特征）。<br>结果表明，鲁棒性（和非鲁棒性）实际上可以作为数据集本身的属性出现。特别是，当我们从原始训练集中去除了非鲁棒性特征时，可以通过标准训练获得高鲁棒性的模型。这进一步证明，对抗性实例是由于非鲁棒性特征而产生的，而且不一定与标准训练框架相关联。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文介绍对抗样本的一篇今年上半年的论文《Adversarial Examples Are Not Bugs They Are Features》，观点比较新颖他认为对抗样本并不是模型的bug而是模型的一种特征。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Machine Learning" scheme="http://blog.chenwe.top/categories/Machine-Learning/"/>
+    
+    
+      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
+    
+      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
+    
+  </entry>
   
   <entry>
     <title>Threat of Adversarial Attacks on Deep Learning in Computer Vision</title>
@@ -1013,44 +1045,6 @@ h_\theta(x) = \frac{1}{1+e^{(-\theta^Tx)}}</script><p>其中 θ 是模型参数�
       <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
     
       <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LaTeX的入门</title>
-    <link href="http://blog.chenwe.top/2018/02/19/2018/2018-02-19%20LaTeX%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/"/>
-    <id>http://blog.chenwe.top/2018/02/19/2018/2018-02-19 LaTeX的一些基本操作/</id>
-    <published>2018-02-19T04:51:54.324Z</published>
-    <updated>2018-02-19T05:41:24.227Z</updated>
-    
-    <content type="html"><![CDATA[<p>前几天参加了数学建模美赛<br>里面用到了LaTeX来排版，这里来简单讲解下<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20180219125407218.png" alt=""></p>
-<a id="more"></a>
-<blockquote>
-<p>LaTeX（LATEX，音译“拉泰赫”）是一种基于ΤΕΧ的排版系统，由美国计算机学家莱斯利·兰伯特（Leslie Lamport）在20世纪80年代初期开发，利用这种格式，即使使用者没有排版和程序设计的知识也可以充分发挥由TeX所提供的强大功能，能在几天，甚至几小时内生成很多具有书籍质量的印刷品。对于生成复杂表格和数学公式，这一点表现得尤为突出。因此它非常适用于生成高印刷质量的科技和数学类文档。这个系统同样适用于生成从简单的信件到完整书籍的所有其他种类的文档。</p>
-</blockquote>
-<p>个人觉得这个有点像markdown</p>
-<h2 id="安装LaTeX环境"><a href="#安装LaTeX环境" class="headerlink" title="安装LaTeX环境"></a>安装LaTeX环境</h2><p>windows用户推荐TeXlive  <a href="http://tug.org/texlive/" target="_blank" rel="external">下载地址</a><br>下载完成后将该 iso 文件解压缩 (普通的解压软件就可以), 在解压得到的文件夹中双击 installtl-windows,<br>开始安装.</p>
-<p>安装需要挺久时间的，TeXlive是自带TeXworks编辑器的，但是这里用的是vscode安装插件来作为编辑器。</p>
-<h2 id="用vscode来写LaTeX"><a href="#用vscode来写LaTeX" class="headerlink" title="用vscode来写LaTeX"></a>用vscode来写LaTeX</h2><p><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20180219132818547.png" alt=""><br>我们需要一个LaTeX Workshop的插件</p>
-<p>安装完成后，我们就可以使用了。</p>
-<h2 id="第一个LaTeX文档"><a href="#第一个LaTeX文档" class="headerlink" title="第一个LaTeX文档"></a>第一个LaTeX文档</h2><p>去网上下载一个LaTeX的文档模板，把它添加到vscode的资源管理器中，我们点击.tex后，在文档里右键 Build LateX project 来编译（或者按 Ctrl + alt + B）。<br>编译完成后，我们点击右上角来查看（或者Ctrl + alt + T）。<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20180219133249294.png" alt=""></p>
-<p>这样我们第一个LateX文档就能成功编译运行了。<br>具体编写方式请参考 <a href="https://www.latex-project.org/help/documentation/" target="_blank" rel="external">官方文档</a></p>
-<h2 id="一个表格示例"><a href="#一个表格示例" class="headerlink" title="一个表格示例"></a>一个表格示例</h2><p>我这里来写一个表格的例子<br>在头部要添加 ‘ \ usepackage{tabu}’<br>下面是一个基本表格的写法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">\begin&#123;table&#125;[htbp]  </div><div class="line">  \caption&#123;Criterion matrix judgment matrix&#125;  </div><div class="line">  \begin&#123;center&#125;  </div><div class="line">  \begin&#123;tabu&#125; to 0.8\textwidth&#123;X[c]|X[2,c]X[2,c]X[2,c]&#125;  </div><div class="line">  %0.8\textwidth  为设置表格宽度  </div><div class="line">  %X[c]   表示这一列居中，所占比例为1，相当于X[1,c]  </div><div class="line">  %X[3,c]  表示这一列居中，所占比例为3，这列的宽度是X[c]列的3倍  </div><div class="line">  \hline  </div><div class="line">  $A$ &amp;$B_1$   &amp;$B_2$   &amp;$B_3$\\  </div><div class="line">  \hline  </div><div class="line">  $B_1$  &amp;1    &amp;3      &amp;5\\  </div><div class="line">  $B_2$  &amp;1/3   &amp;1      &amp;2\\  </div><div class="line">  $B_3$  &amp;1/5   &amp;1/2     &amp;1\\  </div><div class="line"></div><div class="line">  \hline  </div><div class="line">  \end&#123;tabu&#125;  </div><div class="line">  \end&#123;center&#125;  </div><div class="line">  \end&#123;table&#125;</div></pre></td></tr></table></figure></p>
-<p>写完之后 重新编译运行，效果如下<br><img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20180219133944558.png" alt=""></p>
-<p>一个简单的表格就写完了</p>
-<p>LaTeX最强大的功能还是它的公式编辑功能<br>它能够写出更加工整的公式。<br>但是这里就不过多介绍了，感兴趣的话可以去看看文档和其他的一些博客教程。<img src="http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20180219134114663.png" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;前几天参加了数学建模美赛&lt;br&gt;里面用到了LaTeX来排版，这里来简单讲解下&lt;br&gt;&lt;img src=&quot;http://ow9eu3p52.bkt.clouddn.com/markdown-img-paste-20180219125407218.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="数学建模" scheme="http://blog.chenwe.top/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/"/>
-    
-    
-      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
     
   </entry>
   
