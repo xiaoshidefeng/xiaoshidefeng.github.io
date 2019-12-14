@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.chenwe.top/"/>
-  <updated>2019-12-10T14:14:46.294Z</updated>
+  <updated>2019-12-14T04:08:04.827Z</updated>
   <id>http://blog.chenwe.top/</id>
   
   <author>
@@ -14,6 +14,42 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>An Efficient Image Compression Model to Defend Adversarial Examples</title>
+    <link href="http://blog.chenwe.top/2019/12/14/2019/2019-12-14%20An%20Efficient%20Image%20Compression%20Model%20to%20Defend%20Adversarial%20Examples/"/>
+    <id>http://blog.chenwe.top/2019/12/14/2019/2019-12-14 An Efficient Image Compression Model to Defend Adversarial Examples/</id>
+    <published>2019-12-14T02:54:59.369Z</published>
+    <updated>2019-12-14T04:08:04.827Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文是介绍对抗样本的一种防御方法的论文《ComDefend: An Efficient Image Compression Model to Defend Adversarial Examples》。<br><a id="more"></a></p>
+<p><a href="https://arxiv.org/pdf/1811.12673v1.pdf" target="_blank" rel="external"><strong>论文阅读地址</strong></a></p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>深度神经网络已经被证明容易收到对抗样本的攻击。作者在这篇文章中提出一种图像压缩模型ComDefend来防御对抗样本。该模型由压缩卷积神经网络（ComCNN）和重建卷积神经网络（ResCNN）组成。 ComCNN用于维护原始图像的结构信息并纯化对抗性的干扰。 ResCNN用于重建高质量的原始图像。作者所提出的方法优于之前的防御方法，并且始终有效地保护分类器免受对抗性攻击。</p>
+<h2 id="模型架构"><a href="#模型架构" class="headerlink" title="模型架构"></a>模型架构</h2><p><img src="https://i.loli.net/2019/12/14/V89DdiRxwc5OBqP.png" alt="1.png"><br>没有防御措施的一般分类器会被对抗性图片误导，产生错误的分类结果，作者先通过Com CNN将图片压缩成12位的大小，再通过ResCNN重构图片，生成的图片再交由分类器就可以获得不错的结果。<br>压缩与重构的流程如下：<br><img src="https://i.loli.net/2019/12/14/7qFN3wzZWxgdCuc.png" alt="2.png"><br>如图所示，图像压缩模型包含压缩和重建过程。在压缩过程中，ComCNN提取图像结构信息，并去除图像的冗余信息。ComCNN将图像从 24位像素压缩成12位，删除了原件的冗余信息，并保留原始内容的主要信息。在重建过程中，ResCNN重建输入图像而没有对抗性干扰。</p>
+<h2 id="ComCNN"><a href="#ComCNN" class="headerlink" title="ComCNN"></a>ComCNN</h2><p>如上表所示，ComCNN由两个组件组成，第一个组件用于提取对象的特征，生成256个特征，由一到四层组成，其中第一层由32个3<em>3</em>3大小的过滤器组成。<br>第二个部分是用于降级并增强输入图像的功能，由五到九层组成。<br>使用Com CNN是为了提取原始图像的特征并构建紧凑的表示形式。<br><img src="https://i.loli.net/2019/12/14/WR6dHExri5g1Pnt.png" alt="3.png"></p>
+<h2 id="ResCNN"><a href="#ResCNN" class="headerlink" title="ResCNN"></a>ResCNN</h2><p>ResCNN也由9层组成，它用于重建原始图像而不会产生不可察觉的干扰。<br>具体结构信息如下表<br><img src="https://i.loli.net/2019/12/14/8EVQDaGwoCRqSid.png" alt="4.png"></p>
+<h2 id="实验结果与分析"><a href="#实验结果与分析" class="headerlink" title="实验结果与分析"></a>实验结果与分析</h2><p>作者用CIFAR-10 数据集来进行实验，用了50000张清楚的图片做训练，10000张图片做测试。<br>作者使用了三种常见的距离量，用于生成对抗样本：L0，L2，L∞。<br>L0，表示正常图片与对抗性图片的像素区别。<br>L2，表示正常图片与对抗性图片之间的欧式距离。<br>L∞，表示对抗性示例中不可感知的扰动的最大值。<br>实验采用了四种攻击方法：FSGM、BIM、DeepFool、CW。</p>
+<p>作者设置了两组实验，一组是在测试时进行图像压缩，另一种是在训练和测试时进行压缩。</p>
+<p><strong>测试时进行图像压缩组</strong>：<br>分类模型已经在正常的图片训练集中训练完成。测试图像包括正常的图片和对抗图像。这些测试图像用之前的方法对它们进行压缩和重建，然后将它们输入分类模型中。下面这个表显示了该分类器在这个四个攻击产生的测试图像下的准确性：<br><img src="https://i.loli.net/2019/12/14/nKJfBq6Yoxw7NFe.png" alt="5.png"></p>
+<p>在没有防御的情况下与测试时使用了压缩方法的结果进行对比，发现FGSM攻击的准确性从35％提高到83％，BIM的攻击率从0％升至31％，DeepFool的攻击从1％到88％，而CW的攻击从0％到87％。由明显的防御效果。</p>
+<p><strong>在训练和测试时进行压缩</strong>：<br>比起之前只有在测试时使用压缩，这个实验在训练时就使用了经过压缩的部分图片进行训练。如上表所示，FGSM攻击的准确性从35％提高到83％，BIM攻击的准确性从0％提高到31％，DeepFool攻击率从1％提高至89％，CIFAR-10的CW攻击强度从0％提高到87％。</p>
+<p>ComDefend在FGSM，DeepFool和CW攻击方法上拥有比较好的防御性，BIM攻击也能在这个方法中也能有很好的防御效果。同时这个方法更重要的是，ComDefend以逐个补丁的方式而不是整个图像在一个图像上执行，这花费了更少的时间来处理输入图像，提高了防御的效率。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文是介绍对抗样本的一种防御方法的论文《ComDefend: An Efficient Image Compression Model to Defend Adversarial Examples》。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Machine Learning" scheme="http://blog.chenwe.top/categories/Machine-Learning/"/>
+    
+    
+      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
+    
+      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
+    
+  </entry>
   
   <entry>
     <title>Adversarial Examples Are Not Bugs They Are Features</title>
@@ -1004,38 +1040,6 @@ h_\theta(x) = \frac{1}{1+e^{(-\theta^Tx)}}</script><p>其中 θ 是模型参数�
     <summary type="html">
     
       &lt;p&gt;这几天在弄React Native&lt;br&gt;中间难免踩坑&lt;br&gt;这里继续记录下&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="React Native" scheme="http://blog.chenwe.top/categories/React-Native/"/>
-    
-    
-      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
-    
-      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>React Native开发中的一些坑（一）</title>
-    <link href="http://blog.chenwe.top/2018/03/07/2018/2018-03-07%20React%20Native%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91/"/>
-    <id>http://blog.chenwe.top/2018/03/07/2018/2018-03-07 React Native开发中的一些坑/</id>
-    <published>2018-03-07T14:19:02.214Z</published>
-    <updated>2018-03-07T14:39:19.419Z</updated>
-    
-    <content type="html"><![CDATA[<p>这几天在弄React Native<br>中间难免踩坑<br>这里记录下</p>
-<a id="more"></a>
-<h2 id="Configuration-with-name-‘default’-not-found-react-native"><a href="#Configuration-with-name-‘default’-not-found-react-native" class="headerlink" title="Configuration with name ‘default’ not found react-native"></a>Configuration with name ‘default’ not found react-native</h2><p>引入一些库再去运行，可能会报的错<br>原因：因为 android目录下的settings.gradle文件里有些东西的引用和node_modules里不同<br>解决方法： 删掉其中缺失的部分，重新安装。</p>
-<h2 id="react-native-camera-相关的错误"><a href="#react-native-camera-相关的错误" class="headerlink" title="react-native-camera 相关的错误"></a>react-native-camera 相关的错误</h2><h3 id="react-native-camera-unspecified"><a href="#react-native-camera-unspecified" class="headerlink" title="react-native-camera:unspecified"></a>react-native-camera:unspecified</h3><p>在 <code>react-native link react-native-camera</code> 之后容易报的错<br>原因：因为没有在 android/build.gradle 文件里添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">maven &#123; url &apos;https://jitpack.io&apos; &#125;</div></pre></td></tr></table></figure></p>
-<p>注意：添加到上一个maven的下面就行，中间不用加 ,<br>例如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">maven &#123; url &apos;https://jitpack.io&apos; &#125;</div><div class="line">maven &#123;</div><div class="line">    url &quot;https://maven.google.com&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>即可</p>
-<h3 id="Could-not-find-com-android-support-support-v4-26-0-1"><a href="#Could-not-find-com-android-support-support-v4-26-0-1" class="headerlink" title="Could not find com.android.support:support-v4:26.0.1."></a>Could not find com.android.support:support-v4:26.0.1.</h3><p>在 <code>react-native link react-native-camera</code> 之后容易报的错<br>原因：因为build tool 版本太低吗，要求26<br>解决方法：升级。<br>在android/app目录里，修改 build.gradle 里的版本信息为26<br>例如修改为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">compileSdkVersion 26</div><div class="line">buildToolsVersion &quot;26.0.1&quot;</div><div class="line"></div><div class="line">defaultConfig &#123;</div><div class="line">    applicationId &quot;com.came&quot;</div><div class="line">    minSdkVersion 16</div><div class="line">    targetSdkVersion 26</div><div class="line">    versionCode 1</div><div class="line">    versionName &quot;1.0&quot;</div><div class="line">    ndk &#123;</div><div class="line">        abiFilters &quot;armeabi-v7a&quot;, &quot;x86&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>修改之后也还是不行，要在android/build.gradle 文件里添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">maven &#123;</div><div class="line">    url &quot;https://maven.google.com&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;这几天在弄React Native&lt;br&gt;中间难免踩坑&lt;br&gt;这里记录下&lt;/p&gt;
     
     </summary>
     

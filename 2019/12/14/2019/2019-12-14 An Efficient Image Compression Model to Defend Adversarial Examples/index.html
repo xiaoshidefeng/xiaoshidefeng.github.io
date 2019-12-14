@@ -6,17 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.chenwe.top">
-  <title>Tag: study | Xiaoshidefeng的博客</title>
+  <title>An Efficient Image Compression Model to Defend Adversarial Examples | Xiaoshidefeng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="CW的个人Blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Xiaoshidefeng的博客">
-<meta property="og:url" content="http://blog.chenwe.top/tags/study/page/4/index.html">
+  <meta name="description" content="本文是介绍对抗样本的一种防御方法的论文《ComDefend: An Efficient Image Compression Model to Defend Adversarial Examples》。">
+<meta name="keywords" content="study,code">
+<meta property="og:type" content="article">
+<meta property="og:title" content="An Efficient Image Compression Model to Defend Adversarial Examples">
+<meta property="og:url" content="http://blog.chenwe.top/2019/12/14/2019/2019-12-14 An Efficient Image Compression Model to Defend Adversarial Examples/index.html">
 <meta property="og:site_name" content="Xiaoshidefeng的博客">
-<meta property="og:description" content="CW的个人Blog">
+<meta property="og:description" content="本文是介绍对抗样本的一种防御方法的论文《ComDefend: An Efficient Image Compression Model to Defend Adversarial Examples》。">
+<meta property="og:image" content="https://i.loli.net/2019/12/14/V89DdiRxwc5OBqP.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/14/7qFN3wzZWxgdCuc.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/14/WR6dHExri5g1Pnt.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/14/8EVQDaGwoCRqSid.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/14/nKJfBq6Yoxw7NFe.png">
+<meta property="og:updated_time" content="2019-12-14T04:08:04.827Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Xiaoshidefeng的博客">
-<meta name="twitter:description" content="CW的个人Blog">
+<meta name="twitter:title" content="An Efficient Image Compression Model to Defend Adversarial Examples">
+<meta name="twitter:description" content="本文是介绍对抗样本的一种防御方法的论文《ComDefend: An Efficient Image Compression Model to Defend Adversarial Examples》。">
+<meta name="twitter:image" content="https://i.loli.net/2019/12/14/V89DdiRxwc5OBqP.png">
   
     <link rel="alternative" href="/atom.xml" title="Xiaoshidefeng的博客" type="application/atom+xml">
   
@@ -177,37 +185,50 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-2019/2019-12-14 An Efficient Image Compression Model to Defend Adversarial Examples" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      An Efficient Image Compression Model to Defend Adversarial Examples
+    </h1>
+    <span>&nbsp;&nbsp;&nbsp; | &nbsp;
+    <span id="busuanzi_value_page_pv" ></span>次阅读
+    </span>
+  
+
+
+        
+        <a href="/2019/12/14/2019/2019-12-14 An Efficient Image Compression Model to Defend Adversarial Examples/" class="archive-article-date">
+  	<time datetime="2019-12-14T02:54:59.369Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-14</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文是介绍对抗样本的一种防御方法的论文《ComDefend: An Efficient Image Compression Model to Defend Adversarial Examples》。<br><a id="more"></a></p>
+<p><a href="https://arxiv.org/pdf/1811.12673v1.pdf" target="_blank" rel="external"><strong>论文阅读地址</strong></a></p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>深度神经网络已经被证明容易收到对抗样本的攻击。作者在这篇文章中提出一种图像压缩模型ComDefend来防御对抗样本。该模型由压缩卷积神经网络（ComCNN）和重建卷积神经网络（ResCNN）组成。 ComCNN用于维护原始图像的结构信息并纯化对抗性的干扰。 ResCNN用于重建高质量的原始图像。作者所提出的方法优于之前的防御方法，并且始终有效地保护分类器免受对抗性攻击。</p>
+<h2 id="模型架构"><a href="#模型架构" class="headerlink" title="模型架构"></a>模型架构</h2><p><img src="https://i.loli.net/2019/12/14/V89DdiRxwc5OBqP.png" alt="1.png"><br>没有防御措施的一般分类器会被对抗性图片误导，产生错误的分类结果，作者先通过Com CNN将图片压缩成12位的大小，再通过ResCNN重构图片，生成的图片再交由分类器就可以获得不错的结果。<br>压缩与重构的流程如下：<br><img src="https://i.loli.net/2019/12/14/7qFN3wzZWxgdCuc.png" alt="2.png"><br>如图所示，图像压缩模型包含压缩和重建过程。在压缩过程中，ComCNN提取图像结构信息，并去除图像的冗余信息。ComCNN将图像从 24位像素压缩成12位，删除了原件的冗余信息，并保留原始内容的主要信息。在重建过程中，ResCNN重建输入图像而没有对抗性干扰。</p>
+<h2 id="ComCNN"><a href="#ComCNN" class="headerlink" title="ComCNN"></a>ComCNN</h2><p>如上表所示，ComCNN由两个组件组成，第一个组件用于提取对象的特征，生成256个特征，由一到四层组成，其中第一层由32个3<em>3</em>3大小的过滤器组成。<br>第二个部分是用于降级并增强输入图像的功能，由五到九层组成。<br>使用Com CNN是为了提取原始图像的特征并构建紧凑的表示形式。<br><img src="https://i.loli.net/2019/12/14/WR6dHExri5g1Pnt.png" alt="3.png"></p>
+<h2 id="ResCNN"><a href="#ResCNN" class="headerlink" title="ResCNN"></a>ResCNN</h2><p>ResCNN也由9层组成，它用于重建原始图像而不会产生不可察觉的干扰。<br>具体结构信息如下表<br><img src="https://i.loli.net/2019/12/14/8EVQDaGwoCRqSid.png" alt="4.png"></p>
+<h2 id="实验结果与分析"><a href="#实验结果与分析" class="headerlink" title="实验结果与分析"></a>实验结果与分析</h2><p>作者用CIFAR-10 数据集来进行实验，用了50000张清楚的图片做训练，10000张图片做测试。<br>作者使用了三种常见的距离量，用于生成对抗样本：L0，L2，L∞。<br>L0，表示正常图片与对抗性图片的像素区别。<br>L2，表示正常图片与对抗性图片之间的欧式距离。<br>L∞，表示对抗性示例中不可感知的扰动的最大值。<br>实验采用了四种攻击方法：FSGM、BIM、DeepFool、CW。</p>
+<p>作者设置了两组实验，一组是在测试时进行图像压缩，另一种是在训练和测试时进行压缩。</p>
+<p><strong>测试时进行图像压缩组</strong>：<br>分类模型已经在正常的图片训练集中训练完成。测试图像包括正常的图片和对抗图像。这些测试图像用之前的方法对它们进行压缩和重建，然后将它们输入分类模型中。下面这个表显示了该分类器在这个四个攻击产生的测试图像下的准确性：<br><img src="https://i.loli.net/2019/12/14/nKJfBq6Yoxw7NFe.png" alt="5.png"></p>
+<p>在没有防御的情况下与测试时使用了压缩方法的结果进行对比，发现FGSM攻击的准确性从35％提高到83％，BIM的攻击率从0％升至31％，DeepFool的攻击从1％到88％，而CW的攻击从0％到87％。由明显的防御效果。</p>
+<p><strong>在训练和测试时进行压缩</strong>：<br>比起之前只有在测试时使用压缩，这个实验在训练时就使用了经过压缩的部分图片进行训练。如上表所示，FGSM攻击的准确性从35％提高到83％，BIM攻击的准确性从0％提高到31％，DeepFool攻击率从1％提高至89％，CIFAR-10的CW攻击强度从0％提高到87％。</p>
+<p>ComDefend在FGSM，DeepFool和CW攻击方法上拥有比较好的防御性，BIM攻击也能在这个方法中也能有很好的防御效果。同时这个方法更重要的是，ComDefend以逐个补丁的方式而不是整个图像在一个图像上执行，这花费了更少的时间来处理输入图像，提高了防御的效率。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/21/2017/2017-10-21 Oracle的安装与新用户的创建/" class="archive-article-date">
-  	<time datetime="2017-10-21T08:42:15.276Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/21/2017/2017-10-21 Oracle的安装与新用户的创建/">Oracle的安装与新用户的创建</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -223,519 +244,122 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Oracle/" class="article-tag-list-link color2">Oracle</a>
+        			<a href="/categories/MachineLearning/" class="article-tag-list-link color2">Machine Learning</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://blog.chenwe.top/2019/12/14/2019/2019-12-14 An Efficient Image Compression Model to Defend Adversarial Examples/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
+<nav id="article-nav">
+  
+  
+    <a href="/2019/12/10/2019/2019-12-10 Adversarial Examples Are Not Bugs They Are Features/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Adversarial Examples Are Not Bugs They Are Features</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTc5Mi82MzU4">
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
     
+           if (typeof LivereTower === 'function') { return; }
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/15/2017/2017-10-15 理解JAVA的继承与多态/" class="archive-article-date">
-  	<time datetime="2017-10-15T12:48:34.382Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/15/2017/2017-10-15 理解JAVA的继承与多态/">理解Java的继承与多态</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java/" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/04/2017/2017-10-04 图书信息推送系统（三）/" class="archive-article-date">
-  	<time datetime="2017-10-04T11:54:40.531Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/04/2017/2017-10-04 图书信息推送系统（三）/">图书信息推送系统（三）</a>
-    </h1>
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    </div>
+    <!-- City版安装代码已完成 -->
   
 
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/SpringBoot/" class="article-tag-list-link color1">SpringBoot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/03/2017/2017-10-03 图书信息推送系统（二）/" class="archive-article-date">
-  	<time datetime="2017-10-03T12:16:23.866Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/03/2017/2017-10-03 图书信息推送系统（二）/">图书信息推送系统（二）</a>
-    </h1>
   
 
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/SpringBoot/" class="article-tag-list-link color1">SpringBoot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/01/2017/2017-10-01 图书信息推送系统（一）/" class="archive-article-date">
-  	<time datetime="2017-10-01T07:46:23.185Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/01/2017/2017-10-01 图书信息推送系统（一）/">图书信息推送系统（一）</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/SpringBoot/" class="article-tag-list-link color1">SpringBoot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/15/2017/2017-09-15 Spring Boot中的缓存支持/" class="archive-article-date">
-  	<time datetime="2017-09-15T08:22:03.250Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/15/2017/2017-09-15 Spring Boot中的缓存支持/">Spring Boot中的缓存支持</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/SpringBoot/" class="article-tag-list-link color1">SpringBoot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/14/2017/2017-09-14 数据库RAID简介/" class="archive-article-date">
-  	<time datetime="2017-09-14T08:04:23.255Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/14/2017/2017-09-14 数据库RAID简介/">数据库RAID简介</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数据库/" class="article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/11/2017/获取Cookie时中文乱码/" class="archive-article-date">
-  	<time datetime="2017-09-11T08:45:12.450Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/11/2017/获取Cookie时中文乱码/">获取Cookie时中文乱码</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Cookie/" class="article-tag-list-link color2">Cookie</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/10/2017/Vue.js去掉链接里的井号/" class="archive-article-date">
-  	<time datetime="2017-09-10T06:37:51.432Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/10/2017/Vue.js去掉链接里的井号/">Vue.js去掉链接里的井号</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Vue/" class="article-tag-list-link color4">Vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/09/2017/Vue.js平行组件之间通信/" class="archive-article-date">
-  	<time datetime="2017-09-09T03:14:03.851Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/09/2017/Vue.js平行组件之间通信/">Vue.js平行组件之间通信</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Vue/" class="article-tag-list-link color4">Vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/tags/study/page/3/">&laquo; Prev</a><a class="page-number" href="/tags/study/">1</a><a class="page-number" href="/tags/study/page/2/">2</a><a class="page-number" href="/tags/study/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/tags/study/page/5/">5</a><a class="page-number" href="/tags/study/page/6/">6</a><a class="page-number" href="/tags/study/page/7/">7</a><a class="extend next" rel="next" href="/tags/study/page/5/">Next &raquo;</a>
-    </nav>
   
 
 
@@ -773,9 +397,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",
