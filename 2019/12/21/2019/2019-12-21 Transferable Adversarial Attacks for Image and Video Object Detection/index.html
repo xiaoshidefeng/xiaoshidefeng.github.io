@@ -6,17 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://blog.chenwe.top">
-  <title>Tag: study | Xiaoshidefeng的博客</title>
+  <title>Transferable Adversarial Attacks for Image and Video Object Detection | Xiaoshidefeng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="CW的个人Blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Xiaoshidefeng的博客">
-<meta property="og:url" content="http://blog.chenwe.top/tags/study/index.html">
+  <meta name="description" content="本文是介绍对于区域目标的对抗性攻击论文《CTransferable Adversarial Attacks for Image and Video Object Detection》。">
+<meta name="keywords" content="study,code">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Transferable Adversarial Attacks for Image and Video Object Detection">
+<meta property="og:url" content="http://blog.chenwe.top/2019/12/21/2019/2019-12-21 Transferable Adversarial Attacks for Image and Video Object Detection/index.html">
 <meta property="og:site_name" content="Xiaoshidefeng的博客">
-<meta property="og:description" content="CW的个人Blog">
+<meta property="og:description" content="本文是介绍对于区域目标的对抗性攻击论文《CTransferable Adversarial Attacks for Image and Video Object Detection》。">
+<meta property="og:image" content="https://i.loli.net/2019/12/21/AJap6tY5OByG2vC.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/21/KHRkOz6aZjM1iox.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/21/cvdlOTIw2mVp4io.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/21/qhRC3wp2SxUQlt7.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/21/PAH6g25MTFbpECm.png">
+<meta property="og:updated_time" content="2019-12-21T13:12:51.476Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Xiaoshidefeng的博客">
-<meta name="twitter:description" content="CW的个人Blog">
+<meta name="twitter:title" content="Transferable Adversarial Attacks for Image and Video Object Detection">
+<meta name="twitter:description" content="本文是介绍对于区域目标的对抗性攻击论文《CTransferable Adversarial Attacks for Image and Video Object Detection》。">
+<meta name="twitter:image" content="https://i.loli.net/2019/12/21/AJap6tY5OByG2vC.png">
   
     <link rel="alternative" href="/atom.xml" title="Xiaoshidefeng的博客" type="application/atom+xml">
   
@@ -177,37 +185,55 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-2019/2019-12-21 Transferable Adversarial Attacks for Image and Video Object Detection" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      Transferable Adversarial Attacks for Image and Video Object Detection
+    </h1>
+    <span>&nbsp;&nbsp;&nbsp; | &nbsp;
+    <span id="busuanzi_value_page_pv" ></span>次阅读
+    </span>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/21/2019/2019-12-21 Transferable Adversarial Attacks for Image and Video Object Detection/" class="archive-article-date">
+
+
+        
+        <a href="/2019/12/21/2019/2019-12-21 Transferable Adversarial Attacks for Image and Video Object Detection/" class="archive-article-date">
   	<time datetime="2019-12-21T13:07:18.879Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-21</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/21/2019/2019-12-21 Transferable Adversarial Attacks for Image and Video Object Detection/">Transferable Adversarial Attacks for Image and Video Object Detection</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文是介绍对于区域目标的对抗性攻击论文《CTransferable Adversarial Attacks for Image and Video Object Detection》。<br><a id="more"></a></p>
+<p><a href="https://arxiv.org/pdf/1801.00553" target="_blank" rel="external"><strong>论文阅读地址</strong></a></p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>对抗样本已经被证明对计算机视觉任务产生了许多威胁，其中包括对于对象检测的攻击。但是现有的目标检测攻击方法有两个局限性，一个是可传递性差，特定的对抗样本攻击其他的检测方法的成功率低，另一个是计算量大。作者使用一种生成方法来获得对抗性的图像与视频，作者破坏了从特征网络中提取的特征图，这些特征图通常构成对象检测器的基础，再在GAN的基础上，结合了高级类别损失和底层特征损失来共同训练对抗性示例生成器。作者实验发现他们训练的对抗样本有很好的可传递性，能够同时攻击两种代表的对象检测模型： 基于提议区域的Faster-RCNN 和基于回归的SSD。</p>
+<h2 id="现有的问题"><a href="#现有的问题" class="headerlink" title="现有的问题"></a>现有的问题</h2><p>现有目标检测攻击及其不足点：</p>
+<ul>
+<li>基于提议区域的攻击无法攻击基于回归的攻击；</li>
+<li>基于迭代优化，耗时无法处理视频。</li>
+</ul>
+<h2 id="Unified-and-Efficient-Adversary-UEA"><a href="#Unified-and-Efficient-Adversary-UEA" class="headerlink" title="Unified and Efficient Adversary (UEA)"></a>Unified and Efficient Adversary (UEA)</h2><p>作者提出的在目标检测中生成对抗样本的方法UEA，可有效的攻击图像和视频，也可以同时攻击两类检测器，利用高层类别损失和底层特征损失来联合训练对抗样本生成器。<br>作者将问题表述为类似生成对抗网络（GAN）框架，并训练生成器网络以生成对抗图像和关键帧。<br>下图为UEA的整体框架图：</p>
+<p><img src="https://i.loli.net/2019/12/21/AJap6tY5OByG2vC.png" alt="1.png"></p>
+<h2 id="与现有的方法对比"><a href="#与现有的方法对比" class="headerlink" title="与现有的方法对比"></a>与现有的方法对比</h2><p>在2017年的《Adversarial examples for semantic segmentation and object detection. In International Conference on Computer Vision》一文中，作者提出了Dense Adversary Generation (DAG) 方法，来生成对抗样本来攻击目标检测模型，DAG选择Faster-RCNN作为威胁模型。<br>下图是DAG与UEA的对比：<br><img src="https://i.loli.net/2019/12/21/KHRkOz6aZjM1iox.png" alt="2.png"></p>
+<p>第一行是原始图片在Faster-RCNN 和 SSD300 检测模型下的检测结果，在原始图片中，两个模型都正确的检测出了物体，第二行是在DAG方法下生成的对抗样本，在Faster-RCNN下成功欺骗了检测模型，但在SSD300中并没有成功。第三行是作者提出的UEA方法生成的图片，在Faster-RCNN 和 SSD300中都有不错的效果。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>作者采用PASCAL VOC 2007的数据集进行训练，设定了几种评估标准，1.欺骗率。2.噪声数（希望与原图越接近越好）3.处理时间（希望越小越好）。<br>检测算法是用Faster-RCNN 和SSD300。<br><img src="https://i.loli.net/2019/12/21/cvdlOTIw2mVp4io.png" alt="3.png"><br>上表是实验结果，其中SSIM是结构相似性，是一种衡量两幅图像相似度的指标。可以看到UEA方法除了SSIM外均强于DAG方法。</p>
+<h2 id="UEA的消融研究"><a href="#UEA的消融研究" class="headerlink" title="UEA的消融研究"></a>UEA的消融研究</h2><p>消融研究简单来说就是对于一个模型来说，通过控制变量来获取不同的结果的研究，例如一个模型由a b两部分组成，那么消融研究就是看只加a结果如何，只加b结果如何，a和b都加了又如何。<br><img src="https://i.loli.net/2019/12/21/qhRC3wp2SxUQlt7.png" alt="4.png"></p>
+<p>通过表格发现，特征损失具有极强的攻击性。</p>
+<h2 id="视频对抗样本目标检测的攻击效果"><a href="#视频对抗样本目标检测的攻击效果" class="headerlink" title="视频对抗样本目标检测的攻击效果"></a>视频对抗样本目标检测的攻击效果</h2><p>作者先在ImageNet VID数据集上训练Faster-RCNN和SSD300，然后在测试视频的每个帧上运行检测器。然后使用UEA为ImageNet VID的测试集生成相应的对抗视频，然后运行相同的检测器。 mAP下降用于衡量攻击性能。结果如下：<br><img src="https://i.loli.net/2019/12/21/PAH6g25MTFbpECm.png" alt="5.png"></p>
+<p>UEA的Faster-RCNN下降了0.40 mAP，SSD300的下降了0.39 mAP，这表明UEA的有效性。</p>
 
+      
 
-        <div class="article-info info-on-right">
-          
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -223,7 +249,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -236,506 +262,109 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://blog.chenwe.top/2019/12/21/2019/2019-12-21 Transferable Adversarial Attacks for Image and Video Object Detection/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
+<nav id="article-nav">
+  
+  
+    <a href="/2019/12/14/2019/2019-12-14 An Efficient Image Compression Model to Defend Adversarial Examples/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">An Efficient Image Compression Model to Defend Adversarial Examples</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTc5Mi82MzU4">
+    <script type="text/javascript">
+       (function(d, s) {
+           var j, e = d.getElementsByTagName(s)[0];
     
+           if (typeof LivereTower === 'function') { return; }
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/14/2019/2019-12-14 An Efficient Image Compression Model to Defend Adversarial Examples/" class="archive-article-date">
-  	<time datetime="2019-12-14T02:54:59.369Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/14/2019/2019-12-14 An Efficient Image Compression Model to Defend Adversarial Examples/">An Efficient Image Compression Model to Defend Adversarial Examples</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/MachineLearning/" class="article-tag-list-link color2">Machine Learning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
+           j = d.createElement(s);
+           j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+           j.async = true;
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/10/2019/2019-12-10 Adversarial Examples Are Not Bugs They Are Features/" class="archive-article-date">
-  	<time datetime="2019-12-10T13:59:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/10/2019/2019-12-10 Adversarial Examples Are Not Bugs They Are Features/">Adversarial Examples Are Not Bugs They Are Features</a>
-    </h1>
+           e.parentNode.insertBefore(j, e);
+       })(document, 'script');
+    </script>
+    <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    </div>
+    <!-- City版安装代码已完成 -->
   
 
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/MachineLearning/" class="article-tag-list-link color2">Machine Learning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/05/2019/2019-12-05 Threat of Adversarial Attacks on Deep Learning in Computer Vision/" class="archive-article-date">
-  	<time datetime="2019-12-05T12:10:37.564Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/05/2019/2019-12-05 Threat of Adversarial Attacks on Deep Learning in Computer Vision/">Threat of Adversarial Attacks on Deep Learning in Computer Vision</a>
-    </h1>
   
 
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/MachineLearning/" class="article-tag-list-link color2">Machine Learning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/20/2019/2019-11-20 DeepFool简析/" class="archive-article-date">
-  	<time datetime="2019-11-20T11:18:35.240Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/20/2019/2019-11-20 DeepFool简析/">DeepFool</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/MachineLearning/" class="article-tag-list-link color2">Machine Learning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/17/2019/2019-11-17 对抗样本简析/" class="archive-article-date">
-  	<time datetime="2019-11-17T12:19:22.235Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/17/2019/2019-11-17 对抗样本简析/">对抗样本简析</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/MachineLearning/" class="article-tag-list-link color2">Machine Learning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/13/2019/2019-11-13 GAN简析/" class="archive-article-date">
-  	<time datetime="2019-11-13T07:00:55.519Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/13/2019/2019-11-13 GAN简析/">GAN简析</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/MachineLearning/" class="article-tag-list-link color2">Machine Learning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/27/2019/2019-10-27 R-CNN简析/" class="archive-article-date">
-  	<time datetime="2019-10-27T11:29:34.220Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/27/2019/2019-10-27 R-CNN简析/">R-CNN简析</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/MachineLearning/" class="article-tag-list-link color2">Machine Learning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/17/2019/2019-10-17 AlexNet网络简析/" class="archive-article-date">
-  	<time datetime="2019-10-17T13:47:25.248Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/17/2019/2019-10-17 AlexNet网络简析/">AlexNet网络简析</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/MachineLearning/" class="article-tag-list-link color2">Machine Learning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/27/2019/2019-09-27 误差逆传播算法/" class="archive-article-date">
-  	<time datetime="2019-09-27T02:17:11.377Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/27/2019/2019-09-27 误差逆传播算法/">误差逆传播算法</a>
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/MachineLearning/" class="article-tag-list-link color2">Machine Learning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/tags/study/page/2/">2</a><a class="page-number" href="/tags/study/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/tags/study/page/7/">7</a><a class="extend next" rel="next" href="/tags/study/page/2/">Next &raquo;</a>
-    </nav>
   
 
 
@@ -773,9 +402,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",

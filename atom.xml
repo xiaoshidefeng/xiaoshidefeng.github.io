@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.chenwe.top/"/>
-  <updated>2019-12-14T04:08:04.827Z</updated>
+  <updated>2019-12-21T13:12:51.476Z</updated>
   <id>http://blog.chenwe.top/</id>
   
   <author>
@@ -14,6 +14,47 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Transferable Adversarial Attacks for Image and Video Object Detection</title>
+    <link href="http://blog.chenwe.top/2019/12/21/2019/2019-12-21%20Transferable%20Adversarial%20Attacks%20for%20Image%20and%20Video%20Object%20Detection/"/>
+    <id>http://blog.chenwe.top/2019/12/21/2019/2019-12-21 Transferable Adversarial Attacks for Image and Video Object Detection/</id>
+    <published>2019-12-21T13:07:18.879Z</published>
+    <updated>2019-12-21T13:12:51.476Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文是介绍对于区域目标的对抗性攻击论文《CTransferable Adversarial Attacks for Image and Video Object Detection》。<br><a id="more"></a></p>
+<p><a href="https://arxiv.org/pdf/1801.00553" target="_blank" rel="external"><strong>论文阅读地址</strong></a></p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>对抗样本已经被证明对计算机视觉任务产生了许多威胁，其中包括对于对象检测的攻击。但是现有的目标检测攻击方法有两个局限性，一个是可传递性差，特定的对抗样本攻击其他的检测方法的成功率低，另一个是计算量大。作者使用一种生成方法来获得对抗性的图像与视频，作者破坏了从特征网络中提取的特征图，这些特征图通常构成对象检测器的基础，再在GAN的基础上，结合了高级类别损失和底层特征损失来共同训练对抗性示例生成器。作者实验发现他们训练的对抗样本有很好的可传递性，能够同时攻击两种代表的对象检测模型： 基于提议区域的Faster-RCNN 和基于回归的SSD。</p>
+<h2 id="现有的问题"><a href="#现有的问题" class="headerlink" title="现有的问题"></a>现有的问题</h2><p>现有目标检测攻击及其不足点：</p>
+<ul>
+<li>基于提议区域的攻击无法攻击基于回归的攻击；</li>
+<li>基于迭代优化，耗时无法处理视频。</li>
+</ul>
+<h2 id="Unified-and-Efficient-Adversary-UEA"><a href="#Unified-and-Efficient-Adversary-UEA" class="headerlink" title="Unified and Efficient Adversary (UEA)"></a>Unified and Efficient Adversary (UEA)</h2><p>作者提出的在目标检测中生成对抗样本的方法UEA，可有效的攻击图像和视频，也可以同时攻击两类检测器，利用高层类别损失和底层特征损失来联合训练对抗样本生成器。<br>作者将问题表述为类似生成对抗网络（GAN）框架，并训练生成器网络以生成对抗图像和关键帧。<br>下图为UEA的整体框架图：</p>
+<p><img src="https://i.loli.net/2019/12/21/AJap6tY5OByG2vC.png" alt="1.png"></p>
+<h2 id="与现有的方法对比"><a href="#与现有的方法对比" class="headerlink" title="与现有的方法对比"></a>与现有的方法对比</h2><p>在2017年的《Adversarial examples for semantic segmentation and object detection. In International Conference on Computer Vision》一文中，作者提出了Dense Adversary Generation (DAG) 方法，来生成对抗样本来攻击目标检测模型，DAG选择Faster-RCNN作为威胁模型。<br>下图是DAG与UEA的对比：<br><img src="https://i.loli.net/2019/12/21/KHRkOz6aZjM1iox.png" alt="2.png"></p>
+<p>第一行是原始图片在Faster-RCNN 和 SSD300 检测模型下的检测结果，在原始图片中，两个模型都正确的检测出了物体，第二行是在DAG方法下生成的对抗样本，在Faster-RCNN下成功欺骗了检测模型，但在SSD300中并没有成功。第三行是作者提出的UEA方法生成的图片，在Faster-RCNN 和 SSD300中都有不错的效果。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>作者采用PASCAL VOC 2007的数据集进行训练，设定了几种评估标准，1.欺骗率。2.噪声数（希望与原图越接近越好）3.处理时间（希望越小越好）。<br>检测算法是用Faster-RCNN 和SSD300。<br><img src="https://i.loli.net/2019/12/21/cvdlOTIw2mVp4io.png" alt="3.png"><br>上表是实验结果，其中SSIM是结构相似性，是一种衡量两幅图像相似度的指标。可以看到UEA方法除了SSIM外均强于DAG方法。</p>
+<h2 id="UEA的消融研究"><a href="#UEA的消融研究" class="headerlink" title="UEA的消融研究"></a>UEA的消融研究</h2><p>消融研究简单来说就是对于一个模型来说，通过控制变量来获取不同的结果的研究，例如一个模型由a b两部分组成，那么消融研究就是看只加a结果如何，只加b结果如何，a和b都加了又如何。<br><img src="https://i.loli.net/2019/12/21/qhRC3wp2SxUQlt7.png" alt="4.png"></p>
+<p>通过表格发现，特征损失具有极强的攻击性。</p>
+<h2 id="视频对抗样本目标检测的攻击效果"><a href="#视频对抗样本目标检测的攻击效果" class="headerlink" title="视频对抗样本目标检测的攻击效果"></a>视频对抗样本目标检测的攻击效果</h2><p>作者先在ImageNet VID数据集上训练Faster-RCNN和SSD300，然后在测试视频的每个帧上运行检测器。然后使用UEA为ImageNet VID的测试集生成相应的对抗视频，然后运行相同的检测器。 mAP下降用于衡量攻击性能。结果如下：<br><img src="https://i.loli.net/2019/12/21/PAH6g25MTFbpECm.png" alt="5.png"></p>
+<p>UEA的Faster-RCNN下降了0.40 mAP，SSD300的下降了0.39 mAP，这表明UEA的有效性。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文是介绍对于区域目标的对抗性攻击论文《CTransferable Adversarial Attacks for Image and Video Object Detection》。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Machine Learning" scheme="http://blog.chenwe.top/categories/Machine-Learning/"/>
+    
+    
+      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
+    
+      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
+    
+  </entry>
   
   <entry>
     <title>An Efficient Image Compression Model to Defend Adversarial Examples</title>
@@ -1001,49 +1042,6 @@ h_\theta(x) = \frac{1}{1+e^{(-\theta^Tx)}}</script><p>其中 θ 是模型参数�
     </summary>
     
       <category term="Android" scheme="http://blog.chenwe.top/categories/Android/"/>
-    
-    
-      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
-    
-      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>React Native开发中的一些坑 (二)</title>
-    <link href="http://blog.chenwe.top/2018/03/08/2018/2018-03-08%20React%20Native%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91%20(%E4%BA%8C)/"/>
-    <id>http://blog.chenwe.top/2018/03/08/2018/2018-03-08 React Native开发中的一些坑 (二)/</id>
-    <published>2018-03-08T11:34:08.100Z</published>
-    <updated>2018-03-31T06:23:17.368Z</updated>
-    
-    <content type="html"><![CDATA[<p>这几天在弄React Native<br>中间难免踩坑<br>这里继续记录下</p>
-<a id="more"></a>
-<h2 id="Could-not-expand-ZIP"><a href="#Could-not-expand-ZIP" class="headerlink" title="Could not expand ZIP"></a>Could not expand ZIP</h2><p>问题描述：</p>
-<blockquote>
-<p>Execution failed for task ‘:app:prepareCameReactNativeCameraUnspecifiedLibrary’.<br>Could not expand ZIP ‘D:\ReactNative\came\node_modules\react-native-camera\android\build\outputs\aar\react-native-camera-release.aar’.</p>
-</blockquote>
-<p>解决方法：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">D:\ReactNative\came</div><div class="line">λ cd android</div><div class="line"></div><div class="line">D:\ReactNative\came\android</div><div class="line">λ gradlew clean</div><div class="line">Incremental java compilation is an incubating feature.</div><div class="line">:app:clean</div><div class="line">:react-native-camera:clean</div><div class="line"></div><div class="line">BUILD SUCCESSFUL</div><div class="line"></div><div class="line">Total time: 27.948 secs</div><div class="line">D:\ReactNative\came\android</div><div class="line">λ cd ..</div><div class="line"></div><div class="line">D:\ReactNative\came</div><div class="line">λ react-native run-android</div></pre></td></tr></table></figure></p>
-<h2 id="java-io-IOException-Could-not-delete-path"><a href="#java-io-IOException-Could-not-delete-path" class="headerlink" title="java.io.IOException: Could not delete path"></a>java.io.IOException: Could not delete path</h2><p>问题描述：</p>
-<blockquote>
-<p>Execution failed for task ‘:app:transformClassesWithDexForDebug’.<br>java.io.IOException: Could not delete path ‘D:\ReactNative\came\android\app\build\intermediates\transforms\dex\debug\folders’.</p>
-</blockquote>
-<p>解决方法：<br>删除相关问题的node_module 然后重装。</p>
-<h2 id="undefined-is-not-an-object-evaluating-this-props-navigation-navigate"><a href="#undefined-is-not-an-object-evaluating-this-props-navigation-navigate" class="headerlink" title="undefined is not an object (evaluating this.props.navigation.navigate)"></a>undefined is not an object (evaluating this.props.navigation.navigate)</h2><p>问题产生：<br>想从一个页面的组件中实现导航跳转<br>但是没有传入navigation这个props</p>
-<p>解决方法：<br>传入navigation<br>例如 <me navigation="{this.props.navigation}/"></me></p>
-<h2 id="图片点击没反应"><a href="#图片点击没反应" class="headerlink" title="图片点击没反应"></a>图片点击没反应</h2><p>图片之类的控件要在外面加上<code>TouchableWithoutFeedback</code> 才能监听点击</p>
-<p>例如：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">TouchableWithoutFeedback</span> <span class="attr">onPress</span>=<span class="string">&#123;()</span> =&gt;</span> this.toTakePhoto()&#125; &gt;</div><div class="line">  <span class="tag">&lt;<span class="name">View</span> <span class="attr">style</span>=<span class="string">&#123;styles.img_facewarpper&#125;</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">Image</span> <span class="attr">style</span>=<span class="string">&#123;styles.img_face&#125;</span></span></div><div class="line">          <span class="attr">source</span>=<span class="string">&#123;require(</span>'<span class="attr">.</span>/<span class="attr">components</span>/<span class="attr">img</span>/<span class="attr">face.png</span>')&#125; /&gt;</div><div class="line">  <span class="tag">&lt;/<span class="name">View</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">TouchableWithoutFeedback</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<h2 id="Undefined-is-not-an-object-evaluating-this-state"><a href="#Undefined-is-not-an-object-evaluating-this-state" class="headerlink" title="Undefined is not an object evaluating this.state.*"></a>Undefined is not an object evaluating this.state.*</h2><p>这个state的值取不到，说是未定义。</p>
-<p>我们只要在对应调用的方法后面加上 <code>.bind(this)</code> 就好了。<br>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 错误</div><div class="line">renderHeader=&#123;this._renderHeader&#125;</div><div class="line"></div><div class="line">// 正确</div><div class="line">renderHeader=&#123;this._renderHeader.bind(this)&#125;</div></pre></td></tr></table></figure></p>
-<p>上面那种方法，在_renderHeader里的state是取不到的<br>要像下面那种方法那样.bing(this)</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;这几天在弄React Native&lt;br&gt;中间难免踩坑&lt;br&gt;这里继续记录下&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="React Native" scheme="http://blog.chenwe.top/categories/React-Native/"/>
     
     
       <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
