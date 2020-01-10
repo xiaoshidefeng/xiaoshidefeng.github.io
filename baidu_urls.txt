@@ -1,1 +1,1 @@
-http://blog.chenwe.top/2020/01/02/2019/2020-01-02 Synthesizing Robust Adversarial Examples/
+http://blog.chenwe.top/2020/01/10/2020/2020-01-10 Universal adversarial perturbations/

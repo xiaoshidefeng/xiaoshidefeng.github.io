@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.chenwe.top/"/>
-  <updated>2020-01-02T10:42:50.494Z</updated>
+  <updated>2020-01-10T14:02:50.136Z</updated>
   <id>http://blog.chenwe.top/</id>
   
   <author>
@@ -16,11 +16,66 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Universal adversarial perturbations</title>
+    <link href="http://blog.chenwe.top/2020/01/10/2020/2020-01-10%20Universal%20adversarial%20perturbations/"/>
+    <id>http://blog.chenwe.top/2020/01/10/2020/2020-01-10 Universal adversarial perturbations/</id>
+    <published>2020-01-10T12:56:51.032Z</published>
+    <updated>2020-01-10T14:02:50.136Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文是介绍关于通用扰动的论文《Universal adversarial perturbations》。<br><a id="more"></a></p>
+<p><a href="https://arxiv.org/pdf/1610.08401v3.pdf" target="_blank" rel="external"><strong>论文阅读地址</strong></a></p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>作者证明了存在一个通用的很小的扰动向量，这个向量会导致图像被分类器错误分类。作者提出了一种用于计算通用扰动的算法，并且证明深度神经网络会受这类扰动的影响，而人眼不会有察觉。</p>
+<h2 id="文章主要贡献"><a href="#文章主要贡献" class="headerlink" title="文章主要贡献"></a>文章主要贡献</h2><ol>
+<li>作者展示了通用扰动的存在。</li>
+<li>作者提出了生成这类扰动的方法。</li>
+<li>作者发现这类扰动的干扰能力很强。</li>
+<li>部分通用扰动不仅对于图像有干扰，对于深度神经网络也有影响。</li>
+<li>作者解释了通用噪声的原因。</li>
+</ol>
+<h2 id="通用扰动向量"><a href="#通用扰动向量" class="headerlink" title="通用扰动向量"></a>通用扰动向量</h2><p>通用扰动示意图如下：<br><img src="https://i.loli.net/2020/01/10/rjaKOG2VUBJD3Wv.png" alt="1.png"><br>左边是原始图像与标签，中间是通用扰动，右边是添加扰动后分类器给出的错误标签与图像。</p>
+<p>作者定义$μ$为图像在整个集合R上的分布，$v$是扰动向量，x是图片，k是分类器。作者计算v通过以下定义：</p>
+<script type="math/tex; mode=display">
+\hat{k}(x+v)\neq\hat{k}(x) for “most"x\sim\mu</script><p>当图片加上扰动向量$v$后让$\hat{k}$分类器的大部分$x$在$μ$的分布中的结果出错。<br>等同于寻找一个v向量，有以下约束：</p>
+<script type="math/tex; mode=display">
+1. ||v||_p\leq\xi \\
+2. p_{x\sim\mu}(\hat{k}(x+v)\neq\hat{k}(x))\geq1-\delta</script><p>第一个是限制扰动$v$的大小，第二个是量化在$μ$分布上的欺骗率。<br>生成算法是在$v=0$时开始迭代生成最优的$v$，在迭代的过程中$v$如果达不到要求，则令：</p>
+<script type="math/tex; mode=display">
+\Delta{v_i}\leftarrow arg min_r||r||_2 \\ s.t. \hat{k}(x_i+v+r)\neq\hat{k}(x_i).</script><p>它的投影是:</p>
+<script type="math/tex; mode=display">
+P_{p,\xi}(v)=arg min_{v'}||v-v'||_2 \\
+subject to ||v'||_p \leq\xi.</script><p>那么v的更新就是：</p>
+<script type="math/tex; mode=display">
+v=P_{p,\xi}(v+\Delta{v_i})</script><p>它的停止迭代条件是：</p>
+<script type="math/tex; mode=display">
+Err(X_v)=\frac{1}{m}\sum_{i=1}^m1_{\hat{k}(x_i+v)\neq\hat{k}(x_i)}\geq1-\delta</script><p>即平均错误率大于一个值。</p>
+<p>整个过程如下图所示：<br><img src="https://i.loli.net/2020/01/10/egwUHOfmhyRL3rX.png" alt="2.png"><br>在不同的网络上，通用扰动也有很好的欺骗结果，如下表：<br><img src="https://i.loli.net/2020/01/10/4GxVI1fH2eJMTrg.png" alt="3.png"></p>
+<p>Val是验证集。</p>
+<p>作者还研究了训练集大小对欺骗率的影响如下图：<br><img src="https://i.loli.net/2020/01/10/fks4GUaVqPYc9tO.png" alt="4.png"></p>
+<p>如果用于计算扰动的训练集只有500张图，则可以成功攻击验证集中30%的图片，如果用于计算扰动的训练集有1000张图，则可以攻击在验证集中更多的未见过的图片，甚至在这1000张图中都没有出现过那个类别的图片。</p>
+<p>作者还认为图片存在主导标签将通用扰动引导到这个标签上，作者猜测主导标签占据大量图片空间，并因此作为候选标签影响欺骗结果。<br><img src="https://i.loli.net/2020/01/10/wrLyt9zxe3KmThM.png" alt="5.png"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文是介绍关于通用扰动的论文《Universal adversarial perturbations》。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Machine Learning" scheme="http://blog.chenwe.top/categories/Machine-Learning/"/>
+    
+    
+      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
+    
+      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Synthesizing Robust Adversarial Examples</title>
-    <link href="http://blog.chenwe.top/2020/01/02/2019/2020-01-02%20Synthesizing%20Robust%20Adversarial%20Examples/"/>
-    <id>http://blog.chenwe.top/2020/01/02/2019/2020-01-02 Synthesizing Robust Adversarial Examples/</id>
+    <link href="http://blog.chenwe.top/2020/01/02/2020/2020-01-02%20Synthesizing%20Robust%20Adversarial%20Examples/"/>
+    <id>http://blog.chenwe.top/2020/01/02/2020/2020-01-02 Synthesizing Robust Adversarial Examples/</id>
     <published>2020-01-02T10:30:00.016Z</published>
-    <updated>2020-01-02T10:42:50.494Z</updated>
+    <updated>2020-01-10T12:56:40.583Z</updated>
     
     <content type="html"><![CDATA[<p>本文是介绍对于现实世界的的对抗性攻击论文《Synthesizing Robust Adversarial Examples》。<br><a id="more"></a></p>
 <p><a href="https://arxiv.org/pdf/1707.07397.pdf" target="_blank" rel="external"><strong>论文阅读地址</strong></a></p>
@@ -973,50 +1028,6 @@ h_\theta(x) = \frac{1}{1+e^{(-\theta^Tx)}}</script><p>其中 θ 是模型参数�
     </summary>
     
       <category term="ubuntu" scheme="http://blog.chenwe.top/categories/ubuntu/"/>
-    
-    
-      <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>
-    
-      <category term="code" scheme="http://blog.chenwe.top/tags/code/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>docker安装owncloud</title>
-    <link href="http://blog.chenwe.top/2018/03/25/2018/2018-03-25%20docker%E5%AE%89%E8%A3%85owncloud/"/>
-    <id>http://blog.chenwe.top/2018/03/25/2018/2018-03-25 docker安装owncloud/</id>
-    <published>2018-03-25T03:28:25.652Z</published>
-    <updated>2018-03-25T04:49:01.030Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote>
-<p>ownCloud是一个自由且开源的个人云存储解决方案</p>
-</blockquote>
-<p>因为偶尔会有文件想要备份或者共享<br>所以就自己搭建了一下ownCloud，这里记录下搭建过程</p>
-<a id="more"></a>
-<h2 id="安装数据库"><a href="#安装数据库" class="headerlink" title="安装数据库"></a>安装数据库</h2><p>我们要先安装数据库，我这里选择mysql 用docker来安装<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">acm@acm-Lenovo:~/acmcloud$ sudo docker pull registry.docker-cn.com/library/mysql</div><div class="line">Using default tag: latest</div><div class="line">latest: Pulling from library/mysql</div></pre></td></tr></table></figure></p>
-<p>这里我用了国内的镜像加速，提高速度。</p>
-<p>启动容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=mypassword -d mysql</div></pre></td></tr></table></figure></p>
-<p>MYSQL_ROOT_PASSWORD后面填写你要设置的的root密码</p>
-<p>输入 sudo docker ps 查看是否成功运行</p>
-<h2 id="安装owncloud"><a href="#安装owncloud" class="headerlink" title="安装owncloud"></a>安装owncloud</h2><p>用docker安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">acm@acm-Lenovo:~/acmcloud$ sudo docker pull registry.docker-cn.com/library/owncloud</div><div class="line">Using default tag: latest</div><div class="line">latest: Pulling from library/owncloud</div></pre></td></tr></table></figure></p>
-<p>还是利用了国内的镜像加速。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker run -d -p 80:80 owncloud</div></pre></td></tr></table></figure>
-<p>启动容器</p>
-<p>启动成功后访问服务器ip<br><img src="http://ow9eu3p52.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720180325124304.png" alt=""><br>会看到这样的界面<br>我们填写创建管理员账号密码<br>配置下数据库</p>
-<p>这里我们选择mysql数据库，我们创建一个表 名字就叫做owncloud<br>然后填写数据库用户名密码就好了</p>
-<p>等待安装完成<br>完成后，我们再次打开页面，就会看到登陆界面了<br>这样我们的云盘就搭好了<br>开始愉快的使用吧</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;ownCloud是一个自由且开源的个人云存储解决方案&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;因为偶尔会有文件想要备份或者共享&lt;br&gt;所以就自己搭建了一下ownCloud，这里记录下搭建过程&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="docker" scheme="http://blog.chenwe.top/categories/docker/"/>
     
     
       <category term="study" scheme="http://blog.chenwe.top/tags/study/"/>

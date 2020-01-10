@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://blog.chenwe.top/2020/01/02/2019/2020-01-02%20Synthesizing%20Robust%20Adversarial%20Examples/</loc>
+    <loc>http://blog.chenwe.top/2020/01/10/2020/2020-01-10%20Universal%20adversarial%20perturbations/</loc>
     
-    <lastmod>2020-01-02T10:42:50.494Z</lastmod>
+    <lastmod>2020-01-10T14:02:50.136Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.chenwe.top/2020/01/02/2020/2020-01-02%20Synthesizing%20Robust%20Adversarial%20Examples/</loc>
+    
+    <lastmod>2020-01-10T12:56:40.583Z</lastmod>
     
   </url>
   
